@@ -5,7 +5,7 @@
 
 > IN DEVELOPMENT !!!
 
-Date/time converter into "n time ago" format. Supports Russian and English languages.
+Well tested, fast datetime converter into "n time ago" format. Supports Russian and English languages.
 
 ## Example
 
