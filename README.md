@@ -3,6 +3,8 @@
 
 ![clothing shop](https://github.com/SerhiiCho/timeago/blob/master/.github/example.png?raw=true)
 
+> IN DEVELOPMENT !!!
+
 Date/time converter into "n time ago" format. Supports Russian and English languages.
 
 ## Example
