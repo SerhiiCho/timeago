@@ -13,5 +13,8 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v1
 
+    - name: Setup the correct timezone
+      run: ln -s /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+
     - name: Run tests
       run: make
