@@ -52,7 +52,7 @@ func getLastNumber(num int) int {
 	return result
 }
 
-func getWords(typeOf string, num int) string {
+func getWords(timeKind string, num int) string {
 	lastNum := getLastNumber(num)
 	var index int
 
@@ -72,7 +72,7 @@ func getWords(typeOf string, num int) string {
 
 	timeTrans := getTimeTranslations()
 
-	return strconv.Itoa(num) + " " + timeTrans[typeOf][index] + " " + trans("ago")
+	return strconv.Itoa(num) + " " + timeTrans[timeKind][index] + " " + trans("ago")
 }
 
 // getTimeTranslations returns array of translations for different

@@ -45,3 +45,41 @@ func TestGetTimeTranslations(t *testing.T) {
 		}
 	})
 }
+
+func TestGetWords(t *testing.T) {
+	cases := []struct {
+		timeKind string
+		num      int
+		result   string
+		lang     string
+	}{
+		// english
+		{"seconds", 1, "1 second ago", "en"},
+		{"seconds", 2, "2 seconds ago", "en"},
+		{"days", 11, "11 days ago", "en"},
+		{"days", 21, "21 day ago", "en"},
+		{"seconds", 30, "30 seconds ago", "en"},
+		{"seconds", 31, "31 second ago", "en"},
+		{"hours", 10, "10 hours ago", "en"},
+		{"years", 2, "2 years ago", "en"},
+		// russian
+		{"seconds", 1, "1 секунда назад", "ru"},
+		{"minutes", 2, "2 минуты назад", "ru"},
+		{"seconds", 3, "3 секунды назад", "ru"},
+		{"seconds", 4, "4 секунды назад", "ru"},
+		{"hours", 5, "5 часов назад", "ru"},
+		{"days", 11, "11 дней назад", "ru"},
+		{"years", 21, "21 год назад", "ru"},
+		{"minutes", 59, "59 минут назад", "ru"},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.result, func(test *testing.T) {
+			SetLang(tc.lang)
+
+			if res := getWords(tc.timeKind, tc.num); res != tc.result {
+				test.Errorf("Result must be `%s` but got `%s` instead", tc.result, res)
+			}
+		})
+	}
+}
