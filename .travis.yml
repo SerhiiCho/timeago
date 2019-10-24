@@ -4,7 +4,7 @@ go:
     - 1.13
 
 before_install:
-    - sudo cp -f /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+    - export TZ=Europe/Kiev
 
 script:
     - make
