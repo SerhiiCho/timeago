@@ -70,23 +70,18 @@ func getLastNumber(num int) int {
 
 func getWords(timeKind string, num int) string {
 	lastNum := getLastNumber(num)
-	var index int
+	index := 2
 
 	switch {
 	case lastNum == 1 && num == 11:
 		index = 2
 		break
-	case lastNum == 1 && language == "ru":
-		index = 0
-		break
-	case num == 1 && language == "en":
+	case lastNum == 1 && language == "ru" || num == 1 && language == "en":
 		index = 0
 		break
 	case lastNum > 1 && lastNum < 5:
 		index = 1
 		break
-	default:
-		index = 2
 	}
 
 	timeTrans := getTimeTranslations()
