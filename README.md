@@ -1,7 +1,7 @@
 ![clothing shop](https://github.com/SerhiiCho/timeago/blob/master/.github/example.png?raw=true)
 
-[![Build Status](https://travis-ci.com/SerhiiCho/timeago.svg?branch=master)](https://travis-ci.com/SerhiiCho/timeago)
 [![Code Coverage](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/?branch=master)
+[![Build Status](https://travis-ci.com/SerhiiCho/timeago.svg?branch=master)](https://travis-ci.com/SerhiiCho/timeago)
 [![Build Status](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/?branch=master)
 
