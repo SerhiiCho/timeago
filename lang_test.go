@@ -29,3 +29,30 @@ func TestGetOption(test *testing.T) {
 		}
 	})
 }
+
+func TestTrans(t *testing.T) {
+	cases := []struct {
+		lang   string
+		key    string
+		result string
+	}{
+		{"ru", "online", "В сети"},
+		{"ru", "second", "секунда"},
+		{"ru", "hour", "час"},
+		{"ru", "day", "день"},
+		{"en", "online", "Online"},
+		{"en", "second", "second"},
+		{"en", "hour", "hour"},
+		{"en", "day", "day"},
+	}
+
+	for _, tc := range cases {
+		t.Run("returns "+tc.lang+" language", func(test *testing.T) {
+			SetLang(tc.lang)
+
+			if result := trans(tc.key); result != tc.result {
+				test.Errorf("Result mast be %s but got %s", tc.result, result)
+			}
+		})
+	}
+}
