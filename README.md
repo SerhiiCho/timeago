@@ -1,5 +1,7 @@
 ![clothing shop](https://github.com/SerhiiCho/timeago/blob/master/.github/example.png?raw=true)
 
+[![Build Status](https://travis-ci.com/SerhiiCho/timeago.svg?branch=master)](https://travis-ci.com/SerhiiCho/timeago)
+
 100% covered with tests, fast and lightweight datetime converter into "n time ago" format from [year-month-day hours:minutes:seconds]. Supports Russian and English languages.
 
 ## Configurations
