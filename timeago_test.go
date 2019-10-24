@@ -16,32 +16,27 @@ func bigSubTime(years int, months int, days int) string {
 }
 
 func TestGetOption(test *testing.T) {
-	test.Run("case has online option", func(t *testing.T) {
-		date := "2017-02-01 00:00:00|online"
-		option, hasOption := getOption(&date)
+	cases := []struct {
+		name            string
+		date            string
+		optionMustBe    string
+		hasOptionMustBe bool
+	}{
+		{"case has online option", "2017-02-01 00:00:00|online", "online", true},
+		{"case has random option", "2017-02-01 00:00:00|random", "random", true},
+		{"case has online option", "2017-02-01 00:00:00|korotchaeva", "korotchaeva", true},
+		{"case don't have option", "2017-02-01 00:00:00", "", false},
+	}
 
-		if !hasOption || option != "online" {
-			t.Errorf("Result of getOption func must return `online` string and `true`, but `%s` string and `%v` returned returned", option, hasOption)
-		}
-	})
+	for _, tc := range cases {
+		test.Run(tc.name, func(t *testing.T) {
+			option, hasOption := getOption(&tc.date)
 
-	test.Run("case has random option", func(t *testing.T) {
-		date := "2017-02-01 00:00:00|random"
-		option, hasOption := getOption(&date)
-
-		if !hasOption || option != "random" {
-			t.Errorf("Result of getOption func must return `random` string and `true`, but `%s` string and `%v` returned returned", option, hasOption)
-		}
-	})
-
-	test.Run("case don't have option", func(t *testing.T) {
-		date := "2017-02-01 00:00:00"
-		option, hasOption := getOption(&date)
-
-		if hasOption || option != "" {
-			t.Errorf("Result of getOption func must return empty string and `false`, but `%s` string and `%v` returned returned", option, hasOption)
-		}
-	})
+			if hasOption != tc.hasOptionMustBe || option != tc.optionMustBe {
+				t.Errorf("Result of getOption func must return `online` string and `true`, but `%s` string and `%v` returned returned", tc.optionMustBe, tc.hasOptionMustBe)
+			}
+		})
+	}
 }
 
 func TestGetTimeTranslations(t *testing.T) {
