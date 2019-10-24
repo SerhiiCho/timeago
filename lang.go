@@ -1,8 +1,7 @@
 package timeago
 
 var (
-	translations map[string]string
-	lang         string
+	lang string
 )
 
 func SetLang(langParam string) {
