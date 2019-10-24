@@ -45,11 +45,7 @@ func Take(datetime string) string {
 
 func getLastNumber(num int) int {
 	numStr := strconv.Itoa(num)
-	result, err := strconv.Atoi(numStr[len(numStr)-1:])
-
-	if err != nil {
-		return 0
-	}
+	result, _ := strconv.Atoi(numStr[len(numStr)-1:])
 
 	return result
 }
