@@ -1,0 +1,6 @@
+.PHONY: test
+test:
+	go test -cover ./...
+	go vet ./...
+
+.DEFAULT_GOAL := test
