@@ -1,6 +1,8 @@
 <h2 align="center">TimeAgo</h2>
 <h3 align="center">Datetime converter</h3>
 
+![clothing shop](https://github.com/SerhiiCho/timeago/blob/master/.github/example.png?raw=true)
+
 Date/time converter into "n time ago" format. Supports Russian and English languages.
 
 ## Example
