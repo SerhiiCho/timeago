@@ -1,5 +1,5 @@
 <h2 align="center">TimeAgo</h2>
-<h3>Date/time converter</h3>
+<h3 align="center">Datetime converter</h3>
 
 Date/time converter into "n time ago" format. Supports Russian and English languages.
 
