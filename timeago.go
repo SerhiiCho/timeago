@@ -24,6 +24,10 @@ func Take(datetime string) string {
 		return getWords("seconds", 0)
 	}
 
+	return calculateTheResult(seconds, hasOption, option)
+}
+
+func calculateTheResult(seconds int, hasOption bool, option string) string {
 	minutes := seconds / 60
 	hours := seconds / 3600
 	days := seconds / 86400
