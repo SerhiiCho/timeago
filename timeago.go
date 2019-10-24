@@ -76,7 +76,10 @@ func getWords(timeKind string, num int) string {
 	case lastNum == 1 && num == 11:
 		index = 2
 		break
-	case lastNum == 1:
+	case lastNum == 1 && language == "ru":
+		index = 0
+		break
+	case num == 1 && language == "en":
 		index = 0
 		break
 	case lastNum > 1 && lastNum < 5:
