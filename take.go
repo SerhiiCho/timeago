@@ -1,20 +1,46 @@
 package timeago
 
 import (
+	"strconv"
 	"strings"
+	"time"
 )
 
 // Take coverts given datetime into `x time ago` format.
 // For displaying `Online` word if date interval within
 // 60 seconds, add `|online` flag to the datetime string.
 func Take(datetime string) string {
-	option, hasOption := hasOption(datetime)
+	includeTranslations()
 
-	if hasOption && option == "online" {
-		return ""
+	seconds := int(time.Since(time.Now()).Seconds())
+
+	minutes := seconds / 60
+	hours := seconds / 3600
+	days := seconds / 86400
+	weeks := seconds / 604800
+	months := seconds / 2629440
+	years := seconds / 31553280
+
+	option, hasOption := getOption(datetime)
+
+	switch {
+	case hasOption && option == "online" && seconds < 60:
+		return trans("online")
+	case seconds < 60:
+		return getWords("seconds", seconds)
+	case minutes < 60:
+		return getWords("minutes", minutes)
+	case hours < 24:
+		return getWords("hours", hours)
+	case days < 7:
+		return getWords("days", days)
+	case weeks < 4:
+		return getWords("weeks", weeks)
+	case months < 12:
+		return getWords("months", months)
 	}
 
-	return ""
+	return getWords("years", years)
 }
 
 func getLastNumber(num int) int {
