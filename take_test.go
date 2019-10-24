@@ -1,6 +1,9 @@
 package timeago
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestGetOption(test *testing.T) {
 	test.Run("case has online option", func(t *testing.T) {
@@ -104,6 +107,26 @@ func TestGetLastNumber(t *testing.T) {
 		t.Run(tc.name, func(test *testing.T) {
 			if res := getLastNumber(tc.number); res != tc.result {
 				test.Errorf("Result must be %d, but got %d instead", tc.result, res)
+			}
+		})
+	}
+}
+
+func TestTake(t *testing.T) {
+	cases := []struct {
+		date   string
+		result string
+		lang   string
+	}{
+		{time.Now().UTC().Add(-10 * time.Second).Format("2006-01-02 15:04:05"), "10 seconds ago", "en"},
+	}
+
+	for _, tc := range cases {
+		t.Run("result for "+tc.date, func(test *testing.T) {
+			SetLang(tc.lang)
+
+			if res := Take(tc.date); res != tc.result {
+				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
 	}

@@ -10,7 +10,8 @@ import (
 // For displaying `Online` word if date interval within
 // 60 seconds, add `|online` flag to the datetime string.
 func Take(datetime string) string {
-	seconds := int(time.Since(time.Now()).Seconds())
+	parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
+	seconds := int(time.Now().UTC().Sub(parsedTime.UTC()).Seconds())
 
 	minutes := seconds / 60
 	hours := seconds / 3600
