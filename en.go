@@ -2,7 +2,7 @@ package timeago
 
 func getEnglish() map[string]string {
 	return map[string]string{
-		"ago":    "ago ",
+		"ago":    "ago",
 		"online": "Online",
 		// Seconds
 		"second":   "second",
