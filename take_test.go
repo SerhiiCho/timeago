@@ -92,6 +92,7 @@ func TestGetWords(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
 			Set("language", tc.lang)
+			Set("location", "Europe/Kiev")
 
 			if res := getWords(tc.timeKind, tc.num); res != tc.result {
 				test.Errorf("Result must be `%s` but got `%s` instead", tc.result, res)
@@ -243,6 +244,7 @@ func TestTake(t *testing.T) {
 	for _, tc := range cases {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 			Set("language", tc.lang)
+			Set("location", "Europe/Kiev")
 
 			if res := Take(tc.date); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
