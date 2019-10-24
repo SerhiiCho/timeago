@@ -3,8 +3,6 @@ package timeago
 import "testing"
 
 func TestGetOption(test *testing.T) {
-	test.Parallel()
-
 	test.Run("case has online option", func(t *testing.T) {
 		option, hasOption := getOption("2017-02-01 00:00:00|online")
 
@@ -55,4 +53,22 @@ func TestTrans(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestSetLang(t *testing.T) {
+	t.Run("sets language to ru", func(test *testing.T) {
+		SetLang("ru")
+
+		if lang != "ru" {
+			test.Error("SetLang must set the `lang` variable to `ru` but it didn't")
+		}
+	})
+
+	t.Run("sets language to en", func(test *testing.T) {
+		SetLang("en")
+
+		if lang != "en" {
+			test.Error("SetLang must set the `lang` variable to `en` but it didn't")
+		}
+	})
 }
