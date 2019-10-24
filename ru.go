@@ -1,4 +1,4 @@
-package ago
+package timeago
 
 func getRussian() map[string]string {
 	return map[string]string{
