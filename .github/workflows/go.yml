@@ -16,7 +16,7 @@ jobs:
     - name: Setup the correct timezone
       run: |
         sudo rm -rf /etc/localtime
-        cp /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+        sudo cp /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 
     - name: Run tests
       run: make
