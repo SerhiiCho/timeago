@@ -1,6 +1,6 @@
 ![clothing shop](https://github.com/SerhiiCho/timeago/blob/master/.github/example.png?raw=true)
 
-100% coverage tested, fast and lightweight datetime converter into "n time ago" format from [year-month-day hours:minutes:seconds]. Supports Russian and English languages.
+100% covered with tests, fast and lightweight datetime converter into "n time ago" format from [year-month-day hours:minutes:seconds]. Supports Russian and English languages.
 
 ## Configurations
 ##### Language
