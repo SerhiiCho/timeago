@@ -22,6 +22,8 @@ Default location is Europe/Kiev. Optionally you can set the location in your app
 timeago.Set("location", "India/Delhi")
 ```
 
+> Please make sure that timezone configuration is correct for your location. It is very important for displaying the correct datetime.
+
 ## Usage
 
 For outputting post publishing date or something else you can just pass the date to method `timeago.Take()`. It will count the interval between now and given date and returns converted format.
