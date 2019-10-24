@@ -5,9 +5,20 @@ import (
 	"time"
 )
 
+// test helper
+func smallSubTime(d time.Duration) string {
+	return time.Now().UTC().Add(d).Format("2006-01-02 15:04:05")
+}
+
+// test helper
+func bigSubTime(years int, months int, days int) string {
+	return time.Now().UTC().AddDate(-years, -months, -days).Format("2006-01-02 15:04:05")
+}
+
 func TestGetOption(test *testing.T) {
 	test.Run("case has online option", func(t *testing.T) {
-		option, hasOption := getOption("2017-02-01 00:00:00|online")
+		date := "2017-02-01 00:00:00|online"
+		option, hasOption := getOption(&date)
 
 		if !hasOption || option != "online" {
 			t.Errorf("Result of getOption func must return `online` string and `true`, but `%s` string and `%v` returned returned", option, hasOption)
@@ -15,7 +26,8 @@ func TestGetOption(test *testing.T) {
 	})
 
 	test.Run("case has random option", func(t *testing.T) {
-		option, hasOption := getOption("2017-02-01 00:00:00|random")
+		date := "2017-02-01 00:00:00|random"
+		option, hasOption := getOption(&date)
 
 		if !hasOption || option != "random" {
 			t.Errorf("Result of getOption func must return `random` string and `true`, but `%s` string and `%v` returned returned", option, hasOption)
@@ -23,7 +35,8 @@ func TestGetOption(test *testing.T) {
 	})
 
 	test.Run("case don't have option", func(t *testing.T) {
-		option, hasOption := getOption("2017-02-01 00:00:00")
+		date := "2017-02-01 00:00:00"
+		option, hasOption := getOption(&date)
 
 		if hasOption || option != "" {
 			t.Errorf("Result of getOption func must return empty string and `false`, but `%s` string and `%v` returned returned", option, hasOption)
@@ -113,14 +126,6 @@ func TestGetLastNumber(t *testing.T) {
 }
 
 func TestTake(t *testing.T) {
-	smallSubTime := func(d time.Duration) string {
-		return time.Now().UTC().Add(d).Format("2006-01-02 15:04:05")
-	}
-
-	bigSubTime := func(years int, months int, days int) string {
-		return time.Now().UTC().AddDate(-years, -months, -days).Format("2006-01-02 15:04:05")
-	}
-
 	cases := []struct {
 		date   string
 		result string
@@ -236,6 +241,128 @@ func TestTake(t *testing.T) {
 			SetLang(tc.lang)
 
 			if res := Take(tc.date); res != tc.result {
+				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
+			}
+		})
+	}
+}
+
+func TestTake_with_online_flag(t *testing.T) {
+	cases := []struct {
+		date   string
+		result string
+		lang   string
+	}{
+		// english
+		{smallSubTime(-1 * time.Second), "Online", "en"},
+		{smallSubTime(-2 * time.Second), "Online", "en"},
+		{smallSubTime(-9 * time.Second), "Online", "en"},
+		{smallSubTime(-10 * time.Second), "Online", "en"},
+		{smallSubTime(-11 * time.Second), "Online", "en"},
+		{smallSubTime(-20 * time.Second), "Online", "en"},
+		{smallSubTime(-21 * time.Second), "Online", "en"},
+		{smallSubTime(-22 * time.Second), "Online", "en"},
+		{smallSubTime(-30 * time.Second), "Online", "en"},
+		{smallSubTime(-31 * time.Second), "Online", "en"},
+		{smallSubTime(-59 * time.Second), "Online", "en"},
+		{smallSubTime(-60 * time.Second), "1 minute ago", "en"},
+		{smallSubTime(-1 * time.Minute), "1 minute ago", "en"},
+		{smallSubTime(-2 * time.Minute), "2 minutes ago", "en"},
+		{smallSubTime(-9 * time.Minute), "9 minutes ago", "en"},
+		{smallSubTime(-10 * time.Minute), "10 minutes ago", "en"},
+		{smallSubTime(-11 * time.Minute), "11 minutes ago", "en"},
+		{smallSubTime(-20 * time.Minute), "20 minutes ago", "en"},
+		{smallSubTime(-21 * time.Minute), "21 minute ago", "en"},
+		{smallSubTime(-22 * time.Minute), "22 minutes ago", "en"},
+		{smallSubTime(-30 * time.Minute), "30 minutes ago", "en"},
+		{smallSubTime(-31 * time.Minute), "31 minute ago", "en"},
+		{smallSubTime(-59 * time.Minute), "59 minutes ago", "en"},
+		{smallSubTime(-60 * time.Minute), "1 hour ago", "en"},
+		{smallSubTime(-1 * time.Hour), "1 hour ago", "en"},
+		{smallSubTime(-2 * time.Hour), "2 hours ago", "en"},
+		{smallSubTime(-9 * time.Hour), "9 hours ago", "en"},
+		{smallSubTime(-10 * time.Hour), "10 hours ago", "en"},
+		{smallSubTime(-11 * time.Hour), "11 hours ago", "en"},
+		{smallSubTime(-20 * time.Hour), "20 hours ago", "en"},
+		{smallSubTime(-21 * time.Hour), "21 hour ago", "en"},
+		{smallSubTime(-23 * time.Hour), "23 hours ago", "en"},
+		{smallSubTime(-24 * time.Hour), "1 day ago", "en"},
+		{smallSubTime(-47 * time.Hour), "1 day ago", "en"},
+		{smallSubTime((-24 * 2) * time.Hour), "2 days ago", "en"},
+		{smallSubTime((-24 * 6) * time.Hour), "6 days ago", "en"},
+		{smallSubTime((-24 * 7) * time.Hour), "1 week ago", "en"},
+		{smallSubTime((-24 * 14) * time.Hour), "2 weeks ago", "en"},
+		{smallSubTime((-24 * 21) * time.Hour), "3 weeks ago", "en"},
+		{bigSubTime(0, 1, 1), "1 month ago", "en"},
+		{bigSubTime(0, 2, 1), "2 months ago", "en"},
+		{bigSubTime(0, 9, 1), "9 months ago", "en"},
+		{bigSubTime(0, 11, 1), "11 months ago", "en"},
+		{bigSubTime(0, 12, 1), "1 year ago", "en"},
+		{bigSubTime(1, 0, 1), "1 year ago", "en"},
+		{bigSubTime(2, 0, 1), "2 years ago", "en"},
+		{bigSubTime(21, 0, 1), "21 year ago", "en"},
+		{bigSubTime(31, 0, 1), "31 year ago", "en"},
+		{bigSubTime(100, 0, 1), "100 years ago", "en"},
+		// russian
+		{smallSubTime(-1 * time.Second), "В сети", "ru"},
+		{smallSubTime(-2 * time.Second), "В сети", "ru"},
+		{smallSubTime(-9 * time.Second), "В сети", "ru"},
+		{smallSubTime(-10 * time.Second), "В сети", "ru"},
+		{smallSubTime(-11 * time.Second), "В сети", "ru"},
+		{smallSubTime(-20 * time.Second), "В сети", "ru"},
+		{smallSubTime(-21 * time.Second), "В сети", "ru"},
+		{smallSubTime(-22 * time.Second), "В сети", "ru"},
+		{smallSubTime(-30 * time.Second), "В сети", "ru"},
+		{smallSubTime(-31 * time.Second), "В сети", "ru"},
+		{smallSubTime(-59 * time.Second), "В сети", "ru"},
+		{smallSubTime(-60 * time.Second), "1 минута назад", "ru"},
+		{smallSubTime(-1 * time.Minute), "1 минута назад", "ru"},
+		{smallSubTime(-2 * time.Minute), "2 минуты назад", "ru"},
+		{smallSubTime(-9 * time.Minute), "9 минут назад", "ru"},
+		{smallSubTime(-10 * time.Minute), "10 минут назад", "ru"},
+		{smallSubTime(-11 * time.Minute), "11 минут назад", "ru"},
+		{smallSubTime(-20 * time.Minute), "20 минут назад", "ru"},
+		{smallSubTime(-21 * time.Minute), "21 минута назад", "ru"},
+		{smallSubTime(-22 * time.Minute), "22 минуты назад", "ru"},
+		{smallSubTime(-30 * time.Minute), "30 минут назад", "ru"},
+		{smallSubTime(-31 * time.Minute), "31 минута назад", "ru"},
+		{smallSubTime(-59 * time.Minute), "59 минут назад", "ru"},
+		{smallSubTime(-60 * time.Minute), "1 час назад", "ru"},
+		{smallSubTime(-1 * time.Hour), "1 час назад", "ru"},
+		{smallSubTime(-2 * time.Hour), "2 часа назад", "ru"},
+		{smallSubTime(-9 * time.Hour), "9 часов назад", "ru"},
+		{smallSubTime(-10 * time.Hour), "10 часов назад", "ru"},
+		{smallSubTime(-11 * time.Hour), "11 часов назад", "ru"},
+		{smallSubTime(-20 * time.Hour), "20 часов назад", "ru"},
+		{smallSubTime(-21 * time.Hour), "21 час назад", "ru"},
+		{smallSubTime(-23 * time.Hour), "23 часа назад", "ru"},
+		{smallSubTime(-24 * time.Hour), "1 день назад", "ru"},
+		{smallSubTime(-47 * time.Hour), "1 день назад", "ru"},
+		{smallSubTime((-24 * 2) * time.Hour), "2 дня назад", "ru"},
+		{smallSubTime((-24 * 6) * time.Hour), "6 дней назад", "ru"},
+		{smallSubTime((-24 * 7) * time.Hour), "1 неделя назад", "ru"},
+		{smallSubTime((-24 * 14) * time.Hour), "2 недели назад", "ru"},
+		{smallSubTime((-24 * 21) * time.Hour), "3 недели назад", "ru"},
+		{bigSubTime(0, 1, 1), "1 месяц назад", "ru"},
+		{bigSubTime(0, 2, 1), "2 месяца назад", "ru"},
+		{bigSubTime(0, 9, 1), "9 месяцев назад", "ru"},
+		{bigSubTime(0, 11, 1), "11 месяцев назад", "ru"},
+		{bigSubTime(0, 12, 1), "1 год назад", "ru"},
+		{bigSubTime(1, 0, 1), "1 год назад", "ru"},
+		{bigSubTime(2, 0, 1), "2 года назад", "ru"},
+		{bigSubTime(5, 0, 1), "5 лет назад", "ru"},
+		{bigSubTime(6, 0, 1), "6 лет назад", "ru"},
+		{bigSubTime(7, 0, 1), "7 лет назад", "ru"},
+		{bigSubTime(21, 0, 1), "21 год назад", "ru"},
+		{bigSubTime(31, 0, 1), "31 год назад", "ru"},
+		{bigSubTime(100, 0, 1), "100 лет назад", "ru"},
+	}
+
+	for _, tc := range cases {
+		t.Run("result for "+tc.date+"|online", func(test *testing.T) {
+			SetLang(tc.lang)
+
+			if res := Take(tc.date + "|online"); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})

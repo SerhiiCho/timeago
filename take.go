@@ -11,6 +11,8 @@ import (
 // 60 seconds, add `|online` flag to the datetime string.
 // Format must be [year-month-day hours:minutes:seconds}
 func Take(datetime string) string {
+	option, hasOption := getOption(&datetime)
+
 	parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
 	seconds := int(time.Now().UTC().Sub(parsedTime.UTC()).Seconds())
 
@@ -20,8 +22,6 @@ func Take(datetime string) string {
 	weeks := seconds / 604800
 	months := seconds / 2629440
 	years := seconds / 31553280
-
-	option, hasOption := getOption(datetime)
 
 	switch {
 	case hasOption && option == "online" && seconds < 60:
@@ -93,10 +93,12 @@ func getTimeTranslations() map[string][]string {
 	}
 }
 
-func getOption(datetime string) (string, bool) {
-	spittedDateString := strings.Split(datetime, "|")
+func getOption(datetime *string) (string, bool) {
+	date := *datetime
+	spittedDateString := strings.Split(date, "|")
 
 	if len(spittedDateString) > 1 {
+		*datetime = spittedDateString[0]
 		return spittedDateString[1], true
 	}
 
