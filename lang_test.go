@@ -46,3 +46,21 @@ func TestSetLang(t *testing.T) {
 		}
 	})
 }
+
+func TestSetLocation(t *testing.T) {
+	t.Run("sets location to India Delhi", func(test *testing.T) {
+		SetLocation("India/Delhi")
+
+		if location != "India/Delhi" {
+			test.Error("SetLocation must set the `location` variable to `India/Delhi` but it didn't")
+		}
+	})
+
+	t.Run("sets language to Asia/China", func(test *testing.T) {
+		SetLocation("Europe/Kiev")
+
+		if location != "Europe/Kiev" {
+			test.Error("SetLocation must set the `location` variable to `Europe/Kiev` but it didn't")
+		}
+	})
+}

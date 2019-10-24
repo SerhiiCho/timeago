@@ -7,12 +7,12 @@ import (
 
 // test helper
 func smallSubTime(d time.Duration) string {
-	return time.Now().UTC().Add(d).Format("2006-01-02 15:04:05")
+	return time.Now().Add(d).Format("2006-01-02 15:04:05")
 }
 
 // test helper
 func bigSubTime(years int, months int, days int) string {
-	return time.Now().UTC().AddDate(-years, -months, -days).Format("2006-01-02 15:04:05")
+	return time.Now().AddDate(-years, -months, -days).Format("2006-01-02 15:04:05")
 }
 
 func TestGetOption(test *testing.T) {

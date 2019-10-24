@@ -13,8 +13,13 @@ import (
 func Take(datetime string) string {
 	option, hasOption := getOption(&datetime)
 
-	parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
-	seconds := int(time.Now().UTC().Sub(parsedTime.UTC()).Seconds())
+	loc, _ := time.LoadLocation(location)
+	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
+	seconds := int(time.Now().In(loc).Sub(parsedTime).Seconds())
+
+	if seconds < 0 {
+		return getWords("seconds", 0)
+	}
 
 	minutes := seconds / 60
 	hours := seconds / 3600

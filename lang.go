@@ -1,11 +1,16 @@
 package timeago
 
 var (
-	lang string
+	lang     string
+	location = "Europe/Kiev"
 )
 
 func SetLang(langParam string) {
 	lang = langParam
+}
+
+func SetLocation(local string) {
+	location = local
 }
 
 func trans(key string) string {
