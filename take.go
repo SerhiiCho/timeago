@@ -112,7 +112,7 @@ func getOption(datetime *string) (string, bool) {
 func trans(key string) string {
 	if language == "ru" {
 		return getRussian()[key]
-	} else {
-		return getEnglish()[key]
 	}
+
+	return getEnglish()[key]
 }
