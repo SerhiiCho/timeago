@@ -20,7 +20,7 @@ func TestTrans(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("returns "+tc.lang+" language", func(test *testing.T) {
-			SetLang(tc.lang)
+			Set("language", tc.lang)
 
 			if result := trans(tc.key); result != tc.result {
 				test.Errorf("Result mast be %s but got %s", tc.result, result)
@@ -29,38 +29,36 @@ func TestTrans(t *testing.T) {
 	}
 }
 
-func TestSetLang(t *testing.T) {
+func TestSet(t *testing.T) {
 	t.Run("sets language to ru", func(test *testing.T) {
-		SetLang("ru")
+		Set("language", "ru")
 
-		if lang != "ru" {
-			test.Error("SetLang must set the `lang` variable to `ru` but it didn't")
+		if language != "ru" {
+			test.Error("Set must set the `language` variable to `ru` but it didn't")
 		}
 	})
 
 	t.Run("sets language to en", func(test *testing.T) {
-		SetLang("en")
+		Set("language", "en")
 
-		if lang != "en" {
-			test.Error("SetLang must set the `lang` variable to `en` but it didn't")
+		if language != "en" {
+			test.Error("Set must set the `language` variable to `en` but it didn't")
 		}
 	})
-}
 
-func TestSetLocation(t *testing.T) {
 	t.Run("sets location to India Delhi", func(test *testing.T) {
-		SetLocation("India/Delhi")
+		Set("location", "India/Delhi")
 
 		if location != "India/Delhi" {
-			test.Error("SetLocation must set the `location` variable to `India/Delhi` but it didn't")
+			test.Error("Set must set the `location` variable to `India/Delhi` but it didn't")
 		}
 	})
 
 	t.Run("sets language to Asia/China", func(test *testing.T) {
-		SetLocation("Europe/Kiev")
+		Set("location", "Europe/Kiev")
 
 		if location != "Europe/Kiev" {
-			test.Error("SetLocation must set the `location` variable to `Europe/Kiev` but it didn't")
+			test.Error("Set must set the `location` variable to `Europe/Kiev` but it didn't")
 		}
 	})
 }

@@ -4,10 +4,10 @@ import "testing"
 
 func TestGetRussian(t *testing.T) {
 	if getRussian()["weeks2"] != "недель" {
-		t.Error("getRussian must return map of strings with translations for russian lang")
+		t.Error("getRussian must return map of strings with translations for russian language")
 	}
 
 	if getRussian()["days"] != "дня" {
-		t.Error("getRussian must return map of strings with translations for russian lang")
+		t.Error("getRussian must return map of strings with translations for russian language")
 	}
 }
