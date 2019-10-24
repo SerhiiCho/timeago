@@ -1,0 +1,5 @@
+package timeago
+
+func Lang() {
+	//
+}
