@@ -2,7 +2,7 @@ package timeago
 
 var (
 	language = "ru"
-	location = "UTC"
+	location = "America/New_York"
 )
 
 // Set sets configurations parameters to given value

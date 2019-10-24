@@ -14,7 +14,7 @@ timeago.Set("language", "ru")
 Default location is UTC. Optionally you can set the location in your application by calling `timeago.Set()` function and pass the location you need.
 
 ```go
-timeago.Set("location", "Europe/Kiev")
+timeago.Set("location", "America/New_York")
 ```
 
 ## Usage
