@@ -5,11 +5,18 @@
 Well tested, fast datetime converter into "n time ago" format from [year-month-day hours:minutes:seconds]. Supports Russian and English languages.
 
 ## Example
-
-Default language is English. Optionally you can set the language in your application by calling `timeago.SetLang()` method and passing flag "ru" or "en";
+##### Language
+Default language is English. Optionally you can set the language in your application by calling `timeago.SetLang()` method and pass the flag "ru" or "en".
 
 ```go
 timeago.SetLang("ru")
+```
+
+##### Location
+Default location is Europe/Kiev. Optionally you can set the location in your application by calling `timeago.SetLocation()` method and pass the location you need.
+
+```go
+timeago.SetLocation("India/Delhi")
 ```
 
 ## Usage
