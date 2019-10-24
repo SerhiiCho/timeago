@@ -3,8 +3,8 @@ language: go
 go:
     - 1.13
 
-before_script:
+before_install:
     - sudo cp -f /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 
 script:
-    - make test
+    - make
