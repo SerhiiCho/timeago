@@ -81,7 +81,6 @@ func getWords(timeKind string, num int) string {
 		break
 	case lastNum > 1 && lastNum < 5:
 		index = 1
-		break
 	}
 
 	timeTrans := getTimeTranslations()
