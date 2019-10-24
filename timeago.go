@@ -28,12 +28,7 @@ func Take(datetime string) string {
 }
 
 func calculateTheResult(seconds int, hasOption bool, option string) string {
-	minutes := seconds / 60
-	hours := seconds / 3600
-	days := seconds / 86400
-	weeks := seconds / 604800
-	months := seconds / 2629440
-	years := seconds / 31553280
+	minutes, hours, days, weeks, months, years := getTimeCalculations(seconds)
 
 	switch {
 	case hasOption && option == "online" && seconds < 60:
@@ -53,6 +48,17 @@ func calculateTheResult(seconds int, hasOption bool, option string) string {
 	}
 
 	return getWords("years", years)
+}
+
+func getTimeCalculations(seconds int) (int, int, int, int, int, int) {
+	minutes := seconds / 60
+	hours := seconds / 3600
+	days := seconds / 86400
+	weeks := seconds / 604800
+	months := seconds / 2629440
+	years := seconds / 31553280
+
+	return minutes, hours, days, weeks, months, years
 }
 
 func getLastNumber(num int) int {
