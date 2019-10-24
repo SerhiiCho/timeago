@@ -9,6 +9,7 @@ import (
 // Take coverts given datetime into `x time ago` format.
 // For displaying `Online` word if date interval within
 // 60 seconds, add `|online` flag to the datetime string.
+// Format must be [year-month-day hours:minutes:seconds}
 func Take(datetime string) string {
 	parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
 	seconds := int(time.Now().UTC().Sub(parsedTime.UTC()).Seconds())

@@ -2,7 +2,7 @@
 
 > IN DEVELOPMENT !!!
 
-Well tested, fast datetime converter into "n time ago" format. Supports Russian and English languages.
+Well tested, fast datetime converter into "n time ago" format from [year-month-day hours:minutes:seconds]. Supports Russian and English languages.
 
 ## Example
 
