@@ -1,7 +1,7 @@
+![clothing shop](https://github.com/SerhiiCho/timeago/blob/master/.github/example.png?raw=true)
+
 <h2 align="center">TimeAgo</h2>
 <h3 align="center">Datetime converter</h3>
-
-![clothing shop](https://github.com/SerhiiCho/timeago/blob/master/.github/example.png?raw=true)
 
 > IN DEVELOPMENT !!!
 
