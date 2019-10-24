@@ -9,17 +9,10 @@ func SetLang(langParam string) {
 	lang = langParam
 }
 
-// if translation not found returns null
-func trans(index string) string {
-	return translations[index]
-}
-
-// includeTranslations Includes array of translations
-// from lang directory nto the translations variable.
-func includeTranslations() {
+func trans(key string) string {
 	if lang == "ru" {
-		translations = getRussian()
+		return getRussian()[key]
 	} else {
-		translations = getEnglish()
+		return getEnglish()[key]
 	}
 }

@@ -10,8 +10,6 @@ import (
 // For displaying `Online` word if date interval within
 // 60 seconds, add `|online` flag to the datetime string.
 func Take(datetime string) string {
-	includeTranslations()
-
 	seconds := int(time.Since(time.Now()).Seconds())
 
 	minutes := seconds / 60
