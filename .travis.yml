@@ -1,0 +1,10 @@
+language: go
+
+go:
+    - 1.13
+
+before_script:
+    - sudo cp -f /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+
+script:
+    - make test
