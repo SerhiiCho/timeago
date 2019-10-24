@@ -113,12 +113,54 @@ func TestGetLastNumber(t *testing.T) {
 }
 
 func TestTake(t *testing.T) {
+	subTime := func(d time.Duration) string {
+		return time.Now().UTC().Add(d).Format("2006-01-02 15:04:05")
+	}
+
 	cases := []struct {
 		date   string
 		result string
 		lang   string
 	}{
-		{time.Now().UTC().Add(-10 * time.Second).Format("2006-01-02 15:04:05"), "10 seconds ago", "en"},
+		// english
+		{subTime(-1 * time.Second), "1 second ago", "en"},
+		{subTime(-2 * time.Second), "2 seconds ago", "en"},
+		{subTime(-9 * time.Second), "9 seconds ago", "en"},
+		{subTime(-10 * time.Second), "10 seconds ago", "en"},
+		{subTime(-11 * time.Second), "11 seconds ago", "en"},
+		{subTime(-20 * time.Second), "20 seconds ago", "en"},
+		{subTime(-21 * time.Second), "21 second ago", "en"},
+		{subTime(-22 * time.Second), "22 seconds ago", "en"},
+		{subTime(-30 * time.Second), "30 seconds ago", "en"},
+		{subTime(-31 * time.Second), "31 second ago", "en"},
+		{subTime(-59 * time.Second), "59 seconds ago", "en"},
+		{subTime(-60 * time.Second), "1 minute ago", "en"},
+		{subTime(-1 * time.Minute), "1 minute ago", "en"},
+		{subTime(-2 * time.Minute), "2 minutes ago", "en"},
+		{subTime(-9 * time.Minute), "9 minutes ago", "en"},
+		{subTime(-10 * time.Minute), "10 minutes ago", "en"},
+		{subTime(-11 * time.Minute), "11 minutes ago", "en"},
+		{subTime(-20 * time.Minute), "20 minutes ago", "en"},
+		{subTime(-21 * time.Minute), "21 minute ago", "en"},
+		{subTime(-22 * time.Minute), "22 minutes ago", "en"},
+		{subTime(-30 * time.Minute), "30 minutes ago", "en"},
+		{subTime(-31 * time.Minute), "31 minute ago", "en"},
+		{subTime(-59 * time.Minute), "59 minutes ago", "en"},
+		{subTime(-60 * time.Minute), "1 hour ago", "en"},
+		{subTime(-1 * time.Hour), "1 hour ago", "en"},
+		{subTime(-2 * time.Hour), "2 hours ago", "en"},
+		{subTime(-9 * time.Hour), "9 hours ago", "en"},
+		{subTime(-10 * time.Hour), "10 hours ago", "en"},
+		{subTime(-11 * time.Hour), "11 hours ago", "en"},
+		{subTime(-20 * time.Hour), "20 hours ago", "en"},
+		{subTime(-21 * time.Hour), "21 hour ago", "en"},
+		{subTime(-23 * time.Hour), "23 hours ago", "en"},
+		{subTime(-24 * time.Hour), "1 day ago", "en"},
+		{subTime(-47 * time.Hour), "1 day ago", "en"},
+		{subTime((-24 * 2) * time.Hour), "2 days ago", "en"},
+		{subTime((-24 * 6) * time.Hour), "6 days ago", "en"},
+		{subTime((-24 * 7) * time.Hour), "1 week ago", "en"},
+		{subTime((-24 * 21) * time.Hour), "3 weeks ago", "en"},
 	}
 
 	for _, tc := range cases {
