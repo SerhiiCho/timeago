@@ -41,5 +41,5 @@ timeago.Take("2019-10-23 10:46:00|online")
 ## Quick Start
 
 ```bash
-go get github.com/SerhiiCho/timeago
+go get -u github.com/SerhiiCho/timeago
 ```
