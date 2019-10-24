@@ -17,7 +17,10 @@ func Take(datetime string) string {
 	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
 	seconds := int(time.Now().In(loc).Sub(parsedTime).Seconds())
 
-	if seconds < 0 {
+	switch {
+	case seconds < 0 && option == "online":
+		return trans("online")
+	case seconds < 0:
 		return getWords("seconds", 0)
 	}
 

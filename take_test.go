@@ -132,6 +132,8 @@ func TestTake(t *testing.T) {
 		lang   string
 	}{
 		// english
+		{smallSubTime(time.Second * 2), "0 seconds ago", "en"},
+		{smallSubTime(time.Second), "0 seconds ago", "en"},
 		{smallSubTime(-1 * time.Second), "1 second ago", "en"},
 		{smallSubTime(-2 * time.Second), "2 seconds ago", "en"},
 		{smallSubTime(-9 * time.Second), "9 seconds ago", "en"},
@@ -182,6 +184,8 @@ func TestTake(t *testing.T) {
 		{bigSubTime(31, 0, 1), "31 year ago", "en"},
 		{bigSubTime(100, 0, 1), "100 years ago", "en"},
 		// russian
+		{smallSubTime(time.Second * 2), "0 секунд назад", "ru"},
+		{smallSubTime(time.Second), "0 секунд назад", "ru"},
 		{smallSubTime(-1 * time.Second), "1 секунда назад", "ru"},
 		{smallSubTime(-2 * time.Second), "2 секунды назад", "ru"},
 		{smallSubTime(-9 * time.Second), "9 секунд назад", "ru"},
@@ -254,6 +258,8 @@ func TestTake_with_online_flag(t *testing.T) {
 		lang   string
 	}{
 		// english
+		{smallSubTime(time.Second * 2), "Online", "en"},
+		{smallSubTime(time.Second), "Online", "en"},
 		{smallSubTime(-1 * time.Second), "Online", "en"},
 		{smallSubTime(-2 * time.Second), "Online", "en"},
 		{smallSubTime(-9 * time.Second), "Online", "en"},
@@ -304,6 +310,8 @@ func TestTake_with_online_flag(t *testing.T) {
 		{bigSubTime(31, 0, 1), "31 year ago", "en"},
 		{bigSubTime(100, 0, 1), "100 years ago", "en"},
 		// russian
+		{smallSubTime(time.Second * 2), "В сети", "ru"},
+		{smallSubTime(time.Second), "В сети", "ru"},
 		{smallSubTime(-1 * time.Second), "В сети", "ru"},
 		{smallSubTime(-2 * time.Second), "В сети", "ru"},
 		{smallSubTime(-9 * time.Second), "В сети", "ru"},
