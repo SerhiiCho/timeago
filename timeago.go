@@ -68,7 +68,7 @@ func getLastNumber(num int) int {
 	return result
 }
 
-// getWords desides rather the word must be singular or plural,
+// getWords decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
 // the time number
 func getWords(timeKind string, num int) string {
