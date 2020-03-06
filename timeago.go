@@ -61,6 +61,7 @@ func getTimeCalculations(seconds int) (int, int, int, int, int, int) {
 	return minutes, hours, days, weeks, months, years
 }
 
+// get the last number of a given integer
 func getLastNumber(num int) int {
 	numStr := strconv.Itoa(num)
 	result, _ := strconv.Atoi(numStr[len(numStr)-1:])
