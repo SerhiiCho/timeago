@@ -26,7 +26,7 @@ Default location is Europe/Kiev. Optionally you can set the location in your app
 
 ```go
 func init() {
-    timeago.Set("location", "India/Delhi")
+    timeago.Set("location", "America/New_York")
 }
 ```
 
