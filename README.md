@@ -9,19 +9,25 @@
 
 100% test covered, fast and lightweight datetime converter that converts given datetime into "n time ago" format from [YEAR-MONTH-DAY HOURS:MINUTES:SECONDS]. Supports Russian and English languages.
 
+[Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package)
+
 ## Configurations
 ##### Language
-Default language is English. Optionally you can set the language in your application by calling `timeago.Set()` function and pass the flag "ru" or "en".
+Default language is English. Optionally you can set the language in your application by calling `timeago.Set()` function and pass the flag "ru" or "en" in your init function.
 
 ```go
-timeago.Set("language", "ru")
+func init() {
+    timeago.Set("language", "ru")
+}
 ```
 
 ##### Location
-Default location is Europe/Kiev. Optionally you can set the location in your application by calling `timeago.Set()` function and pass the location you need.
+Default location is Europe/Kiev. Optionally you can set the location in your application by calling `timeago.Set()` function and pass the location you need in your init function.
 
 ```go
-timeago.Set("location", "India/Delhi")
+func init() {
+    timeago.Set("location", "India/Delhi")
+}
 ```
 
 > Please make sure that timezone configuration is correct for your location. It is very important for displaying the correct datetime.
