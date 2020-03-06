@@ -44,6 +44,10 @@ func calculateTheResult(seconds int, hasOption bool, option string) string {
 	case weeks < 4:
 		return getWords("weeks", weeks)
 	case months < 12:
+		if months == 0 {
+			months = 1
+		}
+
 		return getWords("months", months)
 	}
 
