@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"math"
 	"strconv"
 	"strings"
 	"time"
@@ -28,7 +29,7 @@ func Take(datetime string) string {
 }
 
 func calculateTheResult(seconds int, hasOption bool, option string) string {
-	minutes, hours, days, weeks, months, years := getTimeCalculations(seconds)
+	minutes, hours, days, weeks, months, years := getTimeCalculations(float64(seconds))
 
 	switch {
 	case hasOption && option == "online" && seconds < 60:
@@ -54,15 +55,15 @@ func calculateTheResult(seconds int, hasOption bool, option string) string {
 	return getWords("years", years)
 }
 
-func getTimeCalculations(seconds int) (int, int, int, int, int, int) {
-	minutes := seconds / 60
-	hours := seconds / 3600
-	days := seconds / 86400
-	weeks := seconds / 604800
-	months := seconds / 2629440
-	years := seconds / 31553280
+func getTimeCalculations(seconds float64) (int, int, int, int, int, int) {
+	minutes := math.Round(seconds / 60)
+	hours := math.Round(seconds / 3600)
+	days := math.Round(seconds / 86400)
+	weeks := math.Round(seconds / 604800)
+	months := math.Round(seconds / 2629440)
+	years := math.Round(seconds / 31553280)
 
-	return minutes, hours, days, weeks, months, years
+	return int(minutes), int(hours), int(days), int(weeks), int(months), int(years)
 }
 
 // get the last number of a given integer
