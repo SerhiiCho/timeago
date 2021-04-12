@@ -65,8 +65,6 @@ func TestGetWords(t *testing.T) {
 		lang     string
 	}{
 		// english
-		{"seconds", 1, "1 second ago", "en"},
-		{"seconds", 2, "2 seconds ago", "en"},
 		{"days", 11, "11 days ago", "en"},
 		{"days", 21, "21 days ago", "en"},
 		{"seconds", 30, "30 seconds ago", "en"},
@@ -74,10 +72,6 @@ func TestGetWords(t *testing.T) {
 		{"hours", 10, "10 hours ago", "en"},
 		{"years", 2, "2 years ago", "en"},
 		// russian
-		{"seconds", 1, "1 секунда назад", "ru"},
-		{"minutes", 2, "2 минуты назад", "ru"},
-		{"seconds", 3, "3 секунды назад", "ru"},
-		{"seconds", 4, "4 секунды назад", "ru"},
 		{"hours", 5, "5 часов назад", "ru"},
 		{"days", 11, "11 дней назад", "ru"},
 		{"years", 21, "21 год назад", "ru"},
@@ -128,19 +122,6 @@ func TestTake(t *testing.T) {
 		lang   string
 	}{
 		// english
-		{smallSubTime(time.Second * 2), "0 seconds ago", "en"},
-		{smallSubTime(time.Second), "0 seconds ago", "en"},
-		{smallSubTime(-1 * time.Second), "1 second ago", "en"},
-		{smallSubTime(-2 * time.Second), "2 seconds ago", "en"},
-		{smallSubTime(-9 * time.Second), "9 seconds ago", "en"},
-		{smallSubTime(-10 * time.Second), "10 seconds ago", "en"},
-		{smallSubTime(-11 * time.Second), "11 seconds ago", "en"},
-		{smallSubTime(-20 * time.Second), "20 seconds ago", "en"},
-		{smallSubTime(-21 * time.Second), "21 seconds ago", "en"},
-		{smallSubTime(-22 * time.Second), "22 seconds ago", "en"},
-		{smallSubTime(-30 * time.Second), "30 seconds ago", "en"},
-		{smallSubTime(-31 * time.Second), "31 seconds ago", "en"},
-		{smallSubTime(-59 * time.Second), "59 seconds ago", "en"},
 		{smallSubTime(-60 * time.Second), "1 minute ago", "en"},
 		{smallSubTime(-1 * time.Minute), "1 minute ago", "en"},
 		{smallSubTime(-2 * time.Minute), "2 minutes ago", "en"},
@@ -180,32 +161,6 @@ func TestTake(t *testing.T) {
 		{bigSubTime(31, 0, 1), "31 years ago", "en"},
 		{bigSubTime(100, 0, 1), "100 years ago", "en"},
 		// russian
-		{smallSubTime(time.Second * 2), "0 секунд назад", "ru"},
-		{smallSubTime(time.Second), "0 секунд назад", "ru"},
-		{smallSubTime(-1 * time.Second), "1 секунда назад", "ru"},
-		{smallSubTime(-2 * time.Second), "2 секунды назад", "ru"},
-		{smallSubTime(-3 * time.Second), "3 секунды назад", "ru"},
-		{smallSubTime(-4 * time.Second), "4 секунды назад", "ru"},
-		{smallSubTime(-5 * time.Second), "5 секунд назад", "ru"},
-		{smallSubTime(-6 * time.Second), "6 секунд назад", "ru"},
-		{smallSubTime(-7 * time.Second), "7 секунд назад", "ru"},
-		{smallSubTime(-8 * time.Second), "8 секунд назад", "ru"},
-		{smallSubTime(-9 * time.Second), "9 секунд назад", "ru"},
-		{smallSubTime(-10 * time.Second), "10 секунд назад", "ru"},
-		{smallSubTime(-11 * time.Second), "11 секунд назад", "ru"},
-		{smallSubTime(-20 * time.Second), "20 секунд назад", "ru"},
-		{smallSubTime(-21 * time.Second), "21 секунда назад", "ru"},
-		{smallSubTime(-22 * time.Second), "22 секунды назад", "ru"},
-		{smallSubTime(-23 * time.Second), "23 секунды назад", "ru"},
-		{smallSubTime(-24 * time.Second), "24 секунды назад", "ru"},
-		{smallSubTime(-25 * time.Second), "25 секунд назад", "ru"},
-		{smallSubTime(-26 * time.Second), "26 секунд назад", "ru"},
-		{smallSubTime(-27 * time.Second), "27 секунд назад", "ru"},
-		{smallSubTime(-28 * time.Second), "28 секунд назад", "ru"},
-		{smallSubTime(-29 * time.Second), "29 секунд назад", "ru"},
-		{smallSubTime(-30 * time.Second), "30 секунд назад", "ru"},
-		{smallSubTime(-31 * time.Second), "31 секунда назад", "ru"},
-		{smallSubTime(-59 * time.Second), "59 секунд назад", "ru"},
 		{smallSubTime(-60 * time.Second), "1 минута назад", "ru"},
 		{smallSubTime(-1 * time.Minute), "1 минута назад", "ru"},
 		{smallSubTime(-2 * time.Minute), "2 минуты назад", "ru"},
@@ -382,6 +337,54 @@ func TestTake_with_online_flag(t *testing.T) {
 
 			if res := Take(tc.date + "|online"); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
+			}
+		})
+	}
+}
+
+func TestTakeWithSeconds(t *testing.T) {
+	cases := []struct {
+		date   string
+		result []string
+		lang   string
+	}{
+		// english
+		{smallSubTime(time.Second * 2), []string{"0 seconds ago", "1 second ago"}, "en"},
+		{smallSubTime(time.Second), []string{"0 seconds ago", "1 second ago"}, "en"},
+		{smallSubTime(-1 * time.Second), []string{"1 second ago", "2 seconds ago"}, "en"},
+		{smallSubTime(-2 * time.Second), []string{"2 seconds ago", "3 seconds ago"}, "en"},
+		{smallSubTime(-9 * time.Second), []string{"9 seconds ago", "10 seconds ago"}, "en"},
+		{smallSubTime(-10 * time.Second), []string{"10 seconds ago", "11 seconds ago"}, "en"},
+		{smallSubTime(-11 * time.Second), []string{"11 seconds ago", "12 seconds ago"}, "en"},
+		{smallSubTime(-20 * time.Second), []string{"20 seconds ago", "21 seconds ago"}, "en"},
+		{smallSubTime(-21 * time.Second), []string{"21 seconds ago", "22 seconds ago"}, "en"},
+		{smallSubTime(-22 * time.Second), []string{"22 seconds ago", "23 seconds ago"}, "en"},
+		{smallSubTime(-30 * time.Second), []string{"30 seconds ago", "31 seconds ago"}, "en"},
+		{smallSubTime(-31 * time.Second), []string{"31 seconds ago", "32 seconds ago"}, "en"},
+		{smallSubTime(-59 * time.Second), []string{"59 seconds ago", "1 minute ago"}, "en"},
+		// russian
+		{smallSubTime(time.Second * 2), []string{"0 секунд назад", "1 секунда назад"}, "ru"},
+		{smallSubTime(time.Second), []string{"0 секунд назад", "1 секунда назад"}, "ru"},
+		{smallSubTime(-1 * time.Second), []string{"1 секунда назад", "2 секунды назад"}, "ru"},
+		{smallSubTime(-2 * time.Second), []string{"2 секунды назад", "3 секунды назад"}, "ru"},
+		{smallSubTime(-3 * time.Second), []string{"3 секунды назад", "4 секунды назад"}, "ru"},
+		{smallSubTime(-4 * time.Second), []string{"4 секунды назад", "5 секунд назад"}, "ru"},
+		{smallSubTime(-9 * time.Second), []string{"9 секунд назад", "10 секунд назад"}, "ru"},
+		{smallSubTime(-10 * time.Second), []string{"10 секунд назад", "11 секунд назад"}, "ru"},
+		{smallSubTime(-11 * time.Second), []string{"11 секунд назад", "12 секунд назад"}, "ru"},
+		{smallSubTime(-29 * time.Second), []string{"29 секунд назад", "30 секунд назад"}, "ru"},
+		{smallSubTime(-30 * time.Second), []string{"30 секунд назад", "31 секунда назад"}, "ru"},
+		{smallSubTime(-31 * time.Second), []string{"31 секунда назад", "32 секунда назад"}, "ru"},
+		{smallSubTime(-59 * time.Second), []string{"59 секунд назад", "1 минута назад"}, "ru"},
+	}
+
+	for _, tc := range cases {
+		t.Run("result for "+tc.date, func(test *testing.T) {
+			Set("language", tc.lang)
+			Set("location", "Europe/Kiev")
+
+			if res := Take(tc.date); res != tc.result[0] && res != tc.result[1] {
+				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
 			}
 		})
 	}
