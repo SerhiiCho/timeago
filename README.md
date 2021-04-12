@@ -1,5 +1,3 @@
-![golang](https://github.com/SerhiiCho/timeago/blob/master/.github/example.png?raw=true)
-
 [![Code Coverage](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/?branch=master)
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FSerhiiCho%2Ftimeago%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/SerhiiCho/timeago/goto?ref=master)
 [![Build Status](https://travis-ci.com/SerhiiCho/timeago.svg?branch=master)](https://travis-ci.com/SerhiiCho/timeago)
