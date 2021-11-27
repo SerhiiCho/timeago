@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"github.com/SerhiiCho/timeago/langs"
 	"math"
 	"strconv"
 	"strings"
@@ -127,9 +128,5 @@ func getOption(datetime *string) (string, bool) {
 }
 
 func trans(key string) string {
-	if language == "ru" {
-		return getRussian()[key]
-	}
-
-	return getEnglish()[key]
+	return langs.GetLanguage(language, key)
 }
