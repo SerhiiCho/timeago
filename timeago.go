@@ -1,7 +1,6 @@
 package timeago
 
 import (
-	"github.com/SerhiiCho/timeago/langs"
 	"math"
 	"strconv"
 	"strings"
@@ -128,5 +127,5 @@ func getOption(datetime *string) (string, bool) {
 }
 
 func trans(key string) string {
-	return langs.GetLanguage(language, key)
+	return GetLanguage(language, key)
 }
