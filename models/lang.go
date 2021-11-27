@@ -1,27 +1,27 @@
 package models
 
 type Lang struct {
-	ago      string
-	online   string
-	second   string
-	seconds  string
-	seconds2 string
-	minute   string
-	minutes  string
-	minutes2 string
-	hour     string
-	hours    string
-	hours2   string
-	day      string
-	days     string
-	days2    string
-	week     string
-	weeks    string
-	weeks2   string
-	month    string
-	months   string
-	months2  string
-	year     string
-	years    string
-	years2   string
+	Ago      string `json="ago"`
+	Online   string `json="online"`
+	Second   string `json="second"`
+	Seconds  string `json="seconds"`
+	Seconds2 string `json="seconds2"`
+	Minute   string `json="minute"`
+	Minutes  string `json="minutes"`
+	Minutes2 string `json="minutes2"`
+	Hour     string `json="hour"`
+	Hours    string `json="hours"`
+	Hours2   string `json="hours2"`
+	Day      string `json="day"`
+	Days     string `json="days"`
+	Days2    string `json="days2"`
+	Week     string `json="week"`
+	Weeks    string `json="weeks"`
+	Weeks2   string `json="weeks2"`
+	Month    string `json="month"`
+	Months   string `json="months"`
+	Months2  string `json="months2"`
+	Year     string `json="year"`
+	Years    string `json="years"`
+	Years2   string `json="years2"`
 }

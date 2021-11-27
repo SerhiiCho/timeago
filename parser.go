@@ -1,9 +1,13 @@
 package timeago
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"strings"
+
+	"github.com/SerhiiCho/timeago/models"
+	"github.com/SerhiiCho/timeago/utils"
 )
 
 func GetLanguage(lang string, key string) string {
@@ -17,24 +21,19 @@ func GetLanguage(lang string, key string) string {
 	// return en[key]
 }
 
-func parseNeededFile() {
-	// result := make(map[string]map[string]string)
+// Parses json file and unmarshals result into a struct
+func parseNeededFile(fileName string) models.Lang {
+	content := utils.GetFileContent(fileName)
 
-	// for _, fileName := range fileNames {
-	// 	var langItem models.Lang
+	var result models.Lang
 
-	// read file
+	err := json.Unmarshal(content, &result)
 
-	// json.NewDecoder().Decode(&langItem)
-	// newItem := map[string]string{
-	// 	"Title": "",
-	// 	"Body":  "",
-	// }
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	// result[lang] = append(result[lang], newItem)
-
-	// fmt.Println(name)
-	// }
+	return result
 }
 
 // Scans 'langs' directory and returns names
