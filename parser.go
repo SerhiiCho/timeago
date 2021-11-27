@@ -10,7 +10,7 @@ import (
 )
 
 func getLanguage(lang string) models.Lang {
-	filePath := fmt.Sprintf("/langs/%s.json", lang)
+	filePath := fmt.Sprintf("./langs/%s.json", lang)
 
 	thereIsFile, err := utils.FileExists(filePath)
 

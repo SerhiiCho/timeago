@@ -5,25 +5,25 @@ import "testing"
 func TestTrans(t *testing.T) {
 	cases := []struct {
 		lang   string
-		key    string
+		trans  func() string
 		result string
 	}{
-		{"ru", "online", "В сети"},
-		{"ru", "second", "секунда"},
-		{"ru", "hour", "час"},
-		{"ru", "day", "день"},
-		{"en", "online", "Online"},
-		{"en", "second", "second"},
-		{"en", "hour", "hour"},
-		{"en", "day", "day"},
+		{"ru", func() string { return trans().Online }, "В сети"},
+		{"ru", func() string { return trans().Second }, "секунда"},
+		{"ru", func() string { return trans().Hour }, "час"},
+		{"ru", func() string { return trans().Day }, "день"},
+		{"en", func() string { return trans().Online }, "Online"},
+		{"en", func() string { return trans().Second }, "second"},
+		{"en", func() string { return trans().Hour }, "hour"},
+		{"en", func() string { return trans().Day }, "day"},
 	}
 
 	for _, tc := range cases {
 		t.Run("returns "+tc.lang+" language", func(test *testing.T) {
 			Set("language", tc.lang)
 
-			if result := trans(tc.key); result != tc.result {
-				test.Errorf("Result mast be %s but got %s", tc.result, result)
+			if result := tc.trans(); result != tc.result {
+				test.Errorf("Result must be %s but got %s", tc.result, result)
 			}
 		})
 	}
