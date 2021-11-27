@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/SerhiiCho/timeago/models"
 )
 
 // Take coverts given datetime into `x time ago` format.
@@ -20,7 +22,7 @@ func Take(datetime string) string {
 
 	switch {
 	case seconds < 0 && option == "online":
-		return trans("online")
+		return trans().Online
 	case seconds < 0:
 		return getWords("seconds", 0)
 	}
@@ -33,7 +35,7 @@ func calculateTheResult(seconds int, hasOption bool, option string) string {
 
 	switch {
 	case hasOption && option == "online" && seconds < 60:
-		return trans("online")
+		return trans().Online
 	case seconds < 60:
 		return getWords("seconds", seconds)
 	case minutes < 60:
@@ -92,7 +94,7 @@ func getWords(timeKind string, num int) string {
 
 	timeTrans := getTimeTranslations()
 
-	return strconv.Itoa(num) + " " + timeTrans[timeKind][index] + " " + trans("ago")
+	return strconv.Itoa(num) + " " + timeTrans[timeKind][index] + " " + trans().Ago
 }
 
 // getTimeTranslations returns array of translations for different
@@ -101,13 +103,13 @@ func getWords(timeKind string, num int) string {
 // possible options for the translated word.
 func getTimeTranslations() map[string][]string {
 	return map[string][]string{
-		"seconds": {trans("second"), trans("seconds"), trans("seconds2")},
-		"minutes": {trans("minute"), trans("minutes"), trans("minutes2")},
-		"hours":   {trans("hour"), trans("hours"), trans("hours2")},
-		"days":    {trans("day"), trans("days"), trans("days2")},
-		"weeks":   {trans("week"), trans("weeks"), trans("weeks2")},
-		"months":  {trans("month"), trans("months"), trans("months2")},
-		"years":   {trans("year"), trans("years"), trans("years2")},
+		"seconds": {trans().Second, trans().Seconds, trans().Seconds2},
+		"minutes": {trans().Minute, trans().Minutes, trans().Minutes2},
+		"hours":   {trans().Hour, trans().Hours, trans().Hours2},
+		"days":    {trans().Day, trans().Days, trans().Days2},
+		"weeks":   {trans().Week, trans().Weeks, trans().Weeks2},
+		"months":  {trans().Month, trans().Months, trans().Months2},
+		"years":   {trans().Year, trans().Years, trans().Years2},
 	}
 }
 
@@ -126,6 +128,6 @@ func getOption(datetime *string) (string, bool) {
 	return "", false
 }
 
-func trans(key string) string {
-	return GetLanguage(language, key)
+func trans() models.Lang {
+	return getLanguage(language)
 }

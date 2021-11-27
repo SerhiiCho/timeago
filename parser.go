@@ -2,23 +2,27 @@ package timeago
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"fmt"
 	"log"
-	"strings"
 
 	"github.com/SerhiiCho/timeago/models"
 	"github.com/SerhiiCho/timeago/utils"
 )
 
-func GetLanguage(lang string, key string) string {
-	// allLangs := getAllLanguages()
+func getLanguage(lang string) models.Lang {
+	filePath := fmt.Sprintf("/langs/%s.json", lang)
 
-	return ""
-	// if lang == "ru" {
-	// 	return ru[key]
-	// }
+	thereIsFile, err := utils.FileExists(filePath)
 
-	// return en[key]
+	if !thereIsFile {
+		log.Fatalf("File with the path: %s, doesn't exist", filePath)
+	}
+
+	if err != nil {
+		log.Fatalf("Error while trying to read file %s. Error: %v", filePath, err)
+	}
+
+	return parseNeededFile(filePath)
 }
 
 // Parses json file and unmarshals result into a struct
@@ -31,24 +35,6 @@ func parseNeededFile(fileName string) models.Lang {
 
 	if err != nil {
 		log.Fatal(err)
-	}
-
-	return result
-}
-
-// Scans 'langs' directory and returns names
-// of all the files inside without extension
-func getAllLanguages() []string {
-	files, err := ioutil.ReadDir("./langs")
-	var result []string
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, file := range files {
-		lang := strings.Split(file.Name(), ".")[0]
-		result = append(result, lang)
 	}
 
 	return result
