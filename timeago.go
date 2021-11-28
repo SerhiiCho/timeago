@@ -1,12 +1,15 @@
 package timeago
 
 import (
+	"fmt"
+	"log"
 	"math"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/SerhiiCho/timeago/models"
+	"github.com/SerhiiCho/timeago/utils"
 )
 
 // Take coverts given datetime into `x time ago` format.
@@ -129,5 +132,17 @@ func getOption(datetime *string) (string, bool) {
 }
 
 func trans() models.Lang {
-	return getLanguage(language)
+	filePath := fmt.Sprintf("./langs/%s.json", language)
+
+	thereIsFile, err := utils.FileExists(filePath)
+
+	if !thereIsFile {
+		log.Fatalf("File with the path: %s, doesn't exist", filePath)
+	}
+
+	if err != nil {
+		log.Fatalf("Error while trying to read file %s. Error: %v", filePath, err)
+	}
+
+	return parseNeededFile(filePath)
 }
