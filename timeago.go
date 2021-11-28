@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"math"
-	"os"
+	"path"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -133,13 +134,15 @@ func getOption(datetime *string) (string, bool) {
 }
 
 func trans() models.Lang {
-	path, err := os.Getwd()
+	_, filename, _, ok := runtime.Caller(0)
 
-	if err != nil {
-		log.Println(err)
+	if !ok {
+		panic("No caller information")
 	}
 
-	filePath := fmt.Sprintf(path+"/langs/%s.json", language)
+	rootPath := path.Dir(filename)
+
+	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", language)
 
 	thereIsFile, err := utils.FileExists(filePath)
 
