@@ -85,37 +85,12 @@ func getLastNumber(num int) int {
 // and depending on the result it adds the correct word after
 // the time number
 func getWords(timeKind string, num int) string {
-	lastNum := getLastNumber(num)
-	index := 2
+	form := getLanguageForm(num)
+	time := getTimeTranslations()
 
-	switch {
-	case lastNum == 1 && num == 11:
-		index = 2
-	case lastNum == 1 && language == "ru" || num == 1 && language == "en":
-		index = 0
-	case lastNum > 1 && lastNum < 5:
-		index = 1
-	}
+	translation := time[timeKind][form]
 
-	timeTrans := getTimeTranslations()
-
-	return strconv.Itoa(num) + " " + timeTrans[timeKind][index] + " " + trans().Ago
-}
-
-// getTimeTranslations returns array of translations for different
-// cases. For example `1 second` must not have `s` at the end
-// but `2 seconds` requires `s`. So this method keeps all
-// possible options for the translated word.
-func getTimeTranslations() map[string][]string {
-	return map[string][]string{
-		"seconds": {trans().Second, trans().Seconds, trans().Seconds2},
-		"minutes": {trans().Minute, trans().Minutes, trans().Minutes2},
-		"hours":   {trans().Hour, trans().Hours, trans().Hours2},
-		"days":    {trans().Day, trans().Days, trans().Days2},
-		"weeks":   {trans().Week, trans().Weeks, trans().Weeks2},
-		"months":  {trans().Month, trans().Months, trans().Months2},
-		"years":   {trans().Year, trans().Years, trans().Years2},
-	}
+	return strconv.Itoa(num) + " " + translation + " " + trans().Ago
 }
 
 // getOption check if datetime has option with time,
