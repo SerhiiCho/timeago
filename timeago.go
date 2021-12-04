@@ -26,7 +26,7 @@ func Take(datetime string) string {
 	seconds := int(time.Now().In(loc).Sub(parsedTime).Seconds())
 
 	switch {
-	case seconds < 0 && option == "online":
+	case seconds < 60 && option == "online":
 		return trans().Online
 	case seconds < 0:
 		return getWords("seconds", 0)

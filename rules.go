@@ -5,8 +5,8 @@ import "github.com/SerhiiCho/timeago/models"
 func getRules(number, lastDigit int) map[string]models.Rule {
 	return map[string]models.Rule{
 		"en": {
-			Single: number == 0 || number == 1,
-			Plural: number > 1,
+			Single: number == 1,
+			Plural: number > 1 || number == 0,
 		},
 		"ru": {
 			Single: lastDigit == 1 || number == 0,

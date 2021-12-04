@@ -13,37 +13,37 @@ func getTimeTranslations() map[string]map[string]string {
 		"seconds": {
 			"single":  trans().Second,
 			"plural":  trans().Seconds,
-			"cpecial": trans().SecondsSpecial,
+			"special": trans().SecondsSpecial,
 		},
 		"minutes": {
 			"single":  trans().Minute,
 			"plural":  trans().Minutes,
-			"cpecial": trans().MinutesSpecial,
+			"special": trans().MinutesSpecial,
 		},
 		"hours": {
 			"single":  trans().Hour,
 			"plural":  trans().Hours,
-			"cpecial": trans().HoursSpecial,
+			"special": trans().HoursSpecial,
 		},
 		"days": {
 			"single":  trans().Day,
 			"plural":  trans().Days,
-			"cpecial": trans().DaysSpecial,
+			"special": trans().DaysSpecial,
 		},
 		"weeks": {
 			"single":  trans().Week,
 			"plural":  trans().Weeks,
-			"cpecial": trans().WeeksSpecial,
+			"special": trans().WeeksSpecial,
 		},
 		"months": {
 			"single":  trans().Month,
 			"plural":  trans().Months,
-			"cpecial": trans().MonthsSpecial,
+			"special": trans().MonthsSpecial,
 		},
 		"years": {
 			"single":  trans().Year,
 			"plural":  trans().Years,
-			"cpecial": trans().YearsSpecial,
+			"special": trans().YearsSpecial,
 		},
 	}
 }
@@ -53,13 +53,6 @@ func getLanguageForm(num int) string {
 	lastDigit := getLastNumber(num)
 	rule := getRules(num, lastDigit)[language]
 
-	switch {
-	case rule.Single:
-		return "single"
-	case rule.Plural:
-		return "plural"
-	}
-
 	if rule.Special != nil {
 		for _, isPassing := range rule.Special {
 			if isPassing {
@@ -68,7 +61,14 @@ func getLanguageForm(num int) string {
 		}
 	}
 
-	fmt.Errorf("Provided rules don't apply to a number %d", num)
+	switch {
+	case rule.Single:
+		return "single"
+	case rule.Plural:
+		return "plural"
+	}
+
+	fmt.Printf("Provided rules don't apply to a number %d", num)
 
 	return form
 }
