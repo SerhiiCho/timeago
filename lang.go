@@ -1,6 +1,8 @@
 package timeago
 
-import "log"
+import (
+	"fmt"
+)
 
 // getTimeTranslations returns array of translations for different
 // cases. For example `1 second` must not have `s` at the end
@@ -66,7 +68,7 @@ func getLanguageForm(num int) string {
 		}
 	}
 
-	log.Fatalf("Provided rules don't apply to a number %d", num)
+	fmt.Errorf("Provided rules don't apply to a number %d", num)
 
 	return form
 }
