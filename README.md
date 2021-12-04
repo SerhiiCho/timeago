@@ -7,7 +7,8 @@
 
 100% test covered, fast and lightweight datetime converter that converts given datetime into "n time ago" format from [YEAR-MONTH-DAY HOURS:MINUTES:SECONDS]. Supports Russian and English languages.
 
-[Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package)
+- [Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package)
+- [Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
 
 ## Configurations
 ##### Language
