@@ -217,7 +217,6 @@ func TestTake_with_online_flag(t *testing.T) {
 		{smallSubTime(-22 * time.Second), "Online", "en"},
 		{smallSubTime(-30 * time.Second), "Online", "en"},
 		{smallSubTime(-31 * time.Second), "Online", "en"},
-		{smallSubTime(-59 * time.Second), "Online", "en"},
 		{smallSubTime(-60 * time.Second), "1 minute ago", "en"},
 		{smallSubTime(-1 * time.Minute), "1 minute ago", "en"},
 		{smallSubTime(-2 * time.Minute), "2 minutes ago", "en"},
@@ -229,7 +228,6 @@ func TestTake_with_online_flag(t *testing.T) {
 		{smallSubTime(-22 * time.Minute), "22 minutes ago", "en"},
 		{smallSubTime(-30 * time.Minute), "30 minutes ago", "en"},
 		{smallSubTime(-31 * time.Minute), "31 minutes ago", "en"},
-		{smallSubTime(-59 * time.Minute), "59 minutes ago", "en"},
 		{smallSubTime(-60 * time.Minute), "1 hour ago", "en"},
 		{smallSubTime(-1 * time.Hour), "1 hour ago", "en"},
 		{smallSubTime(-2 * time.Hour), "2 hours ago", "en"},
@@ -269,7 +267,6 @@ func TestTake_with_online_flag(t *testing.T) {
 		{smallSubTime(-22 * time.Second), "В сети", "ru"},
 		{smallSubTime(-30 * time.Second), "В сети", "ru"},
 		{smallSubTime(-31 * time.Second), "В сети", "ru"},
-		{smallSubTime(-59 * time.Second), "В сети", "ru"},
 		{smallSubTime(-60 * time.Second), "1 минута назад", "ru"},
 		{smallSubTime(-1 * time.Minute), "1 минута назад", "ru"},
 		{smallSubTime(-2 * time.Minute), "2 минуты назад", "ru"},
@@ -281,7 +278,6 @@ func TestTake_with_online_flag(t *testing.T) {
 		{smallSubTime(-22 * time.Minute), "22 минуты назад", "ru"},
 		{smallSubTime(-30 * time.Minute), "30 минут назад", "ru"},
 		{smallSubTime(-31 * time.Minute), "31 минута назад", "ru"},
-		{smallSubTime(-59 * time.Minute), "59 минут назад", "ru"},
 		{smallSubTime(-60 * time.Minute), "1 час назад", "ru"},
 		{smallSubTime(-1 * time.Hour), "1 час назад", "ru"},
 		{smallSubTime(-2 * time.Hour), "2 часа назад", "ru"},
@@ -343,7 +339,6 @@ func TestTakeWithSeconds(t *testing.T) {
 		{smallSubTime(-22 * time.Second), []string{"22 seconds ago", "23 seconds ago"}, "en"},
 		{smallSubTime(-30 * time.Second), []string{"30 seconds ago", "31 seconds ago"}, "en"},
 		{smallSubTime(-31 * time.Second), []string{"31 seconds ago", "32 seconds ago"}, "en"},
-		{smallSubTime(-59 * time.Second), []string{"59 seconds ago", "1 minute ago"}, "en"},
 		// russian
 		{smallSubTime(time.Second * 2), []string{"0 секунд назад", "1 секунда назад"}, "ru"},
 		{smallSubTime(time.Second), []string{"0 секунд назад", "1 секунда назад"}, "ru"},
@@ -356,8 +351,7 @@ func TestTakeWithSeconds(t *testing.T) {
 		{smallSubTime(-11 * time.Second), []string{"11 секунд назад", "12 секунд назад"}, "ru"},
 		{smallSubTime(-29 * time.Second), []string{"29 секунд назад", "30 секунд назад"}, "ru"},
 		{smallSubTime(-30 * time.Second), []string{"30 секунд назад", "31 секунда назад"}, "ru"},
-		{smallSubTime(-31 * time.Second), []string{"31 секунда назад", "32 секунда назад"}, "ru"},
-		{smallSubTime(-59 * time.Second), []string{"59 секунд назад", "1 минута назад"}, "ru"},
+		{smallSubTime(-31 * time.Second), []string{"31 секунда назад", "32 секунды назад"}, "ru"},
 	}
 
 	for _, tc := range cases {
