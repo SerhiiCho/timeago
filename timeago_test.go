@@ -356,7 +356,7 @@ func TestTakeWithSeconds(t *testing.T) {
 		{smallSubTime(-11 * time.Second), []string{"11 секунд назад", "12 секунд назад"}, "ru"},
 		{smallSubTime(-29 * time.Second), []string{"29 секунд назад", "30 секунд назад"}, "ru"},
 		{smallSubTime(-30 * time.Second), []string{"30 секунд назад", "31 секунда назад"}, "ru"},
-		{smallSubTime(-31 * time.Second), []string{"31 секунда назад", "32 секунда назад"}, "ru"},
+		{smallSubTime(-31 * time.Second), []string{"31 секунда назад", "32 секунды назад"}, "ru"},
 		{smallSubTime(-59 * time.Second), []string{"59 секунд назад", "1 минута назад"}, "ru"},
 	}
 
