@@ -7,11 +7,17 @@
 
 Fast and lightweight datetime converter that converts given datetime into "n time ago" format from [YEAR-MONTH-DAY HOURS:MINUTES:SECONDS]. Supports Russian and English languages.
 
-- [Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package)
-- [Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
+- Chapters
+    - [Configurations](#configurations)
+    - [Supported languages](#supportedlanguages)
+    - [Usage](#usage)
+    - [Quick Start](#quickstart)
+- Useful links
+    - [Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package)
+    - [Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
 
 ## Configurations
-##### Language
+#### Language
 Default language is English. Optionally you can set the language in your application by calling `timeago.Set()` function and pass the flag "ru" or "en" in your init function.
 
 ```go
@@ -30,6 +36,31 @@ func init() {
 ```
 
 > Please make sure that timezone configuration is correct for your location. It is very important for displaying the correct datetime.
+
+## Supported languages
+
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Short representation</th>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+      <td>English</td>
+      <td>en</td>
+    </tr>
+    <tr>
+      <td>Russian</td>
+      <td>ru</td>
+    </tr>
+    <tr>
+      <td>Ukrainian</td>
+      <td>uk</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Usage
 
