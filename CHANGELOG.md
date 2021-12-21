@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.1.5 (2021-12-22)
+
+- Added support for Ukrainian language
+- Improved documentation
+- Made easy to contribute another language
+
+----
+
 ## v1.1.4 (2021-12-05)
 
 - Fixed mistake with failing test

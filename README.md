@@ -11,13 +11,16 @@ Fast and lightweight datetime converter that converts given datetime into "n tim
     - [Configurations](#configurations)
     - [Supported languages](#supported-languages)
     - [Usage](#usage)
+    - [Contribute translation](#contribute-translation)
     - [Quick Start](#quick-start)
 - Useful links
     - [Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package)
     - [Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
 
 ## Configurations
+
 #### Language
+
 Default language is English. Optionally you can set the language in your application by calling `timeago.Set()` function and pass the flag "ru" or "en" in your init function.
 
 ```go
@@ -27,6 +30,7 @@ func init() {
 ```
 
 ##### Location
+
 Default location is Europe/Kiev. Optionally you can set the location in your application by calling `timeago.Set()` function and pass the location you need in your init function.
 
 ```go
@@ -42,20 +46,24 @@ func init() {
 <table>
   <thead>
     <tr>
+      <th>FLag</th>
       <th>Language</th>
       <th>Short representation</th>
     </tr>
   </thead>
   <tbody>
      <tr>
+      <td>🇬🇧</td>
       <td>English</td>
       <td>en</td>
     </tr>
     <tr>
+      <td>🇷🇺</td>
       <td>Russian</td>
       <td>ru</td>
     </tr>
     <tr>
+      <td>🇺🇦</td>
       <td>Ukrainian</td>
       <td>uk</td>
     </tr>
@@ -75,6 +83,12 @@ If you want to show last user login like if user is online or not, you can optio
 ```go
 timeago.Take("2019-10-23 10:46:00|online")
 ```
+
+## Contribute translation
+
+If you want to contribute support for a language that is fully supported, all you need to do is to copy/paste 2 files and change them to match the language that you want to add.
+
+After than, add 1 line to `README.md` file and 1 rule to a `rules.go`. Here is my [commit](https://github.com/SerhiiCho/timeago/commit/6fb58f6b4fd2e9c8b2a4ff2f60c38f99fc91708b) for supporting Ukrainian language that shows changes that I did to add the support. It's pretty straightforward. Waiting for you PR 😉.
 
 ## Quick Start
 
