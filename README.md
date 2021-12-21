@@ -31,6 +31,27 @@ func init() {
 
 > Please make sure that timezone configuration is correct for your location. It is very important for displaying the correct datetime.
 
+#### Supported languages
+
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Short representation</th>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+      <td>English</td>
+      <td>en</td>
+    </tr>
+    <tr>
+      <td>Russian</td>
+      <td>ru</td>
+    </tr>
+  </tbody>
+</table>
+
 ## Usage
 
 For outputting post publishing date or something else you can just pass the date to method `timeago.Take()`. It will count the interval between now and given date and returns converted format.
