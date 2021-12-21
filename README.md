@@ -9,9 +9,9 @@ Fast and lightweight datetime converter that converts given datetime into "n tim
 
 - Chapters
     - [Configurations](#configurations)
-    - [Supported languages](#supportedlanguages)
+    - [Supported languages](#supported-languages)
     - [Usage](#usage)
-    - [Quick Start](#quickstart)
+    - [Quick Start](#quick-start)
 - Useful links
     - [Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package)
     - [Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
