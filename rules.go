@@ -17,5 +17,14 @@ func getRules(number, lastDigit int) map[string]models.Rule {
 				lastDigit >= 5 && lastDigit <= 9,
 			},
 		},
+		"uk": {
+			Single: lastDigit == 1 || number == 0,
+			Plural: lastDigit >= 2 && lastDigit < 5,
+			Special: []bool{
+				number >= 5 && number <= 20,
+				lastDigit == 0,
+				lastDigit >= 5 && lastDigit <= 9,
+			},
+		},
 	}
 }
