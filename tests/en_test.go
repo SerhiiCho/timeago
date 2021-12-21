@@ -16,6 +16,7 @@ func TestTakeEn(t *testing.T) {
 		{smallSubTime(-60 * time.Second), "1 minute ago", "en"},
 		{smallSubTime(-1 * time.Minute), "1 minute ago", "en"},
 		{smallSubTime(-2 * time.Minute), "2 minutes ago", "en"},
+		{smallSubTime(-5 * time.Minute), "5 minutes ago", "en"},
 		{smallSubTime(-9 * time.Minute), "9 minutes ago", "en"},
 		{smallSubTime(-10 * time.Minute), "10 minutes ago", "en"},
 		{smallSubTime(-11 * time.Minute), "11 minutes ago", "en"},

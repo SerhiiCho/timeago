@@ -16,6 +16,7 @@ func TestTakeRu(t *testing.T) {
 		{smallSubTime(-60 * time.Second), "1 минута назад", "ru"},
 		{smallSubTime(-1 * time.Minute), "1 минута назад", "ru"},
 		{smallSubTime(-2 * time.Minute), "2 минуты назад", "ru"},
+		{smallSubTime(-5 * time.Minute), "5 минут назад", "ru"},
 		{smallSubTime(-9 * time.Minute), "9 минут назад", "ru"},
 		{smallSubTime(-10 * time.Minute), "10 минут назад", "ru"},
 		{smallSubTime(-11 * time.Minute), "11 минут назад", "ru"},
