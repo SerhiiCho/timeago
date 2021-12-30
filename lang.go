@@ -53,15 +53,9 @@ func getLanguageForm(num int) string {
 	lastDigit := getLastNumber(num)
 	rule := getRules(num, lastDigit)[language]
 
-	if rule.Special != nil {
-		for _, isPassing := range rule.Special {
-			if isPassing {
-				return "special"
-			}
-		}
-	}
-
 	switch {
+	case rule.Special:
+		return "special"
 	case rule.Single:
 		return "single"
 	case rule.Plural:
