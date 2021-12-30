@@ -1,5 +1,12 @@
 # Release Notes
 
+## v1.1.6 (2021-12-30)
+
+- Changed type for the special rule in `rules.go` file.
+- Improved docs by adding more information about how to contribute a language support.
+
+----
+
 ## v1.1.5 (2021-12-22)
 
 - Added support for Ukrainian language
