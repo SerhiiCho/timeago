@@ -64,6 +64,11 @@ func init() {
       <td>Russian</td>
       <td>ru</td>
     </tr>
+    <tr>
+      <td>🇺🇦</td>
+      <td>Ukrainian</td>
+      <td>uk</td>
+    </tr>
   </tbody>
 </table>
 
