@@ -12,7 +12,7 @@ Fast and lightweight datetime converter that converts given datetime into "n tim
         - [Language](#language)
         - [Location](#location)
     - [🚩 Supported languages](#-supported-languages)
-    - [👏 Usage](#usage)
+    - [👏 Usage](#-usage)
     - [🇸🇿 Contribute translation](#-contribute-translation)
         - [Translation files](#translation-files)
         - [Rules](#rules)
