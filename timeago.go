@@ -14,7 +14,7 @@ import (
 	"github.com/SerhiiCho/timeago/utils"
 )
 
-var cache = map[string]models.Lang{}
+var cachedJsonResults = map[string]models.Lang{}
 
 // Take coverts given datetime into `x time ago` format.
 // For displaying `Online` word if date interval within
@@ -121,7 +121,7 @@ func trans() models.Lang {
 
 	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", language)
 
-	if cachedResult, ok := cache[filePath]; ok {
+	if cachedResult, ok := cachedJsonResults[filePath]; ok {
 		return cachedResult
 	}
 
@@ -137,7 +137,7 @@ func trans() models.Lang {
 
 	parseResult := parseNeededFile(filePath)
 
-	cache[filePath] = parseResult
+	cachedJsonResults[filePath] = parseResult
 
 	return parseResult
 }
