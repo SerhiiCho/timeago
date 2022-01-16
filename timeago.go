@@ -14,6 +14,8 @@ import (
 	"github.com/SerhiiCho/timeago/utils"
 )
 
+var cachedJsonResults = map[string]models.Lang{}
+
 // Take coverts given datetime into `x time ago` format.
 // For displaying `Online` word if date interval within
 // 60 seconds, add `|online` flag to the datetime string.
@@ -119,6 +121,10 @@ func trans() models.Lang {
 
 	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", language)
 
+	if cachedResult, ok := cachedJsonResults[filePath]; ok {
+		return cachedResult
+	}
+
 	thereIsFile, err := utils.FileExists(filePath)
 
 	if !thereIsFile {
@@ -129,5 +135,9 @@ func trans() models.Lang {
 		log.Fatalf("Error while trying to read file %s. Error: %v", filePath, err)
 	}
 
-	return parseNeededFile(filePath)
+	parseResult := parseNeededFile(filePath)
+
+	cachedJsonResults[filePath] = parseResult
+
+	return parseResult
 }
