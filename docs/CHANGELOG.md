@@ -1,4 +1,14 @@
+[<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
+
 # Release Notes
+
+----
+
+## v1.1.8 (2022-01-16)
+
+- Improved documentation for the package.
+
+----
 
 ## v1.1.7 (2022-01-16)
 
@@ -38,3 +48,5 @@
 - Fixed bug with wrong path for plugin root
 
 ----
+
+[<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
