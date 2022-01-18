@@ -6,6 +6,7 @@
 
 - Added ability for Set method to except unix timestamp.
 - Refactored and rewritten code.
+- Added ability for Set method to except Time from Go time package.
 
 ----
 

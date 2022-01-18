@@ -26,6 +26,8 @@ func Take(datetime interface{}) string {
 	switch date := datetime.(type) {
 	case int:
 		datetimeStr = utils.ConvertTimestampToString(date)
+	case time.Time:
+		datetimeStr = date.Format("2006-01-02 15:04:05")
 	default:
 		datetimeStr = datetime.(string)
 	}
