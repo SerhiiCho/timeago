@@ -3,6 +3,8 @@ package timeago
 import (
 	"testing"
 	"time"
+
+	. "github.com/SerhiiCho/timeago/utils"
 )
 
 func TestGetOption(test *testing.T) {
@@ -92,12 +94,12 @@ func TestTakeFunctionCanExceptTimestamp(t *testing.T) {
 		timestamp int
 		result    string
 	}{
-		{getTimestamp(time.Minute), "1 minute ago"},
-		{getTimestamp(time.Minute * 5), "5 minutes ago"},
-		{getTimestamp(time.Hour), "1 hour ago"},
-		{getTimestamp(time.Hour * 3), "3 hours ago"},
-		{getTimestamp(time.Hour * 24), "1 day ago"},
-		{getTimestamp(time.Hour * 48), "2 days ago"},
+		{GetTimestampOfPastDate(time.Minute), "1 minute ago"},
+		{GetTimestampOfPastDate(time.Minute * 5), "5 minutes ago"},
+		{GetTimestampOfPastDate(time.Hour), "1 hour ago"},
+		{GetTimestampOfPastDate(time.Hour * 3), "3 hours ago"},
+		{GetTimestampOfPastDate(time.Hour * 24), "1 day ago"},
+		{GetTimestampOfPastDate(time.Hour * 48), "2 days ago"},
 	}
 
 	Set("language", "en")
@@ -110,8 +112,4 @@ func TestTakeFunctionCanExceptTimestamp(t *testing.T) {
 		})
 	}
 
-}
-
-func getTimestamp(subDuration time.Duration) int {
-	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
 }

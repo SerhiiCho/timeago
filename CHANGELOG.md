@@ -5,6 +5,7 @@
 ## v2.0.0 (2022-01-19)
 
 - Added ability for Set method to except unix timestamp.
+- Refactored and rewritten code.
 
 ----
 
