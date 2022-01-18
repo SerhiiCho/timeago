@@ -2,6 +2,7 @@ package timeago
 
 import (
 	"testing"
+	"time"
 )
 
 func TestGetOption(test *testing.T) {
@@ -84,4 +85,33 @@ func TestGetLastNumber(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestTakeFunctionCanExceptTimestamp(t *testing.T) {
+	cases := []struct {
+		timestamp int
+		result    string
+	}{
+		{getTimestamp(time.Minute), "1 minute ago"},
+		{getTimestamp(time.Minute * 5), "5 minutes ago"},
+		{getTimestamp(time.Hour), "1 hour ago"},
+		{getTimestamp(time.Hour * 3), "3 hours ago"},
+		{getTimestamp(time.Hour * 24), "1 day ago"},
+		{getTimestamp(time.Hour * 48), "2 days ago"},
+	}
+
+	Set("language", "en")
+
+	for _, tc := range cases {
+		t.Run(tc.result, func(test *testing.T) {
+			if res := Take(tc.timestamp); res != tc.result {
+				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
+			}
+		})
+	}
+
+}
+
+func getTimestamp(subDuration time.Duration) int {
+	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
 }

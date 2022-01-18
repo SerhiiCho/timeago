@@ -20,11 +20,24 @@ var cachedJsonResults = map[string]models.Lang{}
 // For displaying `Online` word if date interval within
 // 60 seconds, add `|online` flag to the datetime string.
 // Format must be [year-month-day hours:minutes:seconds}
-func Take(datetime string) string {
-	option, hasOption := getOption(&datetime)
+func Take(datetime interface{}) string {
+	var datetimeStr string
 
+	switch date := datetime.(type) {
+	case int:
+		datetimeStr = utils.ConvertTimestampToString(date)
+	default:
+		datetimeStr = datetime.(string)
+	}
+
+	return process(datetimeStr)
+}
+
+func process(datetime string) string {
+	option, hasOption := getOption(&datetime)
 	loc, _ := time.LoadLocation(location)
 	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
+
 	seconds := int(time.Now().In(loc).Sub(parsedTime).Seconds())
 
 	switch {
