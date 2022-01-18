@@ -1,5 +1,13 @@
 # Release Notes
 
+----
+
+## v2.0.0 (2022-01-19)
+
+- Added ability for Set method to except unix timestamp.
+
+----
+
 ## v1.1.7 (2022-01-16)
 
 - Added caching the parsed results into memory to speed up the program. After this change, it will only parse json files once.
