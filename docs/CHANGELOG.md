@@ -7,13 +7,15 @@
 ## v2.0.0 (2022-01-19)
 
 - Added
-    - Added ability for `Set` method to except unix timestamp;
-    - Added ability for `Set` method to except `Time` from Go time package;
+    - Added ability for `Parse` method to except unix timestamp;
+    - Added ability for `Parse` method to except `Time` from Go time package;
 - Changed
-    - Renamed `Set` method to `Parse`;
+    - Renamed `Take` method to `Parse`;
     - Changed the way you pass options;
+    - Renamed `Set` method to `SetConfig`;
+    - Changed the way you set configurations for the package;
 - Documentation
-    - Reformatted;
+    - Added more information to docs;
     - Added `docs` directory with all the docs;
 - Other
     - Refactored and rewritten code;
