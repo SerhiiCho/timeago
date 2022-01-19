@@ -50,12 +50,12 @@ func init() {
 
 ## 👏 Usage
 
-For outputting post publishing date or something else you can just pass the date to method `timeago.Conv()`. It will count the interval between now and given date and returns converted format. `timeago.Conv` method excepts 3 types: unix timestamp, string date and Time type from Go `time` package.
+For outputting post publishing date or something else you can just pass the date to method `timeago.Parse()`. It will count the interval between now and given date and returns converted format. `timeago.Parse` method excepts 3 types: unix timestamp, string date and Time type from Go `time` package.
 
 ```go
-timeago.Conv("2019-10-23 10:46:00") // string date
-timeago.Conv(time.Now()) // time.Time type
-timeago.Conv(1642607826) // Unix timestamp
+timeago.Parse("2019-10-23 10:46:00") // string date
+timeago.Parse(time.Now()) // time.Time type
+timeago.Parse(1642607826) // Unix timestamp
 ```
 
 ## 🚀 Quick Start

@@ -65,7 +65,7 @@ func TestGetLastNumber(t *testing.T) {
 	}
 }
 
-func TestConvFunctionCanExceptTimestamp(t *testing.T) {
+func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 	cases := []struct {
 		timestamp int
 		result    string
@@ -82,7 +82,7 @@ func TestConvFunctionCanExceptTimestamp(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			if res := Conv(tc.timestamp); res != tc.result {
+			if res := Parse(tc.timestamp); res != tc.result {
 				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})
@@ -90,7 +90,7 @@ func TestConvFunctionCanExceptTimestamp(t *testing.T) {
 
 }
 
-func TestConvFunctionCanExceptTimePackage(t *testing.T) {
+func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 	cases := []struct {
 		time   time.Time
 		result string
@@ -112,7 +112,7 @@ func TestConvFunctionCanExceptTimePackage(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			if res := Conv(tc.time); res != tc.result {
+			if res := Parse(tc.time); res != tc.result {
 				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})

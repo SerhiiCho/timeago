@@ -8,7 +8,7 @@ import (
 	. "github.com/SerhiiCho/timeago/utils"
 )
 
-func TestConvUk(t *testing.T) {
+func TestParseUk(t *testing.T) {
 	cases := []struct {
 		date   string
 		result string
@@ -63,14 +63,14 @@ func TestConvUk(t *testing.T) {
 			timeago.Set("language", tc.lang)
 			timeago.Set("location", "Europe/Kiev")
 
-			if res := timeago.Conv(tc.date); res != tc.result {
+			if res := timeago.Parse(tc.date); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
 	}
 }
 
-func TestConvUkWithOnlineFlag(t *testing.T) {
+func TestParseUkWithOnlineFlag(t *testing.T) {
 	cases := []struct {
 		date   string
 		result string
@@ -134,14 +134,14 @@ func TestConvUkWithOnlineFlag(t *testing.T) {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 			timeago.Set("language", tc.lang)
 
-			if res := timeago.Conv(tc.date, "online"); res != tc.result {
+			if res := timeago.Parse(tc.date, "online"); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
 	}
 }
 
-func TestConvUkWithSeconds(t *testing.T) {
+func TestParseUkWithSeconds(t *testing.T) {
 	cases := []struct {
 		date   string
 		result []string
@@ -166,7 +166,7 @@ func TestConvUkWithSeconds(t *testing.T) {
 			timeago.Set("language", tc.lang)
 			timeago.Set("location", "Europe/Kiev")
 
-			if res := timeago.Conv(tc.date); res != tc.result[0] && res != tc.result[1] {
+			if res := timeago.Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
 				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
 			}
 		})

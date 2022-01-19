@@ -10,7 +10,7 @@
     - Added ability for `Set` method to except unix timestamp;
     - Added ability for `Set` method to except `Time` from Go time package;
 - Changed
-    - Renamed `Set` method to `Conv`;
+    - Renamed `Set` method to `Parse`;
     - Changed the way you pass options;
 - Documentation
     - Reformatted;

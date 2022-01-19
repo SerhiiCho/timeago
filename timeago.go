@@ -16,13 +16,17 @@ import (
 var cachedJsonResults = map[string]models.Lang{}
 var globalOptions = []string{}
 
-// Conv coverts given datetime into `x time ago` format.
-func Conv(datetime interface{}, options ...string) string {
+// Parse coverts given datetime into `x time ago` format.
+// First argument can have 3 types:
+// 1. int (unix timestamp),
+// 2. time.Time (Time from Go time package)
+// 3. string (datetime in format 2006-01-02 15:04:05)
+func Parse(datetime interface{}, options ...string) string {
 	var datetimeStr string
 
 	switch date := datetime.(type) {
 	case int:
-		datetimeStr = utils.ConvertTimestampToString(date)
+		datetimeStr = utils.ParseertTimestampToString(date)
 	case time.Time:
 		datetimeStr = date.Format("2006-01-02 15:04:05")
 	default:

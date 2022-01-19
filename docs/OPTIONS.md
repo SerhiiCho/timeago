@@ -7,11 +7,11 @@
 
 ## Usage
 
-As the seconds argument `Conv()` method excepts strings. Here is an example of passed option.
+As the seconds argument `Parse()` method excepts strings. Here is an example of passed option.
 
 ```go
-timeago.Conv(time.Now(), "online") // output: Online
-timeago.Conv(time.Now()) // output: 0 seconds ago
+timeago.Parse(time.Now(), "online") // output: Online
+timeago.Parse(time.Now()) // output: 0 seconds ago
 ```
 
 ## Available options
