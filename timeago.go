@@ -7,7 +7,6 @@ import (
 	"path"
 	"runtime"
 	"strconv"
-	"strings"
 	"time"
 
 	"github.com/SerhiiCho/timeago/models"
@@ -15,12 +14,13 @@ import (
 )
 
 var cachedJsonResults = map[string]models.Lang{}
+var globalOptions = []string{}
 
-// Take coverts given datetime into `x time ago` format.
+// Conv coverts given datetime into `x time ago` format.
 // For displaying `Online` word if date interval within
 // 60 seconds, add `|online` flag to the datetime string.
 // Format must be [year-month-day hours:minutes:seconds}
-func Take(datetime interface{}) string {
+func Conv(datetime interface{}, options ...string) string {
 	var datetimeStr string
 
 	switch date := datetime.(type) {
@@ -32,31 +32,32 @@ func Take(datetime interface{}) string {
 		datetimeStr = datetime.(string)
 	}
 
+	globalOptions = options
+
 	return process(datetimeStr)
 }
 
 func process(datetime string) string {
-	option, hasOption := getOption(&datetime)
 	loc, _ := time.LoadLocation(location)
 	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
 
 	seconds := int(time.Now().In(loc).Sub(parsedTime).Seconds())
 
 	switch {
-	case seconds < 60 && option == "online":
+	case seconds < 60 && optionIsEnabled("online"):
 		return trans().Online
 	case seconds < 0:
 		return getWords("seconds", 0)
 	}
 
-	return calculateTheResult(seconds, hasOption, option)
+	return calculateTheResult(seconds)
 }
 
-func calculateTheResult(seconds int, hasOption bool, option string) string {
+func calculateTheResult(seconds int) string {
 	minutes, hours, days, weeks, months, years := getTimeCalculations(float64(seconds))
 
 	switch {
-	case hasOption && option == "online" && seconds < 60:
+	case optionIsEnabled("online") && seconds < 60:
 		return trans().Online
 	case seconds < 60:
 		return getWords("seconds", seconds)
@@ -110,21 +111,6 @@ func getWords(timeKind string, num int) string {
 	return strconv.Itoa(num) + " " + translation + " " + trans().Ago
 }
 
-// getOption check if datetime has option with time,
-// if yes, it will return this option and remove it
-// from datetime
-func getOption(datetime *string) (string, bool) {
-	date := *datetime
-	spittedDateString := strings.Split(date, "|")
-
-	if len(spittedDateString) > 1 {
-		*datetime = spittedDateString[0]
-		return spittedDateString[1], true
-	}
-
-	return "", false
-}
-
 func trans() models.Lang {
 	_, filename, _, ok := runtime.Caller(0)
 
@@ -155,4 +141,14 @@ func trans() models.Lang {
 	cachedJsonResults[filePath] = parseResult
 
 	return parseResult
+}
+
+func optionIsEnabled(searchOption string) bool {
+	for _, option := range globalOptions {
+		if option == searchOption {
+			return true
+		}
+	}
+
+	return false
 }
