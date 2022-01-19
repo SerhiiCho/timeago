@@ -6,9 +6,17 @@
 
 ## v2.0.0 (2022-01-19)
 
-- Added ability for Set method to except unix timestamp.
-- Refactored and rewritten code.
-- Added ability for Set method to except Time from Go time package.
+- Added
+    - Added ability for `Set` method to except unix timestamp;
+    - Added ability for `Set` method to except `Time` from Go time package;
+- Changed
+    - Renamed `Set` method to `Conv`;
+    - Changed the way you pass options;
+- Documentation
+    - Reformatted;
+    - Added `docs` directory with all the docs;
+- Other
+    - Refactored and rewritten code;
 
 ----
 
