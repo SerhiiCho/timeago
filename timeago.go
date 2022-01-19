@@ -17,9 +17,6 @@ var cachedJsonResults = map[string]models.Lang{}
 var globalOptions = []string{}
 
 // Conv coverts given datetime into `x time ago` format.
-// For displaying `Online` word if date interval within
-// 60 seconds, add `|online` flag to the datetime string.
-// Format must be [year-month-day hours:minutes:seconds}
 func Conv(datetime interface{}, options ...string) string {
 	var datetimeStr string
 

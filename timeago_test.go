@@ -7,30 +7,6 @@ import (
 	. "github.com/SerhiiCho/timeago/utils"
 )
 
-func TestGetOption(test *testing.T) {
-	cases := []struct {
-		name            string
-		date            string
-		optionMustBe    string
-		hasOptionMustBe bool
-	}{
-		{"case has online option", "2017-02-01 00:00:00|online", "online", true},
-		{"case has random option", "2017-02-01 00:00:00|random", "random", true},
-		{"case has online option", "2017-02-01 00:00:00|korotchaeva", "korotchaeva", true},
-		{"case don't have option", "2017-02-01 00:00:00", "", false},
-	}
-
-	for _, tc := range cases {
-		test.Run(tc.name, func(t *testing.T) {
-			option, hasOption := getOption(&tc.date)
-
-			if hasOption != tc.hasOptionMustBe || option != tc.optionMustBe {
-				t.Errorf("Result of getOption func must return `online` string and `true`, but `%s` string and `%v` returned returned", tc.optionMustBe, tc.hasOptionMustBe)
-			}
-		})
-	}
-}
-
 func TestGetWords(t *testing.T) {
 	cases := []struct {
 		timeKind string
@@ -106,7 +82,7 @@ func TestConvFunctionCanExceptTimestamp(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			if res := Conv(tc.timestamp, nil); res != tc.result {
+			if res := Conv(tc.timestamp); res != tc.result {
 				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})

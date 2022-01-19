@@ -131,10 +131,10 @@ func TestConvUkWithOnlineFlag(t *testing.T) {
 	}
 
 	for _, tc := range cases {
-		t.Run("result for "+tc.date+"|online", func(test *testing.T) {
+		t.Run("result for "+tc.date, func(test *testing.T) {
 			timeago.Set("language", tc.lang)
 
-			if res := timeago.Conv(tc.date + "|online"); res != tc.result {
+			if res := timeago.Conv(tc.date, "online"); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
