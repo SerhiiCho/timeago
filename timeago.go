@@ -39,7 +39,7 @@ func Parse(datetime interface{}, options ...string) string {
 }
 
 func process(datetime string) string {
-	loc, _ := time.LoadLocation(location)
+	loc, _ := time.LoadLocation(config.Location)
 	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
 
 	seconds := int(time.Now().In(loc).Sub(parsedTime).Seconds())
@@ -121,7 +121,7 @@ func trans() models.Lang {
 
 	rootPath := path.Dir(filename)
 
-	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", language)
+	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", config.Language)
 
 	if cachedResult, ok := cachedJsonResults[filePath]; ok {
 		return cachedResult

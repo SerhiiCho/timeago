@@ -1,6 +1,10 @@
 package timeago
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/SerhiiCho/timeago/models"
+)
 
 func TestTrans(t *testing.T) {
 	cases := []struct {
@@ -20,7 +24,11 @@ func TestTrans(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("returns "+tc.lang+" language", func(test *testing.T) {
-			Set("language", tc.lang)
+			config := models.Config{
+				Language: tc.lang,
+			}
+
+			SetConfig(config)
 
 			if result := tc.trans(); result != tc.result {
 				test.Errorf("Result must be %s but got %s", tc.result, result)
@@ -41,9 +49,13 @@ func TestSet_for_language(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(test *testing.T) {
-			Set("language", tc.value)
+			config := models.Config{
+				Language: tc.value,
+			}
 
-			if language != tc.value {
+			SetConfig(config)
+
+			if config.Language != tc.value {
 				test.Error(tc.err)
 			}
 		})
@@ -62,9 +74,13 @@ func TestSet_for_location(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(test *testing.T) {
-			Set("location", tc.value)
+			config := models.Config{
+				Location: tc.value,
+			}
 
-			if location != tc.value {
+			SetConfig(config)
+
+			if config.Location != tc.value {
 				test.Error(tc.err)
 			}
 		})

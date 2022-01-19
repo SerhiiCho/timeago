@@ -51,7 +51,7 @@ func getTimeTranslations() map[string]map[string]string {
 func getLanguageForm(num int) string {
 	var form string
 	lastDigit := getLastNumber(num)
-	rule := getRules(num, lastDigit)[language]
+	rule := getRules(num, lastDigit)[config.Language]
 
 	switch {
 	case rule.Special:

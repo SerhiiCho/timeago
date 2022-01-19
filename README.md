@@ -20,21 +20,21 @@ Fast and lightweight datetime converter that converts given datetime into "n tim
 
 #### Language
 
-Default language is English. Optionally you can set the language in your application by calling `timeago.Set()` function and pass the flag "ru" or "en" in your init function.
+Default language is English. Optionally you can set the language in your application by calling `timeago.SetConfig()` function and pass the flag "ru" or "en" in your init function.
 
 ```go
 func init() {
-    timeago.Set("language", "ru")
+    timeago.SetConfig("language", "ru")
 }
 ```
 
 ##### Location
 
-Default location is Europe/Kiev. Optionally you can set the location in your application by calling `timeago.Set()` function and pass the location you need in your init function.
+Default location is Europe/Kiev. Optionally you can set the location in your application by calling `timeago.SetConfig()` function and pass the location you need in your init function.
 
 ```go
 func init() {
-    timeago.Set("location", "America/New_York")
+    timeago.SetConfig("location", "America/New_York")
 }
 ```
 
