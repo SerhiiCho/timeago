@@ -17,6 +17,7 @@
 - Documentation
     - Added more information to docs;
     - Added `docs` directory with all the docs;
+    - Changed structure of the `CHANGELOG.md`;
 - Other
     - Refactored and rewritten code;
 
