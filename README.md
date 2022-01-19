@@ -13,6 +13,7 @@ Fast and lightweight datetime converter that converts given datetime into "n tim
         - [Location](#location)
     - [🚩 Supported languages](#-supported-languages)
     - [👏 Usage](#-usage)
+    - [🤲 Options](#-options)
     - [🇸🇿 Contribute translation](#-contribute-translation)
         - [Translation files](#translation-files)
         - [Rules](#rules)
@@ -47,46 +48,36 @@ func init() {
 
 ## 🚩 Supported languages
 
-<table>
-  <thead>
-    <tr>
-      <th>FLag</th>
-      <th>Language</th>
-      <th>Short representation</th>
-    </tr>
-  </thead>
-  <tbody>
-     <tr>
-      <td>🇬🇧</td>
-      <td>English</td>
-      <td>en</td>
-    </tr>
-    <tr>
-      <td>🇷🇺</td>
-      <td>Russian</td>
-      <td>ru</td>
-    </tr>
-    <tr>
-      <td>🇺🇦</td>
-      <td>Ukrainian</td>
-      <td>uk</td>
-    </tr>
-  </tbody>
-</table>
+| Flag | Language | Short representation |
+| --- | --- | --- |
+| 🇬🇧 | English | en |
+| 🇷🇺 | Russian | ru |
+| 🇺🇦 | Ukrainian | uk |
 
 ## 👏 Usage
 
-For outputting post publishing date or something else you can just pass the date to method `timeago.Take()`. It will count the interval between now and given date and returns converted format.
+For outputting post publishing date or something else you can just pass the date to method `timeago.Conv()`. It will count the interval between now and given date and returns converted format. `timeago.Conv` method excepts 3 types: unix timestamp, string date and Time type from Go `time` package.
 
 ```go
-timeago.Take("2019-10-23 10:46:00") // after 10 seconds outputs: 10 seconds ago
+timeago.Conv("2019-10-23 10:46:00") // string date
+timeago.Conv(time.Now()) // time.Time type
+timeago.Conv(1642607826) // Unix timestamp
 ```
 
-If you want to show last user login like if user is online or not, you can optionally add `|online` to the datetime string. All it does is just displaying **Online** if date interval withing 60 seconds.
+## 🤲 Options
+
+As the seconds argument `Conv()` method excepts strings. Here is an example of passed option.
 
 ```go
-timeago.Take("2019-10-23 10:46:00|online")
+timeago.Conv(time.Now(), "online") // output: Online
+timeago.Conv(time.Now()) // output: 0 seconds ago
 ```
+
+#### Available options
+
+| Option | Description |
+| --- | --- |
+| `online` | Displays **Online** if date interval withing 60 seconds. |
 
 ## 🇸🇿 Contribute translation
 
