@@ -1,3 +1,5 @@
+[<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
+
 # Release Notes
 
 ----
@@ -7,6 +9,12 @@
 - Added ability for Set method to except unix timestamp.
 - Refactored and rewritten code.
 - Added ability for Set method to except Time from Go time package.
+
+----
+
+## v1.1.8 (2022-01-16)
+
+- Improved documentation for the package.
 
 ----
 
@@ -48,3 +56,5 @@
 - Fixed bug with wrong path for plugin root
 
 ----
+
+[<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
