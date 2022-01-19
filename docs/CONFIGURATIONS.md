@@ -11,7 +11,9 @@ Default language is English. Optionally you can set the language in your applica
 
 ```go
 func init() {
-    timeago.SetConfig("language", "ru")
+    timeago.SetConfig(timeago.Config{
+        Language: "ru",
+    })
 }
 ```
 

@@ -4,8 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SerhiiCho/timeago"
-	"github.com/SerhiiCho/timeago/models"
+	. "github.com/SerhiiCho/timeago"
 	. "github.com/SerhiiCho/timeago/utils"
 )
 
@@ -57,12 +56,12 @@ func TestParseEn(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date, func(test *testing.T) {
-			timeago.SetConfig(models.Config{
+			SetConfig(Config{
 				Language: "en",
 				Location: "Europe/Kiev",
 			})
 
-			if res := timeago.Parse(tc.date); res != tc.result {
+			if res := Parse(tc.date); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
@@ -128,11 +127,11 @@ func TestParseEnWithOnlineFlag(t *testing.T) {
 	for _, tc := range cases {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 
-			timeago.SetConfig(models.Config{
+			SetConfig(Config{
 				Language: "en",
 			})
 
-			if res := timeago.Parse(tc.date, "online"); res != tc.result {
+			if res := Parse(tc.date, "online"); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
@@ -160,12 +159,12 @@ func TestParseEnWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date, func(test *testing.T) {
-			timeago.SetConfig(models.Config{
+			SetConfig(Config{
 				Language: "en",
 				Location: "Europe/Kiev",
 			})
 
-			if res := timeago.Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
+			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
 				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
 			}
 		})

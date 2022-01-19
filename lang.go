@@ -4,6 +4,32 @@ import (
 	"fmt"
 )
 
+type Lang struct {
+	Ago            string
+	Online         string
+	Second         string
+	Seconds        string
+	SecondsSpecial string
+	Minute         string
+	Minutes        string
+	MinutesSpecial string
+	Hour           string
+	Hours          string
+	HoursSpecial   string
+	Day            string
+	Days           string
+	DaysSpecial    string
+	Week           string
+	Weeks          string
+	WeeksSpecial   string
+	Month          string
+	Months         string
+	MonthsSpecial  string
+	Year           string
+	Years          string
+	YearsSpecial   string
+}
+
 // getTimeTranslations returns array of translations for different
 // cases. For example `1 second` must not have `s` at the end
 // but `2 seconds` requires `s`. So this method keeps all

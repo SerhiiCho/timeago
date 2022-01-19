@@ -4,7 +4,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SerhiiCho/timeago/models"
 	. "github.com/SerhiiCho/timeago/utils"
 )
 
@@ -31,7 +30,7 @@ func TestGetWords(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			SetConfig(models.Config{
+			SetConfig(Config{
 				Language: tc.lang,
 				Location: "Europe/Kiev",
 			})
@@ -81,7 +80,7 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		{GetTimestampOfPastDate(time.Hour * 48), "2 days ago"},
 	}
 
-	SetConfig(models.Config{
+	SetConfig(Config{
 		Language: "en",
 	})
 
@@ -113,7 +112,7 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 		{time.Now().Add(-time.Hour * 11), "11 hours ago"},
 	}
 
-	SetConfig(models.Config{
+	SetConfig(Config{
 		Language: "en",
 	})
 

@@ -76,8 +76,8 @@ All rules for each language is defined in `getRules` function in `rules.go` file
 Here is the example for English rules:
 
 ```go
-func getRules(number, lastDigit int) map[string]models.Rule {
-	return map[string]models.Rule{
+func getRules(number, lastDigit int) map[string]Rule {
+	return map[string]Rule{
 		"en": {
 			Single: number == 1,
 			Plural: number > 1 || number == 0,

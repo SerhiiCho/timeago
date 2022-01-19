@@ -9,11 +9,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/SerhiiCho/timeago/models"
 	"github.com/SerhiiCho/timeago/utils"
 )
 
-var cachedJsonResults = map[string]models.Lang{}
+var cachedJsonResults = map[string]Lang{}
 var globalOptions = []string{}
 
 // Parse coverts given datetime into `x time ago` format.
@@ -112,7 +111,7 @@ func getWords(timeKind string, num int) string {
 	return strconv.Itoa(num) + " " + translation + " " + trans().Ago
 }
 
-func trans() models.Lang {
+func trans() Lang {
 	_, filename, _, ok := runtime.Caller(0)
 
 	if !ok {

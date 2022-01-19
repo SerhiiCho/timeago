@@ -2,8 +2,6 @@ package timeago
 
 import (
 	"testing"
-
-	"github.com/SerhiiCho/timeago/models"
 )
 
 func TestTrans(t *testing.T) {
@@ -24,7 +22,7 @@ func TestTrans(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("returns "+tc.lang+" language", func(test *testing.T) {
-			config := models.Config{
+			config := Config{
 				Language: tc.lang,
 			}
 
@@ -49,7 +47,7 @@ func TestSet_for_language(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(test *testing.T) {
-			config := models.Config{
+			config := Config{
 				Language: tc.value,
 			}
 
@@ -74,7 +72,7 @@ func TestSet_for_location(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(test *testing.T) {
-			config := models.Config{
+			config := Config{
 				Location: tc.value,
 			}
 
