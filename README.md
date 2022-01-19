@@ -50,7 +50,15 @@ func init() {
 
 ## 👏 Usage
 
-For outputting post publishing date or something else you can just pass the date to method `timeago.Parse()`. It will count the interval between now and given date and returns converted format. `timeago.Parse` method excepts 3 types: unix timestamp, string date and Time type from Go `time` package.
+For outputting post publishing date or something else you can just pass the date to method `timeago.Parse()`. It counts the interval between current datetime and given datetime and returns parsed string in format `x time ago`.
+
+Method `timeago.Parse` excepts different types:
+
+- `int` unix timestamp
+- `time.Time` Time from Go time package
+- `string` datetime in format 2006-01-02 15:04:05
+
+> Any other type will trigger a panic.
 
 ```go
 timeago.Parse("2019-10-23 10:46:00") // string date
