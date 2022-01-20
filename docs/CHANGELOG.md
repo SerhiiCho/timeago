@@ -10,6 +10,7 @@
     - Fixed not working anchor tag in `OPTIONS.md` file;
 - Added
     - Added emoji to Release notes title in `CHANGELOG.md`;
+    - Added `.gitattributes` file;
 
 ----
 
