@@ -1,9 +1,13 @@
 package timeago
 
-import "github.com/SerhiiCho/timeago/models"
+type Rule struct {
+	Single  bool
+	Plural  bool
+	Special bool
+}
 
-func getRules(number, lastDigit int) map[string]models.Rule {
-	return map[string]models.Rule{
+func getRules(number, lastDigit int) map[string]Rule {
+	return map[string]Rule{
 		"en": {
 			Single: number == 1,
 			Plural: number > 1 || number == 0,

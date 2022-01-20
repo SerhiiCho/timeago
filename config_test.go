@@ -1,6 +1,8 @@
 package timeago
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestTrans(t *testing.T) {
 	cases := []struct {
@@ -20,7 +22,11 @@ func TestTrans(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("returns "+tc.lang+" language", func(test *testing.T) {
-			Set("language", tc.lang)
+			config := Config{
+				Language: tc.lang,
+			}
+
+			SetConfig(config)
 
 			if result := tc.trans(); result != tc.result {
 				test.Errorf("Result must be %s but got %s", tc.result, result)
@@ -35,15 +41,19 @@ func TestSet_for_language(t *testing.T) {
 		value string
 		err   string
 	}{
-		{"sets language to ru", "ru", "Set must set the `language` variable to `ru` but it didn't"},
-		{"sets language to en", "en", "Set must set the `language` variable to `en` but it didn't"},
+		{"sets language to ru", "ru", "Set must set language to 'ru' but it didn't"},
+		{"sets language to en", "en", "Set must set language to 'en' but it didn't"},
 	}
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(test *testing.T) {
-			Set("language", tc.value)
+			config := Config{
+				Language: tc.value,
+			}
 
-			if language != tc.value {
+			SetConfig(config)
+
+			if config.Language != tc.value {
 				test.Error(tc.err)
 			}
 		})
@@ -56,15 +66,19 @@ func TestSet_for_location(t *testing.T) {
 		value string
 		err   string
 	}{
-		{"sets location to India Delhi", "India/Delhi", "Set must set the `location` variable to `India/Delhi` but it didn't"},
-		{"sets language to Europe/Kiev", "Europe/Kiev", "Set must set the `location` variable to `Europe/Kiev` but it didn't"},
+		{"sets location to India Delhi", "India/Delhi", "Set must set the location to 'India/Delhi' but it didn't"},
+		{"sets language to Europe/Kiev", "Europe/Kiev", "Set must set the location to 'Europe/Kiev' but it didn't"},
 	}
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(test *testing.T) {
-			Set("location", tc.value)
+			config := Config{
+				Location: tc.value,
+			}
 
-			if location != tc.value {
+			SetConfig(config)
+
+			if config.Location != tc.value {
 				test.Error(tc.err)
 			}
 		})

@@ -2,7 +2,36 @@ package timeago
 
 import (
 	"fmt"
+	"log"
+	"path"
+	"runtime"
 )
+
+type Lang struct {
+	Ago            string
+	Online         string
+	Second         string
+	Seconds        string
+	SecondsSpecial string
+	Minute         string
+	Minutes        string
+	MinutesSpecial string
+	Hour           string
+	Hours          string
+	HoursSpecial   string
+	Day            string
+	Days           string
+	DaysSpecial    string
+	Week           string
+	Weeks          string
+	WeeksSpecial   string
+	Month          string
+	Months         string
+	MonthsSpecial  string
+	Year           string
+	Years          string
+	YearsSpecial   string
+}
 
 // getTimeTranslations returns array of translations for different
 // cases. For example `1 second` must not have `s` at the end
@@ -50,8 +79,8 @@ func getTimeTranslations() map[string]map[string]string {
 
 func getLanguageForm(num int) string {
 	var form string
-	lastDigit := getLastNumber(num)
-	rule := getRules(num, lastDigit)[language]
+	lastDigit := getLastNumberDigit(num)
+	rule := getRules(num, lastDigit)[config.Language]
 
 	switch {
 	case rule.Special:
@@ -65,4 +94,36 @@ func getLanguageForm(num int) string {
 	fmt.Printf("Provided rules don't apply to a number %d", num)
 
 	return form
+}
+
+func trans() Lang {
+	_, filename, _, ok := runtime.Caller(0)
+
+	if !ok {
+		panic("No caller information")
+	}
+
+	rootPath := path.Dir(filename)
+
+	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", config.Language)
+
+	if cachedResult, ok := cachedJsonResults[filePath]; ok {
+		return cachedResult
+	}
+
+	thereIsFile, err := fileExists(filePath)
+
+	if !thereIsFile {
+		log.Fatalf("File with the path: %s, doesn't exist", filePath)
+	}
+
+	if err != nil {
+		log.Fatalf("Error while trying to read file %s. Error: %v", filePath, err)
+	}
+
+	parseResult := parseJsonIntoLang(filePath)
+
+	cachedJsonResults[filePath] = parseResult
+
+	return parseResult
 }
