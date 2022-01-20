@@ -13,7 +13,7 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 - [🇸🇿 Contribute translation](https://github.com/SerhiiCho/timeago/blob/master/docs/CONTRIBUTE_TRANS.md)
 - [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/docs/CHANGELOG.md)
 - [🚀 Quick Start](#-quick-start)
-<!-- - [📖 Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package) -->
+- [📖 Example usage on repl.it](https://replit.com/@SerhiiCho/Usage-of-timeago-package)
 
 ## 🚩 Supported languages
 
