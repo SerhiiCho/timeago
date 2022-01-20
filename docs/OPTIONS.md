@@ -20,5 +20,7 @@ timeago.Parse(time.Now()) // output: 0 seconds ago
 | --- | --- |
 | `online` | Displays **Online** if date interval withing 60 seconds. |
 
+> More options are coming in the next versions.
+
 
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
