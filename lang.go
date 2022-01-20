@@ -121,7 +121,7 @@ func trans() Lang {
 		log.Fatalf("Error while trying to read file %s. Error: %v", filePath, err)
 	}
 
-	parseResult := parseNeededFile(filePath)
+	parseResult := parseJsonIntoLang(filePath)
 
 	cachedJsonResults[filePath] = parseResult
 

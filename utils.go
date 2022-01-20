@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"encoding/json"
 	"errors"
 	"io/ioutil"
 	"log"
@@ -45,6 +46,20 @@ func parseTimestampToString(timestamp int) string {
 func getLastNumberDigit(num int) int {
 	numStr := strconv.Itoa(num)
 	result, _ := strconv.Atoi(numStr[len(numStr)-1:])
+
+	return result
+}
+
+func parseJsonIntoLang(fileName string) Lang {
+	content := getFileContent(fileName)
+
+	var result Lang
+
+	err := json.Unmarshal(content, &result)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return result
 }
