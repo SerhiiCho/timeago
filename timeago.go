@@ -4,8 +4,6 @@ import (
 	"math"
 	"strconv"
 	"time"
-
-	"github.com/SerhiiCho/timeago/utils"
 )
 
 var cachedJsonResults = map[string]Lang{}
@@ -21,7 +19,7 @@ func Parse(datetime interface{}, options ...string) string {
 
 	switch date := datetime.(type) {
 	case int:
-		datetimeStr = utils.ParseertTimestampToString(date)
+		datetimeStr = parseTimestampToString(date)
 	case time.Time:
 		datetimeStr = date.Format("2006-01-02 15:04:05")
 	default:
@@ -87,14 +85,6 @@ func getTimeCalculations(seconds float64) (int, int, int, int, int, int) {
 	return int(minutes), int(hours), int(days), int(weeks), int(months), int(years)
 }
 
-// get the last number of a given integer
-func getLastNumber(num int) int {
-	numStr := strconv.Itoa(num)
-	result, _ := strconv.Atoi(numStr[len(numStr)-1:])
-
-	return result
-}
-
 // getWords decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
 // the time number
@@ -107,6 +97,7 @@ func getWords(timeKind string, num int) string {
 	return strconv.Itoa(num) + " " + translation + " " + trans().Ago
 }
 
+// Check if option was passed by a Parse function
 func optionIsEnabled(searchOption string) bool {
 	for _, option := range globalOptions {
 		if option == searchOption {

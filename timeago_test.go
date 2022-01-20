@@ -3,8 +3,6 @@ package timeago
 import (
 	"testing"
 	"time"
-
-	. "github.com/SerhiiCho/timeago/utils"
 )
 
 func TestGetWords(t *testing.T) {
@@ -42,7 +40,7 @@ func TestGetWords(t *testing.T) {
 	}
 }
 
-func TestGetLastNumber(t *testing.T) {
+func TestGetLastNumberDigit(t *testing.T) {
 	cases := []struct {
 		number int
 		result int
@@ -60,7 +58,7 @@ func TestGetLastNumber(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(test *testing.T) {
-			if res := getLastNumber(tc.number); res != tc.result {
+			if res := getLastNumberDigit(tc.number); res != tc.result {
 				test.Errorf("Result must be %d, but got %d instead", tc.result, res)
 			}
 		})
@@ -72,12 +70,12 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		timestamp int
 		result    string
 	}{
-		{GetTimestampOfPastDate(time.Minute), "1 minute ago"},
-		{GetTimestampOfPastDate(time.Minute * 5), "5 minutes ago"},
-		{GetTimestampOfPastDate(time.Hour), "1 hour ago"},
-		{GetTimestampOfPastDate(time.Hour * 3), "3 hours ago"},
-		{GetTimestampOfPastDate(time.Hour * 24), "1 day ago"},
-		{GetTimestampOfPastDate(time.Hour * 48), "2 days ago"},
+		{getTimestampOfPastDate(time.Minute), "1 minute ago"},
+		{getTimestampOfPastDate(time.Minute * 5), "5 minutes ago"},
+		{getTimestampOfPastDate(time.Hour), "1 hour ago"},
+		{getTimestampOfPastDate(time.Hour * 3), "3 hours ago"},
+		{getTimestampOfPastDate(time.Hour * 24), "1 day ago"},
+		{getTimestampOfPastDate(time.Hour * 48), "2 days ago"},
 	}
 
 	SetConfig(Config{
@@ -91,7 +89,6 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 			}
 		})
 	}
-
 }
 
 func TestParseFunctionCanExceptTimePackage(t *testing.T) {

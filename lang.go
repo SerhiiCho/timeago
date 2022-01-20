@@ -5,8 +5,6 @@ import (
 	"log"
 	"path"
 	"runtime"
-
-	"github.com/SerhiiCho/timeago/utils"
 )
 
 type Lang struct {
@@ -81,7 +79,7 @@ func getTimeTranslations() map[string]map[string]string {
 
 func getLanguageForm(num int) string {
 	var form string
-	lastDigit := getLastNumber(num)
+	lastDigit := getLastNumberDigit(num)
 	rule := getRules(num, lastDigit)[config.Language]
 
 	switch {
@@ -113,7 +111,7 @@ func trans() Lang {
 		return cachedResult
 	}
 
-	thereIsFile, err := utils.FileExists(filePath)
+	thereIsFile, err := fileExists(filePath)
 
 	if !thereIsFile {
 		log.Fatalf("File with the path: %s, doesn't exist", filePath)
