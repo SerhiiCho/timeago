@@ -2,6 +2,11 @@ package timeago
 
 import (
 	"fmt"
+	"log"
+	"path"
+	"runtime"
+
+	"github.com/SerhiiCho/timeago/utils"
 )
 
 type Lang struct {
@@ -91,4 +96,36 @@ func getLanguageForm(num int) string {
 	fmt.Printf("Provided rules don't apply to a number %d", num)
 
 	return form
+}
+
+func trans() Lang {
+	_, filename, _, ok := runtime.Caller(0)
+
+	if !ok {
+		panic("No caller information")
+	}
+
+	rootPath := path.Dir(filename)
+
+	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", config.Language)
+
+	if cachedResult, ok := cachedJsonResults[filePath]; ok {
+		return cachedResult
+	}
+
+	thereIsFile, err := utils.FileExists(filePath)
+
+	if !thereIsFile {
+		log.Fatalf("File with the path: %s, doesn't exist", filePath)
+	}
+
+	if err != nil {
+		log.Fatalf("Error while trying to read file %s. Error: %v", filePath, err)
+	}
+
+	parseResult := parseNeededFile(filePath)
+
+	cachedJsonResults[filePath] = parseResult
+
+	return parseResult
 }

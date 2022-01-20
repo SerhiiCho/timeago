@@ -7,7 +7,7 @@ import (
 	"github.com/SerhiiCho/timeago/utils"
 )
 
-// Parses json file and unmarshals result into a struct
+// Parses json file and includes result into a Lang type
 func parseNeededFile(fileName string) Lang {
 	content := utils.GetFileContent(fileName)
 

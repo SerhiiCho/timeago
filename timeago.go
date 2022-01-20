@@ -1,11 +1,7 @@
 package timeago
 
 import (
-	"fmt"
-	"log"
 	"math"
-	"path"
-	"runtime"
 	"strconv"
 	"time"
 
@@ -109,38 +105,6 @@ func getWords(timeKind string, num int) string {
 	translation := time[timeKind][form]
 
 	return strconv.Itoa(num) + " " + translation + " " + trans().Ago
-}
-
-func trans() Lang {
-	_, filename, _, ok := runtime.Caller(0)
-
-	if !ok {
-		panic("No caller information")
-	}
-
-	rootPath := path.Dir(filename)
-
-	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", config.Language)
-
-	if cachedResult, ok := cachedJsonResults[filePath]; ok {
-		return cachedResult
-	}
-
-	thereIsFile, err := utils.FileExists(filePath)
-
-	if !thereIsFile {
-		log.Fatalf("File with the path: %s, doesn't exist", filePath)
-	}
-
-	if err != nil {
-		log.Fatalf("Error while trying to read file %s. Error: %v", filePath, err)
-	}
-
-	parseResult := parseNeededFile(filePath)
-
-	cachedJsonResults[filePath] = parseResult
-
-	return parseResult
 }
 
 func optionIsEnabled(searchOption string) bool {
