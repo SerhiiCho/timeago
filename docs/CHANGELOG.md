@@ -1,6 +1,18 @@
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
 
-# Release Notes
+# 🗒 Release Notes
+
+----
+
+## v2.0.1 (2022-01-20)
+
+- Fixed
+    - Fixed not working anchor tag in `OPTIONS.md` file;
+- Added
+    - Added emoji to Release notes title in `CHANGELOG.md`;
+    - Added `.gitattributes` file;
+    - Added Example usage on `repl.it` website;
+    - Added nice image banner to `README.md` file;
 
 ----
 
