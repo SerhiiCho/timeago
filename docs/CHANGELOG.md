@@ -12,6 +12,7 @@
     - Added emoji to Release notes title in `CHANGELOG.md`;
     - Added `.gitattributes` file;
     - Added Example usage on `repl.it` website;
+    - Added nice image banner to `README.md` file;
 
 ----
 
