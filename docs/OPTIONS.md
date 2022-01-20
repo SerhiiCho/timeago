@@ -1,7 +1,7 @@
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
 
 - [Usage](#usage)
-- [Available options](#availableoptions)
+- [Available options](#available-options)
 
 # 🤲 Options
 
