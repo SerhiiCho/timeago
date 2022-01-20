@@ -4,7 +4,7 @@
 
 ----
 
-## v2.0.1 (2022-01-21)
+## v2.0.1 (2022-01-20)
 
 - Fixed
     - Fixed not working anchor tag in `OPTIONS.md` file;
