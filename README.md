@@ -16,30 +16,6 @@ Fast and lightweight datetime converter that converts given datetime into "n tim
 - [🚀 Quick Start](#-quick-start)
 <!-- - [📖 Example usage on repl.it](https://repl.it/@SerhiiCho/Usage-of-timeago-package) -->
 
-## ⚙️ Configurations
-
-#### Language
-
-Default language is English. Optionally you can set the language in your application by calling `timeago.SetConfig()` function and pass the flag "ru" or "en" in your init function.
-
-```go
-func init() {
-    timeago.SetConfig("language", "ru")
-}
-```
-
-##### Location
-
-Default location is Europe/Kiev. Optionally you can set the location in your application by calling `timeago.SetConfig()` function and pass the location you need in your init function.
-
-```go
-func init() {
-    timeago.SetConfig("location", "America/New_York")
-}
-```
-
-> Please make sure that timezone configuration is correct for your location. It is very important for displaying the correct datetime.
-
 ## 🚩 Supported languages
 
 | Flag | Language | Short representation |
@@ -50,19 +26,19 @@ func init() {
 
 ## 👏 Usage
 
-For outputting post publishing date or something else you can just pass the date to method `timeago.Parse()`. It counts the interval between current datetime and given datetime and returns parsed string in format `x time ago`.
+Pass the date to `timeago.Parse()` function. It counts the interval between current datetime and given datetime and returns parsed string in format `x time ago`.
 
-Method `timeago.Parse` excepts different types:
+Method `timeago.Parse` excepts different types of datetime:
 
-- `int` unix timestamp
-- `time.Time` Time from Go time package
-- `string` datetime in format 2006-01-02 15:04:05
+- `int` Unix timestamp
+- `time.Time` Type from Go time package
+- `string` Datetime string in format `YYYY-MM-DD HH:MM:SS`
 
 > Any other type will trigger a panic.
 
 ```go
 timeago.Parse("2019-10-23 10:46:00") // string date
-timeago.Parse(time.Now()) // time.Time type
+timeago.Parse(time.Now()) // time.Time
 timeago.Parse(1642607826) // Unix timestamp
 ```
 

@@ -11,9 +11,9 @@ var globalOptions = []string{}
 
 // Parse coverts given datetime into `x time ago` format.
 // First argument can have 3 types:
-// 1. int (unix timestamp)
-// 2. time.Time (Time from Go time package)
-// 3. string (datetime in format 2006-01-02 15:04:05)
+// 1. int (Unix timestamp)
+// 2. time.Time (Type from Go time package)
+// 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
 func Parse(datetime interface{}, options ...string) string {
 	var datetimeStr string
 
