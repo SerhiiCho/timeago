@@ -8,13 +8,13 @@
 
 ## Description
 
-If you want to contribute support for a language that is fully supported, all you need to do is to copy/paste 2 files and change them to match the language that you want to add.
+You can contribute a language support in 4 simple steps. All you need to do is to copy/paste 2 files and change them to match the language that you want to add.
 
-After than, add 1 line to `README.md` file and 1 rule to a `rules.go`. Here is my [commit](https://github.com/SerhiiCho/timeago/commit/d2f9e7f41d17ea3fc8ee10df2e1ac2e47f8e7e69) for supporting Ukrainian language that shows changes that I did to add the support. It's pretty straightforward. Waiting for you PR 😉.
+Finally, add 1 line to `README.md` file and 1 rule to a `rules.go`. Here is my [commit](https://github.com/SerhiiCho/timeago/commit/e7d1c00709e7b77a7c17889c96fd74574ae86731) for supporting Ukrainian language that shows changes that I did to add the support. It's pretty straightforward. Waiting for you PR 😉.
 
-## Translation files
+## Step 1. Add translation file
 
-Translation files live in `langs` directory. Each translation file is pretty simple json. Here's the example of `en.json`.
+Translation files live in `langs` directory. Each translation file is pretty simple JSON object. Here's the example of `en.json`.
 
 ```json
 {
@@ -67,9 +67,9 @@ Some languages (like Russian) have multiple plural forms of the word. For exampl
 }
 ```
 
-You can see that it has `SecondsSpecial`, `MinutesSpecial`, `HoursSpecial`, `DaysSpecial`, `WeeksSpecial` and `YearsSpecial` keys.
+You can see that it has `SecondsSpecial`, `MinutesSpecial`, `HoursSpecial`, `DaysSpecial`, `WeeksSpecial` and `YearsSpecial` keys. Those are responsible for special age cases.
 
-## Rules
+## Step 2. Add language rules
 
 All rules for each language is defined in `getRules` function in `rules.go` file. Rule is just a set of conditions that define when to apply singular form and when to apply plural form.
 
@@ -87,5 +87,17 @@ func getRules(number, lastDigit int) map[string]Rule {
 ```
 
 We'll use singular form when number is equal to 1, and plural if number is more than 1 or number is 0. You can easily write your own rules for your language.
+
+## Step 3. Add tests
+
+Tests for languages live in `tests` directory. Each language has it's own file. The easies way to add tests for your language is to copy paste one of the tests and change it to match your language.
+
+## Step 4. Add info to README
+
+Add a line to `README.md` file. `README.md` file has section ["Supported languages"](https://github.com/SerhiiCho/timeago#-supported-languages) where you need to add your language. For example for Ukrainian language I've added this line:
+
+```
+| 🇺🇦 | Ukrainian | uk |
+```
 
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)

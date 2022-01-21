@@ -4,6 +4,13 @@
 
 ----
 
+## v2.0.2 (2022-01-21)
+
+- Fixed typo in docs;
+- Added more info to `contribute a translation guide`;
+
+----
+
 ## v2.0.1 (2022-01-20)
 
 - Fixed
