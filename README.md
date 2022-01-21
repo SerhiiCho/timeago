@@ -23,6 +23,7 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 | --- | --- | --- |
 | 🇬🇧 | English | en |
 | 🇷🇺 | Russian | ru |
+| 🇺🇦 | Ukrainian | uk |
 
 ## 👏 Usage
 
