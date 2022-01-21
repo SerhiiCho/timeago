@@ -6,10 +6,8 @@
 
 ## v2.0.2 (2022-01-21)
 
-- Fixed
-    - Fixed typo in docs;
-- Added
-    - Added more info to `contribute a translation guide`;
+- Fixed typo in docs;
+- Added more info to `contribute a translation guide`;
 
 ----
 
