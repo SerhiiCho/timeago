@@ -8,6 +8,8 @@
 
 - Fixed
     - Fixed typo in docs;
+- Added
+    - Added more info to `contribute a translation guide`
 
 ----
 
