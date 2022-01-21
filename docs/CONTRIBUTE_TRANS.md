@@ -8,9 +8,9 @@
 
 ## Description
 
-If you want to contribute support for a language that is fully supported, all you need to do is to copy/paste 2 files and change them to match the language that you want to add.
+If you want to contribute support for a language, all you need to do is to copy/paste 2 files and change them to match the language that you want to add.
 
-After than, add 1 line to `README.md` file and 1 rule to a `rules.go`. Here is my [commit](https://github.com/SerhiiCho/timeago/commit/d2f9e7f41d17ea3fc8ee10df2e1ac2e47f8e7e69) for supporting Ukrainian language that shows changes that I did to add the support. It's pretty straightforward. Waiting for you PR 😉.
+After that, add 1 line to `README.md` file and 1 rule to a `rules.go`. Here is my [commit](https://github.com/SerhiiCho/timeago/commit/d2f9e7f41d17ea3fc8ee10df2e1ac2e47f8e7e69) for supporting Ukrainian language that shows changes that I did to add the support. It's pretty straightforward. Waiting for you PR 😉.
 
 ## Translation files
 
