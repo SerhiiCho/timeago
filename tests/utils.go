@@ -60,14 +60,6 @@ func getLastDayOfMonth(date time.Time) time.Time {
 	return date.AddDate(0, 1, -date.Day())
 }
 
-func smallSubTime(d time.Duration) string {
-	return time.Now().Add(d).Format("2006-01-02 15:04:05")
-}
-
-func bigSubTime(years int, months int, days int) string {
-	return time.Now().AddDate(-years, -months, -days).Format("2006-01-02 15:04:05")
-}
-
 func setup() {
 	timeago.SetConfig(timeago.Config{
 		Location: "Europe/Kiev",
