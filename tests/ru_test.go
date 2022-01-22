@@ -153,6 +153,7 @@ func TestParseRuWithSeconds(t *testing.T) {
 		{subSeconds(29), []string{"29 секунд назад", "30 секунд назад"}},
 		{subSeconds(30), []string{"30 секунд назад", "31 секунда назад"}},
 		{subSeconds(31), []string{"31 секунда назад", "32 секунды назад"}},
+		{subSeconds(59), []string{"59 секунд назад", "1 минута назад"}},
 	}
 
 	for _, tc := range cases {
