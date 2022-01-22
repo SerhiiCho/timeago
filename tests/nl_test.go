@@ -7,56 +7,62 @@ import (
 	. "github.com/SerhiiCho/timeago"
 )
 
+const langNl = "nl"
+
 func TestParseNl(t *testing.T) {
 	cases := []struct {
-		date   string
+		date   time.Time
 		result string
 	}{
-		{smallSubTime(-60 * time.Second), "1 minuut geleden"},
-		{smallSubTime(-1 * time.Minute), "1 minuut geleden"},
-		{smallSubTime(-2 * time.Minute), "2 minuten geleden"},
-		{smallSubTime(-5 * time.Minute), "5 minuten geleden"},
-		{smallSubTime(-9 * time.Minute), "9 minuten geleden"},
-		{smallSubTime(-10 * time.Minute), "10 minuten geleden"},
-		{smallSubTime(-11 * time.Minute), "11 minuten geleden"},
-		{smallSubTime(-20 * time.Minute), "20 minuten geleden"},
-		{smallSubTime(-21 * time.Minute), "21 minuten geleden"},
-		{smallSubTime(-22 * time.Minute), "22 minuten geleden"},
-		{smallSubTime(-30 * time.Minute), "30 minuten geleden"},
-		{smallSubTime(-31 * time.Minute), "31 minuten geleden"},
-		{smallSubTime(-59 * time.Minute), "59 minuten geleden"},
-		{smallSubTime(-60 * time.Minute), "1 uur geleden"},
-		{smallSubTime(-1 * time.Hour), "1 uur geleden"},
-		{smallSubTime(-2 * time.Hour), "2 uur geleden"},
-		{smallSubTime(-9 * time.Hour), "9 uur geleden"},
-		{smallSubTime(-10 * time.Hour), "10 uur geleden"},
-		{smallSubTime(-11 * time.Hour), "11 uur geleden"},
-		{smallSubTime(-20 * time.Hour), "20 uur geleden"},
-		{smallSubTime(-21 * time.Hour), "21 uur geleden"},
-		{smallSubTime(-23 * time.Hour), "23 uur geleden"},
-		{smallSubTime(-24 * time.Hour), "1 dag geleden"},
-		{smallSubTime(-30 * time.Hour), "1 dag geleden"},
-		{smallSubTime((-24 * 2) * time.Hour), "2 dagen geleden"},
-		{smallSubTime((-24 * 6) * time.Hour), "6 dagen geleden"},
-		{smallSubTime((-24 * 7) * time.Hour), "1 week geleden"},
-		{smallSubTime((-24 * 14) * time.Hour), "2 weken geleden"},
-		{smallSubTime((-24 * 21) * time.Hour), "3 weken geleden"},
-		{bigSubTime(0, 1, 1), "1 maand geleden"},
-		{bigSubTime(0, 2, 1), "2 maanden geleden"},
-		{bigSubTime(0, 9, 1), "9 maanden geleden"},
-		{bigSubTime(0, 11, 1), "11 maanden geleden"},
-		{bigSubTime(0, 12, 1), "1 jaar geleden"},
-		{bigSubTime(1, 0, 1), "1 jaar geleden"},
-		{bigSubTime(2, 0, 1), "2 jaar geleden"},
-		{bigSubTime(21, 0, 1), "21 jaar geleden"},
-		{bigSubTime(31, 0, 1), "31 jaar geleden"},
-		{bigSubTime(100, 0, 1), "100 jaar geleden"},
+		{subMinutes(1), "1 minuut geleden"},
+		{subMinutes(2), "2 minuten geleden"},
+		{subMinutes(5), "5 minuten geleden"},
+		{subMinutes(9), "9 minuten geleden"},
+		{subMinutes(10), "10 minuten geleden"},
+		{subMinutes(11), "11 minuten geleden"},
+		{subMinutes(20), "20 minuten geleden"},
+		{subMinutes(21), "21 minuten geleden"},
+		{subMinutes(22), "22 minuten geleden"},
+		{subMinutes(30), "30 minuten geleden"},
+		{subMinutes(31), "31 minuten geleden"},
+		{subMinutes(59), "59 minuten geleden"},
+		{subMinutes(60), "1 uur geleden"},
+		{subHours(1), "1 uur geleden"},
+		{subHours(2), "2 uur geleden"},
+		{subHours(9), "9 uur geleden"},
+		{subHours(10), "10 uur geleden"},
+		{subHours(11), "11 uur geleden"},
+		{subHours(20), "20 uur geleden"},
+		{subHours(21), "21 uur geleden"},
+		{subHours(23), "23 uur geleden"},
+		{subDays(1), "1 dag geleden"},
+		{subDays(2), "2 dagen geleden"},
+		{subDays(6), "6 dagen geleden"},
+		{subWeeks(1), "1 week geleden"},
+		{subWeeks(2), "2 weken geleden"},
+		{subWeeks(3), "3 weken geleden"},
+		{subMonths(1), "1 maand geleden"},
+		{subMonths(2), "2 maanden geleden"},
+		{subMonths(3), "3 maanden geleden"},
+		{subMonths(4), "4 maanden geleden"},
+		{subMonths(5), "5 maanden geleden"},
+		{subMonths(6), "6 maanden geleden"},
+		{subMonths(7), "7 maanden geleden"},
+		{subMonths(8), "8 maanden geleden"},
+		{subMonths(9), "9 maanden geleden"},
+		{subMonths(10), "10 maanden geleden"},
+		{subMonths(11), "11 maanden geleden"},
+		{subYears(1), "1 jaar geleden"},
+		{subYears(2), "2 jaar geleden"},
+		{subYears(21), "21 jaar geleden"},
+		{subYears(31), "31 jaar geleden"},
+		{subYears(100), "100 jaar geleden"},
 	}
 
 	for _, tc := range cases {
-		t.Run("result for "+tc.date, func(test *testing.T) {
+		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			SetConfig(Config{
-				Language: "nl",
+				Language: langNl,
 			})
 
 			if res := Parse(tc.date); res != tc.result {
@@ -68,65 +74,66 @@ func TestParseNl(t *testing.T) {
 
 func TestParseNlWithOnlineFlag(t *testing.T) {
 	cases := []struct {
-		date   string
+		date   time.Time
 		result string
 	}{
-		{smallSubTime(time.Second * 2), "Online"},
-		{smallSubTime(time.Second), "Online"},
-		{smallSubTime(-1 * time.Second), "Online"},
-		{smallSubTime(-2 * time.Second), "Online"},
-		{smallSubTime(-9 * time.Second), "Online"},
-		{smallSubTime(-10 * time.Second), "Online"},
-		{smallSubTime(-11 * time.Second), "Online"},
-		{smallSubTime(-20 * time.Second), "Online"},
-		{smallSubTime(-21 * time.Second), "Online"},
-		{smallSubTime(-22 * time.Second), "Online"},
-		{smallSubTime(-30 * time.Second), "Online"},
-		{smallSubTime(-31 * time.Second), "Online"},
-		{smallSubTime(-60 * time.Second), "1 minuut geleden"},
-		{smallSubTime(-1 * time.Minute), "1 minuut geleden"},
-		{smallSubTime(-2 * time.Minute), "2 minuten geleden"},
-		{smallSubTime(-9 * time.Minute), "9 minuten geleden"},
-		{smallSubTime(-10 * time.Minute), "10 minuten geleden"},
-		{smallSubTime(-11 * time.Minute), "11 minuten geleden"},
-		{smallSubTime(-20 * time.Minute), "20 minuten geleden"},
-		{smallSubTime(-21 * time.Minute), "21 minuten geleden"},
-		{smallSubTime(-22 * time.Minute), "22 minuten geleden"},
-		{smallSubTime(-30 * time.Minute), "30 minuten geleden"},
-		{smallSubTime(-31 * time.Minute), "31 minuten geleden"},
-		{smallSubTime(-60 * time.Minute), "1 uur geleden"},
-		{smallSubTime(-1 * time.Hour), "1 uur geleden"},
-		{smallSubTime(-2 * time.Hour), "2 uur geleden"},
-		{smallSubTime(-9 * time.Hour), "9 uur geleden"},
-		{smallSubTime(-10 * time.Hour), "10 uur geleden"},
-		{smallSubTime(-11 * time.Hour), "11 uur geleden"},
-		{smallSubTime(-20 * time.Hour), "20 uur geleden"},
-		{smallSubTime(-21 * time.Hour), "21 uur geleden"},
-		{smallSubTime(-23 * time.Hour), "23 uur geleden"},
-		{smallSubTime(-24 * time.Hour), "1 dag geleden"},
-		{smallSubTime(-30 * time.Hour), "1 dag geleden"},
-		{smallSubTime((-24 * 2) * time.Hour), "2 dagen geleden"},
-		{smallSubTime((-24 * 6) * time.Hour), "6 dagen geleden"},
-		{smallSubTime((-24 * 7) * time.Hour), "1 week geleden"},
-		{smallSubTime((-24 * 14) * time.Hour), "2 weken geleden"},
-		{smallSubTime((-24 * 21) * time.Hour), "3 weken geleden"},
-		{bigSubTime(0, 1, 1), "1 maand geleden"},
-		{bigSubTime(0, 2, 1), "2 maanden geleden"},
-		{bigSubTime(0, 9, 1), "9 maanden geleden"},
-		{bigSubTime(0, 11, 1), "11 maanden geleden"},
-		{bigSubTime(0, 12, 1), "1 jaar geleden"},
-		{bigSubTime(1, 0, 1), "1 jaar geleden"},
-		{bigSubTime(2, 0, 1), "2 jaar geleden"},
-		{bigSubTime(21, 0, 1), "21 jaar geleden"},
-		{bigSubTime(31, 0, 1), "31 jaar geleden"},
-		{bigSubTime(100, 0, 1), "100 jaar geleden"},
+		{subSeconds(0), "Online"},
+		{subSeconds(1), "Online"},
+		{subSeconds(2), "Online"},
+		{subSeconds(9), "Online"},
+		{subSeconds(10), "Online"},
+		{subSeconds(11), "Online"},
+		{subSeconds(20), "Online"},
+		{subSeconds(21), "Online"},
+		{subSeconds(22), "Online"},
+		{subSeconds(30), "Online"},
+		{subSeconds(31), "Online"},
+		{subMinutes(1), "1 minuut geleden"},
+		{subMinutes(2), "2 minuten geleden"},
+		{subMinutes(9), "9 minuten geleden"},
+		{subMinutes(10), "10 minuten geleden"},
+		{subMinutes(11), "11 minuten geleden"},
+		{subMinutes(20), "20 minuten geleden"},
+		{subMinutes(21), "21 minuten geleden"},
+		{subMinutes(22), "22 minuten geleden"},
+		{subMinutes(30), "30 minuten geleden"},
+		{subMinutes(31), "31 minuten geleden"},
+		{subMinutes(60), "1 uur geleden"},
+		{subHours(1), "1 uur geleden"},
+		{subHours(2), "2 uur geleden"},
+		{subHours(9), "9 uur geleden"},
+		{subHours(10), "10 uur geleden"},
+		{subHours(11), "11 uur geleden"},
+		{subHours(20), "20 uur geleden"},
+		{subHours(21), "21 uur geleden"},
+		{subHours(23), "23 uur geleden"},
+		{subHours(24), "1 dag geleden"},
+		{subDays(1), "1 dag geleden"},
+		{subDays(2), "2 dagen geleden"},
+		{subDays(3), "3 dagen geleden"},
+		{subDays(4), "4 dagen geleden"},
+		{subDays(5), "5 dagen geleden"},
+		{subDays(6), "6 dagen geleden"},
+		{subWeeks(1), "1 week geleden"},
+		{subWeeks(2), "2 weken geleden"},
+		{subWeeks(3), "3 weken geleden"},
+		{subMonths(1), "1 maand geleden"},
+		{subMonths(2), "2 maanden geleden"},
+		{subMonths(9), "9 maanden geleden"},
+		{subMonths(11), "11 maanden geleden"},
+		{subMonths(12), "1 jaar geleden"},
+		{subYears(1), "1 jaar geleden"},
+		{subYears(2), "2 jaar geleden"},
+		{subYears(21), "21 jaar geleden"},
+		{subYears(31), "31 jaar geleden"},
+		{subYears(100), "100 jaar geleden"},
 	}
 
 	for _, tc := range cases {
-		t.Run("result for "+tc.date, func(test *testing.T) {
+		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 
 			SetConfig(Config{
-				Language: "nl",
+				Language: langNl,
 			})
 
 			if res := Parse(tc.date, "online"); res != tc.result {
@@ -138,27 +145,27 @@ func TestParseNlWithOnlineFlag(t *testing.T) {
 
 func TestParseNlWithSeconds(t *testing.T) {
 	cases := []struct {
-		date   string
+		date   time.Time
 		result []string
 	}{
-		{smallSubTime(time.Second * 2), []string{"0 seconden geleden", "1 seconde geleden"}},
-		{smallSubTime(time.Second), []string{"0 seconden geleden", "1 seconde geleden"}},
-		{smallSubTime(-1 * time.Second), []string{"1 seconde geleden", "2 seconden geleden"}},
-		{smallSubTime(-2 * time.Second), []string{"2 seconden geleden", "3 seconden geleden"}},
-		{smallSubTime(-9 * time.Second), []string{"9 seconden geleden", "10 seconden geleden"}},
-		{smallSubTime(-10 * time.Second), []string{"10 seconden geleden", "11 seconden geleden"}},
-		{smallSubTime(-11 * time.Second), []string{"11 seconden geleden", "12 seconden geleden"}},
-		{smallSubTime(-20 * time.Second), []string{"20 seconden geleden", "21 seconden geleden"}},
-		{smallSubTime(-21 * time.Second), []string{"21 seconden geleden", "22 seconden geleden"}},
-		{smallSubTime(-22 * time.Second), []string{"22 seconden geleden", "23 seconden geleden"}},
-		{smallSubTime(-30 * time.Second), []string{"30 seconden geleden", "31 seconden geleden"}},
-		{smallSubTime(-31 * time.Second), []string{"31 seconden geleden", "32 seconden geleden"}},
+		{subSeconds(0), []string{"0 seconden geleden", "1 seconde geleden"}},
+		{subSeconds(1), []string{"1 seconde geleden", "2 seconden geleden"}},
+		{subSeconds(2), []string{"2 seconden geleden", "3 seconden geleden"}},
+		{subSeconds(9), []string{"9 seconden geleden", "10 seconden geleden"}},
+		{subSeconds(10), []string{"10 seconden geleden", "11 seconden geleden"}},
+		{subSeconds(11), []string{"11 seconden geleden", "12 seconden geleden"}},
+		{subSeconds(20), []string{"20 seconden geleden", "21 seconden geleden"}},
+		{subSeconds(21), []string{"21 seconden geleden", "22 seconden geleden"}},
+		{subSeconds(22), []string{"22 seconden geleden", "23 seconden geleden"}},
+		{subSeconds(30), []string{"30 seconden geleden", "31 seconden geleden"}},
+		{subSeconds(31), []string{"31 seconden geleden", "32 seconden geleden"}},
+		{subSeconds(59), []string{"59 seconden geleden", "1 minuten geleden"}},
 	}
 
 	for _, tc := range cases {
-		t.Run("result for "+tc.date, func(test *testing.T) {
+		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			SetConfig(Config{
-				Language: "nl",
+				Language: langNl,
 			})
 
 			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
