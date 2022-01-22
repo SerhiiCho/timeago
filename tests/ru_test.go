@@ -148,6 +148,7 @@ func TestParseRuWithSeconds(t *testing.T) {
 		date   string
 		result []string
 	}{
+		{smallSubTime(0), []string{"0 секунд назад", "1 секунда назад"}},
 		{smallSubTime(time.Second * 2), []string{"0 секунд назад", "1 секунда назад"}},
 		{smallSubTime(time.Second), []string{"0 секунд назад", "1 секунда назад"}},
 		{smallSubTime(-1 * time.Second), []string{"1 секунда назад", "2 секунды назад"}},

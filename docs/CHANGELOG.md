@@ -4,6 +4,12 @@
 
 ----
 
+## v2.0.3 (2022-01-22)
+
+- Added support for Dutch language;
+
+----
+
 ## v2.0.2 (2022-01-21)
 
 - Fixed typo in docs;
