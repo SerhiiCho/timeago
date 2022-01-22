@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var cachedJsonResults = map[string]Lang{}
+var cachedJsonResults = map[string]lang{}
 var globalOptions = []string{}
 
 // Parse coverts given datetime into `x time ago` format.

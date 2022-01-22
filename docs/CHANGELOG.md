@@ -4,6 +4,13 @@
 
 ----
 
+## v2.0.5 (2022-01-22)
+
+- Renamed `Lang` structure to `lang`;
+- Renamed `Rule` structure to `rule`;
+
+----
+
 ## v2.0.4 (2022-01-22)
 
 - Added:

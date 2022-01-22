@@ -49,10 +49,10 @@ func getLastNumberDigit(num int) int {
 	return result
 }
 
-func parseJsonIntoLang(fileName string) Lang {
+func parseJsonIntoLang(fileName string) lang {
 	content := getFileContent(fileName)
 
-	var result Lang
+	var result lang
 
 	err := json.Unmarshal(content, &result)
 

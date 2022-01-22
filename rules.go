@@ -1,13 +1,13 @@
 package timeago
 
-type Rule struct {
+type rule struct {
 	Single  bool
 	Plural  bool
 	Special bool
 }
 
-func getRules(number, lastDigit int) map[string]Rule {
-	return map[string]Rule{
+func getRules(number, lastDigit int) map[string]rule {
+	return map[string]rule{
 		"en": {
 			Single: number == 1,
 			Plural: number > 1 || number == 0,
