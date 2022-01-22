@@ -22,5 +22,9 @@ func getRules(number, lastDigit int) map[string]Rule {
 			Single:  lastDigit == 1,
 			Plural:  lastDigit >= 2 && lastDigit < 5,
 		},
+		"nl": {
+			Single: number == 1,
+			Plural: number > 1 || number == 0,
+		},
 	}
 }
