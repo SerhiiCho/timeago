@@ -9,7 +9,7 @@
 - Added
     - Anchors to "Contribute translation" docs;
     - 2 new GitHub badges;
-    - More test cases;
+    - Added more tests and test coverage;
 
 ----
 
