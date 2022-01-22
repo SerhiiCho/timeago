@@ -8,6 +8,7 @@
 
 - Renamed `Lang` structure to `lang`;
 - Renamed `Rule` structure to `rule`;
+- Removed badge from `README.md` file;
 
 ----
 
