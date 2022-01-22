@@ -42,7 +42,6 @@ func parseTimestampToString(timestamp int) string {
 	return time.Unix(int64(timestamp), 0).Format("2006-01-02 15:04:05")
 }
 
-// gets the last digit from a
 func getLastNumberDigit(num int) int {
 	numStr := strconv.Itoa(num)
 	result, _ := strconv.Atoi(numStr[len(numStr)-1:])

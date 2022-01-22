@@ -4,6 +4,19 @@
 
 ----
 
+## v2.0.4 (2022-01-22)
+
+- Added:
+    - Added anchors to "Contribute translation" docs;
+    - Added 2 new GitHub badges;
+    - Added more tests and test coverage;
+- Changed:
+    - Improved tests for languages by changing the way to write them;
+- Fixed:
+    - Fixed mistakes in Ukrainian language translation;
+
+----
+
 ## v2.0.3 (2022-01-22)
 
 - Added support for Dutch language;
@@ -19,9 +32,9 @@
 
 ## v2.0.1 (2022-01-20)
 
-- Fixed
+- Fixed:
     - Fixed not working anchor tag in `OPTIONS.md` file;
-- Added
+- Added:
     - Added emoji to Release notes title in `CHANGELOG.md`;
     - Added `.gitattributes` file;
     - Added Example usage on `repl.it` website;
@@ -31,19 +44,19 @@
 
 ## v2.0.0 (2022-01-19)
 
-- Added
+- Added:
     - Added ability for `Parse` method to except unix timestamp;
     - Added ability for `Parse` method to except `Time` from Go time package;
-- Changed
+- Changed:
     - Renamed `Take` method to `Parse`;
     - Changed the way you pass options;
     - Renamed `Set` method to `SetConfig`;
     - Changed the way you set configurations for the package;
-- Documentation
+- Documentation:
     - Added more information to docs;
     - Added `docs` directory with all the docs;
     - Changed structure of the `CHANGELOG.md`;
-- Other
+- Other:
     - Refactored and rewritten code;
 
 ----

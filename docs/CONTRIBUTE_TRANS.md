@@ -1,8 +1,10 @@
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
 
 - [Description](#description)
-- [Translation files](#translation-files)
-- [Rules](#rules)
+- [Step 1. Add translation file](#step-1-add-translation-file)
+- [Step 2. Add language rules](#step-2-add-language-rules)
+- [Step 3. Add tests](#step-3-add-tests)
+- [Step 4. Add info to README](#step-4-add-info-to-readme)
 
 # 🇸🇿 Contribute translation
 
@@ -10,7 +12,7 @@
 
 You can contribute a language support in 4 simple steps. All you need to do is to copy/paste 2 files and change them to match the language that you want to add.
 
-Finally, add 1 line to `README.md` file and 1 rule to a `rules.go`. Here is my [commit](https://github.com/SerhiiCho/timeago/commit/e7d1c00709e7b77a7c17889c96fd74574ae86731) for supporting Ukrainian language that shows changes that I did to add the support. It's pretty straightforward. Waiting for you PR 😉.
+Finally, add 1 line to `README.md` file and 1 rule to a `rules.go`. Here is my [commit](https://github.com/SerhiiCho/timeago/commit/c1ee0429b540f1cce5eb61b6a3441022d9cb43e7) for supporting Dutch language that shows changes that I did to add the support. It's pretty straightforward. Waiting for you PR 😉.
 
 ## Step 1. Add translation file
 
@@ -94,10 +96,10 @@ Tests for languages live in `tests` directory. Each language has it's own file. 
 
 ## Step 4. Add info to README
 
-Add a line to `README.md` file. `README.md` file has section ["Supported languages"](https://github.com/SerhiiCho/timeago#-supported-languages) where you need to add your language. For example for Ukrainian language I've added this line:
+Add a line to `README.md` file. `README.md` file has section ["Supported languages"](https://github.com/SerhiiCho/timeago#-supported-languages) where you need to add your language. For example for Dutch language I've added this line:
 
 ```
-| 🇺🇦 | Ukrainian | uk |
+| 🇳🇱 | Dutch | nl |
 ```
 
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
