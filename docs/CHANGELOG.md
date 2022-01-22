@@ -4,6 +4,12 @@
 
 ----
 
+## v2.0.4 (2022-01-22)
+
+- Added anchors to "Contribute translation" docs;
+
+----
+
 ## v2.0.3 (2022-01-22)
 
 - Added support for Dutch language;
