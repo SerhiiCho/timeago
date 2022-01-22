@@ -43,6 +43,8 @@ func TestSet_for_language(t *testing.T) {
 	}{
 		{"sets language to ru", "ru", "Set must set language to 'ru' but it didn't"},
 		{"sets language to en", "en", "Set must set language to 'en' but it didn't"},
+		{"sets language to nl", "nl", "Set must set language to 'nl' but it didn't"},
+		{"sets language to uk", "uk", "Set must set language to 'uk' but it didn't"},
 	}
 
 	for _, tc := range cases {
