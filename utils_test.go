@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"encoding/json"
 	"testing"
 )
 
@@ -19,7 +20,7 @@ func TestFileExists(t *testing.T) {
 		result, _ := fileExists("somerandompath")
 
 		if result {
-			t.Errorf("Function fileExists must return false, because filepath points to a file that doesn't exist")
+			t.Error("Function fileExists must return false, because filepath points to a file that doesn't exist")
 		}
 	})
 
@@ -27,7 +28,20 @@ func TestFileExists(t *testing.T) {
 		result, _ := fileExists("timeago.go")
 
 		if result == false {
-			t.Errorf("Function fileExists must return true, because filepath points to a file that exists")
+			t.Error("Function fileExists must return true, because filepath points to a file that exists")
+		}
+	})
+}
+
+func TestGetFileContent(t *testing.T) {
+	t.Run("getFileContent returns content of the file", func(test *testing.T) {
+		result := getFileContent("langs/en.json")
+
+		var js json.RawMessage
+		err := json.Unmarshal(result, &js)
+
+		if err != nil {
+			t.Errorf("Function getFileContent must return JSON object but %s returned", string(result))
 		}
 	})
 }
