@@ -60,7 +60,6 @@ func TestParseRu(t *testing.T) {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 			SetConfig(Config{
 				Language: "ru",
-				Location: "Europe/Kiev",
 			})
 
 			if res := Parse(tc.date); res != tc.result {
@@ -167,7 +166,6 @@ func TestParseRuWithSeconds(t *testing.T) {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 			SetConfig(Config{
 				Language: "ru",
-				Location: "Europe/Kiev",
 			})
 
 			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {

@@ -30,7 +30,6 @@ func TestGetWords(t *testing.T) {
 		t.Run(tc.result, func(test *testing.T) {
 			SetConfig(Config{
 				Language: tc.lang,
-				Location: "Europe/Kiev",
 			})
 
 			if res := getWords(tc.timeKind, tc.num); res != tc.result {

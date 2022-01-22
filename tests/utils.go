@@ -9,3 +9,5 @@ func smallSubTime(d time.Duration) string {
 func bigSubTime(years int, months int, days int) string {
 	return time.Now().AddDate(-years, -months, -days).Format("2006-01-02 15:04:05")
 }
+
+func setup() {

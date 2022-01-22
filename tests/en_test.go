@@ -57,7 +57,6 @@ func TestParseEn(t *testing.T) {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 			SetConfig(Config{
 				Language: "en",
-				Location: "Europe/Kiev",
 			})
 
 			if res := Parse(tc.date); res != tc.result {
@@ -125,7 +124,6 @@ func TestParseEnWithOnlineFlag(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date, func(test *testing.T) {
-
 			SetConfig(Config{
 				Language: "en",
 			})
@@ -160,7 +158,6 @@ func TestParseEnWithSeconds(t *testing.T) {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 			SetConfig(Config{
 				Language: "en",
-				Location: "Europe/Kiev",
 			})
 
 			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {

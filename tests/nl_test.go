@@ -57,7 +57,6 @@ func TestParseNl(t *testing.T) {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 			SetConfig(Config{
 				Language: "nl",
-				Location: "Europe/Kiev",
 			})
 
 			if res := Parse(tc.date); res != tc.result {
@@ -160,7 +159,6 @@ func TestParseNlWithSeconds(t *testing.T) {
 		t.Run("result for "+tc.date, func(test *testing.T) {
 			SetConfig(Config{
 				Language: "nl",
-				Location: "Europe/Kiev",
 			})
 
 			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
