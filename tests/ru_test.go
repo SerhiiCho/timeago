@@ -7,6 +7,8 @@ import (
 	. "github.com/SerhiiCho/timeago"
 )
 
+const langRu = "ru"
+
 func TestParseRu(t *testing.T) {
 	cases := []struct {
 		date   time.Time
@@ -55,7 +57,7 @@ func TestParseRu(t *testing.T) {
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			SetConfig(Config{
-				Language: "ru",
+				Language: langRu,
 			})
 
 			if res := Parse(tc.date); res != tc.result {
@@ -125,7 +127,7 @@ func TestParseRuWithOnlineFlag(t *testing.T) {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 
 			SetConfig(Config{
-				Language: "ru",
+				Language: langRu,
 			})
 
 			if res := Parse(tc.date, "online"); res != tc.result {
@@ -137,28 +139,26 @@ func TestParseRuWithOnlineFlag(t *testing.T) {
 
 func TestParseRuWithSeconds(t *testing.T) {
 	cases := []struct {
-		date   string
+		date   time.Time
 		result []string
 	}{
-		{smallSubTime(0), []string{"0 секунд назад", "1 секунда назад"}},
-		{smallSubTime(time.Second * 2), []string{"0 секунд назад", "1 секунда назад"}},
-		{smallSubTime(time.Second), []string{"0 секунд назад", "1 секунда назад"}},
-		{smallSubTime(-1 * time.Second), []string{"1 секунда назад", "2 секунды назад"}},
-		{smallSubTime(-2 * time.Second), []string{"2 секунды назад", "3 секунды назад"}},
-		{smallSubTime(-3 * time.Second), []string{"3 секунды назад", "4 секунды назад"}},
-		{smallSubTime(-4 * time.Second), []string{"4 секунды назад", "5 секунд назад"}},
-		{smallSubTime(-9 * time.Second), []string{"9 секунд назад", "10 секунд назад"}},
-		{smallSubTime(-10 * time.Second), []string{"10 секунд назад", "11 секунд назад"}},
-		{smallSubTime(-11 * time.Second), []string{"11 секунд назад", "12 секунд назад"}},
-		{smallSubTime(-29 * time.Second), []string{"29 секунд назад", "30 секунд назад"}},
-		{smallSubTime(-30 * time.Second), []string{"30 секунд назад", "31 секунда назад"}},
-		{smallSubTime(-31 * time.Second), []string{"31 секунда назад", "32 секунды назад"}},
+		{subSeconds(0), []string{"0 секунд назад", "1 секунда назад"}},
+		{subSeconds(1), []string{"1 секунда назад", "2 секунды назад"}},
+		{subSeconds(2), []string{"2 секунды назад", "3 секунды назад"}},
+		{subSeconds(3), []string{"3 секунды назад", "4 секунды назад"}},
+		{subSeconds(4), []string{"4 секунды назад", "5 секунд назад"}},
+		{subSeconds(9), []string{"9 секунд назад", "10 секунд назад"}},
+		{subSeconds(10), []string{"10 секунд назад", "11 секунд назад"}},
+		{subSeconds(11), []string{"11 секунд назад", "12 секунд назад"}},
+		{subSeconds(29), []string{"29 секунд назад", "30 секунд назад"}},
+		{subSeconds(30), []string{"30 секунд назад", "31 секунда назад"}},
+		{subSeconds(31), []string{"31 секунда назад", "32 секунды назад"}},
 	}
 
 	for _, tc := range cases {
-		t.Run("result for "+tc.date, func(test *testing.T) {
+		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			SetConfig(Config{
-				Language: "ru",
+				Language: langRu,
 			})
 
 			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
