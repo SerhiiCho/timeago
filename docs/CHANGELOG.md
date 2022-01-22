@@ -6,7 +6,9 @@
 
 ## v2.0.4 (2022-01-22)
 
-- Added anchors to "Contribute translation" docs;
+- Added
+    - Anchors to "Contribute translation" docs;
+    - 2 new GitHub badges;
 
 ----
 
