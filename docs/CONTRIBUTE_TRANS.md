@@ -1,8 +1,6 @@
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
 
 - [Description](#description)
-- [Translation files](#translation-files)
-- [Rules](#rules)
 - [Step 1. Add translation file](#step-1-add-translation-file)
 - [Step 2. Add language rules](#step-2-add-language-rules)
 - [Step 3. Add tests](#step-3-add-tests)
