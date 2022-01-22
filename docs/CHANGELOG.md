@@ -12,6 +12,8 @@
     - Added more tests and test coverage;
 - Changed:
     - Improved tests for languages by changing the way to write them;
+- Fixed:
+    - Fixed mistakes in Ukrainian language translation;
 
 ----
 
