@@ -21,7 +21,7 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 
 ## 🚩 Supported languages
 
-| Flag | Language | Short representation |
+| Flag | Language | Code (ISO 639-1) |
 | --- | --- | --- |
 | 🇬🇧 | English | en |
 | 🇷🇺 | Russian | ru |
