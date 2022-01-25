@@ -14,7 +14,7 @@ var globalOptions = []string{}
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, options ...string) string {
+func Parse(datetime interface{}, options ...string) (string, error) {
 	var input time.Time
 
 	switch date := datetime.(type) {
@@ -25,7 +25,13 @@ func Parse(datetime interface{}, options ...string) string {
 			parsedTime, _ := time.Parse("2006-01-02 15:04:05", date)
 			input = parsedTime
 		} else {
-			parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", date, getLocation())
+			location, err := time.LoadLocation(config.Location)
+
+			if err != nil {
+				return "", err
+			}
+
+			parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", date, location)
 			input = parsedTime
 		}
 	default:
@@ -37,28 +43,29 @@ func Parse(datetime interface{}, options ...string) string {
 	return process(input)
 }
 
-func getLocation() *time.Location {
-	loc, _ := time.LoadLocation(config.Location)
-	return loc
-}
-
-func process(datetime time.Time) string {
+func process(datetime time.Time) (string, error) {
 	now := time.Now()
 
 	if config.Location != "" {
-		now = now.In(getLocation())
+		location, err := time.LoadLocation(config.Location)
+
+		if err != nil {
+			return "", err
+		}
+
+		now = now.In(location)
 	}
 
 	seconds := int(now.Sub(datetime).Seconds())
 
 	switch {
 	case seconds < 60 && optionIsEnabled("online"):
-		return trans().Online
+		return trans().Online, nil
 	case seconds < 0:
-		return getWords("seconds", 0)
+		return getWords("seconds", 0), nil
 	}
 
-	return calculateTheResult(seconds)
+	return calculateTheResult(seconds), nil
 }
 
 func calculateTheResult(seconds int) string {

@@ -11,6 +11,7 @@
     - Renamed `Rule` structure to `rule`;
     - Removed badge from `README.md` file;
     - Removed tests from language files and added 1 test to `online_test.go` file;
+    - Added second return type to Parse function. Now it also returns error;
 
 ----
 

@@ -31,7 +31,16 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 
 Pass the date to `timeago.Parse()` function. It counts the interval between current datetime and given datetime and returns parsed string in format `x time ago`.
 
-Method `timeago.Parse` excepts different types of datetime:
+The usage is pretty straight forward.
+```go
+someDate = "2019-10-23 10:46:00"
+
+res, err := timeago.Parse(someDate)
+
+fmt.Println(res)
+```
+
+Method `timeago.Parse()` excepts different types of datetime:
 
 - `int` Unix timestamp
 - `time.Time` Type from Go time package

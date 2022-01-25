@@ -58,7 +58,7 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			if res := Parse(tc.timestamp); res != tc.result {
+			if res, _ := Parse(tc.timestamp); res != tc.result {
 				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})
@@ -89,40 +89,9 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			if res := Parse(tc.time); res != tc.result {
+			if res, _ := Parse(tc.time); res != tc.result {
 				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})
 	}
 }
-
-// func TestParseFunctionShowsDateInFutureIfGivenDateIsInFuture(t *testing.T) {
-// 	cases := []struct {
-// 		time   time.Time
-// 		result string
-// 	}{
-// 		{time.Now().Add(time.Minute), "1 minute"},
-// 		{time.Now().Add(time.Minute * 2), "2 minutes"},
-// 		{time.Now().Add(time.Minute * 3), "3 minutes"},
-// 		{time.Now().Add(time.Minute * 4), "4 minutes"},
-// 		{time.Now().Add(time.Minute * 25), "25 minutes"},
-// 		{time.Now().Add(time.Minute * 16), "16 minutes"},
-// 		{time.Now().Add(time.Hour * 7), "7 hours"},
-// 		{time.Now().Add(time.Hour * 8), "8 hours"},
-// 		{time.Now().Add(time.Hour * 9), "9 hours"},
-// 		{time.Now().Add(time.Hour * 10), "10 hours"},
-// 		{time.Now().Add(time.Hour * 11), "11 hours"},
-// 	}
-
-// 	SetConfig(Config{
-// 		Language: "en",
-// 	})
-
-// 	for _, tc := range cases {
-// 		t.Run(tc.result, func(test *testing.T) {
-// 			if res := Parse(tc.time); res != tc.result {
-// 				test.Errorf("Result must be '%v', but got '%v' instead", tc.result, res)
-// 			}
-// 		})
-// 	}
-// }

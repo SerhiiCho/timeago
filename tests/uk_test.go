@@ -75,7 +75,7 @@ func TestParseUk(t *testing.T) {
 				Language: langUk,
 			})
 
-			if res := Parse(tc.date); res != tc.result {
+			if res, _ := Parse(tc.date); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
@@ -107,7 +107,7 @@ func TestParseUkWithSeconds(t *testing.T) {
 				Language: langUk,
 			})
 
-			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
+			if res, _ := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
 				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
 			}
 		})

@@ -60,7 +60,7 @@ func TestParseRu(t *testing.T) {
 				Language: langRu,
 			})
 
-			if res := Parse(tc.date); res != tc.result {
+			if res, _ := Parse(tc.date); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
@@ -92,7 +92,7 @@ func TestParseRuWithSeconds(t *testing.T) {
 				Language: langRu,
 			})
 
-			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
+			if res, _ := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
 				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
 			}
 		})
