@@ -4,11 +4,13 @@
 
 ----
 
-## v2.0.5 (2022-01-22)
+## v2.1.0 (2022-01-25)
 
-- Renamed `Lang` structure to `lang`;
-- Renamed `Rule` structure to `rule`;
-- Removed badge from `README.md` file;
+- Changed:
+    - Renamed `Lang` structure to `lang`;
+    - Renamed `Rule` structure to `rule`;
+    - Removed badge from `README.md` file;
+    - Removed tests from language files and added 1 test to `online_test.go` file;
 
 ----
 
