@@ -35,7 +35,7 @@ func TestTrans(t *testing.T) {
 	}
 }
 
-func TestSet_for_language(t *testing.T) {
+func TestSetConfigLanguage(t *testing.T) {
 	cases := []struct {
 		name  string
 		value string
@@ -62,7 +62,7 @@ func TestSet_for_language(t *testing.T) {
 	}
 }
 
-func TestSet_for_location(t *testing.T) {
+func TestSetConfigLocation(t *testing.T) {
 	cases := []struct {
 		name  string
 		value string

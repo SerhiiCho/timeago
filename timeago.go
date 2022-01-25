@@ -15,27 +15,41 @@ var globalOptions = []string{}
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
 func Parse(datetime interface{}, options ...string) string {
-	var datetimeStr string
+	var input time.Time
 
 	switch date := datetime.(type) {
 	case int:
-		datetimeStr = parseTimestampToString(date)
-	case time.Time:
-		datetimeStr = date.Format("2006-01-02 15:04:05")
+		input = parseTimestampToTime(date)
+	case string:
+		if config.Location == "" {
+			parsedTime, _ := time.Parse("2006-01-02 15:04:05", date)
+			input = parsedTime
+		} else {
+			parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", date, getLocation())
+			input = parsedTime
+		}
 	default:
-		datetimeStr = datetime.(string)
+		input = datetime.(time.Time)
 	}
 
 	globalOptions = options
 
-	return process(datetimeStr)
+	return process(input)
 }
 
-func process(datetime string) string {
+func getLocation() *time.Location {
 	loc, _ := time.LoadLocation(config.Location)
-	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
+	return loc
+}
 
-	seconds := int(time.Now().In(loc).Sub(parsedTime).Seconds())
+func process(datetime time.Time) string {
+	now := time.Now()
+
+	if config.Location != "" {
+		now = now.In(getLocation())
+	}
+
+	seconds := int(now.Sub(datetime).Seconds())
 
 	switch {
 	case seconds < 60 && optionIsEnabled("online"):

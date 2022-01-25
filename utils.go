@@ -38,8 +38,8 @@ func getTimestampOfPastDate(subDuration time.Duration) int {
 	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
 }
 
-func parseTimestampToString(timestamp int) string {
-	return time.Unix(int64(timestamp), 0).Format("2006-01-02 15:04:05")
+func parseTimestampToTime(timestamp int) time.Time {
+	return time.Unix(int64(timestamp), 0)
 }
 
 func getLastNumberDigit(num int) int {

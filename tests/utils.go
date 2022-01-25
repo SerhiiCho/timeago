@@ -2,8 +2,6 @@ package tests
 
 import (
 	"time"
-
-	"github.com/SerhiiCho/timeago"
 )
 
 const (
@@ -58,10 +56,4 @@ func getDaysInMonth() time.Duration {
 
 func getLastDayOfMonth(date time.Time) time.Time {
 	return date.AddDate(0, 1, -date.Day())
-}
-
-func setup() {
-	timeago.SetConfig(timeago.Config{
-		Location: "Europe/Kiev",
-	})
 }
