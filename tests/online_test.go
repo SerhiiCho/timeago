@@ -67,7 +67,7 @@ func TestParseWithOnlineFlag(t *testing.T) {
 				Language: langEn,
 			})
 
-			if res, _ := Parse(tc.date, "online"); res != tc.result {
+			if res := Parse(tc.date, "online"); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})

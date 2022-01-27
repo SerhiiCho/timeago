@@ -33,9 +33,7 @@ Pass the date to `timeago.Parse()` function. It counts the interval between curr
 
 The usage is pretty straight forward.
 ```go
-someDate = "2019-10-23 10:46:00"
-
-res, err := timeago.Parse(someDate)
+res := timeago.Parse("2019-10-23 10:46:00")
 
 fmt.Println(res)
 ```

@@ -4,18 +4,15 @@
 
 ----
 
-## v3.0.0 (2022-01-27)
+## v2.1.0 (2022-01-27)
 
 - Changed:
-    - Renamed `Lang` structure to `lang`;
-    - Renamed `Rule` structure to `rule`;
+    - Renamed `Lang` structure to `lang` to make it private;
+    - Renamed `Rule` structure to `rule` to make it private;
     - Changed location configurations. Now package can work without location configuration;
-    - Changed visibility of some functions to be private;
 - Removed:
     - Removed badge from `README.md` file;
     - Removed tests from language files and added 1 test to `online_test.go` file;
-- Added:
-    - Added second return type to Parse function. Now it also returns error;
 
 ----
 

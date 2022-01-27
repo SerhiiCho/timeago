@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"log"
 	"math"
 	"strconv"
 	"time"
@@ -14,7 +15,7 @@ var globalOptions = []string{}
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, options ...string) (string, error) {
+func Parse(datetime interface{}, options ...string) string {
 	var input time.Time
 
 	switch date := datetime.(type) {
@@ -28,7 +29,7 @@ func Parse(datetime interface{}, options ...string) (string, error) {
 			location, err := time.LoadLocation(config.Location)
 
 			if err != nil {
-				return "", err
+				log.Fatalf("Error in timeago package: %v", err)
 			}
 
 			parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", date, location)
@@ -43,29 +44,29 @@ func Parse(datetime interface{}, options ...string) (string, error) {
 	return process(input)
 }
 
-func process(datetime time.Time) (string, error) {
+func process(datetime time.Time) string {
 	now := time.Now()
 
 	if config.Location != "" {
 		location, err := time.LoadLocation(config.Location)
 
 		if err != nil {
-			return "", err
+			log.Fatalf("Location error in timeago package: %v\n", err)
+		} else {
+			now = now.In(location)
 		}
-
-		now = now.In(location)
 	}
 
 	seconds := int(now.Sub(datetime).Seconds())
 
 	switch {
 	case seconds < 60 && optionIsEnabled("online"):
-		return trans().Online, nil
+		return trans().Online
 	case seconds < 0:
-		return getWords("seconds", 0), nil
+		return getWords("seconds", 0)
 	}
 
-	return calculateTheResult(seconds), nil
+	return calculateTheResult(seconds)
 }
 
 func calculateTheResult(seconds int) string {

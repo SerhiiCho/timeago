@@ -58,7 +58,7 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			if res, _ := Parse(tc.timestamp); res != tc.result {
+			if res := Parse(tc.timestamp); res != tc.result {
 				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})
@@ -89,7 +89,7 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			if res, _ := Parse(tc.time); res != tc.result {
+			if res := Parse(tc.time); res != tc.result {
 				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})

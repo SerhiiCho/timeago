@@ -28,7 +28,7 @@ func getFileContent(filePath string) []byte {
 	content, err := ioutil.ReadFile(filePath)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	return content
@@ -57,7 +57,7 @@ func parseJsonIntoLang(fileName string) lang {
 	err := json.Unmarshal(content, &result)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	return result
