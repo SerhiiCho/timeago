@@ -28,7 +28,7 @@ func getFileContent(filePath string) []byte {
 	content, err := ioutil.ReadFile(filePath)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	return content
@@ -38,8 +38,8 @@ func getTimestampOfPastDate(subDuration time.Duration) int {
 	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
 }
 
-func parseTimestampToString(timestamp int) string {
-	return time.Unix(int64(timestamp), 0).Format("2006-01-02 15:04:05")
+func parseTimestampToTime(timestamp int) time.Time {
+	return time.Unix(int64(timestamp), 0)
 }
 
 func getLastNumberDigit(num int) int {
@@ -49,15 +49,15 @@ func getLastNumberDigit(num int) int {
 	return result
 }
 
-func parseJsonIntoLang(fileName string) Lang {
+func parseJsonIntoLang(fileName string) lang {
 	content := getFileContent(fileName)
 
-	var result Lang
+	var result lang
 
 	err := json.Unmarshal(content, &result)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	return result

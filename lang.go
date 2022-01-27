@@ -7,7 +7,7 @@ import (
 	"runtime"
 )
 
-type Lang struct {
+type lang struct {
 	Ago            string
 	Online         string
 	Second         string
@@ -96,7 +96,7 @@ func getLanguageForm(num int) string {
 	return form
 }
 
-func trans() Lang {
+func trans() lang {
 	_, filename, _, ok := runtime.Caller(0)
 
 	if !ok {

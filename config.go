@@ -7,16 +7,12 @@ type Config struct {
 
 var config = Config{
 	Language: "en",
-	Location: "America/New_York",
+	Location: "",
 }
 
 func SetConfig(conf Config) {
 	if conf.Language == "" {
 		conf.Language = config.Language
-	}
-
-	if conf.Location == "" {
-		conf.Location = config.Location
 	}
 
 	config = conf

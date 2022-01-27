@@ -28,9 +28,11 @@ func main() {
 
 ## Location
 
-Optionally you can set the location in your application.
+Optionally you can set the location in your application. The functionality is going to be the
+same, but with 1 exception. In the absence of time zone information, package interprets a time as UTC;
+With location configuration it interprets the time as in the given location.
 
-> Default value is `"America/New_York"`
+> There is no default value for this option.
 
 ```go
 import . "github.com/SerhiiCho/timeago"

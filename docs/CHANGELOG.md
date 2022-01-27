@@ -4,6 +4,18 @@
 
 ----
 
+## v2.1.0 (2022-01-27)
+
+- Changed:
+    - Renamed `Lang` structure to `lang` to make it private;
+    - Renamed `Rule` structure to `rule` to make it private;
+    - Changed location configurations. Now package can work without location configuration;
+- Removed:
+    - Removed badge from `README.md` file;
+    - Removed tests from language files and added 1 test to `online_test.go` file;
+
+----
+
 ## v2.0.4 (2022-01-22)
 
 - Added:

@@ -1,12 +1,13 @@
 package timeago
 
 import (
+	"log"
 	"math"
 	"strconv"
 	"time"
 )
 
-var cachedJsonResults = map[string]Lang{}
+var cachedJsonResults = map[string]lang{}
 var globalOptions = []string{}
 
 // Parse coverts given datetime into `x time ago` format.
@@ -15,27 +16,48 @@ var globalOptions = []string{}
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
 func Parse(datetime interface{}, options ...string) string {
-	var datetimeStr string
+	var input time.Time
 
 	switch date := datetime.(type) {
 	case int:
-		datetimeStr = parseTimestampToString(date)
-	case time.Time:
-		datetimeStr = date.Format("2006-01-02 15:04:05")
+		input = parseTimestampToTime(date)
+	case string:
+		if config.Location == "" {
+			parsedTime, _ := time.Parse("2006-01-02 15:04:05", date)
+			input = parsedTime
+		} else {
+			location, err := time.LoadLocation(config.Location)
+
+			if err != nil {
+				log.Fatalf("Error in timeago package: %v", err)
+			}
+
+			parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", date, location)
+			input = parsedTime
+		}
 	default:
-		datetimeStr = datetime.(string)
+		input = datetime.(time.Time)
 	}
 
 	globalOptions = options
 
-	return process(datetimeStr)
+	return process(input)
 }
 
-func process(datetime string) string {
-	loc, _ := time.LoadLocation(config.Location)
-	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
+func process(datetime time.Time) string {
+	now := time.Now()
 
-	seconds := int(time.Now().In(loc).Sub(parsedTime).Seconds())
+	if config.Location != "" {
+		location, err := time.LoadLocation(config.Location)
+
+		if err != nil {
+			log.Fatalf("Location error in timeago package: %v\n", err)
+		} else {
+			now = now.In(location)
+		}
+	}
+
+	seconds := int(now.Sub(datetime).Seconds())
 
 	switch {
 	case seconds < 60 && optionIsEnabled("online"):
