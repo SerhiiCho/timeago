@@ -9,10 +9,13 @@
 - Changed:
     - Renamed `Lang` structure to `lang`;
     - Renamed `Rule` structure to `rule`;
+    - Changed location configurations. Now package can work without location configuration;
+    - Changed visibility of some functions to be private;
+- Removed:
     - Removed badge from `README.md` file;
     - Removed tests from language files and added 1 test to `online_test.go` file;
+- Added:
     - Added second return type to Parse function. Now it also returns error;
-    - Changed location configurations. Now package can work without location configuration;
 
 ----
 
