@@ -28,10 +28,10 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 - 🕔 Easy to contribute a new language support;
 - 🕧 Very small codebase;
 - 🕖 Frequent small releases without breaking changes;
-- 🕗
-- 🕘
-- 🕙
-- 🕚
+- 🕗 Can parse Unix timestamp;
+- 🕘 Can parse datetime string in `YYYY-MM-DD HH:MM:SS` format;
+- 🕙 Can parse time from `time.Time` go package;
+- 🕚 Open for good issues and pull requests;
 - 🕛 Well documented package;
 
 ## 🚩 Supported languages
