@@ -26,10 +26,10 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 - 🕒 Well tested;
 - 🕓 Supports several languages;
 - 🕔 Easy to contribute a new language support;
-- 🕧 Very small codebase;
+- 🕧 Small codebase;
 - 🕖 Frequent small releases without breaking changes;
 - 🕗 Can parse Unix timestamp;
-- 🕘 Can parse datetime string in `YYYY-MM-DD HH:MM:SS` format;
+- 🕘 Can parse date time string in `YYYY-MM-DD HH:MM:SS` format;
 - 🕙 Can parse time from `time.Time` go package;
 - 🕚 All the changes and features are written in the [CHANGELOG.md](https://github.com/SerhiiCho/timeago/blob/master/docs/CHANGELOG.md);
 - 🕛 Well documented package;
