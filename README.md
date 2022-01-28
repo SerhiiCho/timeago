@@ -9,6 +9,7 @@
 
 Fast and lightweight datetime package that converts given datetime into "n time ago" format. The list of supported languages you can find [here](#-supported-languages).
 
+- [😎 12 Features](#-12-features)
 - [⚙️ Configurations](https://github.com/SerhiiCho/timeago/blob/master/docs/CONFIGURATIONS.md)
 - [🚩 Supported languages](#-supported-languages)
 - [👏 Usage](#-usage)
@@ -17,6 +18,21 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 - [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/docs/CHANGELOG.md)
 - [🚀 Quick Start](#-quick-start)
 - [📖 Example usage on repl.it](https://replit.com/@SerhiiCho/Usage-of-timeago-package)
+
+## 😎 12 Features
+
+- 🕐 Parses any given date, no matter it is the future date or the past;
+- 🕑 Has several options that you can use depending on your use case;
+- 🕒 Well tested;
+- 🕓 Supports several languages;
+- 🕔 Easy to contribute a new language support;
+- 🕧 Small codebase;
+- 🕖 Frequent small releases without breaking changes;
+- 🕗 Can parse Unix timestamp;
+- 🕘 Can parse date time string in `YYYY-MM-DD HH:MM:SS` format;
+- 🕙 Can parse time from `time.Time` go package;
+- 🕚 All the changes and features are written in the [CHANGELOG.md](https://github.com/SerhiiCho/timeago/blob/master/docs/CHANGELOG.md);
+- 🕛 Well documented package;
 
 ## 🚩 Supported languages
 
@@ -29,14 +45,9 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 
 ## 👏 Usage
 
-Pass the date to `timeago.Parse()` function. It counts the interval between current datetime and given datetime and returns parsed string in format `x time ago`.
+Pass the date to `timeago.Parse()` function. It counts the interval between current datetime and given datetime and returns parsed string in format `x time ago`. The package can work not only with dates in the past but future dates as well. The usage is pretty straight forward.
 
-The usage is pretty straight forward.
-```go
-res := timeago.Parse("2019-10-23 10:46:00")
-
-fmt.Println(res)
-```
+### Allowed types
 
 Method `timeago.Parse()` excepts different types of datetime:
 
@@ -50,6 +61,26 @@ Method `timeago.Parse()` excepts different types of datetime:
 timeago.Parse("2019-10-23 10:46:00") // string date
 timeago.Parse(time.Now()) // time.Time
 timeago.Parse(1642607826) // Unix timestamp
+```
+
+### Usage with the date in the past
+
+```go
+pastDate := time.Now().Add(-time.Hour)
+
+res := timeago.Parse(pastDate)
+
+fmt.Println(res) // 1 hour ago
+```
+
+### Usage with the date in the future
+
+```go
+pastDate := time.Now().Add(time.Hour * 2)
+
+res := timeago.Parse(pastDate)
+
+fmt.Println(res) // 2 hours
 ```
 
 ## 🚀 Quick Start

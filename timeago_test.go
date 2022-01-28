@@ -88,7 +88,33 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 	})
 
 	for _, tc := range cases {
-		t.Run(tc.result, func(test *testing.T) {
+		t.Run("Test for date "+tc.time.String(), func(test *testing.T) {
+			if res := Parse(tc.time); res != tc.result {
+				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
+			}
+		})
+	}
+}
+
+func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
+	testCases := []struct {
+		time   time.Time
+		result string
+	}{
+		{time.Now().Add(time.Minute * 2), "2 minutes"},
+		{time.Now().Add(time.Minute * 5), "5 minutes"},
+		{time.Now().Add(time.Minute * 10), "10 minutes"},
+		{time.Now().Add(time.Hour), "1 hour"},
+		{time.Now().Add(time.Hour * 24), "1 day"},
+		{time.Now().Add(time.Hour * 48), "2 days"},
+	}
+
+	SetConfig(Config{
+		Language: "en",
+	})
+
+	for _, tc := range testCases {
+		t.Run("Test for date: "+tc.time.String(), func(test *testing.T) {
 			if res := Parse(tc.time); res != tc.result {
 				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
