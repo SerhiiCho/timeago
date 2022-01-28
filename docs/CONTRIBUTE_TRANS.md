@@ -22,6 +22,7 @@ Translation files live in `langs` directory. Each translation file is pretty sim
 {
     "Ago": "ago",
     "Online": "Online",
+    "JustNow": "Just now",
     "Second": "second",
     "Seconds": "seconds",
     "Minute": "minute",
@@ -45,6 +46,7 @@ Some languages (like Russian) have multiple plural forms of the word. For exampl
 {
     "Ago": "назад",
     "Online": "В сети",
+    "JustNow": "Только что",
     "Second": "секунда",
     "Seconds": "секунды",
     "SecondsSpecial": "секунд",

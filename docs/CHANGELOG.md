@@ -4,6 +4,12 @@
 
 ----
 
+## v2.1.3 (2022-01-28)
+
+- Documentation improvements and small changes;
+
+----
+
 ## v2.1.2 (2022-01-28)
 
 - Added so that `Parse` function can except not only past date but also future date and return correct result. Closes #23;

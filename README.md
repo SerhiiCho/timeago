@@ -7,7 +7,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/?branch=master)
 ![GitHub](https://img.shields.io/github/license/SerhiiCho/timeago)
 
-Fast and lightweight datetime package that converts given datetime into "n time ago" format. The list of supported languages you can find [here](#-supported-languages).
+Fast and lightweight date time package that converts given date into "n time ago" format. The package has many cool features and several supported languages.
 
 - [😎 12 Features](#-12-features)
 - [⚙️ Configurations](https://github.com/SerhiiCho/timeago/blob/master/docs/CONFIGURATIONS.md)
