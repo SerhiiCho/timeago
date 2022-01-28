@@ -1,6 +1,8 @@
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
 
 - [Usage](#usage)
+- [Example with one option](#example-with-one-option)
+- [Example with multiple options](#example-with-multiple-options)
 - [Available options](#available-options)
 
 # 🤲 Options
@@ -9,16 +11,25 @@
 
 As the seconds argument `Parse()` method excepts strings. Here is an example of passed option.
 
+## Example with one option
+
 ```go
 currentTime := time.Now()
 hourAgo := currentTime.Add(-time.Hour)
 
-timeago.Parse(currentTime) // 0 seconds ago
 timeago.Parse(currentTime, "online") // Online
 timeago.Parse(currentTime, "justNow") // Just now
-
-timeago.Parse(hourAgo) // 1 hour ago
 timeago.Parse(hourAgo, "noSuffix") // 1 hour
+```
+
+## Example with multiple options
+
+```go
+currentTime := time.Now()
+hourAgo := currentTime.Add(-time.Hour)
+
+timeago.Parse(currentTime, "online", "noSuffix") // Online
+timeago.Parse(hourAgo, "online", "noSuffix") // 1 hour
 ```
 
 ## Available options

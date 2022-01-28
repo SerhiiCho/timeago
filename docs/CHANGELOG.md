@@ -8,6 +8,7 @@
 
 - Added option `justNow` that prints `Just now` if time is within 60 minutes;
 - Added option `noSuffix` that removes `ago` from the printed result;
+- Added more info to `OPTIONS.md` documentation file;
 
 ----
 
