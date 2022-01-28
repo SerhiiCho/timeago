@@ -57,7 +57,12 @@ func process(datetime time.Time) string {
 		}
 	}
 
-	seconds := int(now.Sub(datetime).Seconds())
+	seconds := now.Sub(datetime).Seconds()
+
+	if seconds < 0 {
+		enableOption("upcoming")
+		seconds = math.Abs(seconds)
+	}
 
 	switch {
 	case seconds < 60 && optionIsEnabled("online"):
@@ -66,7 +71,7 @@ func process(datetime time.Time) string {
 		return getWords("seconds", 0)
 	}
 
-	return calculateTheResult(seconds)
+	return calculateTheResult(int(seconds))
 }
 
 func calculateTheResult(seconds int) string {
@@ -119,14 +124,13 @@ func getWords(timeKind string, num int) string {
 	translation := time[timeKind][form]
 	result := strconv.Itoa(num) + " " + translation
 
-	if optionIsEnabled("noSuffix") {
+	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
 		return result
 	}
 
 	return result + " " + trans().Ago
 }
 
-// Check if option was passed by a Parse function
 func optionIsEnabled(searchOption string) bool {
 	for _, option := range globalOptions {
 		if option == searchOption {
@@ -135,4 +139,8 @@ func optionIsEnabled(searchOption string) bool {
 	}
 
 	return false
+}
+
+func enableOption(option string) {
+	globalOptions = append(globalOptions, option)
 }
