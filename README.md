@@ -9,6 +9,7 @@
 
 Fast and lightweight datetime package that converts given datetime into "n time ago" format. The list of supported languages you can find [here](#-supported-languages).
 
+- [😎 12 Features](#-12-features)
 - [⚙️ Configurations](https://github.com/SerhiiCho/timeago/blob/master/docs/CONFIGURATIONS.md)
 - [🚩 Supported languages](#-supported-languages)
 - [👏 Usage](#-usage)
@@ -17,6 +18,21 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 - [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/docs/CHANGELOG.md)
 - [🚀 Quick Start](#-quick-start)
 - [📖 Example usage on repl.it](https://replit.com/@SerhiiCho/Usage-of-timeago-package)
+
+## 😎 12 Features
+
+- 🕐 Parses any given date, no matter it is the future date or the past;
+- 🕑 Has several options that you can use depending on your use case;
+- 🕒 Well tested;
+- 🕓 Supports several languages;
+- 🕔 Easy to contribute a new language support;
+- 🕧 Very small codebase;
+- 🕖 Frequent small releases without breaking changes;
+- 🕗
+- 🕘
+- 🕙
+- 🕚
+- 🕛 Well documented package;
 
 ## 🚩 Supported languages
 

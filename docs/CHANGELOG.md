@@ -7,6 +7,7 @@
 ## v2.1.2 (2022-01-28)
 
 - Added so that `Parse` function can except not only past date but also future date and return correct result. Closes #23;
+- Added section `12 Features` to the `README.md`;
 
 ----
 
