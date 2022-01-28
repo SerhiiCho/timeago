@@ -10,9 +10,15 @@
 As the seconds argument `Parse()` method excepts strings. Here is an example of passed option.
 
 ```go
-timeago.Parse(time.Now(), "online") // Online
-timeago.Parse(time.Now()) // 0 seconds ago
-timeago.Parse(time.Now(), "justNow") // Just now
+currentTime := time.Now()
+hourAgo := currentTime.Add(-time.Hour)
+
+timeago.Parse(currentTime) // 0 seconds ago
+timeago.Parse(currentTime, "online") // Online
+timeago.Parse(currentTime, "justNow") // Just now
+
+timeago.Parse(hourAgo) // 1 hour ago
+timeago.Parse(hourAgo, "noSuffix") // 1 hour
 ```
 
 ## Available options
@@ -21,8 +27,6 @@ timeago.Parse(time.Now(), "justNow") // Just now
 | --- | --- |
 | `online` | Displays **Online** if date interval withing 60 seconds. For example instead if `13 seconds ago` prints `Online` |
 | `justNow` | Displays **Just now** if date interval withing 60 seconds. For example instead of `32 seconds ago` prints `Just now`. |
-
-> More options are coming in the next versions.
-
+| `noSuffix` | Removes suffix from datetime result and get for example "5 minutes" instead of "5 minutes ago". |
 
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)

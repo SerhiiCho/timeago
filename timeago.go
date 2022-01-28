@@ -117,8 +117,13 @@ func getWords(timeKind string, num int) string {
 	time := getTimeTranslations()
 
 	translation := time[timeKind][form]
+	result := strconv.Itoa(num) + " " + translation
 
-	return strconv.Itoa(num) + " " + translation + " " + trans().Ago
+	if optionIsEnabled("noSuffix") {
+		return result
+	}
+
+	return result + " " + trans().Ago
 }
 
 // Check if option was passed by a Parse function
