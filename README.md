@@ -31,7 +31,7 @@ Fast and lightweight datetime package that converts given datetime into "n time 
 - 🕗 Can parse Unix timestamp;
 - 🕘 Can parse datetime string in `YYYY-MM-DD HH:MM:SS` format;
 - 🕙 Can parse time from `time.Time` go package;
-- 🕚 Open for good issues and pull requests;
+- 🕚 All the changes and features are written in the [CHANGELOG.md](https://github.com/SerhiiCho/timeago/blob/master/docs/CHANGELOG.md);
 - 🕛 Well documented package;
 
 ## 🚩 Supported languages
