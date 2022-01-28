@@ -10,6 +10,7 @@ import (
 type lang struct {
 	Ago            string
 	Online         string
+	JustNow        string
 	Second         string
 	Seconds        string
 	SecondsSpecial string

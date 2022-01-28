@@ -75,6 +75,8 @@ func calculateTheResult(seconds int) string {
 	switch {
 	case optionIsEnabled("online") && seconds < 60:
 		return trans().Online
+	case optionIsEnabled("justNow") && seconds < 60:
+		return trans().JustNow
 	case seconds < 60:
 		return getWords("seconds", seconds)
 	case minutes < 60:

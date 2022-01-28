@@ -4,6 +4,12 @@
 
 ----
 
+## v2.1.1 (2022-01-28)
+
+- Added option `justNow` that prints `Just now` if time is within 60 minutes;
+
+----
+
 ## v2.1.0 (2022-01-27)
 
 - Changed:
