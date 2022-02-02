@@ -4,7 +4,7 @@
 
 ----
 
-## v2.1.3 (2022-01-28)
+## v2.1.3 (2022-02-02)
 
 - Documentation improvements and small changes;
 
