@@ -10,7 +10,8 @@ const (
 	hour   time.Duration = time.Hour
 	day    time.Duration = hour * 24
 	week   time.Duration = day * 7
-	// we cannot add month and year because months and years cannot have static values
+	month  time.Duration = day * 30
+	year   time.Duration = day * 365
 )
 
 func subTime(duration time.Duration) time.Time {
@@ -38,22 +39,9 @@ func subWeeks(duration time.Duration) time.Time {
 }
 
 func subMonths(duration time.Duration) time.Time {
-	return subTime(duration * getDaysInMonth() * day)
+	return subTime(month * duration)
 }
 
 func subYears(duration time.Duration) time.Time {
-	return subTime(duration * getDaysInYear() * day)
-}
-
-func getDaysInYear() time.Duration {
-	lastDayOfTheYear := time.Date(time.Now().Year(), 12, 31, 0, 0, 0, 0, time.UTC)
-	return time.Duration(lastDayOfTheYear.YearDay())
-}
-
-func getDaysInMonth() time.Duration {
-	return time.Duration(getLastDayOfMonth(time.Now()).Day())
-}
-
-func getLastDayOfMonth(date time.Time) time.Time {
-	return date.AddDate(0, 1, -date.Day())
+	return subTime(year * duration)
 }
