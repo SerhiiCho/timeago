@@ -38,6 +38,6 @@ timeago.Parse(hourAgo, "online", "noSuffix") // 1 hour
 | --- | --- |
 | `online` | Displays **Online** if date interval withing 60 seconds. For example instead if `13 seconds ago` prints `Online` |
 | `justNow` | Displays **Just now** if date interval withing 60 seconds. For example instead of `32 seconds ago` prints `Just now`. |
-| `noSuffix` | Removes suffix from datetime result and get for example "5 minutes" instead of "5 minutes ago". |
+| `noSuffix` | Removes suffix from datetime result and get for example `5 minutes` instead of `5 minutes ago`. |
 
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)

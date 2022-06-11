@@ -4,6 +4,14 @@
 
 ----
 
+## v2.1.3 (2022-06-11)
+
+- Documentation improvements and small changes;
+- Fixed bug in test file `tests/utils.go` related to not properly counting months and years when testing;
+- Added link to `README.md` file;
+
+----
+
 ## v2.1.2 (2022-01-28)
 
 - Added so that `Parse` function can except not only past date but also future date and return correct result. Closes #23;
