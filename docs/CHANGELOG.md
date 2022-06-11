@@ -4,10 +4,11 @@
 
 ----
 
-## v2.1.3 (2022-02-02)
+## v2.1.3 (2022-06-11)
 
 - Documentation improvements and small changes;
 - Fixed bug in test file `tests/utils.go` related to not properly counting months and years when testing;
+- Added link to `README.md` file;
 
 ----
 
