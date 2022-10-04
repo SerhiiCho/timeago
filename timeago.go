@@ -1,7 +1,6 @@
 package timeago
 
 import (
-	"log"
 	"math"
 	"strconv"
 	"time"
@@ -28,9 +27,7 @@ func Parse(datetime interface{}, options ...string) string {
 		} else {
 			location, err := time.LoadLocation(config.Location)
 
-			if err != nil {
-				log.Fatalf("Error in timeago package: %v", err)
-			}
+			fatalIfError(err, "Error in timeago package: %v")
 
 			parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", date, location)
 			input = parsedTime
@@ -50,11 +47,9 @@ func process(datetime time.Time) string {
 	if config.Location != "" {
 		location, err := time.LoadLocation(config.Location)
 
-		if err != nil {
-			log.Fatalf("Location error in timeago package: %v\n", err)
-		} else {
-			now = now.In(location)
-		}
+		fatalIfError(err, "Location error in timeago package: %v\n")
+
+		now = now.In(location)
 	}
 
 	seconds := now.Sub(datetime).Seconds()

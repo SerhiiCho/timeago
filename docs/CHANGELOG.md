@@ -4,6 +4,12 @@
 
 ----
 
+## v2.1.4 (2022-10-04)
+
+- Code base refactoring. Made source code look nicer;
+
+----
+
 ## v2.1.3 (2022-06-11)
 
 - Documentation improvements and small changes;

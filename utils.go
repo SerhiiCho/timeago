@@ -62,3 +62,9 @@ func parseJsonIntoLang(fileName string) lang {
 
 	return result
 }
+
+func fatalIfError(err error, msg string) {
+	if err != nil {
+		log.Fatalf(msg, err)
+	}
+}
