@@ -17,3 +17,11 @@ func SetConfig(conf Config) {
 
 	config = conf
 }
+
+func locationIsSet() bool {
+	return config.Location != ""
+}
+
+func locationIsNotSet() bool {
+	return !locationIsSet()
+}

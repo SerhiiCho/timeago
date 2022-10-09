@@ -32,9 +32,9 @@ func Parse(datetime interface{}, options ...string) string {
 	return process(input)
 }
 
-func parseStringInputIntoTime(date string) time.Time {
-	if config.Location == "" {
-		parsedTime, _ := time.Parse("2006-01-02 15:04:05", date)
+func parseStringInputIntoTime(datetime string) time.Time {
+	if locationIsNotSet() {
+		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
 		return parsedTime
 	}
 
@@ -44,7 +44,7 @@ func parseStringInputIntoTime(date string) time.Time {
 		log.Fatalf("Error in timeago package: %v", err)
 	}
 
-	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", date, location)
+	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, location)
 
 	return parsedTime
 }
@@ -52,7 +52,7 @@ func parseStringInputIntoTime(date string) time.Time {
 func process(datetime time.Time) string {
 	now := time.Now()
 
-	if config.Location != "" {
+	if locationIsSet() {
 		now = applyLocationToTime(now)
 	}
 
@@ -73,14 +73,14 @@ func process(datetime time.Time) string {
 	return calculateTheResult(int(seconds))
 }
 
-func applyLocationToTime(date time.Time) time.Time {
+func applyLocationToTime(datetime time.Time) time.Time {
 	location, err := time.LoadLocation(config.Location)
 
 	if err != nil {
 		log.Fatalf("Location error in timeago package: %v\n", err)
 	}
 
-	return date.In(location)
+	return datetime.In(location)
 }
 
 func calculateTheResult(seconds int) string {
