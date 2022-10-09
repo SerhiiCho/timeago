@@ -53,13 +53,7 @@ func process(datetime time.Time) string {
 	now := time.Now()
 
 	if config.Location != "" {
-		location, err := time.LoadLocation(config.Location)
-
-		if err != nil {
-			log.Fatalf("Location error in timeago package: %v\n", err)
-		}
-
-		now = now.In(location)
+		now = applyLocationToTime(now)
 	}
 
 	seconds := now.Sub(datetime).Seconds()
@@ -77,6 +71,16 @@ func process(datetime time.Time) string {
 	}
 
 	return calculateTheResult(int(seconds))
+}
+
+func applyLocationToTime(date time.Time) time.Time {
+	location, err := time.LoadLocation(config.Location)
+
+	if err != nil {
+		log.Fatalf("Location error in timeago package: %v\n", err)
+	}
+
+	return date.In(location)
 }
 
 func calculateTheResult(seconds int) string {
