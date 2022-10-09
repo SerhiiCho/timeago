@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"log"
 	"math"
 	"strconv"
 	"time"
@@ -21,17 +22,7 @@ func Parse(datetime interface{}, options ...string) string {
 	case int:
 		input = parseTimestampToTime(date)
 	case string:
-		if config.Location == "" {
-			parsedTime, _ := time.Parse("2006-01-02 15:04:05", date)
-			input = parsedTime
-		} else {
-			location, err := time.LoadLocation(config.Location)
-
-			fatalIfError(err, "Error in timeago package: %v")
-
-			parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", date, location)
-			input = parsedTime
-		}
+		input = parseStringInputIntoTime(date)
 	default:
 		input = datetime.(time.Time)
 	}
@@ -41,15 +32,28 @@ func Parse(datetime interface{}, options ...string) string {
 	return process(input)
 }
 
+func parseStringInputIntoTime(datetime string) time.Time {
+	if locationIsNotSet() {
+		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
+		return parsedTime
+	}
+
+	location, err := time.LoadLocation(config.Location)
+
+	if err != nil {
+		log.Fatalf("Error in timeago package: %v", err)
+	}
+
+	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, location)
+
+	return parsedTime
+}
+
 func process(datetime time.Time) string {
 	now := time.Now()
 
-	if config.Location != "" {
-		location, err := time.LoadLocation(config.Location)
-
-		fatalIfError(err, "Location error in timeago package: %v\n")
-
-		now = now.In(location)
+	if locationIsSet() {
+		now = applyLocationToTime(now)
 	}
 
 	seconds := now.Sub(datetime).Seconds()
@@ -67,6 +71,16 @@ func process(datetime time.Time) string {
 	}
 
 	return calculateTheResult(int(seconds))
+}
+
+func applyLocationToTime(datetime time.Time) time.Time {
+	location, err := time.LoadLocation(config.Location)
+
+	if err != nil {
+		log.Fatalf("Location error in timeago package: %v\n", err)
+	}
+
+	return datetime.In(location)
 }
 
 func calculateTheResult(seconds int) string {
