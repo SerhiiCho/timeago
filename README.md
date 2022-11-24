@@ -30,7 +30,7 @@ Fast and lightweight date time package that converts given date into "n time ago
 - 🕖 Frequent small releases without breaking changes;
 - 🕗 Can parse Unix timestamp;
 - 🕘 Can parse date time string in `YYYY-MM-DD HH:MM:SS` format;
-- 🕙 Can parse time from `time.Time` go package;
+- 🕙 Can parse time from `time.Time` GO package;
 - 🕚 All the changes and features are written in the [CHANGELOG.md](https://github.com/SerhiiCho/timeago/blob/master/docs/CHANGELOG.md);
 - 🕛 Well documented package;
 

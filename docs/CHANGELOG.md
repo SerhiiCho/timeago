@@ -4,6 +4,12 @@
 
 ----
 
+## v2.1.6 (2022-10-13)
+
+- Changed typo in README.md file;
+
+----
+
 ## v2.1.5 (2022-10-09)
 
 - Code base refactoring. Made source code look nicer;
