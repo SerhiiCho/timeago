@@ -4,7 +4,6 @@ import (
 	"log"
 	"math"
 	"strconv"
-	"strings"
 	"time"
 )
 
@@ -138,39 +137,7 @@ func getWords(timeKind string, num int) string {
 		return result
 	}
 
-	return modifyOutput(result)
-}
-
-func modifyOutput(result string) string {
-	if !translationsAreSet() {
-		return result + " " + trans().Ago
-	}
-
-	suffix := trans().Ago
-
-	for _, translation := range config.Translations {
-		if translation.Language != config.Language {
-			continue
-		}
-
-		for key, trans := range translation.Translations {
-			parts := strings.Split(result, " ")
-
-			if key == "ago" {
-				suffix = trans
-			}
-
-			if parts[1] == key {
-				result = strings.Replace(result, key, trans, 1)
-			}
-		}
-	}
-
-	if suffix == "" {
-		return result
-	}
-
-	return result + " " + suffix
+	return overwriteOutput(result)
 }
 
 func optionIsEnabled(searchOption string) bool {
