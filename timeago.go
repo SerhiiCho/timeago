@@ -4,6 +4,7 @@ import (
 	"log"
 	"math"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -135,6 +136,28 @@ func getWords(timeKind string, num int) string {
 
 	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
 		return result
+	}
+
+	return modifyOutput(result)
+}
+
+func modifyOutput(result string) string {
+	if !translationsAreSet() {
+		return result + " " + trans().Ago
+	}
+
+	for _, translation := range config.Translations {
+		if translation.Language != config.Language {
+			continue
+		}
+
+		for key, trans := range translation.Translations {
+			parts := strings.Split(result, " ")
+
+			if parts[1] == key {
+				result = strings.Replace(result, key, trans, 1)
+			}
+		}
 	}
 
 	return result + " " + trans().Ago

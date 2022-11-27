@@ -1,13 +1,20 @@
 package timeago
 
+type Translation struct {
+	Language     string
+	Translations map[string]string
+}
+
 type Config struct {
-	Language string
-	Location string
+	Language     string
+	Location     string
+	Translations []Translation
 }
 
 var config = Config{
-	Language: "en",
-	Location: "",
+	Language:     "en",
+	Location:     "",
+	Translations: []Translation{},
 }
 
 func SetConfig(conf Config) {
@@ -24,4 +31,8 @@ func locationIsSet() bool {
 
 func locationIsNotSet() bool {
 	return !locationIsSet()
+}
+
+func translationsAreSet() bool {
+	return len(config.Translations) > 0
 }
