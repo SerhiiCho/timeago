@@ -146,7 +146,7 @@ func modifyOutput(result string) string {
 		return result + " " + trans().Ago
 	}
 
-	hideSuffix := false
+	suffix := trans().Ago
 
 	for _, translation := range config.Translations {
 		if translation.Language != config.Language {
@@ -156,23 +156,21 @@ func modifyOutput(result string) string {
 		for key, trans := range translation.Translations {
 			parts := strings.Split(result, " ")
 
-			if key == "ago" && trans == "" {
-				hideSuffix = true
+			if key == "ago" {
+				suffix = trans
 			}
 
-			for _, part := range parts {
-				if part == key {
-					result = strings.Replace(result, key, trans, 1)
-				}
+			if parts[1] == key {
+				result = strings.Replace(result, key, trans, 1)
 			}
 		}
 	}
 
-	if hideSuffix {
+	if suffix == "" {
 		return result
 	}
 
-	return result + " " + trans().Ago
+	return result + " " + suffix
 }
 
 func optionIsEnabled(searchOption string) bool {
