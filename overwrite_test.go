@@ -97,6 +97,20 @@ func TestSetConfigTranslations(t *testing.T) {
 				},
 			},
 		},
+		{
+			lang:   "ru",
+			name:   "you can remove 'назад' suffix by overwriting it to an empty string",
+			time:   time.Now().Add(-time.Minute * 2),
+			expect: "2 минуты",
+			translations: []Translation{
+				{
+					Language: "ru",
+					Translations: map[string]string{
+						"назад": "",
+					},
+				},
+			},
+		},
 	}
 
 	for _, tc := range cases {
