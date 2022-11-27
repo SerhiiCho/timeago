@@ -3,6 +3,7 @@
 - [Description](#description)
 - [Language](#language)
 - [Location](#location)
+- [Overwrite translations](#overwrite-translations)
 
 # ⚙️ Configurations
 
@@ -26,33 +27,6 @@ func main() {
 }
 ```
 
-## Overwrite translations
-
-There are cases when you want to replace certain words with specific ones. For example you might want to replace "days" with "d" to get "4 d ago". You can do it with “Overwrites”. You can do it with configurations.
-
-```go
-import . "github.com/SerhiiCho/timeago"
-
-func main() {
-    SetConfig(Config{
-        Translations: []Translations{
-            {
-                Language: "ru",
-                Translations: map[string]string{
-                    "days": "d",
-                    "day": "d",
-                    "weeks": "w",
-                    "week": "w",
-                    "ago": "",
-                }
-            }
-        }
-    })
-}
-```
-
-After this configuration, instead of getting for example `4 days ago` you'll get `4 d` and instead of `1 week ago` you'll get `1 w`.
-
 ## Location
 
 Optionally you can set the location in your application. The functionality is going to be the
@@ -72,5 +46,32 @@ func main() {
 ```
 
 > Please make sure that timezone configuration is correct for your location. It is very important for displaying the correct datetime.
+
+## Overwrite translations
+
+There are cases when you want to replace certain words with specific ones. For example you might want to replace "days" with "d" to get "4 d ago". You can do it with by setting specific configurations for each language. Let's see the example where we want to overwrite words for English language:
+
+```go
+import . "github.com/SerhiiCho/timeago"
+
+func main() {
+    SetConfig(Config{
+        Translations: []Translations{
+            {
+                Language: "en",
+                Translations: map[string]string{
+                    "days": "d",
+                    "day": "d",
+                    "weeks": "w",
+                    "week": "w",
+                    "ago": "",
+                }
+            }
+        }
+    })
+}
+```
+
+After this configuration, instead of getting, for example, `4 days ago` you'll get `4 d` and instead of `1 week ago` you'll get `1 w`.
 
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
