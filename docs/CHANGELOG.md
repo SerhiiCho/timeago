@@ -7,6 +7,7 @@
 ## v2.1.6 (2022-10-13)
 
 - Changed typo in README.md file;
+- Added ability to overwrite output strings for custom values;
 
 ----
 
