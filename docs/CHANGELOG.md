@@ -4,6 +4,13 @@
 
 ----
 
+## v2.1.6 (2022-11-27)
+
+- Changed typo in README.md file;
+- Added ability to overwrite output strings for custom values;
+
+----
+
 ## v2.1.5 (2022-10-09)
 
 - Code base refactoring. Made source code look nicer;

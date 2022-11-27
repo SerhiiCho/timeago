@@ -137,7 +137,7 @@ func getWords(timeKind string, num int) string {
 		return result
 	}
 
-	return result + " " + trans().Ago
+	return overwriteOutput(result)
 }
 
 func optionIsEnabled(searchOption string) bool {
