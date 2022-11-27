@@ -53,6 +53,19 @@ func TestSetConfigTranslations(t *testing.T) {
 				},
 			},
 		},
+		{
+			name:   "you can remove 'ago' suffix by overwriting it to an empty string",
+			time:   time.Now().Add(-time.Minute * 2),
+			expect: "2 minutes",
+			translations: []Translation{
+				{
+					Language: "en",
+					Translations: map[string]string{
+						"ago": "",
+					},
+				},
+			},
+		},
 	}
 
 	for _, tc := range cases {

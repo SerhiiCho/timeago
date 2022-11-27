@@ -146,6 +146,8 @@ func modifyOutput(result string) string {
 		return result + " " + trans().Ago
 	}
 
+	hideSuffix := false
+
 	for _, translation := range config.Translations {
 		if translation.Language != config.Language {
 			continue
@@ -154,10 +156,20 @@ func modifyOutput(result string) string {
 		for key, trans := range translation.Translations {
 			parts := strings.Split(result, " ")
 
-			if parts[1] == key {
-				result = strings.Replace(result, key, trans, 1)
+			if key == "ago" && trans == "" {
+				hideSuffix = true
+			}
+
+			for _, part := range parts {
+				if part == key {
+					result = strings.Replace(result, key, trans, 1)
+				}
 			}
 		}
+	}
+
+	if hideSuffix {
+		return result
 	}
 
 	return result + " " + trans().Ago
