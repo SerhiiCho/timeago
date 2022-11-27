@@ -12,22 +12,12 @@ func overwriteOutput(result string) string {
 
 	suffix := trans().Ago
 
-	for _, translation := range config.Translations {
-		if translation.Language != config.Language {
+	for _, translationObj := range config.Translations {
+		if translationObj.Language != config.Language {
 			continue
 		}
 
-		for key, translation := range translation.Translations {
-			parts := strings.Split(result, " ")
-
-			if key == trans().Ago {
-				suffix = translation
-			}
-
-			if parts[1] == key {
-				result = strings.Replace(result, key, translation, 1)
-			}
-		}
+		result, suffix = modifyResult(result, translationObj.Translations)
 	}
 
 	if suffix == "" {
@@ -35,4 +25,22 @@ func overwriteOutput(result string) string {
 	}
 
 	return result + " " + suffix
+}
+
+func modifyResult(result string, translations map[string]string) (string, string) {
+	suffix := trans().Ago
+
+	for key, translation := range translations {
+		parts := strings.Split(result, " ")
+
+		if key == trans().Ago {
+			suffix = translation
+		}
+
+		if parts[1] == key {
+			result = strings.Replace(result, key, translation, 1)
+		}
+	}
+
+	return result, suffix
 }
