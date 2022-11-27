@@ -111,6 +111,23 @@ func TestSetConfigTranslations(t *testing.T) {
 				},
 			},
 		},
+		{
+			lang:   "ru",
+			name:   "you can overwrite russian days",
+			time:   time.Now().Add(-time.Hour * 24 * 2),
+			expect: "2 д",
+			translations: []Translation{
+				{
+					Language: "ru",
+					Translations: map[string]string{
+						"день":  "д",
+						"дня":   "д",
+						"дней":  "д",
+						"назад": "",
+					},
+				},
+			},
+		},
 	}
 
 	for _, tc := range cases {
