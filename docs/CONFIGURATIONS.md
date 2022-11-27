@@ -72,6 +72,30 @@ func main() {
 }
 ```
 
-After this configuration, instead of getting, for example, `4 days ago` you'll get `4 d` and instead of `1 week ago` you'll get `1 w`.
+After this configuration, instead of getting, for example, `4 days ago` you'll get `4 d` and instead of `1 week ago` you'll get `1 w`. For other languages it's pretty much the same thing:
+
+```go
+import . "github.com/SerhiiCho/timeago"
+
+func main() {
+    SetConfig(Config{
+        Translations: []Translations{
+            {
+                Language: "ru",
+                Translations: map[string]string{
+                    "день": "д",
+                    "дня": "д",
+                    "дней": "д",
+                    "назад": "",
+                }
+            }
+        }
+    })
+}
+```
+
+With this configurations, you'll get `5 д` instead of `5 дней назад`.
+
+> You can find the full list of words that you can overwrite in `langs/` directory in the root of the project.
 
 [<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
