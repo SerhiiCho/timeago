@@ -4,6 +4,12 @@
 
 ----
 
+## v2.1.7 (2023-09-08)
+
+- Renamed master branch to main
+
+----
+
 ## v2.1.6 (2022-11-27)
 
 - Changed typo in README.md file;
