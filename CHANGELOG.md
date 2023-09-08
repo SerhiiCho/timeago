@@ -9,6 +9,7 @@
 - Renamed master branch to main
 - Added more tests
 - Simplified code
+- Replaced deprecated `ioutil.ReadFile` with `os.ReadFile`
 
 ----
 
