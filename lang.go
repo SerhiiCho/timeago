@@ -79,7 +79,7 @@ func getTimeTranslations() map[string]map[string]string {
 }
 
 func getLanguageForm(num int) string {
-	var form string
+	fmt.Printf("%#v\n", num)
 	lastDigit := getLastNumberDigit(num)
 	rule := getRules(num, lastDigit)[config.Language]
 
@@ -94,7 +94,7 @@ func getLanguageForm(num int) string {
 
 	fmt.Printf("Provided rules don't apply to a number %d", num)
 
-	return form
+	return ""
 }
 
 func trans() lang {
