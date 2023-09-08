@@ -3,7 +3,6 @@ package timeago
 import (
 	"encoding/json"
 	"errors"
-	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
@@ -25,7 +24,7 @@ func fileExists(filePath string) (bool, error) {
 }
 
 func getFileContent(filePath string) []byte {
-	content, err := ioutil.ReadFile(filePath)
+	content, err := os.ReadFile(filePath)
 
 	if err != nil {
 		log.Fatalln(err)
@@ -38,7 +37,7 @@ func getTimestampOfPastDate(subDuration time.Duration) int {
 	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
 }
 
-func parseTimestampToTime(timestamp int) time.Time {
+func parseTimestampIntoTime(timestamp int) time.Time {
 	return time.Unix(int64(timestamp), 0)
 }
 

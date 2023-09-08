@@ -20,19 +20,19 @@ func Parse(datetime interface{}, options ...string) string {
 
 	switch date := datetime.(type) {
 	case int:
-		input = parseTimestampToTime(date)
+		input = parseTimestampIntoTime(date)
 	case string:
-		input = parseStringInputIntoTime(date)
+		input = parseStrIntoTime(date)
 	default:
 		input = datetime.(time.Time)
 	}
 
 	globalOptions = options
 
-	return process(input)
+	return parseInput(input)
 }
 
-func parseStringInputIntoTime(datetime string) time.Time {
+func parseStrIntoTime(datetime string) time.Time {
 	if locationIsNotSet() {
 		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
 		return parsedTime
@@ -49,7 +49,7 @@ func parseStringInputIntoTime(datetime string) time.Time {
 	return parsedTime
 }
 
-func process(datetime time.Time) string {
+func parseInput(datetime time.Time) string {
 	now := time.Now()
 
 	if locationIsSet() {
