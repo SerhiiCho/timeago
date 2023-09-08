@@ -7,6 +7,8 @@
 ## v2.1.7 (2023-09-08)
 
 - Renamed master branch to main
+- Added more tests
+- Simplified code
 
 ----
 

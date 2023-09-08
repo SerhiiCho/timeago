@@ -121,3 +121,21 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 		})
 	}
 }
+
+func TestOptionIsEnabled(t *testing.T) {
+	t.Run("returns true if option is enabled", func(test *testing.T) {
+		globalOptions = []string{"noSuffix"}
+
+		if res := optionIsEnabled("noSuffix"); res == false {
+			test.Errorf("Result must be true, but got %v instead", res)
+		}
+
+		globalOptions = []string{}
+	})
+
+	t.Run("returns false if option is disabled", func(test *testing.T) {
+		if res := optionIsEnabled("noSuffix"); res == true {
+			test.Errorf("Result must be true, but got %v instead", res)
+		}
+	})
+}
