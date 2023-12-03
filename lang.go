@@ -79,7 +79,6 @@ func getTimeTranslations() map[string]map[string]string {
 }
 
 func getLanguageForm(num int) string {
-	fmt.Printf("%#v\n", num)
 	lastDigit := getLastNumberDigit(num)
 	rule := getRules(num, lastDigit)[config.Language]
 
