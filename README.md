@@ -12,7 +12,6 @@ Fast and lightweight date time package that converts given date into "n time ago
 
 - [🗒 Documentation](https://serhiicho.github.io/timeago-docs/)
 - [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/main/CHANGELOG.md)
-- [📖 Example usage on repl.it](https://replit.com/@SerhiiCho/Usage-of-timeago-package)
 
 ## 🚀 Quick Start
 
