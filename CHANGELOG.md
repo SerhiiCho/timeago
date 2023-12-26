@@ -4,6 +4,12 @@
 
 ----
 
+## v2.1.10 (2023-12-26)
+
+- Update Go version in `go.mod` from `1.13` to `1.21.0`
+
+----
+
 ## v2.1.9 (2023-12-26)
 
 - Update CHANGELOG.md file
