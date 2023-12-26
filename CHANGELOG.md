@@ -1,6 +1,11 @@
-[<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)
-
 # 🗒 Release Notes
+
+----
+
+## v2.1.11 (2023-12-26)
+
+- Update Go version in `go.mod` to `1.13`
+- Change package namespace to `github.com/SerhiiCho/timeago/v2` to match Go versioning rules
 
 ----
 
@@ -184,7 +189,3 @@
 ## v1.1.2 (2021-11-28)
 
 - Fixed bug with wrong path for plugin root
-
-----
-
-[<< Go back to home](https://github.com/SerhiiCho/timeago/blob/master/README.md)

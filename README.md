@@ -16,5 +16,5 @@ Fast and lightweight date time package that converts given date into "n time ago
 ## 🚀 Quick Start
 
 ```bash
-go get -u github.com/SerhiiCho/timeago
+go get github.com/SerhiiCho/timeago/v2
 ```
