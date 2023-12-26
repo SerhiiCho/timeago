@@ -4,6 +4,18 @@
 
 ----
 
+## v2.1.9 (2023-12-26)
+
+- Update CHANGELOG.md file
+
+----
+
+## v2.1.8 (2023-12-03)
+
+- Removed printing number getting form. [Commit](https://github.com/SerhiiCho/timeago/commit/52b312ad4a64c7ca9ef0d08e0920986c69ae610e)
+
+----
+
 ## v2.1.7 (2023-09-08)
 
 - Renamed master branch to main
