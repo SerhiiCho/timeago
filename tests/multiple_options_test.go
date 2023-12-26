@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SerhiiCho/timeago"
+	. "github.com/SerhiiCho/timeago/v2"
 )
 
 func TestParseWithMultipleFlags(t *testing.T) {
