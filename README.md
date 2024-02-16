@@ -18,3 +18,7 @@ Fast and lightweight date time package that converts given date into "n time ago
 ```bash
 go get github.com/SerhiiCho/timeago/v2
 ```
+
+## License
+
+This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/main/LICENSE.md).
