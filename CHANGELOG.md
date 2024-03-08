@@ -1,5 +1,9 @@
 # 🗒 Release Notes
 
+## v2.2.0 (2024-03-08)
+
+- Add the German language support
+
 ----
 
 ## v2.1.11 (2023-12-26)

@@ -26,5 +26,9 @@ func getRules(number, lastDigit int) map[string]rule {
 			Single: number == 1,
 			Plural: number > 1 || number == 0,
 		},
+		"de": {
+			Single: number == 1,
+			Plural: number > 1 || number == 0,
+		},
 	}
 }
