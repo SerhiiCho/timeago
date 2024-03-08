@@ -1,16 +1,22 @@
 package timeago
 
-import "strings"
+import (
+	"strings"
+)
 
 // overwriteOutput takes the final result, for example "4 days",
 // and modifies the output if user added custom translations
 // via config.Translations configuration.
 func overwriteOutput(result string) string {
-	if !translationsAreSet() {
-		return result + " " + trans().Ago
-	}
-
 	suffix := trans().Ago
+
+	if !translationsAreSet() {
+		if config.Language == "de" {
+			return suffix + " " + result
+		}
+
+		return result + " " + suffix
+	}
 
 	for _, translationObj := range config.Translations {
 		if translationObj.Language != config.Language {
@@ -22,6 +28,10 @@ func overwriteOutput(result string) string {
 
 	if suffix == "" {
 		return result
+	}
+
+	if config.Language == "de" {
+		return suffix + " " + result
 	}
 
 	return result + " " + suffix
