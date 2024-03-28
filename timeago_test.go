@@ -28,9 +28,7 @@ func TestGetWords(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
-			SetConfig(Config{
-				Language: tc.lang,
-			})
+			SetConfig(Config{Language: tc.lang})
 
 			if res := getWords(tc.timeKind, tc.num); res != tc.result {
 				test.Errorf("Result must be `%s` but got `%s` instead", tc.result, res)
@@ -48,13 +46,17 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		{getTimestampOfPastDate(time.Minute * 5), "5 minutes ago"},
 		{getTimestampOfPastDate(time.Hour), "1 hour ago"},
 		{getTimestampOfPastDate(time.Hour * 3), "3 hours ago"},
+		{getTimestampOfPastDate(time.Hour * 5), "5 hours ago"},
 		{getTimestampOfPastDate(time.Hour * 24), "1 day ago"},
-		{getTimestampOfPastDate(time.Hour * 48), "2 days ago"},
+		{getTimestampOfPastDate(time.Hour * 24 * 2), "2 days ago"},
+		{getTimestampOfPastDate(time.Hour * 24 * 3), "3 days ago"},
+		{getTimestampOfPastDate(time.Hour * 24 * 4), "4 days ago"},
+		{getTimestampOfPastDate(time.Hour * 24 * 5), "5 days ago"},
+		{getTimestampOfPastDate(time.Hour * 24 * 6), "6 days ago"},
+		{getTimestampOfPastDate(time.Hour * 24 * 7), "1 week ago"},
 	}
 
-	SetConfig(Config{
-		Language: "en",
-	})
+	SetConfig(Config{Language: "en"})
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
@@ -83,9 +85,7 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 		{time.Now().Add(-time.Hour * 11), "11 hours ago"},
 	}
 
-	SetConfig(Config{
-		Language: "en",
-	})
+	SetConfig(Config{Language: "en"})
 
 	for _, tc := range cases {
 		t.Run("Test for date "+tc.time.String(), func(test *testing.T) {
@@ -109,9 +109,7 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 		{time.Now().Add(time.Hour * 48), "2 days"},
 	}
 
-	SetConfig(Config{
-		Language: "en",
-	})
+	SetConfig(Config{Language: "en"})
 
 	for _, tc := range testCases {
 		t.Run("Test for date: "+tc.time.String(), func(test *testing.T) {

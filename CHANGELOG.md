@@ -4,6 +4,7 @@
 
 - Updated `README.md` file by adding more information about supported languages
 - Formatted `CHANGELOG.md` file
+- Added more tests
 
 ## v2.2.0 (2024-03-08)
 
