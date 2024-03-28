@@ -1,23 +1,28 @@
 # 🗒 Release Notes
 
+## v2.2.1 (2024-03-28)
+
+- Updated `README.md` file by adding more information about supported languages
+- Formatted `CHANGELOG.md` file
+- Added more tests
+
 ## v2.2.0 (2024-03-08)
 
-- Add the German 🇩🇪 language support
+- Added the German 🇩🇪 language support
 - Formatted `CHANGELOG.md` file
-
 
 ## v2.1.11 (2023-12-26)
 
-- Update Go version in `go.mod` to `1.13`
-- Change package namespace to `github.com/SerhiiCho/timeago/v2` to match Go versioning rules
+- Updated Go version in `go.mod` to `1.13`
+- Changed package namespace to `github.com/SerhiiCho/timeago/v2` to match Go versioning rules
 
 ## v2.1.10 (2023-12-26)
 
-- Update Go version in `go.mod` from `1.13` to `1.21.0`
+- Updated Go version in `go.mod` from `1.13` to `1.21.0`
 
 ## v2.1.9 (2023-12-26)
 
-- Update `CHANGELOG.md` file
+- Updated `CHANGELOG.md` file
 
 ## v2.1.8 (2023-12-03)
 
@@ -83,7 +88,7 @@
 
 ## v2.0.3 (2022-01-22)
 
-- Added support for Dutch language
+- Added support for Dutch 🇳🇱 language
 
 ## v2.0.2 (2022-01-21)
 
