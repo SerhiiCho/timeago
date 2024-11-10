@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SerhiiCho/timeago/v2"
+	. "github.com/SerhiiCho/timeago/v3"
 )
 
 const langEn = "en"
