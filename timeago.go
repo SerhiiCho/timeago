@@ -1,19 +1,20 @@
 package timeago
 
 import (
-	"fmt"
 	"log"
 	"math"
+	"strconv"
 	"time"
 
 	"github.com/SerhiiCho/timeago/v3/config"
 	"github.com/SerhiiCho/timeago/v3/ctx"
-	"github.com/SerhiiCho/timeago/v3/langset"
+	locale "github.com/SerhiiCho/timeago/v3/langset"
 	"github.com/SerhiiCho/timeago/v3/option"
 )
 
-var cachedJsonResults = map[string]langset.LangSet{}
+var cachedJsonResults = map[string]locale.LocaleSet{}
 var options = []option.Option{}
+var localeSet *locale.LocaleSet
 
 var conf = &config.Config{
 	Language:     "en",
@@ -89,16 +90,83 @@ func calculateTimeAgo(datetime time.Time) string {
 	}
 
 	context := ctx.New(conf, options)
-	langSet := langset.New(context)
+	localeSet = locale.New(context)
 
-	fmt.Printf("-------> %#v\n", langSet)
-	// switch {
-	// case seconds < 60 && optionIsEnabled(option.Online):
-	// 	return trans().Online
-	// case seconds < 0:
-	// 	return getWords("seconds", 0)
-	// }
-	return ""
+	switch {
+	case seconds < 60 && optionIsEnabled("online"):
+		return localeSet.Online
+	case seconds < 0:
+		return getWords(localeSet.Second, 0)
+	}
+
+	timeUnit := generateTimeUnit(int(seconds))
+
+	return timeUnit
+}
+
+func generateTimeUnit(seconds int) string {
+	minutes, hours, days, weeks, months, years := getTimeCalculations(float64(seconds))
+
+	switch {
+	case optionIsEnabled("online") && seconds < 60:
+		return localeSet.Online
+	case optionIsEnabled("justNow") && seconds < 60:
+		return localeSet.JustNow
+	case seconds < 60:
+		return getWords(localeSet.Second, seconds)
+	case minutes < 60:
+		return getWords(localeSet.Minute, minutes)
+	case hours < 24:
+		return getWords(localeSet.Hour, hours)
+	case days < 7:
+		return getWords(localeSet.Day, days)
+	case weeks < 4:
+		return getWords(localeSet.Week, weeks)
+	case months < 12:
+		if months == 0 {
+			months = 1
+		}
+
+		return getWords(localeSet.Month, months)
+	}
+
+	return getWords(localeSet.Year, years)
+}
+
+// getWords decides rather the word must be singular or plural,
+// and depending on the result it adds the correct word after
+// the time number
+func getWords(final locale.LocaleForms, num int) string {
+	form := identifyLocaleForm(num)
+	time := getTimeTranslations()
+
+	translation := time[timeUnit][form]
+	result := strconv.Itoa(num) + " " + translation
+
+	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
+		return result
+	}
+
+	return result
+}
+
+func identifyLocaleForm(num int) string {
+	rule := identifyGrammarRules(num)[conf.Language]
+
+	switch {
+	case rule.Zero:
+		return "zero"
+	case rule.One:
+		return "one"
+	case rule.Few:
+		return "few"
+	case rule.Two:
+		return "two"
+	case rule.Many:
+		return "many"
+	}
+
+	return "other"
 }
 
 func applyLocationToTime(datetime time.Time) time.Time {

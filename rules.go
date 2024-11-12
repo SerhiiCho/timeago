@@ -9,9 +9,8 @@ type rule struct {
 	Other bool
 }
 
-func getRules(num int) map[string]rule {
+func identifyGrammarRules(num int) map[string]rule {
 	lastDigit := num % 10
-	// lastTwoDigits := num % 100
 
 	return map[string]rule{
 		"en": {

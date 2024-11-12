@@ -7,10 +7,10 @@ import (
 	"os"
 )
 
-func parseJsonIntoTrans(fileName string) LangSet {
+func parseJsonIntoTrans(fileName string) *LocaleSet {
 	content := getFileContent(fileName)
 
-	var res LangSet
+	var res LocaleSet
 
 	err := json.Unmarshal(content, &res)
 
@@ -18,7 +18,7 @@ func parseJsonIntoTrans(fileName string) LangSet {
 		log.Fatalln(err)
 	}
 
-	return res
+	return &res
 }
 
 func getFileContent(filePath string) []byte {
