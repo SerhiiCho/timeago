@@ -2,25 +2,46 @@
     "Ago": "назад",
     "Online": "В сети",
     "JustNow": "Только что",
-    "Second": "секунда",
-    "Seconds": "секунды",
-    "SecondsSpecial": "секунд",
-    "Minute": "минута",
-    "Minutes": "минуты",
-    "MinutesSpecial": "минут",
-    "Hour": "час",
-    "Hours": "часа",
-    "HoursSpecial": "часов",
-    "Day": "день",
-    "Days": "дня",
-    "DaysSpecial": "дней",
-    "Week": "неделя",
-    "Weeks": "недели",
-    "WeeksSpecial": "недель",
-    "Month": "месяц",
-    "Months": "месяца",
-    "MonthsSpecial": "месяцев",
-    "Year": "год",
-    "Years": "года",
-    "YearsSpecial": "лет"
+    "Second": {
+        "One": "секунда",
+        "Few": "секунды",
+        "Many": "секунд",
+        "Other": "секунды"
+    },
+    "Minute": {
+        "One": "минута",
+        "Few": "минуты",
+        "Many": "минут",
+        "Other": "минуты"
+    },
+    "Hour": {
+        "One": "час",
+        "Few": "часа",
+        "Many": "часов",
+        "Other": "часа"
+    },
+    "Day": {
+        "One": "день",
+        "Few": "дня",
+        "Many": "дней",
+        "Other": "дня"
+    },
+    "Week": {
+        "One": "неделя",
+        "Few": "недели",
+        "Many": "недель",
+        "Other": "недели"
+    },
+    "Month": {
+        "One": "месяц",
+        "Few": "месяца",
+        "Many": "месяцев",
+        "Other": "месяца"
+    },
+    "Year": {
+        "One": "год",
+        "Few": "года",
+        "Many": "лет",
+        "Other": "года"
+    }
 }

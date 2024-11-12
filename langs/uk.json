@@ -11,9 +11,11 @@
     "Hour": "година",
     "Hours": "години",
     "HoursSpecial": "годин",
-    "Day": "день",
-    "Days": "дні",
-    "DaysSpecial": "днів",
+    "Day": {
+        "One": "день",
+        "Few": "дні",
+        "Many": "днів"
+    },
     "Week": "тиждень",
     "Weeks": "тижні",
     "WeeksSpecial": "тижнів",

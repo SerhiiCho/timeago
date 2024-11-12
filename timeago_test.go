@@ -3,39 +3,10 @@ package timeago
 import (
 	"testing"
 	"time"
+
+	"github.com/SerhiiCho/timeago/v3/config"
+	"github.com/SerhiiCho/timeago/v3/option"
 )
-
-func TestGetWords(t *testing.T) {
-	cases := []struct {
-		timeKind string
-		num      int
-		result   string
-		lang     string
-	}{
-		// english
-		{"days", 11, "11 days ago", "en"},
-		{"days", 21, "21 days ago", "en"},
-		{"seconds", 30, "30 seconds ago", "en"},
-		{"seconds", 31, "31 seconds ago", "en"},
-		{"hours", 10, "10 hours ago", "en"},
-		{"years", 2, "2 years ago", "en"},
-		// russian
-		{"hours", 5, "5 часов назад", "ru"},
-		{"days", 11, "11 дней назад", "ru"},
-		{"years", 21, "21 год назад", "ru"},
-		{"minutes", 59, "59 минут назад", "ru"},
-	}
-
-	for _, tc := range cases {
-		t.Run(tc.result, func(test *testing.T) {
-			SetConfig(Config{Language: tc.lang})
-
-			if res := getWords(tc.timeKind, tc.num); res != tc.result {
-				test.Errorf("Result must be `%s` but got `%s` instead", tc.result, res)
-			}
-		})
-	}
-}
 
 func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 	cases := []struct {
@@ -56,7 +27,7 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		{getTimestampOfPastDate(time.Hour * 24 * 7), "1 week ago"},
 	}
 
-	SetConfig(Config{Language: "en"})
+	Configure(&config.Config{Language: "en"})
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(test *testing.T) {
@@ -85,7 +56,7 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 		{time.Now().Add(-time.Hour * 11), "11 hours ago"},
 	}
 
-	SetConfig(Config{Language: "en"})
+	Configure(&config.Config{Language: "en"})
 
 	for _, tc := range cases {
 		t.Run("Test for date "+tc.time.String(), func(test *testing.T) {
@@ -109,7 +80,7 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 		{time.Now().Add(time.Hour * 48), "2 days"},
 	}
 
-	SetConfig(Config{Language: "en"})
+	Configure(&config.Config{Language: "en"})
 
 	for _, tc := range testCases {
 		t.Run("Test for date: "+tc.time.String(), func(test *testing.T) {
@@ -122,23 +93,23 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 
 func TestOptionIsEnabled(t *testing.T) {
 	t.Run("returns true if option is enabled", func(test *testing.T) {
-		globalOptions = []string{"noSuffix"}
+		options = []option.Option{"noSuffix"}
 
 		if res := optionIsEnabled("noSuffix"); res == false {
 			test.Error("Result must be true, but got false instead")
 		}
 
-		globalOptions = []string{}
+		options = []option.Option{}
 	})
 
 	t.Run("returns true if option is enabled with other option", func(test *testing.T) {
-		globalOptions = []string{"noSuffix", "upcoming"}
+		options = []option.Option{"noSuffix", "upcoming"}
 
 		if res := optionIsEnabled("upcoming"); res == false {
 			test.Error("Result must be true, but got false instead")
 		}
 
-		globalOptions = []string{}
+		options = []option.Option{}
 	})
 
 	t.Run("returns false if option is disabled", func(test *testing.T) {
@@ -146,4 +117,8 @@ func TestOptionIsEnabled(t *testing.T) {
 			test.Error("Result must be true, but got false instead")
 		}
 	})
+}
+
+func getTimestampOfPastDate(subDuration time.Duration) int {
+	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
 }

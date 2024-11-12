@@ -5,6 +5,7 @@ import (
 	"time"
 
 	. "github.com/SerhiiCho/timeago/v3"
+	"github.com/SerhiiCho/timeago/v3/config"
 )
 
 func TestParseWithNoSuffixFlag(t *testing.T) {
@@ -67,7 +68,7 @@ func TestParseWithNoSuffixFlag(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			SetConfig(Config{
+			Configure(&config.Config{
 				Language: tc.lang,
 			})
 

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	. "github.com/SerhiiCho/timeago/v3"
+	"github.com/SerhiiCho/timeago/v3/config"
 )
 
 const langRu = "ru"
@@ -56,7 +57,7 @@ func TestParseRu(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			SetConfig(Config{
+			Configure(&config.Config{
 				Language: langRu,
 			})
 
@@ -88,7 +89,7 @@ func TestParseRuWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			SetConfig(Config{
+			Configure(&config.Config{
 				Language: langRu,
 			})
 
