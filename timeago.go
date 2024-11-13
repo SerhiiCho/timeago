@@ -8,13 +8,13 @@ import (
 
 	"github.com/SerhiiCho/timeago/v3/config"
 	"github.com/SerhiiCho/timeago/v3/ctx"
-	locale "github.com/SerhiiCho/timeago/v3/langset"
+	"github.com/SerhiiCho/timeago/v3/localeset"
 	"github.com/SerhiiCho/timeago/v3/option"
 )
 
-var cachedJsonResults = map[string]locale.LocaleSet{}
+var cachedJsonResults = map[string]localeset.LocaleSet{}
 var options = []option.Option{}
-var localeSet *locale.LocaleSet
+var localeSet *localeset.LocaleSet
 
 var conf = &config.Config{
 	Language:     "en",
@@ -90,7 +90,7 @@ func calculateTimeAgo(datetime time.Time) string {
 	}
 
 	context := ctx.New(conf, options)
-	localeSet = locale.New(context)
+	localeSet = localeset.New(context)
 
 	switch {
 	case seconds < 60 && optionIsEnabled("online"):
@@ -136,18 +136,17 @@ func generateTimeUnit(seconds int) string {
 // getWords decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
 // the time number
-func getWords(final locale.LocaleForms, num int) string {
+func getWords(final localeset.LocaleForms, num int) string {
 	form := identifyLocaleForm(num)
-	time := getTimeTranslations()
 
-	translation := time[timeUnit][form]
+	translation := final[form]
 	result := strconv.Itoa(num) + " " + translation
 
 	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
 		return result
 	}
 
-	return result
+	return result + " ago"
 }
 
 func identifyLocaleForm(num int) string {

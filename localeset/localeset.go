@@ -1,13 +1,8 @@
-package langset
+package localeset
 
 import "github.com/SerhiiCho/timeago/v3/ctx"
 
-type LocaleForms struct {
-	One   string `json:"one"`
-	Few   string `json:"few"`
-	Many  string `json:"many"`
-	Other string `json:"other"`
-}
+type LocaleForms map[string]string
 
 type LocaleSet struct {
 	Ago     string      `json:"ago"`

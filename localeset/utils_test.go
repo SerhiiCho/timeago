@@ -1,4 +1,4 @@
-package langset
+package localeset
 
 import (
 	"encoding/json"
