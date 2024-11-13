@@ -1,19 +1,54 @@
 {
-    "Ago": "geleden",
-    "Online": "Online",
-    "JustNow": "Net nu",
-    "Second": "seconde",
-    "Seconds": "seconden",
-    "Minute": "minuut",
-    "Minutes": "minuten",
-    "Hour": "uur",
-    "Hours": "uur",
-    "Day": "dag",
-    "Days": "dagen",
-    "Week": "week",
-    "Weeks": "weken",
-    "Month": "maand",
-    "Months": "maanden",
-    "Year": "jaar",
-    "Years": "jaar"
+    "ago": "geleden",
+    "online": "Online",
+    "justnow": "Net nu",
+    "second": {
+        "zero": "seconden",
+        "one": "seconde",
+        "few": "seconden",
+        "many": "seconden",
+        "other": "seconden"
+    },
+    "minute": {
+        "zero": "minuten",
+        "one": "minuut",
+        "few": "minuten",
+        "many": "minuten",
+        "other": "minuten"
+    },
+    "hour": {
+        "zero": "uren",
+        "one": "uur",
+        "few": "uren",
+        "many": "uren",
+        "other": "uren"
+    },
+    "day": {
+        "zero": "dagen",
+        "one": "dag",
+        "few": "dagen",
+        "many": "dagen",
+        "other": "dagen"
+    },
+    "week": {
+        "zero": "weken",
+        "one": "week",
+        "few": "weken",
+        "many": "weken",
+        "other": "weken"
+    },
+    "month": {
+        "zero": "maanden",
+        "one": "maand",
+        "few": "maanden",
+        "many": "maanden",
+        "other": "maanden"
+    },
+    "year": {
+        "zero": "jaren",
+        "one": "jaar",
+        "few": "jaren",
+        "many": "jaren",
+        "other": "jaren"
+    }
 }

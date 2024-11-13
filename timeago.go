@@ -8,13 +8,13 @@ import (
 
 	"github.com/SerhiiCho/timeago/v3/config"
 	"github.com/SerhiiCho/timeago/v3/ctx"
-	"github.com/SerhiiCho/timeago/v3/localeset"
+	"github.com/SerhiiCho/timeago/v3/langset"
 	"github.com/SerhiiCho/timeago/v3/option"
 )
 
-var cachedJsonResults = map[string]localeset.LocaleSet{}
+var cachedJsonResults = map[string]langset.LangSet{}
 var options = []option.Option{}
-var localeSet *localeset.LocaleSet
+var langSet *langset.LangSet
 
 var conf = &config.Config{
 	Language:     "en",
@@ -90,13 +90,13 @@ func calculateTimeAgo(datetime time.Time) string {
 	}
 
 	context := ctx.New(conf, options)
-	localeSet = localeset.New(context)
+	langSet = langset.New(context)
 
 	switch {
 	case seconds < 60 && optionIsEnabled("online"):
-		return localeSet.Online
+		return langSet.Online
 	case seconds < 0:
-		return getWords(localeSet.Second, 0)
+		return getWords(langSet.Second, 0)
 	}
 
 	timeUnit := generateTimeUnit(int(seconds))
@@ -109,34 +109,34 @@ func generateTimeUnit(seconds int) string {
 
 	switch {
 	case optionIsEnabled("online") && seconds < 60:
-		return localeSet.Online
+		return langSet.Online
 	case optionIsEnabled("justNow") && seconds < 60:
-		return localeSet.JustNow
+		return langSet.JustNow
 	case seconds < 60:
-		return getWords(localeSet.Second, seconds)
+		return getWords(langSet.Second, seconds)
 	case minutes < 60:
-		return getWords(localeSet.Minute, minutes)
+		return getWords(langSet.Minute, minutes)
 	case hours < 24:
-		return getWords(localeSet.Hour, hours)
+		return getWords(langSet.Hour, hours)
 	case days < 7:
-		return getWords(localeSet.Day, days)
+		return getWords(langSet.Day, days)
 	case weeks < 4:
-		return getWords(localeSet.Week, weeks)
+		return getWords(langSet.Week, weeks)
 	case months < 12:
 		if months == 0 {
 			months = 1
 		}
 
-		return getWords(localeSet.Month, months)
+		return getWords(langSet.Month, months)
 	}
 
-	return getWords(localeSet.Year, years)
+	return getWords(langSet.Year, years)
 }
 
 // getWords decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
 // the time number
-func getWords(final localeset.LocaleForms, num int) string {
+func getWords(final langset.LangForms, num int) string {
 	form := identifyLocaleForm(num)
 
 	translation := final[form]
@@ -146,7 +146,7 @@ func getWords(final localeset.LocaleForms, num int) string {
 		return result
 	}
 
-	return result + " ago"
+	return result + " " + langSet.Ago
 }
 
 func identifyLocaleForm(num int) string {

@@ -3,42 +3,49 @@
     "online": "online",
     "justnow": "just now",
     "second": {
+        "zero": "seconds",
         "one": "second",
         "few": "seconds",
         "many": "seconds",
         "other": "seconds"
     },
     "minute": {
+        "zero": "minutes",
         "one": "minute",
         "few": "minutes",
         "many": "minutes",
         "other": "minutes"
     },
     "hour": {
+        "zero": "hours",
         "one": "hour",
         "few": "hours",
         "many": "hours",
         "other": "hours"
     },
     "day": {
+        "zero": "days",
         "one": "day",
         "few": "days",
         "many": "days",
         "other": "days"
     },
     "week": {
+        "zero": "weeks",
         "one": "week",
         "few": "weeks",
         "many": "weeks",
         "other": "weeks"
     },
     "month": {
+        "zero": "months",
         "one": "month",
         "few": "months",
         "many": "months",
         "other": "months"
     },
     "year": {
+        "zero": "years",
         "one": "year",
         "few": "years",
         "many": "years",

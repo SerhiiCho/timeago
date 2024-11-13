@@ -1,19 +1,54 @@
 {
-    "Ago": "Vor",
-    "Online": "Online",
-    "JustNow": "soeben",
-    "Second": "Sekunde",
-    "Seconds": "Sekunden",
-    "Minute": "Minute",
-    "Minutes": "Minuten",
-    "Hour": "Stunde",
-    "Hours": "Stunden",
-    "Day": "Tag",
-    "Days": "Tagen",
-    "Week": "Woche",
-    "Weeks": "Wochen",
-    "Month": "Monat",
-    "Months": "Monaten",
-    "Year": "Jahr",
-    "Years": "Jahren"
+    "ago": "vor",
+    "online": "online",
+    "justnow": "soeben",
+    "second": {
+        "zero": "sekunden",
+        "one": "sekunde",
+        "few": "sekunden",
+        "many": "sekunden",
+        "other": "sekunden"
+    },
+    "minute": {
+        "zero": "minuten",
+        "one": "minute",
+        "few": "minuten",
+        "many": "minuten",
+        "other": "minuten"
+    },
+    "hour": {
+        "zero": "stunden",
+        "one": "stunde",
+        "few": "stunden",
+        "many": "stunden",
+        "other": "stunden"
+    },
+    "day": {
+        "zero": "tagen",
+        "one": "tag",
+        "few": "tagen",
+        "many": "tagen",
+        "other": "tagen"
+    },
+    "week": {
+        "zero": "wochen",
+        "one": "woche",
+        "few": "wochen",
+        "many": "wochen",
+        "other": "wochen"
+    },
+    "month": {
+        "zero": "monaten",
+        "one": "monat",
+        "few": "monaten",
+        "many": "monaten",
+        "other": "monaten"
+    },
+    "year": {
+        "zero": "jahren",
+        "one": "jahr",
+        "few": "jahren",
+        "many": "jahren",
+        "other": "jahren"
+    }
 }

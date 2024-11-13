@@ -1,4 +1,4 @@
-package localeset
+package langset
 
 import (
 	"encoding/json"
@@ -7,10 +7,10 @@ import (
 	"os"
 )
 
-func parseJsonIntoTrans(fileName string) *LocaleSet {
+func parseJsonIntoTrans(fileName string) *LangSet {
 	content := getFileContent(fileName)
 
-	var res LocaleSet
+	var res LangSet
 
 	err := json.Unmarshal(content, &res)
 
