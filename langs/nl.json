@@ -1,7 +1,9 @@
 {
+    "format": "{num} {timeUnit} {ago}",
     "ago": "geleden",
     "online": "Online",
     "justnow": "Net nu",
+
     "second": {
         "zero": "seconden",
         "one": "seconde",

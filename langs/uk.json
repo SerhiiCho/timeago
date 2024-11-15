@@ -1,7 +1,9 @@
 {
+    "format": "{num} {timeUnit} {ago}",
     "ago": "тому",
     "online": "В мережі",
     "justnow": "Щойно",
+
     "second": {
         "zero": "секунд",
         "one": "секунда",

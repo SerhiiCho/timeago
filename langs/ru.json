@@ -1,7 +1,9 @@
-    {
+{
+    "format": "{num} {timeUnit} {ago}",
     "ago": "назад",
     "online": "В сети",
     "justnow": "Только что",
+
     "second": {
         "zero": "секунд",
         "one": "секунда",

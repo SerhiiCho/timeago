@@ -5,6 +5,7 @@ import "github.com/SerhiiCho/timeago/v3/ctx"
 type LangForms map[string]string
 
 type LangSet struct {
+	Format  string    `json:"format"`
 	Ago     string    `json:"ago"`
 	Online  string    `json:"online"`
 	JustNow string    `json:"justnow"`

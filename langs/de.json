@@ -1,54 +1,56 @@
 {
-    "ago": "vor",
+    "format": "{ago} {num} {timeUnit}",
+    "ago": "Vor",
     "online": "Online",
     "justnow": "Soeben",
+
     "second": {
-        "zero": "sekunden",
-        "one": "sekunde",
-        "few": "sekunden",
-        "many": "sekunden",
-        "other": "sekunden"
+        "zero": "Sekunden",
+        "one": "Sekunde",
+        "few": "Sekunden",
+        "many": "Sekunden",
+        "other": "Sekunden"
     },
     "minute": {
-        "zero": "minuten",
-        "one": "minute",
-        "few": "minuten",
-        "many": "minuten",
-        "other": "minuten"
+        "zero": "Minuten",
+        "one": "Minute",
+        "few": "Minuten",
+        "many": "Minuten",
+        "other": "Minuten"
     },
     "hour": {
-        "zero": "stunden",
-        "one": "stunde",
-        "few": "stunden",
-        "many": "stunden",
-        "other": "stunden"
+        "zero": "Stunden",
+        "one": "Stunde",
+        "few": "Stunden",
+        "many": "Stunden",
+        "other": "Stunden"
     },
     "day": {
-        "zero": "tagen",
-        "one": "tag",
-        "few": "tagen",
-        "many": "tagen",
-        "other": "tagen"
+        "zero": "Tagen",
+        "one": "Tag",
+        "few": "Tagen",
+        "many": "Tagen",
+        "other": "Tagen"
     },
     "week": {
-        "zero": "wochen",
-        "one": "woche",
-        "few": "wochen",
-        "many": "wochen",
-        "other": "wochen"
+        "zero": "Wochen",
+        "one": "Woche",
+        "few": "Wochen",
+        "many": "Wochen",
+        "other": "Wochen"
     },
     "month": {
-        "zero": "monaten",
-        "one": "monat",
-        "few": "monaten",
-        "many": "monaten",
-        "other": "monaten"
+        "zero": "Monaten",
+        "one": "Monat",
+        "few": "Monaten",
+        "many": "Monaten",
+        "other": "Monaten"
     },
     "year": {
-        "zero": "jahren",
-        "one": "jahr",
-        "few": "jahren",
-        "many": "jahren",
-        "other": "jahren"
+        "zero": "Jahren",
+        "one": "Jahr",
+        "few": "Jahren",
+        "many": "Jahren",
+        "other": "Jahren"
     }
 }

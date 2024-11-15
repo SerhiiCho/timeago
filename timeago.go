@@ -5,6 +5,7 @@ import (
 	"log"
 	"math"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/SerhiiCho/timeago/v3/config"
@@ -141,14 +142,16 @@ func generateTimeUnit(seconds int) string {
 func getWords(final langset.LangForms, num int) string {
 	form := identifyLocaleForm(num)
 
-	translation := final[form]
-	result := strconv.Itoa(num) + " " + translation
+	result := langSet.Format
+	result = strings.Replace(result, "{timeUnit}", final[form], -1)
+	result = strings.Replace(result, "{num}", strconv.Itoa(num), -1)
 
 	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
-		return result
+		result = strings.Replace(result, "{ago}", "", -1)
+		return strings.Trim(result, " ")
 	}
 
-	return result + " " + langSet.Ago
+	return strings.Replace(result, "{ago}", langSet.Ago, -1)
 }
 
 func identifyLocaleForm(num int) string {
