@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SerhiiCho/timeago/v3"
+	"github.com/SerhiiCho/timeago/v3"
 	"github.com/SerhiiCho/timeago/v3/config"
 )
 
@@ -62,11 +62,9 @@ func TestParseDe(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			Configure(&config.Config{
-				Language: langDe,
-			})
+			timeago.Configure(&config.Config{Language: langDe})
 
-			if res := Parse(tc.date); res != tc.result {
+			if res := timeago.Parse(tc.date); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})
@@ -94,11 +92,9 @@ func TestParseDeWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			Configure(&config.Config{
-				Language: langDe,
-			})
+			timeago.Configure(&config.Config{Language: langDe})
 
-			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
+			if res := timeago.Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
 				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
 			}
 		})

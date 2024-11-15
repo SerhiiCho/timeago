@@ -61,25 +61,34 @@ func parseStrIntoTime(datetime string) time.Time {
 		return parsedTime
 	}
 
-	location, err := time.LoadLocation(conf.Location)
+	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, location())
 
 	if err != nil {
 		log.Fatalf("[Timeago]: ERROR: %v", err)
 	}
 
-	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, location)
-
 	return parsedTime
 }
 
-func calculateTimeAgo(datetime time.Time) string {
+func location() *time.Location {
+	loc, err := time.LoadLocation(conf.Location)
+
+	if err != nil {
+		log.Fatalf("[Timeago]: ERROR: %v", err)
+	}
+
+	return loc
+}
+
+func calculateTimeAgo(t time.Time) string {
 	now := time.Now()
 
 	if conf.LocationIsSet() {
+		t = applyLocationToTime(t)
 		now = applyLocationToTime(now)
 	}
 
-	seconds := now.Sub(datetime).Seconds()
+	seconds := now.Sub(t).Seconds()
 
 	if seconds < 0 {
 		enableOption(Upcoming)
@@ -171,14 +180,8 @@ func identifyLocaleForm(num int) string {
 	return "other"
 }
 
-func applyLocationToTime(datetime time.Time) time.Time {
-	location, err := time.LoadLocation(conf.Location)
-
-	if err != nil {
-		log.Fatalf("[Timeago]: Location error: %v\n", err)
-	}
-
-	return datetime.In(location)
+func applyLocationToTime(t time.Time) time.Time {
+	return t.In(location())
 }
 
 func getTimeCalculations(seconds float64) (int, int, int, int, int, int) {

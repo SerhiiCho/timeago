@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SerhiiCho/timeago/v3"
+	"github.com/SerhiiCho/timeago/v3"
 	"github.com/SerhiiCho/timeago/v3/config"
 )
 
@@ -14,7 +14,10 @@ func TestParseWithMultipleFlags(t *testing.T) {
 		result string
 	}
 
-	cases := []TestCase{
+	cases := []struct {
+		date   time.Time
+		result string
+	}{
 		{subMinutes(1), "1 minute"},
 		{subMinutes(5), "5 minutes"},
 		{subMinutes(10), "10 minutes"},
@@ -43,11 +46,9 @@ func TestParseWithMultipleFlags(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			Configure(&config.Config{
-				Language: langEn,
-			})
+			timeago.Configure(&config.Config{Language: langEn})
 
-			if res := Parse(tc.date, "online", "noSuffix"); res != tc.result {
+			if res := timeago.Parse(tc.date, "online", "noSuffix"); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
 			}
 		})

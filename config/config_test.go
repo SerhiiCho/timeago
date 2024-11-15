@@ -1,6 +1,8 @@
 package config
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestLocationIsSet(t *testing.T) {
 	cases := []struct {
