@@ -1,6 +1,4 @@
-package langset
-
-import "github.com/SerhiiCho/timeago/v3/ctx"
+package timeago
 
 type LangForms map[string]string
 
@@ -18,6 +16,6 @@ type LangSet struct {
 	Year    LangForms `json:"year"`
 }
 
-func New(c *ctx.Ctx) *LangSet {
-	return parseJsonIntoTrans("../langs/" + c.Config().Language + ".json")
+func NewLangSet() *LangSet {
+	return parseLangSet("langs/" + conf.Language + ".json")
 }

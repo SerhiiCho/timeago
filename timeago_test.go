@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/SerhiiCho/timeago/v3/config"
-	"github.com/SerhiiCho/timeago/v3/option"
 )
 
 func TestParseFunctionCanExceptTimestamp(t *testing.T) {
@@ -93,23 +92,23 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 
 func TestOptionIsEnabled(t *testing.T) {
 	t.Run("returns true if option is enabled", func(test *testing.T) {
-		options = []option.Option{"noSuffix"}
+		options = []Option{"noSuffix"}
 
 		if res := optionIsEnabled("noSuffix"); res == false {
 			test.Error("Result must be true, but got false instead")
 		}
 
-		options = []option.Option{}
+		options = []Option{}
 	})
 
 	t.Run("returns true if option is enabled with other option", func(test *testing.T) {
-		options = []option.Option{"noSuffix", "upcoming"}
+		options = []Option{"noSuffix", "upcoming"}
 
 		if res := optionIsEnabled("upcoming"); res == false {
 			test.Error("Result must be true, but got false instead")
 		}
 
-		options = []option.Option{}
+		options = []Option{}
 	})
 
 	t.Run("returns false if option is disabled", func(test *testing.T) {
@@ -117,8 +116,4 @@ func TestOptionIsEnabled(t *testing.T) {
 			test.Error("Result must be true, but got false instead")
 		}
 	})
-}
-
-func getTimestampOfPastDate(subDuration time.Duration) int {
-	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
 }

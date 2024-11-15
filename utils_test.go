@@ -1,4 +1,4 @@
-package langset
+package timeago
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 
 func TestParseJsonIntoLang(t *testing.T) {
 	t.Run("Function returns Lang model with needed values", func(test *testing.T) {
-		result := parseJsonIntoTrans("langs/ru.json")
+		result := parseLangSet("langs/ru.json")
 
 		if result.Ago != "назад" {
 			t.Errorf("Function needs to return model with value назад, but returned %v", result.Ago)
@@ -35,7 +35,7 @@ func TestFileExists(t *testing.T) {
 
 func TestGetFileContent(t *testing.T) {
 	t.Run("getFileContent returns content of the file", func(test *testing.T) {
-		result := getFileContent("langs/en.json")
+		result := fileContent("langs/en.json")
 
 		var js json.RawMessage
 		err := json.Unmarshal(result, &js)

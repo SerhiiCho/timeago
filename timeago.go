@@ -9,14 +9,11 @@ import (
 	"time"
 
 	"github.com/SerhiiCho/timeago/v3/config"
-	"github.com/SerhiiCho/timeago/v3/ctx"
-	"github.com/SerhiiCho/timeago/v3/langset"
-	"github.com/SerhiiCho/timeago/v3/option"
 )
 
-var cachedJsonResults = map[string]langset.LangSet{}
-var options = []option.Option{}
-var langSet *langset.LangSet
+var cachedJsonResults = map[string]LangSet{}
+var options = []Option{}
+var langSet *LangSet
 
 var conf = &config.Config{
 	Language:     "en",
@@ -29,8 +26,8 @@ var conf = &config.Config{
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, opts ...option.Option) string {
-	options = []option.Option{}
+func Parse(datetime interface{}, opts ...Option) string {
+	options = []Option{}
 	var input time.Time
 
 	switch date := datetime.(type) {
@@ -88,12 +85,11 @@ func calculateTimeAgo(datetime time.Time) string {
 	seconds := now.Sub(datetime).Seconds()
 
 	if seconds < 0 {
-		enableOption(option.Upcoming)
+		enableOption(Upcoming)
 		seconds = math.Abs(seconds)
 	}
 
-	context := ctx.New(conf, options)
-	langSet = langset.New(context)
+	langSet = NewLangSet()
 
 	switch {
 	case seconds < 60 && optionIsEnabled("online"):
@@ -139,7 +135,7 @@ func generateTimeUnit(seconds int) string {
 // getWords decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
 // the time number
-func getWords(final langset.LangForms, num int) string {
+func getWords(final LangForms, num int) string {
 	form := identifyLocaleForm(num)
 
 	result := langSet.Format
