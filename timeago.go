@@ -11,15 +11,12 @@ import (
 	"github.com/SerhiiCho/timeago/v3/config"
 )
 
-var cachedJsonResults = map[string]*LangSet{}
-var options = []Option{}
-var langSet *LangSet
-
-var conf = &config.Config{
-	Language:     "en",
-	Location:     "",
-	Translations: []config.Translation{},
-}
+var (
+	cachedJsonResults = map[string]*LangSet{}
+	options           = []Option{}
+	langSet           *LangSet
+	conf              = config.New("en", "", []config.Translation{})
+)
 
 // Parse coverts given datetime into `x time ago` format.
 // First argument can have 3 types:

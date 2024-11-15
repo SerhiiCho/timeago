@@ -6,8 +6,8 @@ type Config struct {
 	Translations []Translation
 }
 
-func New(lang, loc string, trans []Translation) Config {
-	return Config{
+func New(lang, loc string, trans []Translation) *Config {
+	return &Config{
 		Language:     lang,
 		Location:     loc,
 		Translations: trans,
