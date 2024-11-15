@@ -17,11 +17,11 @@
         "other": "minuten"
     },
     "hour": {
-        "zero": "uren",
+        "zero": "uur",
         "one": "uur",
-        "few": "uren",
-        "many": "uren",
-        "other": "uren"
+        "few": "uur",
+        "many": "uur",
+        "other": "uur"
     },
     "day": {
         "zero": "dagen",
@@ -45,10 +45,10 @@
         "other": "maanden"
     },
     "year": {
-        "zero": "jaren",
+        "zero": "jaar",
         "one": "jaar",
-        "few": "jaren",
-        "many": "jaren",
-        "other": "jaren"
+        "few": "jaar",
+        "many": "jaar",
+        "other": "jaar"
     }
 }

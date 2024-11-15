@@ -29,6 +29,7 @@ var conf = &config.Config{
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
 func Parse(datetime interface{}, opts ...option.Option) string {
+	options = []option.Option{}
 	var input time.Time
 
 	switch date := datetime.(type) {
