@@ -1,7 +1,7 @@
 {
     "ago": "ago",
-    "online": "online",
-    "justnow": "just now",
+    "online": "Online",
+    "justnow": "Just now",
     "second": {
         "zero": "seconds",
         "one": "second",

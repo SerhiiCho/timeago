@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"strconv"
@@ -67,7 +68,7 @@ func parseStrIntoTime(datetime string) time.Time {
 	location, err := time.LoadLocation(conf.Location)
 
 	if err != nil {
-		log.Fatalf("Error in timeago package: %v", err)
+		log.Fatalf("[Timeago]: ERROR: %v", err)
 	}
 
 	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, location)
@@ -150,7 +151,12 @@ func getWords(final langset.LangForms, num int) string {
 }
 
 func identifyLocaleForm(num int) string {
-	rule := identifyGrammarRules(num)[conf.Language]
+	rule, err := identifyGrammarRules(num, conf.Language)
+
+	if err != nil {
+		fmt.Println(err)
+		return "other"
+	}
 
 	switch {
 	case rule.Zero:
@@ -172,7 +178,7 @@ func applyLocationToTime(datetime time.Time) time.Time {
 	location, err := time.LoadLocation(conf.Location)
 
 	if err != nil {
-		log.Fatalf("Location error in timeago package: %v\n", err)
+		log.Fatalf("[Timeago]: Location error: %v\n", err)
 	}
 
 	return datetime.In(location)
