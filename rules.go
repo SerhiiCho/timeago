@@ -21,17 +21,17 @@ func identifyGrammarRules(num int) map[string]rule {
 		},
 		"ru": {
 			Zero: num == 0,
-			One:  lastDigit == 1,
+			One:  num == 1 || (num > 20 && lastDigit == 1),
 			Two:  num == 2,
 			Few:  lastDigit == 2 || lastDigit == 3 || lastDigit == 4,
 			Many: (num >= 5 && num <= 20) || lastDigit == 0 || (lastDigit >= 5 && lastDigit <= 9),
 		},
 		"uk": {
 			Zero: num == 0,
-			One:  lastDigit == 1,
+			One:  num == 1 || (num > 20 && lastDigit == 1),
 			Two:  num == 2,
-			Few:  num == 2,
-			Many: lastDigit >= 2 && lastDigit < 5,
+			Few:  lastDigit == 2 || lastDigit == 3 || lastDigit == 4,
+			Many: (num >= 5 && num <= 20) || lastDigit == 0 || (lastDigit >= 5 && lastDigit <= 9),
 		},
 		"nl": {
 			Zero: num == 0,

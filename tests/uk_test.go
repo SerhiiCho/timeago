@@ -61,7 +61,7 @@ func TestParseUk(t *testing.T) {
 		{subMonths(11), "11 місяців тому"},
 		{subMonths(12), "1 рік тому"},
 		{subYears(1), "1 рік тому"},
-		{subYears(2), "2 року тому"},
+		{subYears(2), "2 роки тому"},
 		{subYears(5), "5 років тому"},
 		{subYears(6), "6 років тому"},
 		{subYears(7), "7 років тому"},
