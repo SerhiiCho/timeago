@@ -11,7 +11,7 @@ import (
 	"github.com/SerhiiCho/timeago/v3/config"
 )
 
-var cachedJsonResults = map[string]LangSet{}
+var cachedJsonResults = map[string]*LangSet{}
 var options = []Option{}
 var langSet *LangSet
 

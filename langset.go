@@ -1,5 +1,11 @@
 package timeago
 
+import (
+	"fmt"
+	"path"
+	"runtime"
+)
+
 type LangForms map[string]string
 
 type LangSet struct {
@@ -17,5 +23,18 @@ type LangSet struct {
 }
 
 func NewLangSet() *LangSet {
-	return parseLangSet("langs/" + conf.Language + ".json")
+	_, filename, _, ok := runtime.Caller(0)
+
+	if !ok {
+		panic("[Timeago]: No caller information")
+	}
+
+	rootPath := path.Dir(filename)
+	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", conf.Language)
+
+	if cache, hasCache := cachedJsonResults[filePath]; hasCache {
+		return cache
+	}
+
+	return parseLangSet(filePath)
 }
