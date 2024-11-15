@@ -29,9 +29,9 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 	Configure(&config.Config{Language: "en"})
 
 	for _, tc := range cases {
-		t.Run(tc.result, func(test *testing.T) {
+		t.Run(tc.result, func(t *testing.T) {
 			if res := Parse(tc.timestamp); res != tc.result {
-				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
+				t.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})
 	}
@@ -58,9 +58,9 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 	Configure(&config.Config{Language: "en"})
 
 	for _, tc := range cases {
-		t.Run("Test for date "+tc.time.String(), func(test *testing.T) {
+		t.Run("Test for date "+tc.time.String(), func(t *testing.T) {
 			if res := Parse(tc.time); res != tc.result {
-				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
+				t.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})
 	}
@@ -82,9 +82,9 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 	Configure(&config.Config{Language: "en"})
 
 	for _, tc := range testCases {
-		t.Run("Test for date: "+tc.time.String(), func(test *testing.T) {
+		t.Run("Test for date: "+tc.time.String(), func(t *testing.T) {
 			if res := Parse(tc.time); res != tc.result {
-				test.Errorf("Result must be %v, but got %v instead", tc.result, res)
+				t.Errorf("Result must be %v, but got %v instead", tc.result, res)
 			}
 		})
 	}
