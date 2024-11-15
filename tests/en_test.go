@@ -73,16 +73,16 @@ func TestParseEnWithSeconds(t *testing.T) {
 		result []string
 	}{
 		{subSeconds(0), []string{"0 seconds ago", "1 second ago"}},
-		// {subSeconds(1), []string{"1 second ago", "2 seconds ago"}},
-		// {subSeconds(2), []string{"2 seconds ago", "3 seconds ago"}},
-		// {subSeconds(9), []string{"9 seconds ago", "10 seconds ago"}},
-		// {subSeconds(10), []string{"10 seconds ago", "11 seconds ago"}},
-		// {subSeconds(11), []string{"11 seconds ago", "12 seconds ago"}},
-		// {subSeconds(20), []string{"20 seconds ago", "21 seconds ago"}},
-		// {subSeconds(21), []string{"21 seconds ago", "22 seconds ago"}},
-		// {subSeconds(22), []string{"22 seconds ago", "23 seconds ago"}},
-		// {subSeconds(30), []string{"30 seconds ago", "31 seconds ago"}},
-		// {subSeconds(59), []string{"59 seconds ago", "1 minute ago"}},
+		{subSeconds(1), []string{"1 second ago", "2 seconds ago"}},
+		{subSeconds(2), []string{"2 seconds ago", "3 seconds ago"}},
+		{subSeconds(9), []string{"9 seconds ago", "10 seconds ago"}},
+		{subSeconds(10), []string{"10 seconds ago", "11 seconds ago"}},
+		{subSeconds(11), []string{"11 seconds ago", "12 seconds ago"}},
+		{subSeconds(20), []string{"20 seconds ago", "21 seconds ago"}},
+		{subSeconds(21), []string{"21 seconds ago", "22 seconds ago"}},
+		{subSeconds(22), []string{"22 seconds ago", "23 seconds ago"}},
+		{subSeconds(30), []string{"30 seconds ago", "31 seconds ago"}},
+		{subSeconds(59), []string{"59 seconds ago", "1 minute ago"}},
 	}
 
 	for _, tc := range cases {
