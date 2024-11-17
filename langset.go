@@ -22,19 +22,19 @@ type LangSet struct {
 	Year    LangForms `json:"year"`
 }
 
-func NewLangSet() *LangSet {
+func NewLangSet() (*LangSet, error) {
 	_, filename, _, ok := runtime.Caller(0)
 
 	if !ok {
-		panic("[Timeago]: No caller information")
+		return nil, createError("No called information")
 	}
 
 	rootPath := path.Dir(filename)
 	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", conf.Language)
 
 	if cache, hasCache := cachedJsonRes[filePath]; hasCache {
-		return cache
+		return cache, nil
 	}
 
-	return parseLangSet(filePath)
+	return parseLangSet(filePath), nil
 }

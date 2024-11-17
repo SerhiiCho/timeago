@@ -3,6 +3,7 @@ package timeago
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -14,6 +15,10 @@ func parseTimestampIntoTime(timestamp int) time.Time {
 
 func getTimestampOfPastDate(subDuration time.Duration) int {
 	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
+}
+
+func createError(msg string, a ...interface{}) error {
+	return fmt.Errorf("[Timeago]: "+msg, a...)
 }
 
 func parseLangSet(fileName string) *LangSet {

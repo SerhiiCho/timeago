@@ -1,7 +1,6 @@
 package timeago
 
 import (
-	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -72,7 +71,7 @@ func parseStrIntoTime(datetime string) (time.Time, error) {
 	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
 
 	if err != nil {
-		return time.Time{}, fmt.Errorf("[Timeago]: %v", err)
+		return time.Time{}, createError("%v", err)
 	}
 
 	return parsedTime, nil
@@ -86,7 +85,7 @@ func location() (*time.Location, error) {
 	loc, err := time.LoadLocation(conf.Location)
 
 	if err != nil {
-		return nil, fmt.Errorf("[Timeago]: ERROR: %v", err)
+		return nil, createError("%v", err)
 	}
 
 	return loc, nil
@@ -113,7 +112,13 @@ func calculateTimeAgo(t time.Time) (string, error) {
 		seconds = -seconds
 	}
 
-	langSet = NewLangSet()
+	set, err := NewLangSet()
+
+	if err != nil {
+		return "", err
+	}
+
+	langSet = set
 
 	return generateTimeUnit(seconds)
 }
