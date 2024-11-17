@@ -2,6 +2,7 @@ package timeago
 
 import (
 	"testing"
+	"time"
 )
 
 func TestLocationIsSet(t *testing.T) {
@@ -32,4 +33,31 @@ func TestLocationIsSet(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestCustomTranslations(t *testing.T) {
+	t.Skip()
+
+	t.Run("can overwrite translations", func(t *testing.T) {
+		Configure(&Config{
+			Language: "en",
+			Translations: []Translation{
+				{
+					Language: "en",
+					Translations: &LangSet{
+						Hour: LangForms{
+							"other": "h",
+						},
+					},
+				},
+			},
+		})
+
+		date := getTimestampOfPastDate(time.Hour * 10)
+		expect := "10 h ago"
+
+		if res, _ := Parse(date); res != expect {
+			t.Errorf("Result must be %v, but got %v instead", expect, res)
+		}
+	})
 }

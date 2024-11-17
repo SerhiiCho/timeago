@@ -9,8 +9,8 @@ import (
 
 func TestParseWithJustNowFlag(t *testing.T) {
 	type TestCase struct {
-		date   time.Time
-		result string
+		date time.Time
+		res  string
 	}
 
 	cases := []TestCase{
@@ -67,8 +67,14 @@ func TestParseWithJustNowFlag(t *testing.T) {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			timeago.Configure(&timeago.Config{Language: langEn})
 
-			if res := timeago.Parse(tc.date, "justNow"); res != tc.result {
-				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
+			res, err := timeago.Parse(tc.date, "justNow")
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res {
+				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
 			}
 		})
 	}

@@ -9,8 +9,8 @@ import (
 
 func TestParseWithOnlineFlag(t *testing.T) {
 	type TestCase struct {
-		date   time.Time
-		result string
+		date time.Time
+		res  string
 	}
 
 	cases := []TestCase{
@@ -65,8 +65,14 @@ func TestParseWithOnlineFlag(t *testing.T) {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			timeago.Configure(&timeago.Config{Language: langEn})
 
-			if res := timeago.Parse(tc.date, "online"); res != tc.result {
-				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
+			res, err := timeago.Parse(tc.date, "online")
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res {
+				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
 			}
 		})
 	}

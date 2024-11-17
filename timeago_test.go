@@ -7,8 +7,8 @@ import (
 
 func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 	cases := []struct {
-		timestamp int
-		result    string
+		date int
+		res  string
 	}{
 		{getTimestampOfPastDate(time.Minute), "1 minute ago"},
 		{getTimestampOfPastDate(time.Minute * 5), "5 minutes ago"},
@@ -27,9 +27,15 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 	Configure(&Config{Language: "en"})
 
 	for _, tc := range cases {
-		t.Run(tc.result, func(t *testing.T) {
-			if res := Parse(tc.timestamp); res != tc.result {
-				t.Errorf("Result must be %v, but got %v instead", tc.result, res)
+		t.Run(tc.res, func(t *testing.T) {
+			res, err := Parse(tc.date)
+
+			if err != nil {
+				t.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res {
+				t.Errorf("Result must be %v, but got %v instead", tc.res, res)
 			}
 		})
 	}
@@ -37,8 +43,8 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 
 func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 	cases := []struct {
-		time   time.Time
-		result string
+		date time.Time
+		res  string
 	}{
 		{time.Now().Add(-time.Minute), "1 minute ago"},
 		{time.Now().Add(-time.Minute * 2), "2 minutes ago"},
@@ -56,9 +62,15 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 	Configure(&Config{Language: "en"})
 
 	for _, tc := range cases {
-		t.Run("Test for date "+tc.time.String(), func(t *testing.T) {
-			if res := Parse(tc.time); res != tc.result {
-				t.Errorf("Result must be %v, but got %v instead", tc.result, res)
+		t.Run("Test for date "+tc.date.String(), func(t *testing.T) {
+			res, err := Parse(tc.date)
+
+			if err != nil {
+				t.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res {
+				t.Errorf("Result must be %v, but got %v instead", tc.res, res)
 			}
 		})
 	}
@@ -66,8 +78,8 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 
 func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 	testCases := []struct {
-		time   time.Time
-		result string
+		date time.Time
+		res  string
 	}{
 		{time.Now().Add(time.Minute * 2), "2 minutes"},
 		{time.Now().Add(time.Minute * 5), "5 minutes"},
@@ -80,65 +92,16 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 	Configure(&Config{Language: "en"})
 
 	for _, tc := range testCases {
-		t.Run("Test for date: "+tc.time.String(), func(t *testing.T) {
-			if res := Parse(tc.time); res != tc.result {
-				t.Errorf("Result must be %v, but got %v instead", tc.result, res)
+		t.Run("Test for date: "+tc.date.String(), func(t *testing.T) {
+			res, err := Parse(tc.date)
+
+			if err != nil {
+				t.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res {
+				t.Errorf("Result must be %v, but got %v instead", tc.res, res)
 			}
 		})
 	}
-}
-
-func TestOptionIsEnabled(t *testing.T) {
-	t.Run("returns true if option is enabled", func(test *testing.T) {
-		options = []Option{"noSuffix"}
-
-		if res := optionIsEnabled("noSuffix"); res == false {
-			test.Error("Result must be true, but got false instead")
-		}
-
-		options = []Option{}
-	})
-
-	t.Run("returns true if option is enabled with other option", func(test *testing.T) {
-		options = []Option{"noSuffix", "upcoming"}
-
-		if res := optionIsEnabled("upcoming"); res == false {
-			test.Error("Result must be true, but got false instead")
-		}
-
-		options = []Option{}
-	})
-
-	t.Run("returns false if option is disabled", func(test *testing.T) {
-		if res := optionIsEnabled("noSuffix"); res == true {
-			test.Error("Result must be true, but got false instead")
-		}
-	})
-}
-
-func TestCustomTranslations(t *testing.T) {
-	t.Skip()
-
-	t.Run("can overwrite translations", func(t *testing.T) {
-		Configure(&Config{
-			Language: "en",
-			Translations: []Translation{
-				{
-					Language: "en",
-					Translations: &LangSet{
-						Hour: LangForms{
-							"other": "h",
-						},
-					},
-				},
-			},
-		})
-
-		date := getTimestampOfPastDate(time.Hour * 10)
-		expect := "10 h ago"
-
-		if res := Parse(date); res != expect {
-			t.Errorf("Result must be %v, but got %v instead", expect, res)
-		}
-	})
 }
