@@ -9,10 +9,10 @@ import (
 )
 
 var (
-	cachedJsonResults = map[string]*LangSet{}
-	options           = []Option{}
-	langSet           *LangSet
-	conf              = NewConfig("en", "", []Translation{})
+	cachedJsonRes = map[string]*LangSet{}
+	options       = []Option{}
+	langSet       *LangSet
+	conf          = NewConfig("en", "", []Translation{})
 )
 
 // Parse coverts given datetime into `x time ago` format.
@@ -157,16 +157,16 @@ func getWords(final LangForms, num int) (string, error) {
 		return "", err
 	}
 
-	result := langSet.Format
-	result = strings.Replace(result, "{timeUnit}", final[form], -1)
-	result = strings.Replace(result, "{num}", strconv.Itoa(num), -1)
+	res := langSet.Format
+	res = strings.Replace(res, "{timeUnit}", final[form], -1)
+	res = strings.Replace(res, "{num}", strconv.Itoa(num), -1)
 
 	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
-		result = strings.Replace(result, "{ago}", "", -1)
-		return strings.Trim(result, " "), nil
+		res = strings.Replace(res, "{ago}", "", -1)
+		return strings.Trim(res, " "), nil
 	}
 
-	return strings.Replace(result, "{ago}", langSet.Ago, -1), nil
+	return strings.Replace(res, "{ago}", langSet.Ago, -1), nil
 }
 
 func identifyLocaleForm(num int) (string, error) {

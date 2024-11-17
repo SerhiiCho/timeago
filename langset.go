@@ -32,7 +32,7 @@ func NewLangSet() *LangSet {
 	rootPath := path.Dir(filename)
 	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", conf.Language)
 
-	if cache, hasCache := cachedJsonResults[filePath]; hasCache {
+	if cache, hasCache := cachedJsonRes[filePath]; hasCache {
 		return cache
 	}
 
