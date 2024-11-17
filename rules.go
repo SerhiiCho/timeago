@@ -6,28 +6,20 @@ import (
 )
 
 type rule struct {
-	Zero bool
-	One  bool
-	Two  bool
-	Few  bool
-	Many bool
+	Zero  bool
+	One   bool
+	Two   bool
+	Few   bool
+	Many  bool
+	Other bool
 }
 
 var grammarRules = func(num int) map[string]*rule {
 	lastDigit := num % 10
 
 	return map[string]*rule{
-		"en,nl,de": {
-			Zero: num == 0,
-			One:  num == 1,
-			Two:  num == 2,
-			Few:  num > 1,
-			Many: num > 1,
-		},
+		"en,nl,de": {},
 		"ru,uk": {
-			Zero: num == 0,
-			One:  num == 1 || (num > 20 && lastDigit == 1),
-			Two:  num == 2,
 			Few:  lastDigit == 2 || lastDigit == 3 || lastDigit == 4,
 			Many: (num >= 5 && num <= 20) || lastDigit == 0 || (lastDigit >= 5 && lastDigit <= 9),
 		},

@@ -2,7 +2,6 @@ package timeago
 
 import (
 	"fmt"
-	"log"
 	"math"
 	"strconv"
 	"strings"
@@ -21,17 +20,22 @@ var (
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, opts ...Option) string {
+func Parse(datetime interface{}, opts ...Option) (string, error) {
 	options = []Option{}
 	var input time.Time
+	var err error
 
 	switch date := datetime.(type) {
 	case int:
 		input = parseTimestampIntoTime(date)
 	case string:
-		input = parseStrIntoTime(date)
+		input, err = parseStrIntoTime(date)
 	default:
 		input = datetime.(time.Time)
+	}
+
+	if err != nil {
+		return "", err
 	}
 
 	enableOptions(opts)
@@ -53,40 +57,51 @@ func Configure(c *Config) {
 	}
 }
 
-func parseStrIntoTime(datetime string) time.Time {
+func parseStrIntoTime(datetime string) (time.Time, error) {
 	if !conf.LocationIsSet() {
 		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
-		return parsedTime
+		return parsedTime, nil
 	}
 
-	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, location())
+	loc, err := location()
 
 	if err != nil {
-		log.Fatalf("[Timeago]: ERROR: %v", err)
+		return time.Time{}, err
 	}
 
-	return parsedTime
+	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
+
+	if err != nil {
+		return time.Time{}, fmt.Errorf("[Timeago]: %v", err)
+	}
+
+	return parsedTime, nil
 }
 
-func location() *time.Location {
+func location() (*time.Location, error) {
 	if !conf.LocationIsSet() {
-		return time.Now().Location()
+		return time.Now().Location(), nil
 	}
 
 	loc, err := time.LoadLocation(conf.Location)
 
 	if err != nil {
-		log.Fatalf("[Timeago]: ERROR: %v", err)
+		return nil, fmt.Errorf("[Timeago]: ERROR: %v", err)
 	}
 
-	return loc
+	return loc, nil
 }
 
-func calculateTimeAgo(t time.Time) string {
+func calculateTimeAgo(t time.Time) (string, error) {
 	now := time.Now()
 
 	if conf.LocationIsSet() {
-		loc := location()
+		loc, err := location()
+
+		if err != nil {
+			return "", err
+		}
+
 		t = t.In(loc)
 		now = now.In(loc)
 	}
@@ -103,14 +118,14 @@ func calculateTimeAgo(t time.Time) string {
 	return generateTimeUnit(seconds)
 }
 
-func generateTimeUnit(seconds int) string {
+func generateTimeUnit(seconds int) (string, error) {
 	minutes, hours, days, weeks, months, years := getTimeCalculations(float64(seconds))
 
 	switch {
 	case optionIsEnabled("online") && seconds < 60:
-		return langSet.Online
+		return langSet.Online, nil
 	case optionIsEnabled("justNow") && seconds < 60:
-		return langSet.JustNow
+		return langSet.JustNow, nil
 	case seconds < 60:
 		return getWords(langSet.Second, seconds)
 	case minutes < 60:
@@ -135,8 +150,12 @@ func generateTimeUnit(seconds int) string {
 // getWords decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
 // the time number
-func getWords(final LangForms, num int) string {
-	form := identifyLocaleForm(num)
+func getWords(final LangForms, num int) (string, error) {
+	form, err := identifyLocaleForm(num)
+
+	if err != nil {
+		return "", err
+	}
 
 	result := langSet.Format
 	result = strings.Replace(result, "{timeUnit}", final[form], -1)
@@ -144,34 +163,33 @@ func getWords(final LangForms, num int) string {
 
 	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
 		result = strings.Replace(result, "{ago}", "", -1)
-		return strings.Trim(result, " ")
+		return strings.Trim(result, " "), nil
 	}
 
-	return strings.Replace(result, "{ago}", langSet.Ago, -1)
+	return strings.Replace(result, "{ago}", langSet.Ago, -1), nil
 }
 
-func identifyLocaleForm(num int) string {
+func identifyLocaleForm(num int) (string, error) {
 	rule, err := identifyGrammarRules(num, conf.Language)
 
 	if err != nil {
-		fmt.Println(err)
-		return "other"
+		return "", err
 	}
 
 	switch {
 	case rule.Zero:
-		return "zero"
+		return "zero", nil
 	case rule.One:
-		return "one"
+		return "one", nil
 	case rule.Few:
-		return "few"
+		return "few", nil
 	case rule.Two:
-		return "two"
+		return "two", nil
 	case rule.Many:
-		return "many"
+		return "many", nil
 	}
 
-	return "other"
+	return "other", nil
 }
 
 func getTimeCalculations(seconds float64) (int, int, int, int, int, int) {

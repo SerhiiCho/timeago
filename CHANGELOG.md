@@ -2,9 +2,11 @@
 
 ## v3.0.0 (2024-11-10)
 - Breaking changes:
+    - Improved error handling. The `Parse` function now returns an error as the second returned value
     - Changed package namespace to `github.com/SerhiiCho/timeago/v3`
     - Rename `SetConfig` function to `Configure`
     - `Configure` function now excepts pointer to the config `timeago.Configure(&timeago.Config{})` instead of just `timeago.Config{}`
+    - Change the API for setting custom translations to overwrite default translations
 
 ## v2.2.1 (2024-03-28)
 - Updated `README.md` file by adding more information about supported languages
