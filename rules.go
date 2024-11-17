@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-type rule struct {
+type Rule struct {
 	Zero  bool
 	One   bool
 	Two   bool
@@ -13,10 +13,10 @@ type rule struct {
 	Other bool
 }
 
-var grammarRules = func(num int) map[string]*rule {
+var grammarRules = func(num int) map[string]*Rule {
 	end := num % 10
 
-	return map[string]*rule{
+	return map[string]*Rule{
 		"en,nl,de": {
 			Zero: num == 0,
 			One:  num == 1,
@@ -34,7 +34,7 @@ var grammarRules = func(num int) map[string]*rule {
 	}
 }
 
-func identifyGrammarRules(num int, lang string) (*rule, error) {
+func identifyGrammarRules(num int, lang string) (*Rule, error) {
 	rules := grammarRules(num)
 
 	if v, ok := rules[lang]; ok {
