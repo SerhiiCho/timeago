@@ -14,7 +14,7 @@ type rule struct {
 }
 
 var grammarRules = func(num int) map[string]*rule {
-	lastDigit := num % 10
+	end := num % 10
 
 	return map[string]*rule{
 		"en,nl,de": {
@@ -26,10 +26,10 @@ var grammarRules = func(num int) map[string]*rule {
 		},
 		"ru,uk": {
 			Zero: num == 0,
-			One:  num == 1 || (num > 20 && lastDigit == 1),
+			One:  num == 1 || (num > 20 && end == 1),
 			Two:  num == 2,
-			Few:  lastDigit == 2 || lastDigit == 3 || lastDigit == 4,
-			Many: (num >= 5 && num <= 20) || lastDigit == 0 || (lastDigit >= 5 && lastDigit <= 9),
+			Few:  end == 2 || end == 3 || end == 4,
+			Many: (num >= 5 && num <= 20) || end == 0 || (end >= 5 && end <= 9),
 		},
 	}
 }
