@@ -3,8 +3,6 @@ package timeago
 import (
 	"testing"
 	"time"
-
-	"github.com/SerhiiCho/timeago/v3/config"
 )
 
 func TestParseFunctionCanExceptTimestamp(t *testing.T) {
@@ -26,7 +24,7 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		{getTimestampOfPastDate(time.Hour * 24 * 7), "1 week ago"},
 	}
 
-	Configure(&config.Config{Language: "en"})
+	Configure(&Config{Language: "en"})
 
 	for _, tc := range cases {
 		t.Run(tc.result, func(t *testing.T) {
@@ -55,7 +53,7 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 		{time.Now().Add(-time.Hour * 11), "11 hours ago"},
 	}
 
-	Configure(&config.Config{Language: "en"})
+	Configure(&Config{Language: "en"})
 
 	for _, tc := range cases {
 		t.Run("Test for date "+tc.time.String(), func(t *testing.T) {
@@ -79,7 +77,7 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 		{time.Now().Add(time.Hour * 48), "2 days"},
 	}
 
-	Configure(&config.Config{Language: "en"})
+	Configure(&Config{Language: "en"})
 
 	for _, tc := range testCases {
 		t.Run("Test for date: "+tc.time.String(), func(t *testing.T) {
@@ -120,13 +118,15 @@ func TestOptionIsEnabled(t *testing.T) {
 
 func TestCustomTranslations(t *testing.T) {
 	t.Run("can overwrite translations", func(t *testing.T) {
-		Configure(&config.Config{
+		Configure(&Config{
 			Language: "en",
-			Translations: []config.Translation{
+			Translations: []Translation{
 				{
 					Language: "en",
-					Translations: map[string]string{
-						"hours": "h",
+					Translations: LangSet{
+						Hour: LangForms{
+							"hours": "h",
+						},
 					},
 				},
 			},

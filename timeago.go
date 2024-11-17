@@ -7,15 +7,13 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/SerhiiCho/timeago/v3/config"
 )
 
 var (
 	cachedJsonResults = map[string]*LangSet{}
 	options           = []Option{}
 	langSet           *LangSet
-	conf              = config.New("en", "", []config.Translation{})
+	conf              = NewConfig("en", "", []Translation{})
 )
 
 // Parse coverts given datetime into `x time ago` format.
@@ -41,7 +39,7 @@ func Parse(datetime interface{}, opts ...Option) string {
 	return calculateTimeAgo(input)
 }
 
-func Configure(c *config.Config) {
+func Configure(c *Config) {
 	if c.Language != "" {
 		conf.Language = c.Language
 	}

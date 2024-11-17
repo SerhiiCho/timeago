@@ -1,4 +1,4 @@
-package config
+package timeago
 
 type Config struct {
 	Language string
@@ -12,7 +12,7 @@ type Config struct {
 	Translations []Translation
 }
 
-func New(lang, loc string, trans []Translation) *Config {
+func NewConfig(lang, loc string, trans []Translation) *Config {
 	return &Config{
 		Language:     lang,
 		Location:     loc,

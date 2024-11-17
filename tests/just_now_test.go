@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/SerhiiCho/timeago/v3"
-	"github.com/SerhiiCho/timeago/v3/config"
 )
 
 func TestParseWithJustNowFlag(t *testing.T) {
@@ -66,7 +65,7 @@ func TestParseWithJustNowFlag(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Configure(&config.Config{Language: langEn})
+			timeago.Configure(&timeago.Config{Language: langEn})
 
 			if res := timeago.Parse(tc.date, "justNow"); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)

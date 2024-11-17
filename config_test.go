@@ -1,4 +1,4 @@
-package config
+package timeago
 
 import (
 	"testing"
@@ -24,7 +24,7 @@ func TestLocationIsSet(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			c := New("ru", tc.loc, []Translation{})
+			c := NewConfig("ru", tc.loc, []Translation{})
 			actual := c.LocationIsSet()
 
 			if actual != tc.expect {

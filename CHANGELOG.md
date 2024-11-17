@@ -4,8 +4,7 @@
 - Breaking changes:
     - Changed package namespace to `github.com/SerhiiCho/timeago/v3`
     - Rename `SetConfig` function to `Configure`
-    - Moved `timeago.Config` object to `config.Config` package
-    - `Configure` function now excepts pointer to the config `timeago.Configure(&config.Config{})` instead of just `config.Config{}`
+    - `Configure` function now excepts pointer to the config `timeago.Configure(&timeago.Config{})` instead of just `timeago.Config{}`
 
 ## v2.2.1 (2024-03-28)
 - Updated `README.md` file by adding more information about supported languages

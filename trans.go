@@ -1,6 +1,6 @@
-package config
+package timeago
 
 type Translation struct {
 	Language     string
-	Translations map[string]string
+	Translations LangSet
 }

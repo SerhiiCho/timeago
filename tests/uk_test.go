@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/SerhiiCho/timeago/v3"
-	"github.com/SerhiiCho/timeago/v3/config"
 )
 
 const langUk = "uk"
@@ -72,7 +71,7 @@ func TestParseUk(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Configure(&config.Config{Language: langUk})
+			timeago.Configure(&timeago.Config{Language: langUk})
 
 			if res := timeago.Parse(tc.date); res != tc.result {
 				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
@@ -102,7 +101,7 @@ func TestParseUkWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Configure(&config.Config{Language: langUk})
+			timeago.Configure(&timeago.Config{Language: langUk})
 
 			if res := timeago.Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
 				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
