@@ -1,8 +1,14 @@
 package config
 
 type Config struct {
-	Language     string
-	Location     string
+	Language string
+
+	// Location is the timezone location neeed for parsing
+	// string date like "2019-01-01 00:00:00" to time.Time.
+	// If Location is not set it will default to the server's.
+	// Example: "America/New_York", "Asia/China"
+	Location string
+
 	Translations []Translation
 }
 

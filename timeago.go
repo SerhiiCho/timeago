@@ -71,6 +71,10 @@ func parseStrIntoTime(datetime string) time.Time {
 }
 
 func location() *time.Location {
+	if !conf.LocationIsSet() {
+		return time.Now().Location()
+	}
+
 	loc, err := time.LoadLocation(conf.Location)
 
 	if err != nil {
@@ -84,29 +88,21 @@ func calculateTimeAgo(t time.Time) string {
 	now := time.Now()
 
 	if conf.LocationIsSet() {
-		t = applyLocationToTime(t)
-		now = applyLocationToTime(now)
+		loc := location()
+		t = t.In(loc)
+		now = now.In(loc)
 	}
 
-	seconds := now.Sub(t).Seconds()
+	seconds := int(now.Sub(t).Seconds())
 
 	if seconds < 0 {
 		enableOption(Upcoming)
-		seconds = math.Abs(seconds)
+		seconds = -seconds
 	}
 
 	langSet = NewLangSet()
 
-	switch {
-	case seconds < 60 && optionIsEnabled("online"):
-		return langSet.Online
-	case seconds < 0:
-		return getWords(langSet.Second, 0)
-	}
-
-	timeUnit := generateTimeUnit(int(seconds))
-
-	return timeUnit
+	return generateTimeUnit(seconds)
 }
 
 func generateTimeUnit(seconds int) string {
@@ -178,10 +174,6 @@ func identifyLocaleForm(num int) string {
 	}
 
 	return "other"
-}
-
-func applyLocationToTime(t time.Time) time.Time {
-	return t.In(location())
 }
 
 func getTimeCalculations(seconds float64) (int, int, int, int, int, int) {

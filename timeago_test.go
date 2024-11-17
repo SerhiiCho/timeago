@@ -117,3 +117,26 @@ func TestOptionIsEnabled(t *testing.T) {
 		}
 	})
 }
+
+func TestCustomTranslations(t *testing.T) {
+	t.Run("can overwrite translations", func(t *testing.T) {
+		Configure(&config.Config{
+			Language: "en",
+			Translations: []config.Translation{
+				{
+					Language: "en",
+					Translations: map[string]string{
+						"hours": "h",
+					},
+				},
+			},
+		})
+
+		date := getTimestampOfPastDate(time.Hour * 10)
+		expect := "10 h ago"
+
+		if res := Parse(date); res != expect {
+			t.Errorf("Result must be %v, but got %v instead", expect, res)
+		}
+	})
+}
