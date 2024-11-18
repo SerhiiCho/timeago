@@ -5,52 +5,31 @@
     "justnow": "Soeben",
 
     "second": {
-        "zero": "Sekunden",
         "one": "Sekunde",
-        "few": "Sekunden",
-        "many": "Sekunden",
         "other": "Sekunden"
     },
     "minute": {
-        "zero": "Minuten",
         "one": "Minute",
-        "few": "Minuten",
-        "many": "Minuten",
         "other": "Minuten"
     },
     "hour": {
-        "zero": "Stunden",
         "one": "Stunde",
-        "few": "Stunden",
-        "many": "Stunden",
         "other": "Stunden"
     },
     "day": {
-        "zero": "Tagen",
         "one": "Tag",
-        "few": "Tagen",
-        "many": "Tagen",
         "other": "Tagen"
     },
     "week": {
-        "zero": "Wochen",
         "one": "Woche",
-        "few": "Wochen",
-        "many": "Wochen",
         "other": "Wochen"
     },
     "month": {
-        "zero": "Monaten",
         "one": "Monat",
-        "few": "Monaten",
-        "many": "Monaten",
         "other": "Monaten"
     },
     "year": {
-        "zero": "Jahren",
         "one": "Jahr",
-        "few": "Jahren",
-        "many": "Jahren",
         "other": "Jahren"
     }
 }

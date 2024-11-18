@@ -155,15 +155,15 @@ func generateTimeUnit(seconds int) (string, error) {
 // getWords decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
 // the time number
-func getWords(final LangForms, num int) (string, error) {
-	form, err := identifyLocaleForm(num)
+func getWords(langForm LangForms, num int) (string, error) {
+	timeUnit, err := finalTimeUnit(langForm, num)
 
 	if err != nil {
 		return "", err
 	}
 
 	res := langSet.Format
-	res = strings.Replace(res, "{timeUnit}", final[form], -1)
+	res = strings.Replace(res, "{timeUnit}", timeUnit, -1)
 	res = strings.Replace(res, "{num}", strconv.Itoa(num), -1)
 
 	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
@@ -174,7 +174,21 @@ func getWords(final LangForms, num int) (string, error) {
 	return strings.Replace(res, "{ago}", langSet.Ago, -1), nil
 }
 
-func identifyLocaleForm(num int) (string, error) {
+func finalTimeUnit(langForm LangForms, num int) (string, error) {
+	form, err := identifyTimeUnitForm(num)
+
+	if err != nil {
+		return "", err
+	}
+
+	if unit, ok := langForm[form]; ok {
+		return unit, nil
+	}
+
+	return langForm["other"], nil
+}
+
+func identifyTimeUnitForm(num int) (string, error) {
 	rule, err := identifyGrammarRules(num, conf.Language)
 
 	if err != nil {
