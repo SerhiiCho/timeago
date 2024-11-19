@@ -8,19 +8,31 @@ import (
 )
 
 var (
+	// cachedJsonRes saves parsed JSON translations to prevent
+	// parsing the same JSON file multiple times.
 	cachedJsonRes = map[string]*LangSet{}
-	options       = []Option{}
-	langSet       *LangSet
-	conf          = NewConfig("en", "", []LangSet{})
+
+	// options is a list of options that modify the final output.
+	// Some options are noSuffix, upcoming, online, and justNow.
+	options = []Option{}
+
+	// conf is configuration provided by the user.
+	conf = NewConfig("en", "", []LangSet{})
+
+	// langSet is a pointer to the current language set that
+	// is currently being used.
+	langSet *LangSet
 )
 
-// Parse coverts given datetime into `x time ago` format.
-// First argument can have 3 types:
+// Parse coverts privided datetime into `x time ago` format.
+// The first argument can have 3 types:
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
 func Parse(datetime interface{}, opts ...Option) (string, error) {
 	options = []Option{}
+	langSet = nil
+
 	var input time.Time
 	var err error
 
@@ -42,6 +54,7 @@ func Parse(datetime interface{}, opts ...Option) (string, error) {
 	return calculateTimeAgo(input)
 }
 
+// Configure applies the given configuration to the timeago package.
 func Configure(c Config) {
 	if c.Language != "" {
 		conf.Language = c.Language
@@ -57,7 +70,7 @@ func Configure(c Config) {
 }
 
 func parseStrIntoTime(datetime string) (time.Time, error) {
-	if !conf.IsLocationProvided() {
+	if !conf.isLocationProvided() {
 		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
 		return parsedTime, nil
 	}
@@ -78,7 +91,7 @@ func parseStrIntoTime(datetime string) (time.Time, error) {
 }
 
 func location() (*time.Location, error) {
-	if !conf.IsLocationProvided() {
+	if !conf.isLocationProvided() {
 		return time.Now().Location(), nil
 	}
 
@@ -94,7 +107,7 @@ func location() (*time.Location, error) {
 func calculateTimeAgo(t time.Time) (string, error) {
 	now := time.Now()
 
-	if conf.IsLocationProvided() {
+	if conf.isLocationProvided() {
 		loc, err := location()
 
 		if err != nil {
@@ -154,7 +167,7 @@ func generateTimeUnit(seconds int) (string, error) {
 
 // getWords decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
-// the time number
+// the time number.
 func getWords(langForm LangForms, num int) (string, error) {
 	timeUnit, err := finalTimeUnit(langForm, num)
 

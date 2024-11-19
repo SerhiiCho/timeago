@@ -27,7 +27,6 @@ func NewConfig(lang, loc string, langSets []LangSet) *Config {
 	}
 }
 
-// IsLocationProvided check if the location is privided by the user
-func (c Config) IsLocationProvided() bool {
+func (c Config) isLocationProvided() bool {
 	return c.Location != ""
 }
