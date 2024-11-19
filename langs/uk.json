@@ -1,4 +1,5 @@
 {
+    "lang": "uk",
     "format": "{num} {timeUnit} {ago}",
     "ago": "тому",
     "online": "В мережі",

@@ -1,12 +1,14 @@
 # 🗒 Release Notes
 
 ## v3.0.0 (2024-11-10)
-- Breaking changes:
-    - Improved error handling. The `Parse` function now returns an error as the second returned value
-    - Changed package namespace to `github.com/SerhiiCho/timeago/v3`
-    - Rename `SetConfig` function to `Configure`
-    - `Configure` function now excepts pointer to the config `timeago.Configure(&timeago.Config{})` instead of just `timeago.Config{}`
-    - Change the API for setting custom translations to overwrite default translations
+> BREAKING CHANGES!
+- **Improved error handling**. The `Parse` function now returns an error as the second returned value
+- **Update package namespace**. Changed package namespace to `github.com/SerhiiCho/timeago/v3`
+- **Rename a function**. Renamed `SetConfig` function to `Configure` to make it better fit into Go naming conventions
+- **New language files structure**. Change the file structure for `JSON` language files. They have now format to match [CLDR Specifications](https://cldr.unicode.org/index/cldr-spec/plural-rules)
+- **New language addition is improved**. Add ability to change the output of the `Parse` function when adding a support for a new language by adding a `format` field to a `JSON` file
+
+> Follow the [Upgrade Guide](https://time-ago.github.io/upgrade.html) from v2 to v3
 
 ## v2.2.1 (2024-03-28)
 - Updated `README.md` file by adding more information about supported languages

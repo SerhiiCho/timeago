@@ -9,6 +9,7 @@ import (
 type LangForms map[string]string
 
 type LangSet struct {
+	Lang    string    `json:"lang"`
 	Format  string    `json:"format"`
 	Ago     string    `json:"ago"`
 	Online  string    `json:"online"`

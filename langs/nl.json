@@ -1,4 +1,5 @@
 {
+    "lang": "nl",
     "format": "{num} {timeUnit} {ago}",
     "ago": "geleden",
     "online": "Online",

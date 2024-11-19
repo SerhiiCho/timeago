@@ -61,7 +61,7 @@ func TestParseDe(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Configure(&timeago.Config{Language: langDe})
+			timeago.Configure(timeago.Config{Language: langDe})
 
 			res, err := timeago.Parse(tc.date)
 
@@ -97,7 +97,7 @@ func TestParseDeWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Configure(&timeago.Config{Language: langDe})
+			timeago.Configure(timeago.Config{Language: langDe})
 
 			res, err := timeago.Parse(tc.date)
 

@@ -1,4 +1,5 @@
 {
+    "lang": "de",
     "format": "{ago} {num} {timeUnit}",
     "ago": "Vor",
     "online": "Online",

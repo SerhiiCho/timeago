@@ -11,7 +11,7 @@ var (
 	cachedJsonRes = map[string]*LangSet{}
 	options       = []Option{}
 	langSet       *LangSet
-	conf          = NewConfig("en", "", []Translation{})
+	conf          = NewConfig("en", "", []LangSet{})
 )
 
 // Parse coverts given datetime into `x time ago` format.
@@ -42,7 +42,7 @@ func Parse(datetime interface{}, opts ...Option) (string, error) {
 	return calculateTimeAgo(input)
 }
 
-func Configure(c *Config) {
+func Configure(c Config) {
 	if c.Language != "" {
 		conf.Language = c.Language
 	}
@@ -57,7 +57,7 @@ func Configure(c *Config) {
 }
 
 func parseStrIntoTime(datetime string) (time.Time, error) {
-	if !conf.LocationIsSet() {
+	if !conf.IsLocationProvided() {
 		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
 		return parsedTime, nil
 	}
@@ -78,7 +78,7 @@ func parseStrIntoTime(datetime string) (time.Time, error) {
 }
 
 func location() (*time.Location, error) {
-	if !conf.LocationIsSet() {
+	if !conf.IsLocationProvided() {
 		return time.Now().Location(), nil
 	}
 
@@ -94,7 +94,7 @@ func location() (*time.Location, error) {
 func calculateTimeAgo(t time.Time) (string, error) {
 	now := time.Now()
 
-	if conf.LocationIsSet() {
+	if conf.IsLocationProvided() {
 		loc, err := location()
 
 		if err != nil {

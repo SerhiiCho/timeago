@@ -25,8 +25,8 @@ func TestLocationIsSet(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			c := NewConfig("ru", tc.loc, []Translation{})
-			actual := c.LocationIsSet()
+			c := NewConfig("ru", tc.loc, []LangSet{})
+			actual := c.IsLocationProvided()
 
 			if actual != tc.expect {
 				t.Fatalf("Expected %v, but got %v", tc.expect, actual)
@@ -36,18 +36,20 @@ func TestLocationIsSet(t *testing.T) {
 }
 
 func TestCustomTranslations(t *testing.T) {
-	t.Skip()
-
 	t.Run("can overwrite translations", func(t *testing.T) {
-		Configure(&Config{
+		Configure(Config{
 			Language: "en",
-			Translations: []Translation{
+			Translations: []LangSet{
 				{
-					Language: "en",
-					Translations: &LangSet{
-						Hour: LangForms{
-							"other": "h",
-						},
+					Lang: "en",
+					Ago:  "",
+					Day: LangForms{
+						"one":   "h",
+						"other": "h",
+					},
+					Week: LangForms{
+						"one":   "w",
+						"other": "w",
 					},
 				},
 			},

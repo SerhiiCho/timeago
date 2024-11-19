@@ -1,4 +1,5 @@
 {
+    "lang": "ru",
     "format": "{num} {timeUnit} {ago}",
     "ago": "назад",
     "online": "В сети",
