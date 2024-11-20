@@ -71,8 +71,7 @@ func TestParseUk(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.ClearCache()
-			timeago.Configure(timeago.Config{Language: langUk})
+			timeago.Reconfigure(timeago.Config{Language: langUk})
 
 			res, err := timeago.Parse(tc.date)
 
@@ -108,8 +107,7 @@ func TestParseUkWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.ClearCache()
-			timeago.Configure(timeago.Config{Language: langUk})
+			timeago.Reconfigure(timeago.Config{Language: langUk})
 
 			res, err := timeago.Parse(tc.date)
 

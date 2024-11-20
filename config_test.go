@@ -25,7 +25,6 @@ func TestLocationIsSet(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			ClearCache()
 			c := NewConfig("ru", tc.loc, []LangSet{})
 			actual := c.isLocationProvided()
 
@@ -75,8 +74,7 @@ func TestCustomTranslations(t *testing.T) {
 		name := tc.langSet.Lang + " " + tc.expect
 
 		t.Run(name, func(t *testing.T) {
-			ClearCache()
-			Configure(Config{
+			Reconfigure(Config{
 				Language:     tc.langSet.Lang,
 				Translations: []LangSet{tc.langSet},
 			})

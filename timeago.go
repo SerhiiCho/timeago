@@ -17,7 +17,7 @@ var (
 	options = []Option{}
 
 	// conf is configuration provided by the user.
-	conf = NewConfig("en", "", []LangSet{})
+	conf = defaultConfig()
 
 	// langSet is a pointer to the current language set that
 	// is currently being used.
@@ -54,7 +54,10 @@ func Parse(datetime interface{}, opts ...Option) (string, error) {
 	return calculateTimeAgo(input)
 }
 
-// Configure applies the given configuration to the timeago.
+// Configure applies the given configuration to the timeago without
+// overriding the previous configuration. It will only override the
+// provided configuration. If you want to override the previous
+// configurations, use Reconfigure function instead.
 func Configure(c Config) {
 	if c.Language != "" {
 		conf.Language = c.Language
@@ -69,16 +72,17 @@ func Configure(c Config) {
 	}
 }
 
-// ClearCache removes all cached translations, options, and other
-// configurations. Since Timeago caches parsed JSON files, this function
-// removes all cached and resets config to default.
-// It useful when you want to reload the language files without
-// restarting the application or freeing up the memory.
-func ClearCache() {
-	conf = NewConfig("en", "", []LangSet{})
+// Reconfigure reconfigures the timeago with the provided configuration.
+// It will override the previous configuration with the new one.
+func Reconfigure(c Config) {
+	conf = defaultConfig()
 	cachedJsonRes = map[string]*LangSet{}
-	options = []Option{}
-	langSet = nil
+
+	Configure(c)
+}
+
+func defaultConfig() *Config {
+	return NewConfig("en", "", []LangSet{})
 }
 
 func parseStrIntoTime(datetime string) (time.Time, error) {

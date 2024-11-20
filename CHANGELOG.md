@@ -7,7 +7,7 @@
 - **Rename a function**. Renamed `SetConfig` function to `Configure` to make it better fit into Go naming conventions
 - **New language files structure**. Change the file structure for `JSON` language files. They have now format to match [CLDR Specifications](https://cldr.unicode.org/index/cldr-spec/plural-rules)
 - **New language addition is improved**. Add ability to change the output of the `Parse` function when adding a support for a new language by adding a `format` field to a `JSON` file
-- **New function `ClearCache`**. Added a new function to clear the cache of the package to free up memory when needed. It's also useful when you want to reload the language files without restarting the application.
+- **New function `Reconfigure`**. Added a new function to reconfigure the package configurations. Unlike the `Configure` function, it will overwrite the previous configurations with the new ones.
 
 > Follow the [Upgrade Guide](https://time-ago.github.io/upgrade.html) from v2 to v3
 
