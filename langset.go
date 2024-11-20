@@ -55,64 +55,36 @@ func applyCustomTranslations(langSet *LangSet) *LangSet {
 			continue
 		}
 
-		if trans.Format != "" {
-			langSet.Format = trans.Format
-		}
+		mergeSetValue(trans.Lang, &langSet.Lang)
+		mergeSetValue(trans.Format, &langSet.Format)
+		mergeSetValue(trans.Ago, &langSet.Ago)
+		mergeSetValue(trans.Online, &langSet.Online)
+		mergeSetValue(trans.JustNow, &langSet.JustNow)
 
-		if trans.Ago != "" {
-			langSet.Ago = trans.Ago
-		}
-
-		if trans.Online != "" {
-			langSet.Online = trans.Online
-		}
-
-		if trans.JustNow != "" {
-			langSet.JustNow = trans.JustNow
-		}
-
-		if trans.Second != nil {
-			for k, v := range trans.Second {
-				langSet.Second[k] = v
-			}
-		}
-
-		if trans.Minute != nil {
-			for k, v := range trans.Minute {
-				langSet.Minute[k] = v
-			}
-		}
-
-		if trans.Hour != nil {
-			for k, v := range trans.Hour {
-				langSet.Hour[k] = v
-			}
-		}
-
-		if trans.Day != nil {
-			for k, v := range trans.Day {
-				langSet.Day[k] = v
-			}
-		}
-
-		if trans.Week != nil {
-			for k, v := range trans.Week {
-				langSet.Week[k] = v
-			}
-		}
-
-		if trans.Month != nil {
-			for k, v := range trans.Month {
-				langSet.Month[k] = v
-			}
-		}
-
-		if trans.Year != nil {
-			for k, v := range trans.Year {
-				langSet.Year[k] = v
-			}
-		}
+		mergeLangForms(langSet.Second, trans.Second)
+		mergeLangForms(langSet.Minute, trans.Minute)
+		mergeLangForms(langSet.Hour, trans.Hour)
+		mergeLangForms(langSet.Day, trans.Day)
+		mergeLangForms(langSet.Week, trans.Week)
+		mergeLangForms(langSet.Month, trans.Month)
+		mergeLangForms(langSet.Year, trans.Year)
 	}
 
 	return langSet
+}
+
+func mergeSetValue(newVal string, currVal *string) {
+	if newVal != "" {
+		*currVal = newVal
+	}
+}
+
+func mergeLangForms(curr, langForms LangForms) {
+	if len(langForms) == 0 {
+		return
+	}
+
+	for k, v := range langForms {
+		curr[k] = v
+	}
 }

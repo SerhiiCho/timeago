@@ -36,25 +36,39 @@ func TestLocationIsSet(t *testing.T) {
 }
 
 func TestCustomTranslations(t *testing.T) {
-	t.Run("can overwrite translations", func(t *testing.T) {
-		Configure(Config{
-			Language: "en",
-			Translations: []LangSet{
-				{
-					Lang: "en",
-					Hour: LangForms{
-						"one":   "h",
-						"other": "h",
-					},
+	cases := []struct {
+		name    string
+		lang    string
+		expect  string
+		langSet LangSet
+	}{
+		{
+			name:   "",
+			lang:   "en",
+			expect: "10 h a",
+			langSet: LangSet{
+				Lang: "en",
+				Ago:  "a",
+				Hour: LangForms{
+					"one":   "h",
+					"other": "h",
 				},
 			},
+		},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			Configure(Config{
+				Language:     tc.lang,
+				Translations: []LangSet{tc.langSet},
+			})
+
+			date := getTimestampOfPastDate(time.Hour * 10)
+
+			if res, _ := Parse(date); res != tc.expect {
+				t.Errorf("Result must be %v, but got %v instead", tc.expect, res)
+			}
 		})
-
-		date := getTimestampOfPastDate(time.Hour * 10)
-		expect := "10 h ago"
-
-		if res, _ := Parse(date); res != expect {
-			t.Errorf("Result must be %v, but got %v instead", expect, res)
-		}
-	})
+	}
 }
