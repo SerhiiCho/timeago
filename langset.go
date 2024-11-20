@@ -37,5 +37,7 @@ func newLangSet() (*LangSet, error) {
 		return cache, nil
 	}
 
-	return parseLangSet(filePath), nil
+	cachedJsonRes[filePath] = parseLangSet(filePath)
+
+	return cachedJsonRes[filePath], nil
 }
