@@ -23,7 +23,7 @@ type LangSet struct {
 	Year    LangForms `json:"year"`
 }
 
-func NewLangSet() (*LangSet, error) {
+func newLangSet() (*LangSet, error) {
 	_, filename, _, ok := runtime.Caller(0)
 
 	if !ok {
@@ -33,7 +33,7 @@ func NewLangSet() (*LangSet, error) {
 	rootPath := path.Dir(filename)
 	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", conf.Language)
 
-	if cache, hasCache := cachedJsonRes[filePath]; hasCache {
+	if cache, ok := cachedJsonRes[filePath]; ok {
 		return cache, nil
 	}
 

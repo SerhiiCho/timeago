@@ -125,7 +125,7 @@ func calculateTimeAgo(t time.Time) (string, error) {
 		seconds = -seconds
 	}
 
-	set, err := NewLangSet()
+	set, err := newLangSet()
 
 	if err != nil {
 		return "", err

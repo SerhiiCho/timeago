@@ -42,14 +42,9 @@ func TestCustomTranslations(t *testing.T) {
 			Translations: []LangSet{
 				{
 					Lang: "en",
-					Ago:  "",
-					Day: LangForms{
+					Hour: LangForms{
 						"one":   "h",
 						"other": "h",
-					},
-					Week: LangForms{
-						"one":   "w",
-						"other": "w",
 					},
 				},
 			},
