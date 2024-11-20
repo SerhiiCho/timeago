@@ -45,6 +45,7 @@ func TestParseWithMultipleFlags(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
+			timeago.ClearCache()
 			timeago.Configure(timeago.Config{Language: langEn})
 
 			res, err := timeago.Parse(tc.date, "online", "noSuffix")

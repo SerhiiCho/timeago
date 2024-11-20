@@ -24,6 +24,7 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		{getTimestampOfPastDate(time.Hour * 24 * 7), "1 week ago"},
 	}
 
+	ClearCache()
 	Configure(Config{Language: "en"})
 
 	for _, tc := range cases {
@@ -59,6 +60,7 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 		{time.Now().Add(-time.Hour * 11), "11 hours ago"},
 	}
 
+	ClearCache()
 	Configure(Config{Language: "en"})
 
 	for _, tc := range cases {
@@ -89,6 +91,7 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 		{time.Now().Add(time.Hour * 48), "2 days"},
 	}
 
+	ClearCache()
 	Configure(Config{Language: "en"})
 
 	for _, tc := range testCases {

@@ -69,6 +69,18 @@ func Configure(c Config) {
 	}
 }
 
+// ClearCache removes all cached translations, options, and other
+// configurations. Since Timeago caches parsed JSON files, this function
+// removes all cached and resets config to default.
+// It useful when you want to reload the language files without
+// restarting the application or freeing up the memory.
+func ClearCache() {
+	conf = NewConfig("en", "", []LangSet{})
+	cachedJsonRes = map[string]*LangSet{}
+	options = []Option{}
+	langSet = nil
+}
+
 func parseStrIntoTime(datetime string) (time.Time, error) {
 	if !conf.isLocationProvided() {
 		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)

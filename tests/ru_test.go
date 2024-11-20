@@ -56,6 +56,7 @@ func TestParseRu(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
+			timeago.ClearCache()
 			timeago.Configure(timeago.Config{Language: langRu})
 
 			res, err := timeago.Parse(tc.date)
@@ -92,6 +93,7 @@ func TestParseRuWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
+			timeago.ClearCache()
 			timeago.Configure(timeago.Config{Language: langRu})
 
 			res, err := timeago.Parse(tc.date)

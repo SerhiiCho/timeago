@@ -25,6 +25,7 @@ func TestLocationIsSet(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
+			ClearCache()
 			c := NewConfig("ru", tc.loc, []LangSet{})
 			actual := c.isLocationProvided()
 
