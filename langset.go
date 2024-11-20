@@ -37,7 +37,82 @@ func newLangSet() (*LangSet, error) {
 		return cache, nil
 	}
 
-	cachedJsonRes[filePath] = parseLangSet(filePath)
+	langSet := parseLangSet(filePath)
+	langSet = applyCustomTranslations(langSet)
 
-	return cachedJsonRes[filePath], nil
+	cachedJsonRes[filePath] = langSet
+
+	return langSet, nil
+}
+
+func applyCustomTranslations(langSet *LangSet) *LangSet {
+	if len(conf.Translations) == 0 {
+		return langSet
+	}
+
+	for _, trans := range conf.Translations {
+		if trans.Lang != langSet.Lang {
+			continue
+		}
+
+		if trans.Format != "" {
+			langSet.Format = trans.Format
+		}
+
+		if trans.Ago != "" {
+			langSet.Ago = trans.Ago
+		}
+
+		if trans.Online != "" {
+			langSet.Online = trans.Online
+		}
+
+		if trans.JustNow != "" {
+			langSet.JustNow = trans.JustNow
+		}
+
+		if trans.Second != nil {
+			for k, v := range trans.Second {
+				langSet.Second[k] = v
+			}
+		}
+
+		if trans.Minute != nil {
+			for k, v := range trans.Minute {
+				langSet.Minute[k] = v
+			}
+		}
+
+		if trans.Hour != nil {
+			for k, v := range trans.Hour {
+				langSet.Hour[k] = v
+			}
+		}
+
+		if trans.Day != nil {
+			for k, v := range trans.Day {
+				langSet.Day[k] = v
+			}
+		}
+
+		if trans.Week != nil {
+			for k, v := range trans.Week {
+				langSet.Week[k] = v
+			}
+		}
+
+		if trans.Month != nil {
+			for k, v := range trans.Month {
+				langSet.Month[k] = v
+			}
+		}
+
+		if trans.Year != nil {
+			for k, v := range trans.Year {
+				langSet.Year[k] = v
+			}
+		}
+	}
+
+	return langSet
 }
