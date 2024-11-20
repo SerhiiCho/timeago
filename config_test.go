@@ -26,7 +26,7 @@ func TestLocationIsSet(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			c := NewConfig("ru", tc.loc, []LangSet{})
-			actual := c.IsLocationProvided()
+			actual := c.isLocationProvided()
 
 			if actual != tc.expect {
 				t.Fatalf("Expected %v, but got %v", tc.expect, actual)
