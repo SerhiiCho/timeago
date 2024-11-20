@@ -54,7 +54,7 @@ func Parse(datetime interface{}, opts ...Option) (string, error) {
 	return calculateTimeAgo(input)
 }
 
-// Configure applies the given configuration to the timeago package.
+// Configure applies the given configuration to the timeago.
 func Configure(c Config) {
 	if c.Language != "" {
 		conf.Language = c.Language

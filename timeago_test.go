@@ -32,11 +32,11 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 			res, err := Parse(tc.date)
 
 			if err != nil {
-				t.Errorf("Error must be nil, but got %v instead", err)
+				t.Errorf("Error must be nil, but got %q instead", err)
 			}
 
 			if res != tc.res {
-				t.Errorf("Result must be %v, but got %v instead", tc.res, res)
+				t.Errorf("Result must be %q, but got %q instead", tc.res, res)
 			}
 		})
 	}
@@ -68,11 +68,11 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 			res, err := Parse(tc.date)
 
 			if err != nil {
-				t.Errorf("Error must be nil, but got %v instead", err)
+				t.Errorf("Error must be nil, but got %q instead", err)
 			}
 
 			if res != tc.res {
-				t.Errorf("Result must be %v, but got %v instead", tc.res, res)
+				t.Errorf("Result must be %q, but got %q instead", tc.res, res)
 			}
 		})
 	}
@@ -99,11 +99,11 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 			res, err := Parse(tc.date)
 
 			if err != nil {
-				t.Errorf("Error must be nil, but got %v instead", err)
+				t.Errorf("Error must be nil, but got %q instead", err)
 			}
 
 			if res != tc.res {
-				t.Errorf("Result must be %v, but got %v instead", tc.res, res)
+				t.Errorf("Result must be %q, but got %q instead", tc.res, res)
 			}
 		})
 	}
