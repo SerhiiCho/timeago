@@ -38,9 +38,9 @@ func Parse(datetime interface{}, opts ...Option) (string, error) {
 
 	switch date := datetime.(type) {
 	case int:
-		input = parseTimestampIntoTime(date)
+		input = unixToTime(date)
 	case string:
-		input, err = parseStrIntoTime(date)
+		input, err = strToTime(date)
 	default:
 		input = datetime.(time.Time)
 	}
@@ -51,7 +51,7 @@ func Parse(datetime interface{}, opts ...Option) (string, error) {
 
 	enableOptions(opts)
 
-	return calculateTimeAgo(input)
+	return computeTimeSince(input)
 }
 
 // Configure applies the given configuration to the timeago without
@@ -85,7 +85,7 @@ func defaultConfig() *Config {
 	return NewConfig("en", "", []LangSet{})
 }
 
-func parseStrIntoTime(datetime string) (time.Time, error) {
+func strToTime(datetime string) (time.Time, error) {
 	if !conf.isLocationProvided() {
 		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
 		return parsedTime, nil
@@ -100,12 +100,13 @@ func parseStrIntoTime(datetime string) (time.Time, error) {
 	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
 
 	if err != nil {
-		return time.Time{}, createError("%v", err)
+		return time.Time{}, errorf("%v", err)
 	}
 
 	return parsedTime, nil
 }
 
+// location loads location from the time package
 func location() (*time.Location, error) {
 	if !conf.isLocationProvided() {
 		return time.Now().Location(), nil
@@ -114,13 +115,13 @@ func location() (*time.Location, error) {
 	loc, err := time.LoadLocation(conf.Location)
 
 	if err != nil {
-		return nil, createError("%v", err)
+		return nil, errorf("%v", err)
 	}
 
 	return loc, nil
 }
 
-func calculateTimeAgo(t time.Time) (string, error) {
+func computeTimeSince(t time.Time) (string, error) {
 	now := time.Now()
 
 	if conf.isLocationProvided() {
@@ -149,11 +150,11 @@ func calculateTimeAgo(t time.Time) (string, error) {
 
 	langSet = set
 
-	return generateTimeUnit(seconds)
+	return computeTimeUnit(seconds)
 }
 
-func generateTimeUnit(seconds int) (string, error) {
-	minutes, hours, days, weeks, months, years := getTimeCalculations(float64(seconds))
+func computeTimeUnit(seconds int) (string, error) {
+	minutes, hours, days, weeks, months, years := timeCalculations(float64(seconds))
 
 	switch {
 	case optionIsEnabled("online") && seconds < 60:
@@ -161,30 +162,30 @@ func generateTimeUnit(seconds int) (string, error) {
 	case optionIsEnabled("justNow") && seconds < 60:
 		return langSet.JustNow, nil
 	case seconds < 60:
-		return getWords(langSet.Second, seconds)
+		return timeUnits(langSet.Second, seconds)
 	case minutes < 60:
-		return getWords(langSet.Minute, minutes)
+		return timeUnits(langSet.Minute, minutes)
 	case hours < 24:
-		return getWords(langSet.Hour, hours)
+		return timeUnits(langSet.Hour, hours)
 	case days < 7:
-		return getWords(langSet.Day, days)
+		return timeUnits(langSet.Day, days)
 	case weeks < 4:
-		return getWords(langSet.Week, weeks)
+		return timeUnits(langSet.Week, weeks)
 	case months < 12:
 		if months == 0 {
 			months = 1
 		}
 
-		return getWords(langSet.Month, months)
+		return timeUnits(langSet.Month, months)
 	}
 
-	return getWords(langSet.Year, years)
+	return timeUnits(langSet.Year, years)
 }
 
-// getWords decides rather the word must be singular or plural,
+// timeUnits decides rather the word must be singular or plural,
 // and depending on the result it adds the correct word after
 // the time number.
-func getWords(langForm LangForms, num int) (string, error) {
+func timeUnits(langForm LangForms, num int) (string, error) {
 	timeUnit, err := finalTimeUnit(langForm, num)
 
 	if err != nil {
@@ -204,7 +205,7 @@ func getWords(langForm LangForms, num int) (string, error) {
 }
 
 func finalTimeUnit(langForm LangForms, num int) (string, error) {
-	form, err := identifyTimeUnitForm(num)
+	form, err := timeUnitForm(num)
 
 	if err != nil {
 		return "", err
@@ -217,7 +218,7 @@ func finalTimeUnit(langForm LangForms, num int) (string, error) {
 	return langForm["other"], nil
 }
 
-func identifyTimeUnitForm(num int) (string, error) {
+func timeUnitForm(num int) (string, error) {
 	rule, err := identifyGrammarRules(num, conf.Language)
 
 	if err != nil {
@@ -240,7 +241,7 @@ func identifyTimeUnitForm(num int) (string, error) {
 	return "other", nil
 }
 
-func getTimeCalculations(seconds float64) (int, int, int, int, int, int) {
+func timeCalculations(seconds float64) (int, int, int, int, int, int) {
 	minutes := math.Round(seconds / 60)
 	hours := math.Round(seconds / 3600)
 	days := math.Round(seconds / 86400)

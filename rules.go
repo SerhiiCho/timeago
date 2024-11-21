@@ -47,5 +47,5 @@ func identifyGrammarRules(num int, lang string) (*Rule, error) {
 		}
 	}
 
-	return nil, createError("Language '" + lang + "' not found")
+	return nil, errorf("Language '" + lang + "' not found")
 }

@@ -10,18 +10,18 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		date int
 		res  string
 	}{
-		{getTimestampOfPastDate(time.Minute), "1 minute ago"},
-		{getTimestampOfPastDate(time.Minute * 5), "5 minutes ago"},
-		{getTimestampOfPastDate(time.Hour), "1 hour ago"},
-		{getTimestampOfPastDate(time.Hour * 3), "3 hours ago"},
-		{getTimestampOfPastDate(time.Hour * 5), "5 hours ago"},
-		{getTimestampOfPastDate(time.Hour * 24), "1 day ago"},
-		{getTimestampOfPastDate(time.Hour * 24 * 2), "2 days ago"},
-		{getTimestampOfPastDate(time.Hour * 24 * 3), "3 days ago"},
-		{getTimestampOfPastDate(time.Hour * 24 * 4), "4 days ago"},
-		{getTimestampOfPastDate(time.Hour * 24 * 5), "5 days ago"},
-		{getTimestampOfPastDate(time.Hour * 24 * 6), "6 days ago"},
-		{getTimestampOfPastDate(time.Hour * 24 * 7), "1 week ago"},
+		{timestampFromPastDate(time.Minute), "1 minute ago"},
+		{timestampFromPastDate(time.Minute * 5), "5 minutes ago"},
+		{timestampFromPastDate(time.Hour), "1 hour ago"},
+		{timestampFromPastDate(time.Hour * 3), "3 hours ago"},
+		{timestampFromPastDate(time.Hour * 5), "5 hours ago"},
+		{timestampFromPastDate(time.Hour * 24), "1 day ago"},
+		{timestampFromPastDate(time.Hour * 24 * 2), "2 days ago"},
+		{timestampFromPastDate(time.Hour * 24 * 3), "3 days ago"},
+		{timestampFromPastDate(time.Hour * 24 * 4), "4 days ago"},
+		{timestampFromPastDate(time.Hour * 24 * 5), "5 days ago"},
+		{timestampFromPastDate(time.Hour * 24 * 6), "6 days ago"},
+		{timestampFromPastDate(time.Hour * 24 * 7), "1 week ago"},
 	}
 
 	Reconfigure(Config{Language: "en"})

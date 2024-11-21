@@ -79,7 +79,7 @@ func TestCustomTranslations(t *testing.T) {
 				Translations: []LangSet{tc.langSet},
 			})
 
-			date := getTimestampOfPastDate(tc.time)
+			date := timestampFromPastDate(tc.time)
 
 			if res, _ := Parse(date); res != tc.expect {
 				t.Errorf("Result must be %q, but got %q instead", tc.expect, res)

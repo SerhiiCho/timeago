@@ -15,33 +15,37 @@ func TestParseJsonIntoLang(t *testing.T) {
 	})
 }
 
-func TestFileExists(t *testing.T) {
-	t.Run("fileExists return false if file doesn't exist", func(test *testing.T) {
-		res, _ := fileExists("somerandompath")
+func TestIsFilePresent(t *testing.T) {
+	t.Run("isFilePresent return false if file doesn't exist", func(test *testing.T) {
+		res, _ := isFilePresent("somerandompath")
 
 		if res {
-			t.Error("Function fileExists must return false, because filepath points to a file that doesn't exist")
+			t.Error("isFilePresent must return false, because filepath points to a file that doesn't exist")
 		}
 	})
 
-	t.Run("fileExists return true if file exist", func(test *testing.T) {
-		res, _ := fileExists("timeago.go")
+	t.Run("isFilePresent return true if file exist", func(test *testing.T) {
+		ok, err := isFilePresent("timeago.go")
 
-		if res == false {
-			t.Error("Function fileExists must return true, because filepath points to a file that exists")
+		if err != nil {
+			t.Errorf("isFilePresent must return true, because filepath points to a file that exists, but returned error %v", err)
+		}
+
+		if !ok {
+			t.Error("isFilePresent must return true, because filepath points to a file that exists")
 		}
 	})
 }
 
-func TestGetFileContent(t *testing.T) {
-	t.Run("getFileContent returns content of the file", func(test *testing.T) {
-		res := fileContent("langs/en.json")
+func TestReadFile(t *testing.T) {
+	t.Run("readFile returns content of the file", func(test *testing.T) {
+		res := readFile("langs/en.json")
 
 		var js json.RawMessage
 		err := json.Unmarshal(res, &js)
 
 		if err != nil {
-			t.Errorf("Function getFileContent must return JSON object but %s returned", string(res))
+			t.Errorf("Function readFile must return JSON object but %s returned", string(res))
 		}
 	})
 }

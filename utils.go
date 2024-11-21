@@ -9,20 +9,20 @@ import (
 	"time"
 )
 
-func parseTimestampIntoTime(timestamp int) time.Time {
+func unixToTime(timestamp int) time.Time {
 	return time.Unix(int64(timestamp), 0)
 }
 
-func getTimestampOfPastDate(subDuration time.Duration) int {
+func timestampFromPastDate(subDuration time.Duration) int {
 	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
 }
 
-func createError(msg string, a ...interface{}) error {
+func errorf(msg string, a ...interface{}) error {
 	return fmt.Errorf("[Timeago]: "+msg, a...)
 }
 
 func parseLangSet(fileName string) *LangSet {
-	content := fileContent(fileName)
+	content := readFile(fileName)
 
 	var res LangSet
 
@@ -35,7 +35,7 @@ func parseLangSet(fileName string) *LangSet {
 	return &res
 }
 
-func fileContent(filePath string) []byte {
+func readFile(filePath string) []byte {
 	content, err := os.ReadFile(filePath)
 
 	if err != nil {
@@ -45,7 +45,7 @@ func fileContent(filePath string) []byte {
 	return content
 }
 
-func fileExists(filePath string) (bool, error) {
+func isFilePresent(filePath string) (bool, error) {
 	_, err := os.Stat(filePath)
 
 	if err == nil {

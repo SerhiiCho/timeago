@@ -27,7 +27,7 @@ func newLangSet() (*LangSet, error) {
 	_, filename, _, ok := runtime.Caller(0)
 
 	if !ok {
-		return nil, createError("No called information")
+		return nil, errorf("No called information")
 	}
 
 	rootPath := path.Dir(filename)
