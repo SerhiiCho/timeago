@@ -2,6 +2,8 @@
 
 ## v3.0.0 (2024-11-21)
 > BREAKING CHANGES!
+
+[Upgrade Guide from v2 to v3](https://time-ago.github.io/v3/upgrade.html)
 - **Improved error handling**. The `Parse` function now returns an error as the second returned value
 - **Update package namespace**. Changed package namespace to `github.com/SerhiiCho/timeago/v3`
 - **Rename a function**. Renamed `SetConfig` function to `Configure` to make it better fit into Go naming conventions
