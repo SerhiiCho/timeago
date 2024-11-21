@@ -1,6 +1,6 @@
 # 🗒 Release Notes
 
-## v3.0.0 (2024-11-10)
+## v3.0.0 (2024-11-21)
 > BREAKING CHANGES!
 - **Improved error handling**. The `Parse` function now returns an error as the second returned value
 - **Update package namespace**. Changed package namespace to `github.com/SerhiiCho/timeago/v3`
