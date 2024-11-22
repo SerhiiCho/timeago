@@ -1,19 +1,36 @@
 {
-    "Ago": "geleden",
-    "Online": "Online",
-    "JustNow": "Net nu",
-    "Second": "seconde",
-    "Seconds": "seconden",
-    "Minute": "minuut",
-    "Minutes": "minuten",
-    "Hour": "uur",
-    "Hours": "uur",
-    "Day": "dag",
-    "Days": "dagen",
-    "Week": "week",
-    "Weeks": "weken",
-    "Month": "maand",
-    "Months": "maanden",
-    "Year": "jaar",
-    "Years": "jaar"
+    "lang": "nl",
+    "format": "{num} {timeUnit} {ago}",
+    "ago": "geleden",
+    "online": "Online",
+    "justnow": "Net nu",
+
+    "second": {
+        "one": "seconde",
+        "other": "seconden"
+    },
+    "minute": {
+        "one": "minuut",
+        "other": "minuten"
+    },
+    "hour": {
+        "one": "uur",
+        "other": "uur"
+    },
+    "day": {
+        "one": "dag",
+        "other": "dagen"
+    },
+    "week": {
+        "one": "week",
+        "other": "weken"
+    },
+    "month": {
+        "one": "maand",
+        "other": "maanden"
+    },
+    "year": {
+        "one": "jaar",
+        "other": "jaar"
+    }
 }

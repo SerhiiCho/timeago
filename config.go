@@ -1,38 +1,32 @@
 package timeago
 
-type Translation struct {
-	Language     string
-	Translations map[string]string
-}
-
 type Config struct {
-	Language     string
-	Location     string
-	Translations []Translation
+	// Language is an ISO 639 language code like en, ru, de, nl, etc.
+	// If Language is not set it will default to English "en".
+	Language string
+
+	// Location is the timezone location neeed for parsing
+	// string date like "2019-01-01 00:00:00" to time.Time.
+	// If Location is not set it will default to the server's.
+	// Example: "America/New_York", "Asia/China"
+	Location string
+
+	// Translations is a slice of language sets that can be used to
+	// overwrite the default translations. Read more about it in the docs
+	// https://time-ago.github.io/configurations.html#overwrite-translations
+	Translations []LangSet
 }
 
-var config = Config{
-	Language:     "en",
-	Location:     "",
-	Translations: []Translation{},
-}
-
-func SetConfig(conf Config) {
-	if conf.Language == "" {
-		conf.Language = config.Language
+// NewConfig creates a new Config instance with the given language, location
+// and language sets to overwrite the default translations.
+func NewConfig(lang, loc string, langSets []LangSet) *Config {
+	return &Config{
+		Language:     lang,
+		Location:     loc,
+		Translations: langSets,
 	}
-
-	config = conf
 }
 
-func locationIsSet() bool {
-	return config.Location != ""
-}
-
-func locationIsNotSet() bool {
-	return !locationIsSet()
-}
-
-func translationsAreSet() bool {
-	return len(config.Translations) > 0
+func (c Config) isLocationProvided() bool {
+	return c.Location != ""
 }

@@ -4,17 +4,15 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SerhiiCho/timeago/v2"
+	"github.com/SerhiiCho/timeago/v3"
 )
 
 func TestParseWithNoSuffixFlag(t *testing.T) {
-	type TestCase struct {
-		date   time.Time
-		result string
-		lang   string
-	}
-
-	cases := []TestCase{
+	cases := []struct {
+		date time.Time
+		res  string
+		lang string
+	}{
 		{subMinutes(1), "1 minute", "en"},
 		{subMinutes(2), "2 minutes", "en"},
 		{subMinutes(3), "3 minutes", "en"},
@@ -67,12 +65,16 @@ func TestParseWithNoSuffixFlag(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			SetConfig(Config{
-				Language: tc.lang,
-			})
+			timeago.Reconfigure(timeago.Config{Language: tc.lang})
 
-			if res := Parse(tc.date, "noSuffix"); res != tc.result {
-				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
+			res, err := timeago.Parse(tc.date, "noSuffix")
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res {
+				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
 			}
 		})
 	}

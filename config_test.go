@@ -2,86 +2,87 @@ package timeago
 
 import (
 	"testing"
+	"time"
 )
 
-func TestTrans(t *testing.T) {
+func TestLocationIsSet(t *testing.T) {
 	cases := []struct {
-		lang   string
-		trans  func() string
-		result string
+		name   string
+		loc    string
+		expect bool
 	}{
-		{"ru", func() string { return trans().Online }, "В сети"},
-		{"ru", func() string { return trans().Second }, "секунда"},
-		{"ru", func() string { return trans().Hour }, "час"},
-		{"ru", func() string { return trans().Day }, "день"},
-		{"en", func() string { return trans().Online }, "Online"},
-		{"en", func() string { return trans().Second }, "second"},
-		{"en", func() string { return trans().Hour }, "hour"},
-		{"en", func() string { return trans().Day }, "day"},
+		{
+			name:   "Location is set",
+			loc:    "Russia/Moscow",
+			expect: true,
+		},
+		{
+			name:   "Location is not set",
+			loc:    "",
+			expect: false,
+		},
 	}
 
 	for _, tc := range cases {
-		t.Run("returns "+tc.lang+" language", func(test *testing.T) {
-			config := Config{
-				Language: tc.lang,
-			}
+		t.Run(tc.name, func(t *testing.T) {
+			c := NewConfig("ru", tc.loc, []LangSet{})
+			actual := c.isLocationProvided()
 
-			SetConfig(config)
-
-			if result := tc.trans(); result != tc.result {
-				test.Errorf("Result must be %s but got %s", tc.result, result)
+			if actual != tc.expect {
+				t.Fatalf("Expected %v, but got %v", tc.expect, actual)
 			}
 		})
 	}
 }
 
-func TestSetConfigLanguage(t *testing.T) {
+func TestCustomTranslations(t *testing.T) {
 	cases := []struct {
-		name  string
-		value string
-		err   string
+		expect  string
+		time    time.Duration
+		langSet LangSet
 	}{
-		{"sets language to ru", "ru", "Set must set language to 'ru' but it didn't"},
-		{"sets language to en", "en", "Set must set language to 'en' but it didn't"},
-		{"sets language to nl", "nl", "Set must set language to 'nl' but it didn't"},
-		{"sets language to uk", "uk", "Set must set language to 'uk' but it didn't"},
+		{
+			expect: "10 h a",
+			time:   time.Hour * 10,
+			langSet: LangSet{
+				Lang: "en",
+				Ago:  "a",
+				Hour: LangForms{"other": "h"},
+			},
+		},
+		{
+			expect: "1м н",
+			time:   time.Minute,
+			langSet: LangSet{
+				Format: "{num}{timeUnit} {ago}",
+				Lang:   "ru",
+				Ago:    "н",
+				Minute: LangForms{"one": "м"},
+			},
+		},
+		{
+			expect: "2 d ago",
+			time:   time.Hour * 24 * 2,
+			langSet: LangSet{
+				Lang: "en",
+				Day:  LangForms{"other": "d"},
+			},
+		},
 	}
 
 	for _, tc := range cases {
-		t.Run(tc.name, func(test *testing.T) {
-			config := Config{
-				Language: tc.value,
-			}
+		name := tc.langSet.Lang + " " + tc.expect
 
-			SetConfig(config)
+		t.Run(name, func(t *testing.T) {
+			Reconfigure(Config{
+				Language:     tc.langSet.Lang,
+				Translations: []LangSet{tc.langSet},
+			})
 
-			if config.Language != tc.value {
-				test.Error(tc.err)
-			}
-		})
-	}
-}
+			date := timestampFromPastDate(tc.time)
 
-func TestSetConfigLocation(t *testing.T) {
-	cases := []struct {
-		name  string
-		value string
-		err   string
-	}{
-		{"sets location to India Delhi", "India/Delhi", "Set must set the location to 'India/Delhi' but it didn't"},
-		{"sets language to Europe/Kiev", "Europe/Kiev", "Set must set the location to 'Europe/Kiev' but it didn't"},
-	}
-
-	for _, tc := range cases {
-		t.Run(tc.name, func(test *testing.T) {
-			config := Config{
-				Location: tc.value,
-			}
-
-			SetConfig(config)
-
-			if config.Location != tc.value {
-				test.Error(tc.err)
+			if res, _ := Parse(date); res != tc.expect {
+				t.Errorf("Result must be %q, but got %q instead", tc.expect, res)
 			}
 		})
 	}

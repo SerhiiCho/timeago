@@ -4,15 +4,15 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SerhiiCho/timeago/v2"
+	"github.com/SerhiiCho/timeago/v3"
 )
 
 const langUk = "uk"
 
 func TestParseUk(t *testing.T) {
 	cases := []struct {
-		date   time.Time
-		result string
+		date time.Time
+		res  string
 	}{
 		{subSeconds(60), "1 хвилина тому"},
 		{subMinutes(1), "1 хвилина тому"},
@@ -60,7 +60,7 @@ func TestParseUk(t *testing.T) {
 		{subMonths(11), "11 місяців тому"},
 		{subMonths(12), "1 рік тому"},
 		{subYears(1), "1 рік тому"},
-		{subYears(2), "2 року тому"},
+		{subYears(2), "2 роки тому"},
 		{subYears(5), "5 років тому"},
 		{subYears(6), "6 років тому"},
 		{subYears(7), "7 років тому"},
@@ -71,12 +71,16 @@ func TestParseUk(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			SetConfig(Config{
-				Language: langUk,
-			})
+			timeago.Reconfigure(timeago.Config{Language: langUk})
 
-			if res := Parse(tc.date); res != tc.result {
-				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
+			res, err := timeago.Parse(tc.date)
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res {
+				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
 			}
 		})
 	}
@@ -84,8 +88,8 @@ func TestParseUk(t *testing.T) {
 
 func TestParseUkWithSeconds(t *testing.T) {
 	cases := []struct {
-		date   time.Time
-		result []string
+		date time.Time
+		res  []string
 	}{
 		{subSeconds(0), []string{"0 секунд тому", "1 секунда тому"}},
 		{subSeconds(1), []string{"1 секунда тому", "2 секунди тому"}},
@@ -103,12 +107,16 @@ func TestParseUkWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			SetConfig(Config{
-				Language: langUk,
-			})
+			timeago.Reconfigure(timeago.Config{Language: langUk})
 
-			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
-				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
+			res, err := timeago.Parse(tc.date)
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res[0] && res != tc.res[1] {
+				test.Errorf("Result must be %s or %s, but got %s instead", tc.res[0], tc.res[1], res)
 			}
 		})
 	}

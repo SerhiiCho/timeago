@@ -1,19 +1,36 @@
 {
-    "Ago": "ago",
-    "Online": "Online",
-    "JustNow": "Just now",
-    "Second": "second",
-    "Seconds": "seconds",
-    "Minute": "minute",
-    "Minutes": "minutes",
-    "Hour": "hour",
-    "Hours": "hours",
-    "Day": "day",
-    "Days": "days",
-    "Week": "week",
-    "Weeks": "weeks",
-    "Month": "month",
-    "Months": "months",
-    "Year": "year",
-    "Years": "years"
+    "lang": "en",
+    "format": "{num} {timeUnit} {ago}",
+    "ago": "ago",
+    "online": "Online",
+    "justnow": "Just now",
+
+    "second": {
+        "one": "second",
+        "other": "seconds"
+    },
+    "minute": {
+        "one": "minute",
+        "other": "minutes"
+    },
+    "hour": {
+        "one": "hour",
+        "other": "hours"
+    },
+    "day": {
+        "one": "day",
+        "other": "days"
+    },
+    "week": {
+        "one": "week",
+        "other": "weeks"
+    },
+    "month": {
+        "one": "month",
+        "other": "months"
+    },
+    "year": {
+        "one": "year",
+        "other": "years"
+    }
 }

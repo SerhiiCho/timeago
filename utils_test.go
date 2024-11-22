@@ -2,76 +2,50 @@ package timeago
 
 import (
 	"encoding/json"
-	"fmt"
 	"testing"
 )
 
 func TestParseJsonIntoLang(t *testing.T) {
 	t.Run("Function returns Lang model with needed values", func(test *testing.T) {
-		result := parseJsonIntoLang("langs/ru.json")
+		res := parseLangSet("langs/ru.json")
 
-		if result.Ago != "назад" {
-			t.Errorf("Function needs to return model with value назад, but returned %v", result.Ago)
+		if res.Ago != "назад" {
+			t.Errorf("Function needs to return model with value назад, but returned %v", res.Ago)
 		}
 	})
 }
 
-func TestFileExists(t *testing.T) {
-	t.Run("fileExists return false if file doesn't exist", func(test *testing.T) {
-		result, _ := fileExists("somerandompath")
+func TestIsFilePresent(t *testing.T) {
+	t.Run("isFilePresent return false if file doesn't exist", func(test *testing.T) {
+		res, _ := isFilePresent("somerandompath")
 
-		if result {
-			t.Error("Function fileExists must return false, because filepath points to a file that doesn't exist")
+		if res {
+			t.Error("isFilePresent must return false, because filepath points to a file that doesn't exist")
 		}
 	})
 
-	t.Run("fileExists return true if file exist", func(test *testing.T) {
-		result, _ := fileExists("timeago.go")
-
-		if result == false {
-			t.Error("Function fileExists must return true, because filepath points to a file that exists")
-		}
-	})
-}
-
-func TestGetFileContent(t *testing.T) {
-	t.Run("getFileContent returns content of the file", func(test *testing.T) {
-		result := getFileContent("langs/en.json")
-
-		var js json.RawMessage
-		err := json.Unmarshal(result, &js)
+	t.Run("isFilePresent return true if file exist", func(test *testing.T) {
+		ok, err := isFilePresent("timeago.go")
 
 		if err != nil {
-			t.Errorf("Function getFileContent must return JSON object but %s returned", string(result))
+			t.Errorf("isFilePresent must return true, because filepath points to a file that exists, but returned error %v", err)
+		}
+
+		if !ok {
+			t.Error("isFilePresent must return true, because filepath points to a file that exists")
 		}
 	})
 }
 
-func TestGetLastNumberDigit(t *testing.T) {
-	cases := []struct {
-		number int
-		expect int
-	}{
-		{0, 0},
-		{1, 1},
-		{9, 9},
-		{20, 0},
-		{300, 0},
-		{-1, 1},
-		{253, 3},
-		{23423252, 2},
-		{22, 2},
-		{4444, 4},
-		{-24, 4},
-		{23423521562348, 8},
-		{23525, 5},
-	}
+func TestReadFile(t *testing.T) {
+	t.Run("readFile returns content of the file", func(test *testing.T) {
+		res := readFile("langs/en.json")
 
-	for _, tc := range cases {
-		t.Run(fmt.Sprintf("Result must be %d", tc.expect), func(test *testing.T) {
-			if res := getLastNumberDigit(tc.number); res != tc.expect {
-				test.Errorf("Result must be %d, but got %d instead", tc.expect, res)
-			}
-		})
-	}
+		var js json.RawMessage
+		err := json.Unmarshal(res, &js)
+
+		if err != nil {
+			t.Errorf("Function readFile must return JSON object but %s returned", string(res))
+		}
+	})
 }

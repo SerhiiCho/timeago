@@ -1,34 +1,51 @@
 package timeago
 
-type rule struct {
-	Single  bool
-	Plural  bool
-	Special bool
+import (
+	"strings"
+)
+
+type Rule struct {
+	Zero  bool
+	One   bool
+	Two   bool
+	Few   bool
+	Many  bool
+	Other bool
 }
 
-func getRules(number, lastDigit int) map[string]rule {
-	return map[string]rule{
-		"en": {
-			Single: number == 1,
-			Plural: number > 1 || number == 0,
+var grammarRules = func(num int) map[string]*Rule {
+	end := num % 10
+
+	return map[string]*Rule{
+		"en,nl,de": {
+			Zero: num == 0,
+			One:  num == 1,
+			Two:  num == 2,
+			Few:  num > 1,
+			Many: num > 1,
 		},
-		"ru": {
-			Special: (number >= 5 && number <= 20) || lastDigit == 0 || (lastDigit >= 5 && lastDigit <= 9),
-			Single:  lastDigit == 1,
-			Plural:  lastDigit >= 2 && lastDigit < 5,
-		},
-		"uk": {
-			Special: (number >= 5 && number <= 20) || lastDigit == 0 || (lastDigit >= 5 && lastDigit <= 9),
-			Single:  lastDigit == 1,
-			Plural:  lastDigit >= 2 && lastDigit < 5,
-		},
-		"nl": {
-			Single: number == 1,
-			Plural: number > 1 || number == 0,
-		},
-		"de": {
-			Single: number == 1,
-			Plural: number > 1 || number == 0,
+		"ru,uk": {
+			Zero: num == 0,
+			One:  num == 1 || (num > 20 && end == 1),
+			Two:  num == 2,
+			Few:  end == 2 || end == 3 || end == 4,
+			Many: (num >= 5 && num <= 20) || end == 0 || (end >= 5 && end <= 9),
 		},
 	}
+}
+
+func identifyGrammarRules(num int, lang string) (*Rule, error) {
+	rules := grammarRules(num)
+
+	if v, ok := rules[lang]; ok {
+		return v, nil
+	}
+
+	for langs, v := range rules {
+		if strings.Contains(langs, lang) {
+			return v, nil
+		}
+	}
+
+	return nil, errorf("Language '" + lang + "' not found")
 }

@@ -1,118 +1,247 @@
 package timeago
 
 import (
-	"log"
 	"math"
 	"strconv"
+	"strings"
 	"time"
 )
 
-var cachedJsonResults = map[string]lang{}
-var globalOptions = []string{}
+var (
+	// cachedJsonRes saves parsed JSON translations to prevent
+	// parsing the same JSON file multiple times.
+	cachedJsonRes = map[string]*LangSet{}
 
-// Parse coverts given datetime into `x time ago` format.
-// First argument can have 3 types:
+	// options is a list of options that modify the final output.
+	// Some options are noSuffix, upcoming, online, and justNow.
+	options = []Option{}
+
+	// conf is configuration provided by the user.
+	conf = defaultConfig()
+
+	// langSet is a pointer to the current language set that
+	// is currently being used.
+	langSet *LangSet
+)
+
+// Parse coverts privided datetime into `x time ago` format.
+// The first argument can have 3 types:
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, options ...string) string {
+func Parse(datetime interface{}, opts ...Option) (string, error) {
+	options = []Option{}
+	langSet = nil
+
 	var input time.Time
+	var err error
 
 	switch date := datetime.(type) {
 	case int:
-		input = parseTimestampIntoTime(date)
+		input = unixToTime(date)
 	case string:
-		input = parseStrIntoTime(date)
+		input, err = strToTime(date)
 	default:
 		input = datetime.(time.Time)
 	}
 
-	globalOptions = options
-
-	return parseInput(input)
-}
-
-func parseStrIntoTime(datetime string) time.Time {
-	if locationIsNotSet() {
-		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
-		return parsedTime
+	if err != nil {
+		return "", err
 	}
 
-	location, err := time.LoadLocation(config.Location)
+	enableOptions(opts)
+
+	return computeTimeSince(input)
+}
+
+// Configure applies the given configuration to the timeago without
+// overriding the previous configuration. It will only override the
+// provided configuration. If you want to override the previous
+// configurations, use Reconfigure function instead.
+func Configure(c Config) {
+	if c.Language != "" {
+		conf.Language = c.Language
+	}
+
+	if c.Location != "" {
+		conf.Location = c.Location
+	}
+
+	if len(c.Translations) > 0 {
+		conf.Translations = c.Translations
+	}
+}
+
+// Reconfigure reconfigures the timeago with the provided configuration.
+// It will override the previous configuration with the new one.
+func Reconfigure(c Config) {
+	conf = defaultConfig()
+	cachedJsonRes = map[string]*LangSet{}
+
+	Configure(c)
+}
+
+func defaultConfig() *Config {
+	return NewConfig("en", "", []LangSet{})
+}
+
+func strToTime(datetime string) (time.Time, error) {
+	if !conf.isLocationProvided() {
+		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
+		return parsedTime, nil
+	}
+
+	loc, err := location()
 
 	if err != nil {
-		log.Fatalf("Error in timeago package: %v", err)
+		return time.Time{}, err
 	}
 
-	parsedTime, _ := time.ParseInLocation("2006-01-02 15:04:05", datetime, location)
+	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
 
-	return parsedTime
+	if err != nil {
+		return time.Time{}, errorf("%v", err)
+	}
+
+	return parsedTime, nil
 }
 
-func parseInput(datetime time.Time) string {
+// location loads location from the time package
+func location() (*time.Location, error) {
+	if !conf.isLocationProvided() {
+		return time.Now().Location(), nil
+	}
+
+	loc, err := time.LoadLocation(conf.Location)
+
+	if err != nil {
+		return nil, errorf("%v", err)
+	}
+
+	return loc, nil
+}
+
+func computeTimeSince(t time.Time) (string, error) {
 	now := time.Now()
 
-	if locationIsSet() {
-		now = applyLocationToTime(now)
+	if conf.isLocationProvided() {
+		loc, err := location()
+
+		if err != nil {
+			return "", err
+		}
+
+		t = t.In(loc)
+		now = now.In(loc)
 	}
 
-	seconds := now.Sub(datetime).Seconds()
+	seconds := int(now.Sub(t).Seconds())
 
 	if seconds < 0 {
-		enableOption("upcoming")
-		seconds = math.Abs(seconds)
+		enableOption(Upcoming)
+		seconds = -seconds
 	}
 
-	switch {
-	case seconds < 60 && optionIsEnabled("online"):
-		return trans().Online
-	case seconds < 0:
-		return getWords("seconds", 0)
-	}
-
-	return calculateTheResult(int(seconds))
-}
-
-func applyLocationToTime(datetime time.Time) time.Time {
-	location, err := time.LoadLocation(config.Location)
+	set, err := newLangSet()
 
 	if err != nil {
-		log.Fatalf("Location error in timeago package: %v\n", err)
+		return "", err
 	}
 
-	return datetime.In(location)
+	langSet = set
+
+	return computeTimeUnit(seconds)
 }
 
-func calculateTheResult(seconds int) string {
-	minutes, hours, days, weeks, months, years := getTimeCalculations(float64(seconds))
+func computeTimeUnit(seconds int) (string, error) {
+	minutes, hours, days, weeks, months, years := timeCalculations(float64(seconds))
 
 	switch {
 	case optionIsEnabled("online") && seconds < 60:
-		return trans().Online
+		return langSet.Online, nil
 	case optionIsEnabled("justNow") && seconds < 60:
-		return trans().JustNow
+		return langSet.JustNow, nil
 	case seconds < 60:
-		return getWords("seconds", seconds)
+		return timeUnits(langSet.Second, seconds)
 	case minutes < 60:
-		return getWords("minutes", minutes)
+		return timeUnits(langSet.Minute, minutes)
 	case hours < 24:
-		return getWords("hours", hours)
+		return timeUnits(langSet.Hour, hours)
 	case days < 7:
-		return getWords("days", days)
+		return timeUnits(langSet.Day, days)
 	case weeks < 4:
-		return getWords("weeks", weeks)
+		return timeUnits(langSet.Week, weeks)
 	case months < 12:
 		if months == 0 {
 			months = 1
 		}
 
-		return getWords("months", months)
+		return timeUnits(langSet.Month, months)
 	}
 
-	return getWords("years", years)
+	return timeUnits(langSet.Year, years)
 }
 
-func getTimeCalculations(seconds float64) (int, int, int, int, int, int) {
+// timeUnits decides rather the word must be singular or plural,
+// and depending on the result it adds the correct word after
+// the time number.
+func timeUnits(langForm LangForms, num int) (string, error) {
+	timeUnit, err := finalTimeUnit(langForm, num)
+
+	if err != nil {
+		return "", err
+	}
+
+	res := langSet.Format
+	res = strings.Replace(res, "{timeUnit}", timeUnit, -1)
+	res = strings.Replace(res, "{num}", strconv.Itoa(num), -1)
+
+	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
+		res = strings.Replace(res, "{ago}", "", -1)
+		return strings.Trim(res, " "), nil
+	}
+
+	return strings.Replace(res, "{ago}", langSet.Ago, -1), nil
+}
+
+func finalTimeUnit(langForm LangForms, num int) (string, error) {
+	form, err := timeUnitForm(num)
+
+	if err != nil {
+		return "", err
+	}
+
+	if unit, ok := langForm[form]; ok {
+		return unit, nil
+	}
+
+	return langForm["other"], nil
+}
+
+func timeUnitForm(num int) (string, error) {
+	rule, err := identifyGrammarRules(num, conf.Language)
+
+	if err != nil {
+		return "", err
+	}
+
+	switch {
+	case rule.Zero:
+		return "zero", nil
+	case rule.One:
+		return "one", nil
+	case rule.Few:
+		return "few", nil
+	case rule.Two:
+		return "two", nil
+	case rule.Many:
+		return "many", nil
+	}
+
+	return "other", nil
+}
+
+func timeCalculations(seconds float64) (int, int, int, int, int, int) {
 	minutes := math.Round(seconds / 60)
 	hours := math.Round(seconds / 3600)
 	days := math.Round(seconds / 86400)
@@ -121,35 +250,4 @@ func getTimeCalculations(seconds float64) (int, int, int, int, int, int) {
 	years := math.Round(seconds / 31553280)
 
 	return int(minutes), int(hours), int(days), int(weeks), int(months), int(years)
-}
-
-// getWords decides rather the word must be singular or plural,
-// and depending on the result it adds the correct word after
-// the time number
-func getWords(timeKind string, num int) string {
-	form := getLanguageForm(num)
-	time := getTimeTranslations()
-
-	translation := time[timeKind][form]
-	result := strconv.Itoa(num) + " " + translation
-
-	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
-		return result
-	}
-
-	return overwriteOutput(result)
-}
-
-func optionIsEnabled(searchOption string) bool {
-	for _, option := range globalOptions {
-		if option == searchOption {
-			return true
-		}
-	}
-
-	return false
-}
-
-func enableOption(option string) {
-	globalOptions = append(globalOptions, option)
 }

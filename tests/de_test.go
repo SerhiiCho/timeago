@@ -4,15 +4,15 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/SerhiiCho/timeago/v2"
+	"github.com/SerhiiCho/timeago/v3"
 )
 
 const langDe = "de"
 
 func TestParseDe(t *testing.T) {
 	cases := []struct {
-		date   time.Time
-		result string
+		date time.Time
+		res  string
 	}{
 		{subMinutes(1), "Vor 1 Minute"},
 		{subMinutes(2), "Vor 2 Minuten"},
@@ -61,12 +61,16 @@ func TestParseDe(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			SetConfig(Config{
-				Language: langDe,
-			})
+			timeago.Reconfigure(timeago.Config{Language: langDe})
 
-			if res := Parse(tc.date); res != tc.result {
-				test.Errorf("Result must be %s, but got %s instead", tc.result, res)
+			res, err := timeago.Parse(tc.date)
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res {
+				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
 			}
 		})
 	}
@@ -74,8 +78,8 @@ func TestParseDe(t *testing.T) {
 
 func TestParseDeWithSeconds(t *testing.T) {
 	cases := []struct {
-		date   time.Time
-		result []string
+		date time.Time
+		res  []string
 	}{
 		{subSeconds(0), []string{"Vor 0 Sekunden", "Vor 1 Sekunde"}},
 		{subSeconds(1), []string{"Vor 1 Sekunde", "Vor 2 Sekunden"}},
@@ -93,12 +97,16 @@ func TestParseDeWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			SetConfig(Config{
-				Language: langDe,
-			})
+			timeago.Reconfigure(timeago.Config{Language: langDe})
 
-			if res := Parse(tc.date); res != tc.result[0] && res != tc.result[1] {
-				test.Errorf("Result must be %s or %s, but got %s instead", tc.result[0], tc.result[1], res)
+			res, err := timeago.Parse(tc.date)
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if res != tc.res[0] && res != tc.res[1] {
+				test.Errorf("Result must be %s or %s, but got %s instead", tc.res[0], tc.res[1], res)
 			}
 		})
 	}

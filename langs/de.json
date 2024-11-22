@@ -1,19 +1,36 @@
 {
-    "Ago": "Vor",
-    "Online": "Online",
-    "JustNow": "soeben",
-    "Second": "Sekunde",
-    "Seconds": "Sekunden",
-    "Minute": "Minute",
-    "Minutes": "Minuten",
-    "Hour": "Stunde",
-    "Hours": "Stunden",
-    "Day": "Tag",
-    "Days": "Tagen",
-    "Week": "Woche",
-    "Weeks": "Wochen",
-    "Month": "Monat",
-    "Months": "Monaten",
-    "Year": "Jahr",
-    "Years": "Jahren"
+    "lang": "de",
+    "format": "{ago} {num} {timeUnit}",
+    "ago": "Vor",
+    "online": "Online",
+    "justnow": "Soeben",
+
+    "second": {
+        "one": "Sekunde",
+        "other": "Sekunden"
+    },
+    "minute": {
+        "one": "Minute",
+        "other": "Minuten"
+    },
+    "hour": {
+        "one": "Stunde",
+        "other": "Stunden"
+    },
+    "day": {
+        "one": "Tag",
+        "other": "Tagen"
+    },
+    "week": {
+        "one": "Woche",
+        "other": "Wochen"
+    },
+    "month": {
+        "one": "Monat",
+        "other": "Monaten"
+    },
+    "year": {
+        "one": "Jahr",
+        "other": "Jahren"
+    }
 }
