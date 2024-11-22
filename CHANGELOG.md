@@ -1,6 +1,6 @@
 # 🗒 Release Notes
 
-## v3.0.0 (2024-11-21)
+## v3.0.0 (2024-11-22)
 > BREAKING CHANGES!
 
 [Upgrade Guide from v2 to v3](https://time-ago.github.io/v3/upgrade.html)
