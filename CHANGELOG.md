@@ -2,6 +2,7 @@
 
 ## v3.1.0 (2024-11-25)
 - Updated the `LICENSE.md` file
+- Refactored codebase to make it more readable and maintainable
 
 ## v3.0.0 (2024-11-22)
 > BREAKING CHANGES!
