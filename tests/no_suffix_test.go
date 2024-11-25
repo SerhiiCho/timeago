@@ -67,7 +67,7 @@ func TestParseWithNoSuffixFlag(t *testing.T) {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			timeago.Reconfigure(timeago.Config{Language: tc.lang})
 
-			res, err := timeago.Parse(tc.date, timeago.NoSuffix)
+			res, err := timeago.Parse(tc.date, timeago.OptNoSuffix)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)

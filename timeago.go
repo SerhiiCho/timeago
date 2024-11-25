@@ -14,7 +14,7 @@ var (
 
 	// options is a list of options that modify the final output.
 	// Some options are noSuffix, upcoming, online, and justNow.
-	options = []Option{}
+	options = []opt{}
 
 	// conf is configuration provided by the user.
 	conf = defaultConfig()
@@ -39,8 +39,8 @@ type timeNumbers struct {
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, opts ...Option) (string, error) {
-	options = []Option{}
+func Parse(datetime interface{}, opts ...opt) (string, error) {
+	options = []opt{}
 	langSet = nil
 
 	var input time.Time
@@ -142,11 +142,11 @@ func computeTimeSince(t time.Time) (string, error) {
 		return "", err
 	}
 
-	if optionIsEnabled(Online) && timeInSec < 60 {
+	if optionIsEnabled(OptOnline) && timeInSec < 60 {
 		return langSet.Online, nil
 	}
 
-	if optionIsEnabled(JustNow) && timeInSec < 60 {
+	if optionIsEnabled(OptJustNow) && timeInSec < 60 {
 		return langSet.JustNow, nil
 	}
 
@@ -181,7 +181,7 @@ func adjustTimesForLocation(t, now time.Time) (time.Time, time.Time, error) {
 func computeTimeDifference(t, now time.Time) int {
 	timeInSec := int(now.Sub(t).Seconds())
 	if timeInSec < 0 {
-		enableOption(Upcoming)
+		enableOption(OptUpcoming)
 		return -timeInSec
 	}
 
@@ -226,7 +226,7 @@ func findLangForms(timeInSec int) (LangForms, int) {
 }
 
 func computeSuffix() string {
-	if optionIsEnabled(NoSuffix) || optionIsEnabled(Upcoming) {
+	if optionIsEnabled(OptNoSuffix) || optionIsEnabled(OptUpcoming) {
 		return ""
 	}
 

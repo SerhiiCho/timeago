@@ -3,6 +3,9 @@
 ## v3.1.0 (2024-11-25)
 - Updated the `LICENSE.md` file
 - Refactored codebase to make it more readable and maintainable
+- **POTENTIAL BREAK**. Might break your code if you were using the `Option` type or option constants directly. Which wasn't documented for public use.
+    - Rename `Option` type to `opt` making it unexported
+    - Add prefix to option constants `Opt` to make them like `OptOnline`, `OptNoSuffix`, etc.
 
 ## v3.0.0 (2024-11-22)
 > BREAKING CHANGES!

@@ -67,7 +67,7 @@ func TestParseWithUpcomingFlag(t *testing.T) {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			timeago.Reconfigure(timeago.Config{Language: tc.lang})
 
-			res, err := timeago.Parse(tc.date, timeago.Upcoming)
+			res, err := timeago.Parse(tc.date, timeago.OptUpcoming)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)
