@@ -7,8 +7,6 @@ import (
 	"github.com/SerhiiCho/timeago/v3"
 )
 
-const langEn = "en"
-
 func TestParseEn(t *testing.T) {
 	cases := []struct {
 		date time.Time
@@ -55,7 +53,7 @@ func TestParseEn(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{Language: langEn})
+			timeago.Reconfigure(timeago.Config{Language: "en"})
 
 			res, err := timeago.Parse(tc.date)
 
@@ -90,7 +88,7 @@ func TestParseEnWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{Language: langEn})
+			timeago.Reconfigure(timeago.Config{Language: "en"})
 
 			res, err := timeago.Parse(tc.date)
 

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SerhiiCho/timeago/v3"
+	ago "github.com/SerhiiCho/timeago/v3"
 )
 
 func TestParseWithMultipleFlags(t *testing.T) {
@@ -45,9 +45,9 @@ func TestParseWithMultipleFlags(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{Language: langEn})
+			ago.Reconfigure(ago.Config{Language: ago.LangEn})
 
-			res, err := timeago.Parse(tc.date, timeago.OptOnline, timeago.OptNoSuffix)
+			res, err := ago.Parse(tc.date, ago.OptOnline, ago.OptNoSuffix)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)

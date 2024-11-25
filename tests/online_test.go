@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SerhiiCho/timeago/v3"
+	ago "github.com/SerhiiCho/timeago/v3"
 )
 
 func TestParseWithOnlineFlag(t *testing.T) {
@@ -61,11 +61,11 @@ func TestParseWithOnlineFlag(t *testing.T) {
 		cases = append(cases, TestCase{subSeconds(time.Duration(i)), "Online"})
 	}
 
-	timeago.Reconfigure(timeago.Config{Language: langEn})
+	ago.Reconfigure(ago.Config{Language: ago.LangEn})
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			res, err := timeago.Parse(tc.date, timeago.OptOnline)
+			res, err := ago.Parse(tc.date, ago.OptOnline)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)
@@ -101,12 +101,12 @@ func TestOnlineThresholdConfiguration(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{
-				Language:        langEn,
+			ago.Reconfigure(ago.Config{
+				Language:        ago.LangEn,
 				OnlineThreshold: tc.threshold,
 			})
 
-			out, err := timeago.Parse(tc.date, timeago.OptOnline)
+			out, err := ago.Parse(tc.date, ago.OptOnline)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)
@@ -142,12 +142,12 @@ func TestJustNowThresholdConfiguration(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{
-				Language:         langRu,
+			ago.Reconfigure(ago.Config{
+				Language:         ago.LangRu,
 				JustNowThreshold: tc.threshold,
 			})
 
-			out, err := timeago.Parse(tc.date, timeago.OptJustNow)
+			out, err := ago.Parse(tc.date, ago.OptJustNow)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)

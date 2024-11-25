@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SerhiiCho/timeago/v3"
+	ago "github.com/SerhiiCho/timeago/v3"
 )
 
 func TestParseWithUpcomingFlag(t *testing.T) {
@@ -65,9 +65,9 @@ func TestParseWithUpcomingFlag(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{Language: tc.lang})
+			ago.Reconfigure(ago.Config{Language: tc.lang})
 
-			res, err := timeago.Parse(tc.date, timeago.OptUpcoming)
+			res, err := ago.Parse(tc.date, ago.OptUpcoming)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)

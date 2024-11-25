@@ -1,11 +1,19 @@
 package timeago
 
+const (
+	LangEn string = "en"
+	LangRu string = "ru"
+	LangUk string = "uk"
+	LangNl string = "nl"
+	LangDe string = "de"
+)
+
 type Config struct {
 	// Language is an ISO 639 language code like en, ru, de, nl, etc.
-	// Default: "en".
+	// Default: LangEn ("en").
 	Language string
 
-	// Location is the timezone location neeed for parsing
+	// Location is the timezone location needed for parsing
 	// string date like "2019-01-01 00:00:00" to time.Time.
 	// If Location is not set it will default to the server's.
 	// Example: "America/New_York", "Europe/Moscow".
