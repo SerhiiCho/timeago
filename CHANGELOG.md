@@ -3,8 +3,8 @@
 ## v3.1.0 (2024-11-25)
 - Updated the `LICENSE.md` file
 - Refactored codebase to make it more readable and maintainable
-- Added `OnlineThreshold` parameter to the configurations to set the threshold for the "Online" status
-- Added `JustNowThreshold` parameter to the configurations to set the threshold for the "Just now" status
+- Added [OnlineThreshold](https://time-ago.github.io/v3/configurations.html#thresholds) parameter to the configurations to set the threshold for the "Online" status
+- Added [JustNowThreshold](https://time-ago.github.io/v3/configurations.html#thresholds) parameter to the configurations to set the threshold for the "Just now" status
 - **POTENTIAL BREAK**. Might break your code if you were using the `Option` type or option constants directly. Which wasn't documented for public use.
     - Rename `Option` type to `opt` making it unexported
     - Add prefix to option constants `Opt` to make them like `OptOnline`, `OptNoSuffix`, etc.
