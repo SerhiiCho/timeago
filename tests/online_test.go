@@ -118,3 +118,44 @@ func TestOnlineThresholdConfiguration(t *testing.T) {
 		})
 	}
 }
+
+func TestJustNowThresholdConfiguration(t *testing.T) {
+	cases := []struct {
+		date      time.Time
+		res       string
+		threshold int
+	}{
+		{subSeconds(10), "Только что", 12},
+		{subSeconds(10), "10 секунд назад", 8},
+		{subSeconds(20), "Только что", 22},
+		{subSeconds(20), "20 секунд назад", 18},
+		{subSeconds(30), "Только что", 32},
+		{subSeconds(30), "30 секунд назад", 28},
+		{subSeconds(40), "Только что", 42},
+		{subSeconds(40), "40 секунд назад", 38},
+		{subSeconds(50), "Только что", 52},
+		{subSeconds(50), "50 секунд назад", 48},
+		{subSeconds(53), "53 секунды назад", 5},
+		{subSeconds(57), "Только что", 60},
+		{subSeconds(57), "57 секунд назад", 55},
+	}
+
+	for _, tc := range cases {
+		t.Run("result for "+tc.date.String(), func(test *testing.T) {
+			timeago.Reconfigure(timeago.Config{
+				Language:         langRu,
+				JustNowThreshold: tc.threshold,
+			})
+
+			out, err := timeago.Parse(tc.date, timeago.OptJustNow)
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if out != tc.res {
+				test.Errorf("Result must be %q, but got %q instead", tc.res, out)
+			}
+		})
+	}
+}
