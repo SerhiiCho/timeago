@@ -4,9 +4,9 @@ import "testing"
 
 func TestOptionIsEnabled(t *testing.T) {
 	t.Run("returns true if option is enabled", func(test *testing.T) {
-		options = []Option{"noSuffix"}
+		options = []Option{NoSuffix}
 
-		if res := optionIsEnabled("noSuffix"); res == false {
+		if res := optionIsEnabled(NoSuffix); res == false {
 			test.Error("Result must be true, but got false instead")
 		}
 
@@ -14,9 +14,9 @@ func TestOptionIsEnabled(t *testing.T) {
 	})
 
 	t.Run("returns true if option is enabled with other option", func(test *testing.T) {
-		options = []Option{"noSuffix", "upcoming"}
+		options = []Option{NoSuffix, Upcoming}
 
-		if res := optionIsEnabled("upcoming"); res == false {
+		if res := optionIsEnabled(Upcoming); res == false {
 			test.Error("Result must be true, but got false instead")
 		}
 
@@ -24,7 +24,7 @@ func TestOptionIsEnabled(t *testing.T) {
 	})
 
 	t.Run("returns false if option is disabled", func(test *testing.T) {
-		if res := optionIsEnabled("noSuffix"); res == true {
+		if res := optionIsEnabled(NoSuffix); res == true {
 			test.Error("Result must be true, but got false instead")
 		}
 	})

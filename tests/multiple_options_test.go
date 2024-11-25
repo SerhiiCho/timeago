@@ -47,7 +47,7 @@ func TestParseWithMultipleFlags(t *testing.T) {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			timeago.Reconfigure(timeago.Config{Language: langEn})
 
-			res, err := timeago.Parse(tc.date, "online", "noSuffix")
+			res, err := timeago.Parse(tc.date, timeago.Online, timeago.NoSuffix)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)

@@ -142,11 +142,11 @@ func computeTimeSince(t time.Time) (string, error) {
 		return "", err
 	}
 
-	if optionIsEnabled("online") && timeInSec < 60 {
+	if optionIsEnabled(Online) && timeInSec < 60 {
 		return langSet.Online, nil
 	}
 
-	if optionIsEnabled("justNow") && timeInSec < 60 {
+	if optionIsEnabled(JustNow) && timeInSec < 60 {
 		return langSet.JustNow, nil
 	}
 
@@ -226,7 +226,7 @@ func findLangForms(timeInSec int) (LangForms, int) {
 }
 
 func computeSuffix() string {
-	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
+	if optionIsEnabled(NoSuffix) || optionIsEnabled(Upcoming) {
 		return ""
 	}
 
