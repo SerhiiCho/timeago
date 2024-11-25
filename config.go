@@ -23,19 +23,19 @@ type Config struct {
 	// time difference is less than the threshold, it will show "Online".
 	// Minimum value: "1"
 	// Default: "60"
-	OnlineThreshold uint
+	OnlineThreshold int
 
 	// JustNowThreshold is the threshold in seconds to determine when
 	// Timeago should show "Just now" instead of "X seconds ago". If the
 	// time difference is less than the threshold, it will show "Just now".
 	// Minimum value: "1"
 	// Default: "60"
-	JustNowThreshold uint
+	JustNowThreshold int
 }
 
 // NewConfig creates a new Config instance with the given language, location
 // and language sets to overwrite the default translations.
-func NewConfig(lang, loc string, langSets []LangSet, online, justNow uint) *Config {
+func NewConfig(lang, loc string, langSets []LangSet, online, justNow int) *Config {
 	return &Config{
 		Language:         lang,
 		Location:         loc,
