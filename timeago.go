@@ -69,6 +69,14 @@ func Parse(datetime interface{}, opts ...opt) (string, error) {
 // provided configuration. If you want to override the previous
 // configurations, use Reconfigure function instead.
 func Configure(c Config) {
+	if c.OnlineThreshold > 0 {
+		conf.OnlineThreshold = c.OnlineThreshold
+	}
+
+	if c.JustNowThreshold > 0 {
+		conf.JustNowThreshold = c.JustNowThreshold
+	}
+
 	if c.Language != "" {
 		conf.Language = c.Language
 	}
@@ -91,7 +99,7 @@ func Reconfigure(c Config) {
 }
 
 func defaultConfig() *Config {
-	return NewConfig("en", "", []LangSet{})
+	return NewConfig("en", "UTC", []LangSet{}, 60, 60)
 }
 
 func strToTime(datetime string) (time.Time, error) {
