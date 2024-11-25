@@ -27,7 +27,6 @@ func parseLangSet(fileName string) *LangSet {
 	var res LangSet
 
 	err := json.Unmarshal(content, &res)
-
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -37,7 +36,6 @@ func parseLangSet(fileName string) *LangSet {
 
 func readFile(filePath string) []byte {
 	content, err := os.ReadFile(filePath)
-
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -47,7 +45,6 @@ func readFile(filePath string) []byte {
 
 func isFilePresent(filePath string) (bool, error) {
 	_, err := os.Stat(filePath)
-
 	if err == nil {
 		return true, nil
 	}

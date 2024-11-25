@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SerhiiCho/timeago/v3"
+	ago "github.com/SerhiiCho/timeago/v3"
 )
 
 func TestParseWithOnlineFlag(t *testing.T) {
@@ -61,18 +61,100 @@ func TestParseWithOnlineFlag(t *testing.T) {
 		cases = append(cases, TestCase{subSeconds(time.Duration(i)), "Online"})
 	}
 
+	ago.Reconfigure(ago.Config{Language: ago.LangEn})
+
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{Language: langEn})
-
-			res, err := timeago.Parse(tc.date, "online")
+			res, err := ago.Parse(tc.date, ago.OptOnline)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)
 			}
 
 			if res != tc.res {
-				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
+				test.Errorf("Result must be %q, but got %q instead", tc.res, res)
+			}
+		})
+	}
+}
+
+func TestOnlineThresholdConfiguration(t *testing.T) {
+	cases := []struct {
+		date      time.Time
+		res       string
+		threshold int
+	}{
+		{subSeconds(10), "Online", 12},
+		{subSeconds(10), "10 seconds ago", 8},
+		{subSeconds(20), "Online", 22},
+		{subSeconds(20), "20 seconds ago", 18},
+		{subSeconds(30), "Online", 32},
+		{subSeconds(30), "30 seconds ago", 28},
+		{subSeconds(40), "Online", 42},
+		{subSeconds(40), "40 seconds ago", 38},
+		{subSeconds(50), "Online", 52},
+		{subSeconds(50), "50 seconds ago", 48},
+		{subSeconds(53), "53 seconds ago", 5},
+		{subSeconds(57), "Online", 60},
+		{subSeconds(57), "57 seconds ago", 55},
+	}
+
+	for _, tc := range cases {
+		t.Run("result for "+tc.date.String(), func(test *testing.T) {
+			ago.Reconfigure(ago.Config{
+				Language:        ago.LangEn,
+				OnlineThreshold: tc.threshold,
+			})
+
+			out, err := ago.Parse(tc.date, ago.OptOnline)
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if out != tc.res {
+				test.Errorf("Result must be %q, but got %q instead", tc.res, out)
+			}
+		})
+	}
+}
+
+func TestJustNowThresholdConfiguration(t *testing.T) {
+	cases := []struct {
+		date      time.Time
+		res       string
+		threshold int
+	}{
+		{subSeconds(10), "Только что", 12},
+		{subSeconds(10), "10 секунд назад", 8},
+		{subSeconds(20), "Только что", 22},
+		{subSeconds(20), "20 секунд назад", 18},
+		{subSeconds(30), "Только что", 32},
+		{subSeconds(30), "30 секунд назад", 28},
+		{subSeconds(40), "Только что", 42},
+		{subSeconds(40), "40 секунд назад", 38},
+		{subSeconds(50), "Только что", 52},
+		{subSeconds(50), "50 секунд назад", 48},
+		{subSeconds(53), "53 секунды назад", 5},
+		{subSeconds(57), "Только что", 60},
+		{subSeconds(57), "57 секунд назад", 55},
+	}
+
+	for _, tc := range cases {
+		t.Run("result for "+tc.date.String(), func(test *testing.T) {
+			ago.Reconfigure(ago.Config{
+				Language:         ago.LangRu,
+				JustNowThreshold: tc.threshold,
+			})
+
+			out, err := ago.Parse(tc.date, ago.OptJustNow)
+
+			if err != nil {
+				test.Errorf("Error must be nil, but got %v instead", err)
+			}
+
+			if out != tc.res {
+				test.Errorf("Result must be %q, but got %q instead", tc.res, out)
 			}
 		})
 	}

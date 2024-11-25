@@ -1,0 +1,15 @@
+{
+    "lang": "zh",
+    "format": "{num}{timeUnit}{ago}",
+    "ago": "前",
+    "online": "在线",
+    "justnow": "刚刚",
+
+    "second": {"other": "秒"},
+    "minute": {"other": "分钟"},
+    "hour": {"other": "小时"},
+    "day": {"other": "天"},
+    "week": {"other": "周"},
+    "month": {"other": "个月"},
+    "year": {"other": "年"}
+}

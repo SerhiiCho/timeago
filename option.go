@@ -1,27 +1,44 @@
 package timeago
 
+type opt string
+
 const (
-	Upcoming Option = "upcoming"
-	Online   Option = "online"
-	JustNow  Option = "justNow"
-	NoSuffix Option = "noSuffix"
+	// OptUpcoming option removes the suffix "ago" when the date is
+	// in the future. This option is enabled by default, there
+	// is no need to pass it. It's available to keep backward
+	// compatibility with the previous versions.
+	OptUpcoming opt = "upcoming"
+
+	// Upcoming option displays "OptOnline" if date interval withing
+	// the OnlineThreshold provided in config. By default, it's
+	// 60 seconds. For example instead of "13 seconds ago" it will
+	// print "Online".
+	OptOnline opt = "online"
+
+	// OptJustNow option displays "Just now" if date interval withing
+	// the JustNowThreshold provided in config. By default, it's
+	// 60 seconds. For example instead of "32 seconds ago" it will
+	// print "Just now".
+	OptJustNow opt = "justNow"
+
+	// OptNoSuffix option removes suffix from datetime result and get
+	// for example "5 minutes" instead of "5 minutes ago".
+	OptNoSuffix opt = "noSuffix"
 )
 
-type Option string
-
-func enableOption(opt Option) {
-	options = append(options, opt)
+func enableOption(o opt) {
+	options = append(options, o)
 }
 
-func enableOptions(opts []Option) {
+func enableOptions(opts []opt) {
 	for _, opt := range opts {
 		enableOption(opt)
 	}
 }
 
-func optionIsEnabled(opt Option) bool {
+func optionIsEnabled(o opt) bool {
 	for _, option := range options {
-		if option == opt {
+		if option == o {
 			return true
 		}
 	}

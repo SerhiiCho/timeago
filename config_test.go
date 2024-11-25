@@ -5,19 +5,29 @@ import (
 	"time"
 )
 
-func TestLocationIsSet(t *testing.T) {
+func TestIsLocationProvided(t *testing.T) {
 	cases := []struct {
 		name   string
 		loc    string
 		expect bool
 	}{
 		{
-			name:   "Location is set",
-			loc:    "Russia/Moscow",
+			name:   "Location is set to Europe/Paris",
+			loc:    "Europe/Paris",
+			expect: true,
+		},
+		{
+			name:   "Location is set to Asia/Shanghai",
+			loc:    "Asia/Shanghai",
 			expect: true,
 		},
 		{
 			name:   "Location is not set",
+			loc:    "UTC",
+			expect: false,
+		},
+		{
+			name:   "Location is empty",
 			loc:    "",
 			expect: false,
 		},
@@ -25,7 +35,7 @@ func TestLocationIsSet(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			c := NewConfig("ru", tc.loc, []LangSet{})
+			c := NewConfig("en", tc.loc, []LangSet{}, 60, 60)
 			actual := c.isLocationProvided()
 
 			if actual != tc.expect {

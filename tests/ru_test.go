@@ -4,10 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SerhiiCho/timeago/v3"
+	ago "github.com/SerhiiCho/timeago/v3"
 )
-
-const langRu = "ru"
 
 func TestParseRu(t *testing.T) {
 	cases := []struct {
@@ -56,9 +54,9 @@ func TestParseRu(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{Language: langRu})
+			ago.Reconfigure(ago.Config{Language: ago.LangRu})
 
-			res, err := timeago.Parse(tc.date)
+			res, err := ago.Parse(tc.date)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)
@@ -92,9 +90,9 @@ func TestParseRuWithSeconds(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			timeago.Reconfigure(timeago.Config{Language: langRu})
+			ago.Reconfigure(ago.Config{Language: ago.LangRu})
 
-			res, err := timeago.Parse(tc.date)
+			res, err := ago.Parse(tc.date)
 
 			if err != nil {
 				test.Errorf("Error must be nil, but got %v instead", err)

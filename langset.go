@@ -25,7 +25,6 @@ type LangSet struct {
 
 func newLangSet() (*LangSet, error) {
 	_, filename, _, ok := runtime.Caller(0)
-
 	if !ok {
 		return nil, errorf("No called information")
 	}

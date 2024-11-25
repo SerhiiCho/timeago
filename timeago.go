@@ -14,7 +14,7 @@ var (
 
 	// options is a list of options that modify the final output.
 	// Some options are noSuffix, upcoming, online, and justNow.
-	options = []Option{}
+	options = []opt{}
 
 	// conf is configuration provided by the user.
 	conf = defaultConfig()
@@ -24,13 +24,23 @@ var (
 	langSet *LangSet
 )
 
+type timeNumbers struct {
+	Seconds int
+	Minutes int
+	Hours   int
+	Days    int
+	Weeks   int
+	Months  int
+	Years   int
+}
+
 // Parse coverts privided datetime into `x time ago` format.
 // The first argument can have 3 types:
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, opts ...Option) (string, error) {
-	options = []Option{}
+func Parse(datetime interface{}, opts ...opt) (string, error) {
+	options = []opt{}
 	langSet = nil
 
 	var input time.Time
@@ -59,6 +69,14 @@ func Parse(datetime interface{}, opts ...Option) (string, error) {
 // provided configuration. If you want to override the previous
 // configurations, use Reconfigure function instead.
 func Configure(c Config) {
+	if c.OnlineThreshold > 0 {
+		conf.OnlineThreshold = c.OnlineThreshold
+	}
+
+	if c.JustNowThreshold > 0 {
+		conf.JustNowThreshold = c.JustNowThreshold
+	}
+
 	if c.Language != "" {
 		conf.Language = c.Language
 	}
@@ -77,12 +95,11 @@ func Configure(c Config) {
 func Reconfigure(c Config) {
 	conf = defaultConfig()
 	cachedJsonRes = map[string]*LangSet{}
-
 	Configure(c)
 }
 
 func defaultConfig() *Config {
-	return NewConfig("en", "", []LangSet{})
+	return NewConfig("en", "UTC", []LangSet{}, 60, 60)
 }
 
 func strToTime(datetime string) (time.Time, error) {
@@ -92,13 +109,11 @@ func strToTime(datetime string) (time.Time, error) {
 	}
 
 	loc, err := location()
-
 	if err != nil {
 		return time.Time{}, err
 	}
 
 	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
-
 	if err != nil {
 		return time.Time{}, errorf("%v", err)
 	}
@@ -113,7 +128,6 @@ func location() (*time.Location, error) {
 	}
 
 	loc, err := time.LoadLocation(conf.Location)
-
 	if err != nil {
 		return nil, errorf("%v", err)
 	}
@@ -123,90 +137,131 @@ func location() (*time.Location, error) {
 
 func computeTimeSince(t time.Time) (string, error) {
 	now := time.Now()
+	var err error
 
-	if conf.isLocationProvided() {
-		loc, err := location()
-
-		if err != nil {
-			return "", err
-		}
-
-		t = t.In(loc)
-		now = now.In(loc)
-	}
-
-	seconds := int(now.Sub(t).Seconds())
-
-	if seconds < 0 {
-		enableOption(Upcoming)
-		seconds = -seconds
-	}
-
-	set, err := newLangSet()
-
-	if err != nil {
+	// Adjust times based on location if provided
+	if t, now, err = adjustTimesForLocation(t, now); err != nil {
 		return "", err
 	}
 
-	langSet = set
+	timeInSec := computeTimeDifference(t, now)
 
-	return computeTimeUnit(seconds)
+	if langSet, err = newLangSet(); err != nil {
+		return "", err
+	}
+
+	if optionIsEnabled(OptOnline) && timeInSec < conf.OnlineThreshold {
+		return langSet.Online, nil
+	}
+
+	if optionIsEnabled(OptJustNow) && timeInSec < conf.JustNowThreshold {
+		return langSet.JustNow, nil
+	}
+
+	var timeUnit string
+
+	langForms, timeNum := findLangForms(timeInSec)
+
+	if timeUnit, err = computeTimeUnit(langForms, timeNum); err != nil {
+		return "", err
+	}
+
+	suffix := computeSuffix()
+
+	return mergeFinalOutput(timeNum, timeUnit, suffix)
 }
 
-func computeTimeUnit(seconds int) (string, error) {
-	minutes, hours, days, weeks, months, years := timeCalculations(float64(seconds))
+// adjustTimesForLocation adjusts the given times based on the provided location.
+func adjustTimesForLocation(t, now time.Time) (time.Time, time.Time, error) {
+	if !conf.isLocationProvided() {
+		return t, now, nil
+	}
+
+	loc, err := location()
+	if err != nil {
+		return t, now, err
+	}
+
+	return t.In(loc), now.In(loc), nil
+}
+
+// computeTimeDifference returns the absolute time difference in seconds.
+func computeTimeDifference(t, now time.Time) int {
+	timeInSec := int(now.Sub(t).Seconds())
+	if timeInSec < 0 {
+		enableOption(OptUpcoming)
+		return -timeInSec
+	}
+
+	return timeInSec
+}
+
+func mergeFinalOutput(timeNum int, timeUnit, suffix string) (string, error) {
+	replacer := strings.NewReplacer(
+		"{timeUnit}", timeUnit,
+		"{num}", strconv.Itoa(timeNum),
+		"{ago}", suffix,
+	)
+
+	out := replacer.Replace(langSet.Format)
+
+	return strings.TrimSpace(out), nil
+}
+
+func findLangForms(timeInSec int) (LangForms, int) {
+	nums := calculateTimeNumbers(float64(timeInSec))
 
 	switch {
-	case optionIsEnabled("online") && seconds < 60:
-		return langSet.Online, nil
-	case optionIsEnabled("justNow") && seconds < 60:
-		return langSet.JustNow, nil
-	case seconds < 60:
-		return timeUnits(langSet.Second, seconds)
-	case minutes < 60:
-		return timeUnits(langSet.Minute, minutes)
-	case hours < 24:
-		return timeUnits(langSet.Hour, hours)
-	case days < 7:
-		return timeUnits(langSet.Day, days)
-	case weeks < 4:
-		return timeUnits(langSet.Week, weeks)
-	case months < 12:
-		if months == 0 {
-			months = 1
+	case timeInSec < 60:
+		return langSet.Second, nums.Seconds
+	case nums.Minutes < 60:
+		return langSet.Minute, nums.Minutes
+	case nums.Hours < 24:
+		return langSet.Hour, nums.Hours
+	case nums.Days < 7:
+		return langSet.Day, nums.Days
+	case nums.Weeks < 4:
+		return langSet.Week, nums.Weeks
+	case nums.Months < 12:
+		if nums.Months == 0 {
+			nums.Months = 1
 		}
 
-		return timeUnits(langSet.Month, months)
+		return langSet.Month, nums.Months
 	}
 
-	return timeUnits(langSet.Year, years)
+	return langSet.Year, nums.Years
 }
 
-// timeUnits decides rather the word must be singular or plural,
-// and depending on the result it adds the correct word after
-// the time number.
-func timeUnits(langForm LangForms, num int) (string, error) {
-	timeUnit, err := finalTimeUnit(langForm, num)
-
-	if err != nil {
-		return "", err
+func computeSuffix() string {
+	if optionIsEnabled(OptNoSuffix) || optionIsEnabled(OptUpcoming) {
+		return ""
 	}
 
-	res := langSet.Format
-	res = strings.Replace(res, "{timeUnit}", timeUnit, -1)
-	res = strings.Replace(res, "{num}", strconv.Itoa(num), -1)
-
-	if optionIsEnabled("noSuffix") || optionIsEnabled("upcoming") {
-		res = strings.Replace(res, "{ago}", "", -1)
-		return strings.Trim(res, " "), nil
-	}
-
-	return strings.Replace(res, "{ago}", langSet.Ago, -1), nil
+	return langSet.Ago
 }
 
-func finalTimeUnit(langForm LangForms, num int) (string, error) {
+func calculateTimeNumbers(seconds float64) timeNumbers {
+	minutes := math.Round(seconds / 60)
+	hours := math.Round(seconds / 3600)
+	days := math.Round(seconds / 86400)
+	weeks := math.Round(seconds / 604800)
+	months := math.Round(seconds / 2629440)
+	years := math.Round(seconds / 31553280)
+
+	return timeNumbers{
+		Seconds: int(seconds),
+		Minutes: int(minutes),
+		Hours:   int(hours),
+		Days:    int(days),
+		Weeks:   int(weeks),
+		Months:  int(months),
+		Years:   int(years),
+	}
+}
+
+func computeTimeUnit(langForm LangForms, num int) (string, error) {
 	form, err := timeUnitForm(num)
-
 	if err != nil {
 		return "", err
 	}
@@ -220,7 +275,6 @@ func finalTimeUnit(langForm LangForms, num int) (string, error) {
 
 func timeUnitForm(num int) (string, error) {
 	rule, err := identifyGrammarRules(num, conf.Language)
-
 	if err != nil {
 		return "", err
 	}
@@ -239,15 +293,4 @@ func timeUnitForm(num int) (string, error) {
 	}
 
 	return "other", nil
-}
-
-func timeCalculations(seconds float64) (int, int, int, int, int, int) {
-	minutes := math.Round(seconds / 60)
-	hours := math.Round(seconds / 3600)
-	days := math.Round(seconds / 86400)
-	weeks := math.Round(seconds / 604800)
-	months := math.Round(seconds / 2629440)
-	years := math.Round(seconds / 31553280)
-
-	return int(minutes), int(hours), int(days), int(weeks), int(months), int(years)
 }
