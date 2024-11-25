@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func TestLocationIsSet(t *testing.T) {
+func TestIsLocationProvided(t *testing.T) {
 	cases := []struct {
 		name   string
 		loc    string
@@ -25,7 +25,7 @@ func TestLocationIsSet(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			c := NewConfig("ru", tc.loc, []LangSet{})
+			c := defaultConfig()
 			actual := c.isLocationProvided()
 
 			if actual != tc.expect {

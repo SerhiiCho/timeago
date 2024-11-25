@@ -10,13 +10,15 @@ const (
 	OptUpcoming opt = "upcoming"
 
 	// Upcoming option displays "OptOnline" if date interval withing
-	// 60 seconds. For example instead of "13 seconds ago"
-	// prints "OptOnline".
+	// the OnlineThreshold provided in config. By default, it's
+	// 60 seconds. For example instead of "13 seconds ago" it will
+	// print "Online".
 	OptOnline opt = "online"
 
 	// OptJustNow option displays "Just now" if date interval withing
-	// 60 seconds. For example instead of "32 seconds ago" prints
-	// "Just now".
+	// the JustNowThreshold provided in config. By default, it's
+	// 60 seconds. For example instead of "32 seconds ago" it will
+	// print "Just now".
 	OptJustNow opt = "justNow"
 
 	// OptNoSuffix option removes suffix from datetime result and get
