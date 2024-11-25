@@ -6,6 +6,7 @@ const (
 	LangUk string = "uk"
 	LangNl string = "nl"
 	LangDe string = "de"
+	LangZh string = "zh"
 )
 
 type Config struct {
