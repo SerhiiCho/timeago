@@ -5,32 +5,11 @@
     "online": "Online",
     "justnow": "Soeben",
 
-    "second": {
-        "one": "Sekunde",
-        "other": "Sekunden"
-    },
-    "minute": {
-        "one": "Minute",
-        "other": "Minuten"
-    },
-    "hour": {
-        "one": "Stunde",
-        "other": "Stunden"
-    },
-    "day": {
-        "one": "Tag",
-        "other": "Tagen"
-    },
-    "week": {
-        "one": "Woche",
-        "other": "Wochen"
-    },
-    "month": {
-        "one": "Monat",
-        "other": "Monaten"
-    },
-    "year": {
-        "one": "Jahr",
-        "other": "Jahren"
-    }
+    "second": {"one": "Sekunde", "other": "Sekunden"},
+    "minute": {"one": "Minute", "other": "Minuten"},
+    "hour": {"one": "Stunde", "other": "Stunden"},
+    "day": {"one": "Tag", "other": "Tagen"},
+    "week": {"one": "Woche", "other": "Wochen"},
+    "month": {"one": "Monat", "other": "Monaten"},
+    "year": {"one": "Jahr", "other": "Jahren"}
 }
