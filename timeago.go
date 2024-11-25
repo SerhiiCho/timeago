@@ -1,7 +1,6 @@
 package timeago
 
 import (
-	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -150,9 +149,6 @@ func computeTimeSince(t time.Time) (string, error) {
 	if langSet, err = newLangSet(); err != nil {
 		return "", err
 	}
-
-	fmt.Printf("-------> %#v\n", timeInSec)
-	fmt.Printf("-------> %#v\n", timeInSec < conf.OnlineThreshold)
 
 	if optionIsEnabled(OptOnline) && timeInSec < conf.OnlineThreshold {
 		return langSet.Online, nil
