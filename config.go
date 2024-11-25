@@ -46,5 +46,5 @@ func NewConfig(lang, loc string, langSets []LangSet, online, justNow int) *Confi
 }
 
 func (c Config) isLocationProvided() bool {
-	return c.Location != ""
+	return c.Location != "UTC" && c.Location != ""
 }

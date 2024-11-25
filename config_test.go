@@ -6,14 +6,40 @@ import (
 )
 
 func TestIsLocationProvided(t *testing.T) {
-	cases := []string{"Europe/Moscow", "UTC", "America/New_York", ""}
+	cases := []struct {
+		name   string
+		loc    string
+		expect bool
+	}{
+		{
+			name:   "Location is set to Europe/Paris",
+			loc:    "Europe/Paris",
+			expect: true,
+		},
+		{
+			name:   "Location is set to Asia/Shanghai",
+			loc:    "Asia/Shanghai",
+			expect: true,
+		},
+		{
+			name:   "Location is not set",
+			loc:    "UTC",
+			expect: false,
+		},
+		{
+			name:   "Location is empty",
+			loc:    "",
+			expect: false,
+		},
+	}
 
 	for _, tc := range cases {
-		t.Run(tc, func(t *testing.T) {
-			c := defaultConfig()
+		t.Run(tc.name, func(t *testing.T) {
+			c := NewConfig("en", tc.loc, []LangSet{}, 60, 60)
+			actual := c.isLocationProvided()
 
-			if !c.isLocationProvided() {
-				t.Fatalf("Expected location to be provided, but got %v", tc)
+			if actual != tc.expect {
+				t.Fatalf("Expected %v, but got %v", tc.expect, actual)
 			}
 		})
 	}
