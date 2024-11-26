@@ -7,6 +7,7 @@ const (
 	LangNl string = "nl" // Dutch
 	LangDe string = "de" // German
 	LangZh string = "zh" // Chinese
+	LangBe string = "be" // Belarusian
 )
 
 type Config struct {

@@ -1,5 +1,8 @@
 # Release Notes v3
 
+## v3.2.0 (2024-11-27)
+- Added support for Belarusian language 🇧🇾
+
 ## v3.1.0 (2024-11-25)
 - Updated the `LICENSE.md` file
 - Refactored codebase to make it more readable and maintainable

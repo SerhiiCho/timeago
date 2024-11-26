@@ -24,7 +24,7 @@ var grammarRules = func(num int) map[string]*Rule {
 			Few:  num > 1,
 			Many: num > 1,
 		},
-		"ru,uk": {
+		"ru,uk,be": {
 			Zero: num == 0,
 			One:  num == 1 || (num > 20 && end == 1),
 			Two:  num == 2,
