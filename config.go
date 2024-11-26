@@ -8,6 +8,7 @@ const (
 	LangDe string = "de" // German
 	LangZh string = "zh" // Chinese
 	LangBe string = "be" // Belarusian
+	LangEs string = "es" // Spanish
 )
 
 type Config struct {

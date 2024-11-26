@@ -17,7 +17,7 @@ var grammarRules = func(num int) map[string]*Rule {
 	end := num % 10
 
 	return map[string]*Rule{
-		"en,nl,de": {
+		"en,nl,de,es": {
 			Zero: num == 0,
 			One:  num == 1,
 			Two:  num == 2,
