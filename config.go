@@ -1,12 +1,12 @@
 package timeago
 
 const (
-	LangEn string = "en"
-	LangRu string = "ru"
-	LangUk string = "uk"
-	LangNl string = "nl"
-	LangDe string = "de"
-	LangZh string = "zh"
+	LangEn string = "en" // English
+	LangRu string = "ru" // Russian
+	LangUk string = "uk" // Ukrainian
+	LangNl string = "nl" // Dutch
+	LangDe string = "de" // German
+	LangZh string = "zh" // Chinese
 )
 
 type Config struct {
