@@ -24,7 +24,7 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		{timestampFromPastDate(time.Hour * 24 * 7), "1 week ago"},
 	}
 
-	Reconfigure(Config{Language: "en"})
+	Reconfigure(Config{Language: LangEn})
 
 	for _, tc := range cases {
 		t.Run(tc.res, func(t *testing.T) {
@@ -59,7 +59,7 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 		{time.Now().Add(-time.Hour * 11), "11 hours ago"},
 	}
 
-	Reconfigure(Config{Language: "en"})
+	Reconfigure(Config{Language: LangEn})
 
 	for _, tc := range cases {
 		t.Run("Test for date "+tc.date.String(), func(t *testing.T) {
