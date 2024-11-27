@@ -33,7 +33,7 @@ var grammarRules = func(num int) map[string]*Rule {
 			Few:  end == 2 || end == 3 || end == 4,
 			Many: (num >= 5 && num <= 20) || end == 0 || (end >= 5 && end <= 9),
 		},
-		"zh": {
+		"zh,ja": {
 			Zero: true,
 			One:  true,
 			Two:  true,
