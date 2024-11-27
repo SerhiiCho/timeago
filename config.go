@@ -10,6 +10,7 @@ const (
 	LangBe string = "be" // Belarusian
 	LangEs string = "es" // Spanish
 	LangJa string = "ja" // Japanese
+	LangFr string = "fr" // French
 )
 
 type Config struct {

@@ -1,0 +1,15 @@
+{
+    "lang": "fr",
+    "format": "{num} {timeUnit} {ago}",
+    "ago": "il y a",
+    "online": "En ligne",
+    "justnow": "À l'instant",
+
+    "second": {"one": "seconde", "other": "secondes"},
+    "minute": {"one": "minute", "other": "minutes"},
+    "hour": {"one": "heure", "other": "heures"},
+    "day": {"one": "jour", "other": "jours"},
+    "week": {"one": "semaine", "other": "semaines"},
+    "month": {"one": "mois", "other": "mois"},
+    "year": {"one": "an", "other": "ans"}
+}
