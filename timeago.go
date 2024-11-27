@@ -113,7 +113,7 @@ func strToTime(datetime string) (time.Time, error) {
 		return time.Time{}, err
 	}
 
-	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
+	parsedTime, err := time.ParseInLocation(time.DateTime, dateTime, loc)
 	if err != nil {
 		return time.Time{}, errorf("%v", err)
 	}
