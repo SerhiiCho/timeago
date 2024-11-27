@@ -3,6 +3,7 @@
 ## v3.2.0 (2024-11-27)
 - Added support for Belarusian language 🇧🇾
 - Added support for Spanish language 🇪🇸
+- Code refactoring and improvements for better readability and maintainability
 
 ## v3.1.0 (2024-11-25)
 - Updated the `LICENSE.md` file

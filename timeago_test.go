@@ -48,17 +48,17 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 		date time.Time
 		res  string
 	}{
-		{time.Now().Add(-time.Minute), "1 minute ago"},
-		{time.Now().Add(-time.Minute * 2), "2 minutes ago"},
-		{time.Now().Add(-time.Minute * 3), "3 minutes ago"},
-		{time.Now().Add(-time.Minute * 4), "4 minutes ago"},
-		{time.Now().Add(-time.Minute * 5), "5 minutes ago"},
-		{time.Now().Add(-time.Minute * 6), "6 minutes ago"},
-		{time.Now().Add(-time.Hour * 7), "7 hours ago"},
-		{time.Now().Add(-time.Hour * 8), "8 hours ago"},
-		{time.Now().Add(-time.Hour * 9), "9 hours ago"},
-		{time.Now().Add(-time.Hour * 10), "10 hours ago"},
-		{time.Now().Add(-time.Hour * 11), "11 hours ago"},
+		{utils.SubMinutes(1), "1 minute ago"},
+		{utils.SubMinutes(2), "2 minutes ago"},
+		{utils.SubMinutes(3), "3 minutes ago"},
+		{utils.SubMinutes(4), "4 minutes ago"},
+		{utils.SubMinutes(5), "5 minutes ago"},
+		{utils.SubMinutes(6), "6 minutes ago"},
+		{utils.SubHours(7), "7 hours ago"},
+		{utils.SubHours(8), "8 hours ago"},
+		{utils.SubHours(9), "9 hours ago"},
+		{utils.SubHours(10), "10 hours ago"},
+		{utils.SubHours(11), "11 hours ago"},
 	}
 
 	Reconfigure(Config{Language: LangEn})
@@ -83,12 +83,12 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 		date time.Time
 		res  string
 	}{
-		{time.Now().Add(time.Minute * 2), "2 minutes"},
-		{time.Now().Add(time.Minute * 5), "5 minutes"},
-		{time.Now().Add(time.Minute * 10), "10 minutes"},
-		{time.Now().Add(time.Hour), "1 hour"},
-		{time.Now().Add(time.Hour * 24), "1 day"},
-		{time.Now().Add(time.Hour * 48), "2 days"},
+		{utils.AddMinutes(2), "2 minutes"},
+		{utils.AddMinutes(5), "5 minutes"},
+		{utils.AddMinutes(10), "10 minutes"},
+		{utils.AddHours(1), "1 hour"},
+		{utils.AddHours(24), "1 day"},
+		{utils.AddHours(48), "2 days"},
 	}
 
 	Reconfigure(Config{Language: LangEn})

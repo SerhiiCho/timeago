@@ -6,7 +6,7 @@ import (
 )
 
 func UnixFromPastDate(subDuration time.Duration) int {
-	return int(time.Now().Add(-subDuration).UnixNano() / 1000000000)
+	return int(SubTime(subDuration).UnixNano() / 1000000000)
 }
 
 func Errorf(msg string, a ...interface{}) error {

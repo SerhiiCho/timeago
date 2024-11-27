@@ -16,6 +16,10 @@ func SubTime(duration time.Duration) time.Time {
 	return time.Now().Add(-duration)
 }
 
+func AddTime(duration time.Duration) time.Time {
+	return time.Now().Add(duration)
+}
+
 func SubSeconds(duration time.Duration) time.Time {
 	return SubTime(second * duration)
 }
@@ -24,8 +28,16 @@ func SubMinutes(duration time.Duration) time.Time {
 	return SubTime(minute * duration)
 }
 
+func AddMinutes(duration time.Duration) time.Time {
+	return AddTime(minute * duration)
+}
+
 func SubHours(duration time.Duration) time.Time {
 	return SubTime(hour * duration)
+}
+
+func AddHours(duration time.Duration) time.Time {
+	return AddTime(hour * duration)
 }
 
 func SubDays(duration time.Duration) time.Time {
