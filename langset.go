@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"path"
 	"runtime"
+
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 type LangForms map[string]string
@@ -26,7 +28,7 @@ type LangSet struct {
 func newLangSet() (*LangSet, error) {
 	_, filename, _, ok := runtime.Caller(0)
 	if !ok {
-		return nil, errorf("No called information")
+		return nil, utils.Errorf("No called information")
 	}
 
 	rootPath := path.Dir(filename)

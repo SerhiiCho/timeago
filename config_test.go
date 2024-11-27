@@ -3,6 +3,8 @@ package timeago
 import (
 	"testing"
 	"time"
+
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 func TestIsLocationProvided(t *testing.T) {
@@ -89,7 +91,7 @@ func TestCustomTranslations(t *testing.T) {
 				Translations: []LangSet{tc.langSet},
 			})
 
-			date := timestampFromPastDate(tc.time)
+			date := utils.UnixFromPastDate(tc.time)
 
 			if res, _ := Parse(date); res != tc.expect {
 				t.Errorf("Result must be %q, but got %q instead", tc.expect, res)

@@ -3,6 +3,8 @@ package timeago
 import (
 	"testing"
 	"time"
+
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 func TestParseFunctionCanExceptTimestamp(t *testing.T) {
@@ -10,18 +12,18 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		date int
 		res  string
 	}{
-		{timestampFromPastDate(time.Minute), "1 minute ago"},
-		{timestampFromPastDate(time.Minute * 5), "5 minutes ago"},
-		{timestampFromPastDate(time.Hour), "1 hour ago"},
-		{timestampFromPastDate(time.Hour * 3), "3 hours ago"},
-		{timestampFromPastDate(time.Hour * 5), "5 hours ago"},
-		{timestampFromPastDate(time.Hour * 24), "1 day ago"},
-		{timestampFromPastDate(time.Hour * 24 * 2), "2 days ago"},
-		{timestampFromPastDate(time.Hour * 24 * 3), "3 days ago"},
-		{timestampFromPastDate(time.Hour * 24 * 4), "4 days ago"},
-		{timestampFromPastDate(time.Hour * 24 * 5), "5 days ago"},
-		{timestampFromPastDate(time.Hour * 24 * 6), "6 days ago"},
-		{timestampFromPastDate(time.Hour * 24 * 7), "1 week ago"},
+		{utils.UnixFromPastDate(time.Minute), "1 minute ago"},
+		{utils.UnixFromPastDate(time.Minute * 5), "5 minutes ago"},
+		{utils.UnixFromPastDate(time.Hour), "1 hour ago"},
+		{utils.UnixFromPastDate(time.Hour * 3), "3 hours ago"},
+		{utils.UnixFromPastDate(time.Hour * 5), "5 hours ago"},
+		{utils.UnixFromPastDate(time.Hour * 24), "1 day ago"},
+		{utils.UnixFromPastDate(time.Hour * 24 * 2), "2 days ago"},
+		{utils.UnixFromPastDate(time.Hour * 24 * 3), "3 days ago"},
+		{utils.UnixFromPastDate(time.Hour * 24 * 4), "4 days ago"},
+		{utils.UnixFromPastDate(time.Hour * 24 * 5), "5 days ago"},
+		{utils.UnixFromPastDate(time.Hour * 24 * 6), "6 days ago"},
+		{utils.UnixFromPastDate(time.Hour * 24 * 7), "1 week ago"},
 	}
 
 	Reconfigure(Config{Language: LangEn})

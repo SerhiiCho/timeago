@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 var (
@@ -115,7 +117,7 @@ func strToTime(userDate string) (time.Time, error) {
 
 	parsedTime, err := time.ParseInLocation(time.DateTime, userDate, loc)
 	if err != nil {
-		return time.Time{}, errorf("%v", err)
+		return time.Time{}, utils.Errorf("%v", err)
 	}
 
 	return parsedTime, nil
@@ -129,7 +131,7 @@ func location() (*time.Location, error) {
 
 	loc, err := time.LoadLocation(conf.Location)
 	if err != nil {
-		return nil, errorf("%v", err)
+		return nil, utils.Errorf("%v", err)
 	}
 
 	return loc, nil
