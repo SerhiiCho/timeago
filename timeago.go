@@ -39,20 +39,20 @@ type timeNumbers struct {
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, opts ...opt) (string, error) {
+func Parse(date interface{}, opts ...opt) (string, error) {
 	options = []opt{}
 	langSet = nil
 
 	var t time.Time
 	var err error
 
-	switch inpDate := datetime.(type) {
+	switch userDate := date.(type) {
 	case int:
-		t = unixToTime(inpDate)
+		t = unixToTime(userDate)
 	case string:
-		t, err = strToTime(inpDate)
+		t, err = strToTime(userDate)
 	default:
-		t = datetime.(time.Time)
+		t = date.(time.Time)
 	}
 
 	if err != nil {
@@ -102,9 +102,9 @@ func defaultConfig() *Config {
 	return NewConfig("en", "UTC", []LangSet{}, 60, 60)
 }
 
-func strToTime(datetime string) (time.Time, error) {
+func strToTime(userDate string) (time.Time, error) {
 	if !conf.isLocationProvided() {
-		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
+		parsedTime, _ := time.Parse(time.DateTime, userDate)
 		return parsedTime, nil
 	}
 
@@ -113,7 +113,7 @@ func strToTime(datetime string) (time.Time, error) {
 		return time.Time{}, err
 	}
 
-	parsedTime, err := time.ParseInLocation(time.DateTime, dateTime, loc)
+	parsedTime, err := time.ParseInLocation(time.DateTime, userDate, loc)
 	if err != nil {
 		return time.Time{}, errorf("%v", err)
 	}
