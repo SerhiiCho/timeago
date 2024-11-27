@@ -89,7 +89,7 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 		{time.Now().Add(time.Hour * 48), "2 days"},
 	}
 
-	Reconfigure(Config{Language: "en"})
+	Reconfigure(Config{Language: LangEn})
 
 	for _, tc := range testCases {
 		t.Run("Test for date: "+tc.date.String(), func(t *testing.T) {
