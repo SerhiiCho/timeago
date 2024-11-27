@@ -2,6 +2,8 @@ package timeago
 
 import (
 	"strings"
+
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 type Rule struct {
@@ -17,21 +19,21 @@ var grammarRules = func(num int) map[string]*Rule {
 	end := num % 10
 
 	return map[string]*Rule{
-		"en,nl,de": {
+		"en,nl,de,es,fr": {
 			Zero: num == 0,
 			One:  num == 1,
 			Two:  num == 2,
 			Few:  num > 1,
 			Many: num > 1,
 		},
-		"ru,uk": {
+		"ru,uk,be": {
 			Zero: num == 0,
 			One:  num == 1 || (num > 20 && end == 1),
 			Two:  num == 2,
 			Few:  end == 2 || end == 3 || end == 4,
 			Many: (num >= 5 && num <= 20) || end == 0 || (end >= 5 && end <= 9),
 		},
-		"zh": {
+		"zh,ja": {
 			Zero: true,
 			One:  true,
 			Two:  true,
@@ -54,5 +56,5 @@ func identifyGrammarRules(num int, lang string) (*Rule, error) {
 		}
 	}
 
-	return nil, errorf("Language '" + lang + "' not found")
+	return nil, utils.Errorf("Language '" + lang + "' not found")
 }

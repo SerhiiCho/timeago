@@ -5,23 +5,24 @@ import (
 	"time"
 
 	ago "github.com/SerhiiCho/timeago/v3"
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 func TestJustNowOption(t *testing.T) {
 	cases := []struct {
 		date time.Time
 	}{
-		{subSeconds(0)},
-		{subSeconds(1)},
-		{subSeconds(2)},
-		{subSeconds(9)},
-		{subSeconds(10)},
-		{subSeconds(11)},
-		{subSeconds(20)},
-		{subSeconds(21)},
-		{subSeconds(22)},
-		{subSeconds(30)},
-		{subSeconds(58)},
+		{utils.SubSeconds(0)},
+		{utils.SubSeconds(1)},
+		{utils.SubSeconds(2)},
+		{utils.SubSeconds(9)},
+		{utils.SubSeconds(10)},
+		{utils.SubSeconds(11)},
+		{utils.SubSeconds(20)},
+		{utils.SubSeconds(21)},
+		{utils.SubSeconds(22)},
+		{utils.SubSeconds(30)},
+		{utils.SubSeconds(58)},
 	}
 
 	for _, tc := range cases {

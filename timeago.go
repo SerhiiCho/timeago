@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 var (
@@ -39,20 +41,20 @@ type timeNumbers struct {
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
 // 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
-func Parse(datetime interface{}, opts ...opt) (string, error) {
+func Parse(date interface{}, opts ...opt) (string, error) {
 	options = []opt{}
 	langSet = nil
 
-	var input time.Time
+	var t time.Time
 	var err error
 
-	switch date := datetime.(type) {
+	switch userDate := date.(type) {
 	case int:
-		input = unixToTime(date)
+		t = unixToTime(userDate)
 	case string:
-		input, err = strToTime(date)
+		t, err = strToTime(userDate)
 	default:
-		input = datetime.(time.Time)
+		t = date.(time.Time)
 	}
 
 	if err != nil {
@@ -61,7 +63,7 @@ func Parse(datetime interface{}, opts ...opt) (string, error) {
 
 	enableOptions(opts)
 
-	return computeTimeSince(input)
+	return computeTimeSince(t)
 }
 
 // Configure applies the given configuration to the timeago without
@@ -102,9 +104,9 @@ func defaultConfig() *Config {
 	return NewConfig("en", "UTC", []LangSet{}, 60, 60)
 }
 
-func strToTime(datetime string) (time.Time, error) {
+func strToTime(userDate string) (time.Time, error) {
 	if !conf.isLocationProvided() {
-		parsedTime, _ := time.Parse("2006-01-02 15:04:05", datetime)
+		parsedTime, _ := time.Parse(time.DateTime, userDate)
 		return parsedTime, nil
 	}
 
@@ -113,9 +115,9 @@ func strToTime(datetime string) (time.Time, error) {
 		return time.Time{}, err
 	}
 
-	parsedTime, err := time.ParseInLocation("2006-01-02 15:04:05", datetime, loc)
+	parsedTime, err := time.ParseInLocation(time.DateTime, userDate, loc)
 	if err != nil {
-		return time.Time{}, errorf("%v", err)
+		return time.Time{}, utils.Errorf("%v", err)
 	}
 
 	return parsedTime, nil
@@ -129,7 +131,7 @@ func location() (*time.Location, error) {
 
 	loc, err := time.LoadLocation(conf.Location)
 	if err != nil {
-		return nil, errorf("%v", err)
+		return nil, utils.Errorf("%v", err)
 	}
 
 	return loc, nil

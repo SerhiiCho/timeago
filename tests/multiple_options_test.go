@@ -5,6 +5,7 @@ import (
 	"time"
 
 	ago "github.com/SerhiiCho/timeago/v3"
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 func TestParseWithMultipleFlags(t *testing.T) {
@@ -17,30 +18,30 @@ func TestParseWithMultipleFlags(t *testing.T) {
 		date time.Time
 		res  string
 	}{
-		{subMinutes(1), "1 minute"},
-		{subMinutes(5), "5 minutes"},
-		{subMinutes(10), "10 minutes"},
-		{subMinutes(30), "30 minutes"},
-		{subMinutes(31), "31 minutes"},
-		{subHours(1), "1 hour"},
-		{subHours(11), "11 hours"},
-		{subHours(20), "20 hours"},
-		{subDays(6), "6 days"},
-		{subWeeks(1), "1 week"},
-		{subWeeks(2), "2 weeks"},
-		{subWeeks(3), "3 weeks"},
-		{subMonths(1), "1 month"},
-		{subMonths(6), "6 months"},
-		{subMonths(8), "8 months"},
-		{subMonths(9), "9 months"},
-		{subMonths(11), "11 months"},
-		{subMonths(1), "1 month"},
-		{subYears(2), "2 years"},
-		{subYears(44), "44 years"},
+		{utils.SubMinutes(1), "1 minute"},
+		{utils.SubMinutes(5), "5 minutes"},
+		{utils.SubMinutes(10), "10 minutes"},
+		{utils.SubMinutes(30), "30 minutes"},
+		{utils.SubMinutes(31), "31 minutes"},
+		{utils.SubHours(1), "1 hour"},
+		{utils.SubHours(11), "11 hours"},
+		{utils.SubHours(20), "20 hours"},
+		{utils.SubDays(6), "6 days"},
+		{utils.SubWeeks(1), "1 week"},
+		{utils.SubWeeks(2), "2 weeks"},
+		{utils.SubWeeks(3), "3 weeks"},
+		{utils.SubMonths(1), "1 month"},
+		{utils.SubMonths(6), "6 months"},
+		{utils.SubMonths(8), "8 months"},
+		{utils.SubMonths(9), "9 months"},
+		{utils.SubMonths(11), "11 months"},
+		{utils.SubMonths(1), "1 month"},
+		{utils.SubYears(2), "2 years"},
+		{utils.SubYears(44), "44 years"},
 	}
 
 	for i := 0; i < 60; i++ {
-		cases = append(cases, TestCase{subSeconds(time.Duration(i)), "Online"})
+		cases = append(cases, TestCase{utils.SubSeconds(time.Duration(i)), "Online"})
 	}
 
 	for _, tc := range cases {

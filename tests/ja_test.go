@@ -8,43 +8,43 @@ import (
 	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
-func TestParseZh(t *testing.T) {
+func TestParseJa(t *testing.T) {
 	cases := []struct {
 		date time.Time
 		res  string
 	}{
-		{utils.SubMinutes(1), "1分钟前"},
-		{utils.SubMinutes(2), "2分钟前"},
-		{utils.SubMinutes(5), "5分钟前"},
-		{utils.SubMinutes(9), "9分钟前"},
-		{utils.SubMinutes(10), "10分钟前"},
-		{utils.SubMinutes(11), "11分钟前"},
-		{utils.SubMinutes(20), "20分钟前"},
-		{utils.SubMinutes(21), "21分钟前"},
-		{utils.SubMinutes(22), "22分钟前"},
-		{utils.SubMinutes(30), "30分钟前"},
-		{utils.SubMinutes(31), "31分钟前"},
-		{utils.SubMinutes(59), "59分钟前"},
-		{utils.SubHours(1), "1小时前"},
-		{utils.SubHours(2), "2小时前"},
-		{utils.SubHours(9), "9小时前"},
-		{utils.SubHours(10), "10小时前"},
-		{utils.SubHours(11), "11小时前"},
-		{utils.SubHours(20), "20小时前"},
-		{utils.SubHours(21), "21小时前"},
-		{utils.SubHours(23), "23小时前"},
-		{utils.SubDays(1), "1天前"},
-		{utils.SubDays(2), "2天前"},
-		{utils.SubDays(4), "4天前"},
-		{utils.SubDays(5), "5天前"},
-		{utils.SubDays(6), "6天前"},
-		{utils.SubWeeks(1), "1周前"},
-		{utils.SubWeeks(2), "2周前"},
-		{utils.SubWeeks(3), "3周前"},
-		{utils.SubMonths(1), "1个月前"},
-		{utils.SubMonths(2), "2个月前"},
-		{utils.SubMonths(9), "9个月前"},
-		{utils.SubMonths(11), "11个月前"},
+		{utils.SubMinutes(1), "1分前"},
+		{utils.SubMinutes(2), "2分前"},
+		{utils.SubMinutes(5), "5分前"},
+		{utils.SubMinutes(9), "9分前"},
+		{utils.SubMinutes(10), "10分前"},
+		{utils.SubMinutes(11), "11分前"},
+		{utils.SubMinutes(20), "20分前"},
+		{utils.SubMinutes(21), "21分前"},
+		{utils.SubMinutes(22), "22分前"},
+		{utils.SubMinutes(30), "30分前"},
+		{utils.SubMinutes(31), "31分前"},
+		{utils.SubMinutes(59), "59分前"},
+		{utils.SubHours(1), "1時間前"},
+		{utils.SubHours(2), "2時間前"},
+		{utils.SubHours(9), "9時間前"},
+		{utils.SubHours(10), "10時間前"},
+		{utils.SubHours(11), "11時間前"},
+		{utils.SubHours(20), "20時間前"},
+		{utils.SubHours(21), "21時間前"},
+		{utils.SubHours(23), "23時間前"},
+		{utils.SubDays(1), "1日前"},
+		{utils.SubDays(2), "2日前"},
+		{utils.SubDays(4), "4日前"},
+		{utils.SubDays(5), "5日前"},
+		{utils.SubDays(6), "6日前"},
+		{utils.SubWeeks(1), "1週間前"},
+		{utils.SubWeeks(2), "2週間前"},
+		{utils.SubWeeks(3), "3週間前"},
+		{utils.SubMonths(1), "1ヶ月前"},
+		{utils.SubMonths(2), "2ヶ月前"},
+		{utils.SubMonths(9), "9ヶ月前"},
+		{utils.SubMonths(11), "11ヶ月前"},
 		{utils.SubYears(1), "1年前"},
 		{utils.SubYears(2), "2年前"},
 		{utils.SubYears(21), "21年前"},
@@ -54,7 +54,7 @@ func TestParseZh(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			ago.Reconfigure(ago.Config{Language: ago.LangZh})
+			ago.Reconfigure(ago.Config{Language: ago.LangJa})
 
 			res, err := ago.Parse(tc.date)
 
@@ -69,7 +69,7 @@ func TestParseZh(t *testing.T) {
 	}
 }
 
-func TestParseZhWithSeconds(t *testing.T) {
+func TestParseJaWithSeconds(t *testing.T) {
 	cases := []struct {
 		date time.Time
 		res  []string
@@ -84,12 +84,12 @@ func TestParseZhWithSeconds(t *testing.T) {
 		{utils.SubSeconds(21), []string{"21秒前", "22秒前"}},
 		{utils.SubSeconds(22), []string{"22秒前", "23秒前"}},
 		{utils.SubSeconds(30), []string{"30秒前", "31秒前"}},
-		{utils.SubSeconds(59), []string{"59秒前", "1分钟前"}},
+		{utils.SubSeconds(59), []string{"59秒前", "1分前"}},
 	}
 
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
-			ago.Reconfigure(ago.Config{Language: ago.LangZh})
+			ago.Reconfigure(ago.Config{Language: ago.LangJa})
 
 			res, err := ago.Parse(tc.date)
 

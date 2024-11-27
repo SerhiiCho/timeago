@@ -1,0 +1,15 @@
+{
+    "lang": "ja",
+    "format": "{num}{timeUnit}{ago}",
+    "ago": "前",
+    "online": "オンライン",
+    "justnow": "たった今",
+
+    "second": {"other": "秒"},
+    "minute": {"other": "分"},
+    "hour": {"other": "時間"},
+    "day": {"other": "日"},
+    "week": {"other": "週間"},
+    "month": {"other": "ヶ月"},
+    "year": {"other": "年"}
+}

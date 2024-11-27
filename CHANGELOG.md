@@ -1,5 +1,12 @@
 # Release Notes v3
 
+## v3.2.0 (2024-11-27)
+- Added support for Belarusian language 🇧🇾
+- Added support for Spanish language 🇪🇸
+- Added support for Japanese language 🇯🇵
+- Added support for French language 🇫🇷
+- Code refactoring and improvements for better readability and maintainability
+
 ## v3.1.0 (2024-11-25)
 - Updated the `LICENSE.md` file
 - Refactored codebase to make it more readable and maintainable
