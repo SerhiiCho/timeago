@@ -43,16 +43,16 @@ func Parse(datetime interface{}, opts ...opt) (string, error) {
 	options = []opt{}
 	langSet = nil
 
-	var input time.Time
+	var t time.Time
 	var err error
 
-	switch date := datetime.(type) {
+	switch inpDate := datetime.(type) {
 	case int:
-		input = unixToTime(date)
+		t = unixToTime(inpDate)
 	case string:
-		input, err = strToTime(date)
+		t, err = strToTime(inpDate)
 	default:
-		input = datetime.(time.Time)
+		t = datetime.(time.Time)
 	}
 
 	if err != nil {
@@ -61,7 +61,7 @@ func Parse(datetime interface{}, opts ...opt) (string, error) {
 
 	enableOptions(opts)
 
-	return computeTimeSince(input)
+	return computeTimeSince(t)
 }
 
 // Configure applies the given configuration to the timeago without
