@@ -1,6 +1,6 @@
 {
     "lang": "fr",
-    "format": "{num} {timeUnit} {ago}",
+    "format": "{ago} {num} {timeUnit}",
     "ago": "il y a",
     "online": "En ligne",
     "justnow": "À l'instant",

@@ -63,7 +63,7 @@ func TestParseFr(t *testing.T) {
 			}
 
 			if res != tc.res {
-				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
+				test.Errorf("Result must be %q, but got %q instead", tc.res, res)
 			}
 		})
 	}
@@ -74,7 +74,7 @@ func TestParseFrWithSeconds(t *testing.T) {
 		date time.Time
 		res  []string
 	}{
-		{utils.SubSeconds(0), []string{"il y a 0 seconde", "il y a 1 seconde"}},
+		{utils.SubSeconds(0), []string{"il y a 0 secondes", "il y a 1 seconde"}},
 		{utils.SubSeconds(1), []string{"il y a 1 seconde", "il y a 2 secondes"}},
 		{utils.SubSeconds(2), []string{"il y a 2 secondes", "il y a 3 secondes"}},
 		{utils.SubSeconds(9), []string{"il y a 9 secondes", "il y a 10 secondes"}},
@@ -98,7 +98,7 @@ func TestParseFrWithSeconds(t *testing.T) {
 			}
 
 			if res != tc.res[0] && res != tc.res[1] {
-				test.Errorf("Result must be %s or %s, but got %s instead", tc.res[0], tc.res[1], res)
+				test.Errorf("Result must be %q or %q, but got %q instead", tc.res[0], tc.res[1], res)
 			}
 		})
 	}
