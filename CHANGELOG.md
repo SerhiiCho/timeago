@@ -1,5 +1,9 @@
 # Release Notes v3
 
+## v3.2.1 (2024-12-06)
+- Bug fix with incorrect Russian, Ukrainian, and Belarusian languages rules
+- Added more tests for Russian, Ukrainian, and Belarusian languages for testing seconds
+
 ## v3.2.0 (2024-11-27)
 - Added support for Belarusian language 🇧🇾
 - Added support for Spanish language 🇪🇸
