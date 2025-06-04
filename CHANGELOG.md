@@ -1,5 +1,8 @@
 # Release Notes v3
 
+## v3.2.2 (2025-06-04)
+- Remove support for go version 1.13, 1.14, 1.15 because they do not have `go:embed`
+
 ## v3.2.1 (2024-12-06)
 - Bug fix with incorrect Russian, Ukrainian, and Belarusian languages rules
 - Added more tests for Russian, Ukrainian, and Belarusian languages for testing seconds
