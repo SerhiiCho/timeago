@@ -1,12 +1,12 @@
 package timeago
 
 import (
+	"embed"
 	"fmt"
-	"path"
-	"runtime"
-
-	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
+
+//go:embed langs/*.json
+var langsFS embed.FS
 
 type LangForms map[string]string
 
@@ -26,19 +26,17 @@ type LangSet struct {
 }
 
 func newLangSet() (*LangSet, error) {
-	_, filename, _, ok := runtime.Caller(0)
-	if !ok {
-		return nil, utils.Errorf("No called information")
-	}
-
-	rootPath := path.Dir(filename)
-	filePath := fmt.Sprintf(rootPath+"/langs/%s.json", conf.Language)
+	filePath := fmt.Sprintf("langs/%s.json", conf.Language)
 
 	if cache, ok := cachedJsonRes[filePath]; ok {
 		return cache, nil
 	}
 
-	langSet := parseLangSet(filePath)
+	langSet, err := parseLangSet(filePath)
+	if err != nil {
+		return nil, err
+	}
+
 	langSet = applyCustomTranslations(langSet)
 
 	cachedJsonRes[filePath] = langSet
