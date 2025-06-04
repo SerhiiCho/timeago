@@ -32,7 +32,7 @@ func newLangSet() (*LangSet, error) {
 		return cache, nil
 	}
 
-	langSet, err := parseLangSet(filePath, langsFS)
+	langSet, err := parseLangSet(filePath)
 	if err != nil {
 		return nil, err
 	}

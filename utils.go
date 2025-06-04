@@ -1,7 +1,6 @@
 package timeago
 
 import (
-	"embed"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -14,7 +13,7 @@ func unixToTime(userDate int) time.Time {
 	return time.Unix(int64(userDate), 0)
 }
 
-func parseLangSet(filePath string, fs embed.FS) (*LangSet, error) {
+func parseLangSet(filePath string) (*LangSet, error) {
 	content, err := langsFS.ReadFile(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("could not read language file: %w", err)
