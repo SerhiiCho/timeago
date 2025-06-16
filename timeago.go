@@ -40,7 +40,7 @@ type timeNumbers struct {
 // The first argument can different types of inputs:
 // 1. Unix timestamp: int, int32, int64, unit, uint32, uint64, string
 // 2. Type from Go time package: time.Time
-// 3. Datetime string in format 'YYYY-MM-DD HH:MM:SS')
+// 3. Datetime string in format 'YYYY-MM-DD HH:MM:SS': string
 func Parse(date interface{}, opts ...opt) (string, error) {
 	options = []opt{}
 	langSet = nil
@@ -51,7 +51,15 @@ func Parse(date interface{}, opts ...opt) (string, error) {
 	switch userDate := date.(type) {
 	case int:
 		t = unixToTime(userDate)
+	case int32:
+		t = unixToTime(int(userDate))
 	case int64:
+		t = unixToTime(int(userDate))
+	case uint:
+		t = unixToTime(int(userDate))
+	case uint32:
+		t = unixToTime(int(userDate))
+	case uint64:
 		t = unixToTime(int(userDate))
 	case string:
 		if isUnsignedInteger(userDate) {
