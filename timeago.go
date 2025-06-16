@@ -36,7 +36,7 @@ type timeNumbers struct {
 	Years   int
 }
 
-// Parse coverts privided datetime into `x time ago` format.
+// Parse coverts provided datetime into `x time ago` format.
 // The first argument can have 3 types:
 // 1. int (Unix timestamp)
 // 2. time.Time (Type from Go time package)
@@ -52,7 +52,11 @@ func Parse(date interface{}, opts ...opt) (string, error) {
 	case int:
 		t = unixToTime(userDate)
 	case string:
-		t, err = strToTime(userDate)
+		if isUnsignedInteger(userDate) {
+			t, err = strTimestampToTime(userDate)
+		} else {
+			t, err = strToTime(userDate)
+		}
 	default:
 		t = date.(time.Time)
 	}
@@ -102,6 +106,15 @@ func Reconfigure(c Config) {
 
 func defaultConfig() *Config {
 	return NewConfig("en", "UTC", []LangSet{}, 60, 60)
+}
+
+func strTimestampToTime(userDate string) (time.Time, error) {
+	sec, err := strconv.Atoi(userDate)
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return unixToTime(sec), nil
 }
 
 func strToTime(userDate string) (time.Time, error) {

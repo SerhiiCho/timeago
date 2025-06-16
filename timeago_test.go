@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"strconv"
 	"testing"
 	"time"
 
@@ -12,6 +13,7 @@ func TestParse(t *testing.T) {
 		date interface{}
 		res  string
 	}{
+		// Integer timestamp input parsing
 		{utils.UnixFromPastDate(time.Minute), "1 minute ago"},
 		{utils.UnixFromPastDate(time.Minute * 5), "5 minutes ago"},
 		{utils.UnixFromPastDate(time.Hour), "1 hour ago"},
@@ -24,6 +26,7 @@ func TestParse(t *testing.T) {
 		{utils.UnixFromPastDate(time.Hour * 24 * 5), "5 days ago"},
 		{utils.UnixFromPastDate(time.Hour * 24 * 6), "6 days ago"},
 		{utils.UnixFromPastDate(time.Hour * 24 * 7), "1 week ago"},
+		// time.Time input parsing
 		{utils.SubMinutes(1), "1 minute ago"},
 		{utils.SubMinutes(2), "2 minutes ago"},
 		{utils.SubMinutes(3), "3 minutes ago"},
@@ -35,12 +38,26 @@ func TestParse(t *testing.T) {
 		{utils.SubHours(9), "9 hours ago"},
 		{utils.SubHours(10), "10 hours ago"},
 		{utils.SubHours(11), "11 hours ago"},
+		// time.Time future date parsing
 		{utils.AddMinutes(2), "2 minutes"},
 		{utils.AddMinutes(5), "5 minutes"},
 		{utils.AddMinutes(10), "10 minutes"},
 		{utils.AddHours(1), "1 hour"},
 		{utils.AddHours(24), "1 day"},
 		{utils.AddHours(48), "2 days"},
+		// Timestamp string input parsing
+		{strconv.Itoa(utils.UnixFromPastDate(time.Minute)), "1 minute ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Minute * 5)), "5 minutes ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour)), "1 hour ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 3)), "3 hours ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 5)), "5 hours ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 24)), "1 day ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 24 * 2)), "2 days ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 24 * 3)), "3 days ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 24 * 4)), "4 days ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 24 * 5)), "5 days ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 24 * 6)), "6 days ago"},
+		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 24 * 7)), "1 week ago"},
 	}
 
 	Reconfigure(Config{Language: LangEn})

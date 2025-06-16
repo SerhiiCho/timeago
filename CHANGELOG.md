@@ -1,5 +1,8 @@
 # Release Notes v3
 
+## v3.3.0 (2025-06-16)
+- Now you can parse string timestamps. E.g. `out, err := timeago.Parse("1642607826")`
+
 ## v3.2.2 (2025-06-04)
 - Change so that all JSON files are included in the final binary by using `go:embed` functionality
 - Remove support for go version 1.13, 1.14, 1.15 because they do not have `go:embed`
