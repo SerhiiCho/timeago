@@ -7,9 +7,9 @@ import (
 	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
-func TestParseFunctionCanExceptTimestamp(t *testing.T) {
+func TestParse(t *testing.T) {
 	cases := []struct {
-		date int
+		date interface{}
 		res  string
 	}{
 		{utils.UnixFromPastDate(time.Minute), "1 minute ago"},
@@ -24,30 +24,6 @@ func TestParseFunctionCanExceptTimestamp(t *testing.T) {
 		{utils.UnixFromPastDate(time.Hour * 24 * 5), "5 days ago"},
 		{utils.UnixFromPastDate(time.Hour * 24 * 6), "6 days ago"},
 		{utils.UnixFromPastDate(time.Hour * 24 * 7), "1 week ago"},
-	}
-
-	Reconfigure(Config{Language: LangEn})
-
-	for _, tc := range cases {
-		t.Run(tc.res, func(t *testing.T) {
-			res, err := Parse(tc.date)
-
-			if err != nil {
-				t.Errorf("Error must be nil, but got %q instead", err)
-			}
-
-			if res != tc.res {
-				t.Errorf("Result must be %q, but got %q instead", tc.res, res)
-			}
-		})
-	}
-}
-
-func TestParseFunctionCanExceptTimePackage(t *testing.T) {
-	cases := []struct {
-		date time.Time
-		res  string
-	}{
 		{utils.SubMinutes(1), "1 minute ago"},
 		{utils.SubMinutes(2), "2 minutes ago"},
 		{utils.SubMinutes(3), "3 minutes ago"},
@@ -59,30 +35,6 @@ func TestParseFunctionCanExceptTimePackage(t *testing.T) {
 		{utils.SubHours(9), "9 hours ago"},
 		{utils.SubHours(10), "10 hours ago"},
 		{utils.SubHours(11), "11 hours ago"},
-	}
-
-	Reconfigure(Config{Language: LangEn})
-
-	for _, tc := range cases {
-		t.Run("Test for date "+tc.date.String(), func(t *testing.T) {
-			res, err := Parse(tc.date)
-
-			if err != nil {
-				t.Errorf("Error must be nil, but got %q instead", err)
-			}
-
-			if res != tc.res {
-				t.Errorf("Result must be %q, but got %q instead", tc.res, res)
-			}
-		})
-	}
-}
-
-func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
-	testCases := []struct {
-		date time.Time
-		res  string
-	}{
 		{utils.AddMinutes(2), "2 minutes"},
 		{utils.AddMinutes(5), "5 minutes"},
 		{utils.AddMinutes(10), "10 minutes"},
@@ -93,8 +45,8 @@ func TestParseFuncWillCalculateIntervalToFutureDate(t *testing.T) {
 
 	Reconfigure(Config{Language: LangEn})
 
-	for _, tc := range testCases {
-		t.Run("Test for date: "+tc.date.String(), func(t *testing.T) {
+	for _, tc := range cases {
+		t.Run(tc.res, func(t *testing.T) {
 			res, err := Parse(tc.date)
 
 			if err != nil {
