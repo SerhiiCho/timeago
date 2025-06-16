@@ -51,6 +51,8 @@ func Parse(date interface{}, opts ...opt) (string, error) {
 	switch userDate := date.(type) {
 	case int:
 		t = unixToTime(userDate)
+	case int64:
+		t = unixToTime(int(userDate))
 	case string:
 		if isUnsignedInteger(userDate) {
 			t, err = strTimestampToTime(userDate)

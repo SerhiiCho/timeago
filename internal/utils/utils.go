@@ -19,6 +19,10 @@ func UnixFromPastDate(subDuration time.Duration) int {
 	return int(SubTime(subDuration).UnixNano() / 1000000000)
 }
 
+func UnixFromFutureDate(duration time.Duration) int {
+	return int(AddTime(duration).UnixNano() / 1000000000)
+}
+
 func Errorf(msg string, a ...interface{}) error {
 	return fmt.Errorf("[Timeago]: "+msg, a...)
 }

@@ -26,6 +26,18 @@ func TestParse(t *testing.T) {
 		{utils.UnixFromPastDate(time.Hour * 24 * 5), "5 days ago"},
 		{utils.UnixFromPastDate(time.Hour * 24 * 6), "6 days ago"},
 		{utils.UnixFromPastDate(time.Hour * 24 * 7), "1 week ago"},
+		// Integer 64 timestamp input parsing
+		{int64(utils.UnixFromPastDate(time.Minute * 5)), "5 minutes ago"},
+		{int64(utils.UnixFromPastDate(time.Hour)), "1 hour ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 3)), "3 hours ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 5)), "5 hours ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 24)), "1 day ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 24 * 2)), "2 days ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 24 * 3)), "3 days ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 24 * 4)), "4 days ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 24 * 5)), "5 days ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 24 * 6)), "6 days ago"},
+		{int64(utils.UnixFromPastDate(time.Hour * 24 * 7)), "1 week ago"},
 		// time.Time input parsing
 		{utils.SubMinutes(1), "1 minute ago"},
 		{utils.SubMinutes(2), "2 minutes ago"},
