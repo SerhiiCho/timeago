@@ -36,11 +36,11 @@ type timeNumbers struct {
 	Years   int
 }
 
-// Parse coverts privided datetime into `x time ago` format.
-// The first argument can have 3 types:
-// 1. int (Unix timestamp)
-// 2. time.Time (Type from Go time package)
-// 3. string (Datetime string in format 'YYYY-MM-DD HH:MM:SS')
+// Parse coverts provided datetime into `x time ago` format.
+// The first argument can different types of inputs:
+// 1. Unix timestamp: int, int32, int64, unit, uint32, uint64, string
+// 2. Type from Go time package: time.Time
+// 3. Datetime string in format 'YYYY-MM-DD HH:MM:SS': string
 func Parse(date interface{}, opts ...opt) (string, error) {
 	options = []opt{}
 	langSet = nil
@@ -51,8 +51,22 @@ func Parse(date interface{}, opts ...opt) (string, error) {
 	switch userDate := date.(type) {
 	case int:
 		t = unixToTime(userDate)
+	case int32:
+		t = unixToTime(int(userDate))
+	case int64:
+		t = unixToTime(int(userDate))
+	case uint:
+		t = unixToTime(int(userDate))
+	case uint32:
+		t = unixToTime(int(userDate))
+	case uint64:
+		t = unixToTime(int(userDate))
 	case string:
-		t, err = strToTime(userDate)
+		if isUnsignedInteger(userDate) {
+			t, err = strTimestampToTime(userDate)
+		} else {
+			t, err = strToTime(userDate)
+		}
 	default:
 		t = date.(time.Time)
 	}
@@ -102,6 +116,15 @@ func Reconfigure(c Config) {
 
 func defaultConfig() *Config {
 	return NewConfig("en", "UTC", []LangSet{}, 60, 60)
+}
+
+func strTimestampToTime(userDate string) (time.Time, error) {
+	sec, err := strconv.Atoi(userDate)
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return unixToTime(sec), nil
 }
 
 func strToTime(userDate string) (time.Time, error) {
