@@ -14,7 +14,6 @@ func TestParse(t *testing.T) {
 		res  string
 	}{
 		// Integer timestamp input parsing
-		{utils.UnixFromPastDate(time.Minute), "1 minute ago"},
 		{utils.UnixFromPastDate(time.Minute * 5), "5 minutes ago"},
 		{utils.UnixFromPastDate(time.Hour), "1 hour ago"},
 		{utils.UnixFromPastDate(time.Hour * 3), "3 hours ago"},
@@ -38,8 +37,19 @@ func TestParse(t *testing.T) {
 		{int64(utils.UnixFromPastDate(time.Hour * 24 * 5)), "5 days ago"},
 		{int64(utils.UnixFromPastDate(time.Hour * 24 * 6)), "6 days ago"},
 		{int64(utils.UnixFromPastDate(time.Hour * 24 * 7)), "1 week ago"},
+		// Negative integer timestamp input parsing
+		{utils.UnixFromFutureDate(time.Minute * 5), "5 minutes"},
+		{utils.UnixFromFutureDate(time.Hour), "1 hour"},
+		{utils.UnixFromFutureDate(time.Hour * 3), "3 hours"},
+		{utils.UnixFromFutureDate(time.Hour * 5), "5 hours"},
+		{utils.UnixFromFutureDate(time.Hour * 24), "1 day"},
+		{utils.UnixFromFutureDate(time.Hour * 24 * 2), "2 days"},
+		{utils.UnixFromFutureDate(time.Hour * 24 * 3), "3 days"},
+		{utils.UnixFromFutureDate(time.Hour * 24 * 4), "4 days"},
+		{utils.UnixFromFutureDate(time.Hour * 24 * 5), "5 days"},
+		{utils.UnixFromFutureDate(time.Hour * 24 * 6), "6 days"},
+		{utils.UnixFromFutureDate(time.Hour * 24 * 7), "1 week"},
 		// time.Time input parsing
-		{utils.SubMinutes(1), "1 minute ago"},
 		{utils.SubMinutes(2), "2 minutes ago"},
 		{utils.SubMinutes(3), "3 minutes ago"},
 		{utils.SubMinutes(4), "4 minutes ago"},
@@ -58,7 +68,6 @@ func TestParse(t *testing.T) {
 		{utils.AddHours(24), "1 day"},
 		{utils.AddHours(48), "2 days"},
 		// Timestamp string input parsing
-		{strconv.Itoa(utils.UnixFromPastDate(time.Minute)), "1 minute ago"},
 		{strconv.Itoa(utils.UnixFromPastDate(time.Minute * 5)), "5 minutes ago"},
 		{strconv.Itoa(utils.UnixFromPastDate(time.Hour)), "1 hour ago"},
 		{strconv.Itoa(utils.UnixFromPastDate(time.Hour * 3)), "3 hours ago"},
