@@ -27,3 +27,22 @@ Here are some of the naming conventions used in the codebase and their meanings 
 
 ## License
 This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md).
+
+## Development
+### Without Docker
+You'll need to have Go installed on your machine. Also, if you want to run Makefile commands, you'll need to have `make` installed as well.
+
+### With Docker
+#### Build an image
+To build an image, navigate to the root of the project that contains `Dockerfile` and run this command:
+```bash
+docker compose build
+```
+
+#### Run the container
+To run a container, navigate to the root of the project that contains `Dockerfile` and run this command to enter the Linux container with Go installed:
+```bash
+docker compose run --rm app
+```
+
+Inside of this container you'll be able to run `make` commands like `make test` to run tests.

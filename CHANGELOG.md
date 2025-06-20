@@ -1,5 +1,8 @@
 # Release Notes v3
 
+## v3.3.1 (2025-06-20)
+- Added Docker to the project
+
 ## v3.3.0 (2025-06-16)
 - Now you can parse different times of timestamps, such as `string`, `int64`, `uint`, `uint64`, `int32`, `uint32`
 
