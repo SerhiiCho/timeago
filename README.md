@@ -28,21 +28,28 @@ Here are some of the naming conventions used in the codebase and their meanings 
 ## License
 This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md).
 
-## Development
-### Without Docker
-You'll need to have Go installed on your machine. Also, if you want to run Makefile commands, you'll need to have `make` installed as well.
+## Contribute
+### With Container Engine
+If you use a container engine like [🦦 Podman](https://podman.io/) or [🐳 Docker](https://app.docker.com/), here are the steps that you can make:
 
-### With Docker
-#### Build an image
-To build an image, navigate to the root of the project that contains `Dockerfile` and run this command:
+#### Build an Image
+To build an image, navigate to the root of the project and run this command if you use Docker:
 ```bash
 docker compose build
 ```
+For Podman, run this:
+```bash
+podman-compose build
+```
 
-#### Run the container
-To run a container, navigate to the root of the project that contains `Dockerfile` and run this command to enter the Linux container with Go installed:
+#### Run the Container
+To run a container, navigate to the root of the project and run this Docker command to enter the Linux container with Go installed:
 ```bash
 docker compose run --rm app
+```
+For Podman, run this:
+```bash
+podman-compose run --rm app
 ```
 
 Inside of this container you'll be able to run `make` commands like `make test` to run tests.
