@@ -30,24 +30,17 @@ This project is open-sourced software licensed under the [MIT license](https://g
 
 ## Contribute
 ### With Container Engine
-If you use a container engine like [🦦 Podman](https://podman.io/) or [🐳 Docker](https://app.docker.com/), here are the steps that you can make:
+> [!NOTE]
+> If you use [🐳 Docker](https://app.docker.com/) instead of [🦦 Podman](https://podman.io/), just replace `podman-compose` with `docker compose`, and `podman` with `docker` in code examples below.
 
 #### Build an Image
-To build an image, navigate to the root of the project and run this command if you use Docker:
-```bash
-docker compose build
-```
-For Podman, run this:
+To build an image, navigate to the root of the project and run this command:
 ```bash
 podman-compose build
 ```
 
 #### Run the Container
-To run a container, navigate to the root of the project and run this Docker command to enter the Linux container with Go installed:
-```bash
-docker compose run --rm app
-```
-For Podman, run this:
+To run a container, navigate to the root of the project and run this command to enter the Linux container with Go installed:
 ```bash
 podman-compose run --rm app
 ```
