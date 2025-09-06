@@ -25,6 +25,9 @@ Here are some of the naming conventions used in the codebase and their meanings 
 - **suffix** - the suffix `ago` in the final output like `1 minute ago`, `2 minutes ago`, `3 minutes ago`, etc.
 - **time since** - the final output result like `2 minutes`, `3 minutes ago`, `Just now`, `Online`, `3 years ago` etc.
 
+## Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=SerhiiCho/timeago&type=Date)](https://www.star-history.com/#SerhiiCho/timeago&Date)
+
 ## License
 This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md).
 
