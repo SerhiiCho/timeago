@@ -3,8 +3,6 @@ name: serhii-timeago
 services:
     app:
         image: serhii-timeago
-        build:
-            context: .
-            dockerfile: Containerfile
+        build: .
         volumes:
             - .:/app:z

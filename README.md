@@ -1,4 +1,4 @@
-![golang](https://serhii.io/storage/other/timeago.png)
+![golang](https://serhiicho.com/storage/other/timeago.png)
 
 [![Go](https://github.com/SerhiiCho/timeago/actions/workflows/go.yml/badge.svg)](https://github.com/SerhiiCho/timeago/actions/workflows/go.yml)
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FSerhiiCho%2Ftimeago%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/SerhiiCho/timeago/goto?ref=master)
@@ -33,19 +33,30 @@ This project is open-sourced software licensed under the [MIT license](https://g
 
 ## Contribute
 ### With Container Engine
-> [!NOTE]
-> If you use [🐳 Docker](https://app.docker.com/) instead of [🦦 Podman](https://podman.io/), just replace `podman-compose` with `docker compose`, and `podman` with `docker` in code examples below.
-
 #### Build an Image
-To build an image, navigate to the root of the project and run this command:
+To build an image, navigate to the root of the project and run this command.
+
+With Podman:
 ```bash
 podman-compose build
 ```
 
+With Docker:
+```bash
+docker compose build
+```
+
 #### Run the Container
-To run a container, navigate to the root of the project and run this command to enter the Linux container with Go installed:
+To run a container, navigate to the root of the project and run this command to enter the Linux container with Go installed.
+
+With Podman:
 ```bash
 podman-compose run --rm app
+```
+
+With Docker:
+```bash
+docker compose run --rm app
 ```
 
 Inside of this container you'll be able to run `make` commands like `make test` to run tests.
