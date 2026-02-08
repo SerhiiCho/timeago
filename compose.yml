@@ -3,7 +3,6 @@ name: serhii-timeago
 services:
     app:
         image: serhii-timeago
-        build:
-            context: .
+        build: .
         volumes:
-            - .:/app
+            - .:/app:z

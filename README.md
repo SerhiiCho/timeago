@@ -1,4 +1,4 @@
-![golang](https://serhii.io/storage/other/timeago.png)
+![golang](https://serhiicho.com/storage/other/timeago.png)
 
 [![Go](https://github.com/SerhiiCho/timeago/actions/workflows/go.yml/badge.svg)](https://github.com/SerhiiCho/timeago/actions/workflows/go.yml)
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FSerhiiCho%2Ftimeago%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/SerhiiCho/timeago/goto?ref=master)
@@ -25,22 +25,36 @@ Here are some of the naming conventions used in the codebase and their meanings 
 - **suffix** - the suffix `ago` in the final output like `1 minute ago`, `2 minutes ago`, `3 minutes ago`, etc.
 - **time since** - the final output result like `2 minutes`, `3 minutes ago`, `Just now`, `Online`, `3 years ago` etc.
 
+## Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=SerhiiCho/timeago&type=Date)](https://www.star-history.com/#SerhiiCho/timeago&Date)
+
 ## License
 This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md).
 
-## Development
-### Without Docker
-You'll need to have Go installed on your machine. Also, if you want to run Makefile commands, you'll need to have `make` installed as well.
+## Contribute
+### With Container Engine
+#### Build an Image
+To build an image, navigate to the root of the project and run this command.
 
-### With Docker
-#### Build an image
-To build an image, navigate to the root of the project that contains `Dockerfile` and run this command:
+With Podman:
+```bash
+podman-compose build
+```
+
+With Docker:
 ```bash
 docker compose build
 ```
 
-#### Run the container
-To run a container, navigate to the root of the project that contains `Dockerfile` and run this command to enter the Linux container with Go installed:
+#### Run the Container
+To run a container, navigate to the root of the project and run this command to enter the Linux container with Go installed.
+
+With Podman:
+```bash
+podman-compose run --rm app
+```
+
+With Docker:
 ```bash
 docker compose run --rm app
 ```

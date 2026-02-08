@@ -251,7 +251,6 @@ func findLangForms(timeInSec int) (LangForms, int) {
 		if nums.Months == 0 {
 			nums.Months = 1
 		}
-
 		return langSet.Month, nums.Months
 	}
 
@@ -262,7 +261,6 @@ func computeSuffix() string {
 	if optionIsEnabled(OptNoSuffix) || optionIsEnabled(OptUpcoming) {
 		return ""
 	}
-
 	return langSet.Ago
 }
 
