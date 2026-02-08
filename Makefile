@@ -1,7 +1,8 @@
 .PHONY: test
 test:
-	go test -cover -timeout 10s ./...
-	go vet ./...
+	@clear || true
+	go test ./...
+	@echo "✅ All tests passed!"
 
 .PHONY: cover
 cover:
@@ -9,10 +10,24 @@ cover:
 	go tool cover -html=coverage.out
 	rm coverage.out
 
-.PHONY: push
-push:
-	make test
-	git pull origin HEAD
-	git push origin HEAD
+.PHONY: fmt
+fmt:
+	@go fmt ./...
+	@echo "✅ Code formatted!"
+
+.PHONY: lint
+lint:
+	@golangci-lint run
+	@echo "✅ Linting passed!"
+
+.PHONY: todo
+todo:
+	@if grep -I --exclude="Makefile" --exclude-dir=".git" -r TODO .; then \
+		echo "❌ Found TODOs" >&2; \
+		exit 1; \
+	fi
+
+.PHONY: check
+check: test fmt lint todo
 
 .DEFAULT_GOAL := test
