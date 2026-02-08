@@ -37,8 +37,8 @@ func TestIsLocationProvided(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			c := NewConfig("en", tc.loc, []LangSet{}, 60, 60)
-			actual := c.isLocationProvided()
+			conf := NewConfig("en", tc.loc, []LangSet{}, 60, 60)
+			actual := conf.isLocationProvided()
 
 			if actual != tc.expect {
 				t.Fatalf("Expected %v, but got %v", tc.expect, actual)
@@ -92,7 +92,6 @@ func TestCustomTranslations(t *testing.T) {
 			})
 
 			date := utils.UnixFromPastDate(tc.time)
-
 			if res, _ := Parse(date); res != tc.expect {
 				t.Errorf("Result must be %q, but got %q instead", tc.expect, res)
 			}

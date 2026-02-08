@@ -31,8 +31,8 @@ func isUnsignedInteger(date string) bool {
 	}
 
 	for i := 0; i < len(date); i++ {
-		c := date[i]
-		if c < '0' || c > '9' {
+		char := date[i]
+		if char < '0' || char > '9' {
 			return false
 		}
 	}
