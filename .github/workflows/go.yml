@@ -12,19 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go_version: ['1.16', '1.17', '1.18', '1.19', '1.20', '1.21', '1.22', '1.23', '1.24', '1.25']
+        go_version: [1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24, 1.25]
 
-  steps:
-    - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-    - name: Setup the correct timezone
-      run: sudo cp -f /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+      - name: Setup the correct timezone
+        run: sudo cp -f /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
+      - name: Set up Go
+        uses: actions/setup-go@v4
 
-    - name: Install golangci-lint
-      run: curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.8.0
+      - name: Install golangci-lint
+        run: curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.8.0
 
-    - name: Run checks
-      run: make check
+      - name: Run checks
+        run: make check
