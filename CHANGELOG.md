@@ -1,30 +1,34 @@
 # Release Notes v3
 
+## v3.3.2 (2026-02-08)
+
+- 🧑 Added linting and formatting check for GitHub actions.
+
 ## v3.3.1 (2025-06-20)
 
-- 🧑 Added Container Engines like Docker and Podman to the project
+- 🧑 Added Container Engines like Docker and Podman to the project.
 
 ## v3.3.0 (2025-06-16)
 
-- ✨ Now you can parse different times of timestamps, such as `string`, `int64`, `uint`, `uint64`, `int32`, `uint32`
+- ✨ Now you can parse different times of timestamps, such as `string`, `int64`, `uint`, `uint64`, `int32`, `uint32`.
 
 ## v3.2.2 (2025-06-04)
 
-- ✨ Change so that all JSON files are included in the final binary by using `go:embed` functionality
-- ⚠️ Remove support for go version 1.13, 1.14, 1.15 because they do not have `go:embed`
+- ✨ Change so that all JSON files are included in the final binary by using `go:embed` functionality.
+- ⚠️ Remove support for go version 1.13, 1.14, 1.15 because they do not have `go:embed`.
 
 ## v3.2.1 (2024-12-06)
 
-- 🐛 Bug fix with incorrect Russian, Ukrainian, and Belarusian languages rules
-- 🧑 Added more tests for Russian, Ukrainian, and Belarusian languages for testing seconds
+- 🐛 Bug fix with incorrect Russian, Ukrainian, and Belarusian languages rules.
+- 🧑 Added more tests for Russian, Ukrainian, and Belarusian languages for testing seconds.
 
 ## v3.2.0 (2024-11-27)
 
-- ✨ Added support for Belarusian language 🇧🇾
-- ✨ Added support for Spanish language 🇪🇸
-- ✨ Added support for Japanese language 🇯🇵
-- ✨ Added support for French language 🇫🇷
-- 🧑 Code refactoring and improvements for better readability and maintainability
+- ✨ Added support for Belarusian language 🇧🇾.
+- ✨ Added support for Spanish language 🇪🇸.
+- ✨ Added support for Japanese language 🇯🇵.
+- ✨ Added support for French language 🇫🇷.
+- 🧑 Code refactoring and improvements for better readability and maintainability.
 
 ## v3.1.0 (2024-11-25)
 
