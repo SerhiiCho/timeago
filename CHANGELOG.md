@@ -3,6 +3,7 @@
 ## v3.3.2 (2026-02-08)
 
 - 🧑 Added linting and formatting check for GitHub actions.
+- 🧑 Code refactoring and improvements for better readability and maintainability.
 
 ## v3.3.1 (2025-06-20)
 
