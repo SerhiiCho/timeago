@@ -45,7 +45,6 @@ var grammarRules = func(num int) map[string]*Rule {
 
 func identifyGrammarRules(num int, lang string) (*Rule, error) {
 	rules := grammarRules(num)
-
 	if v, ok := rules[lang]; ok {
 		return v, nil
 	}
@@ -56,5 +55,5 @@ func identifyGrammarRules(num int, lang string) (*Rule, error) {
 		}
 	}
 
-	return nil, utils.Errorf("Language '" + lang + "' not found")
+	return nil, utils.Errorf("Language '%s' not found", lang)
 }

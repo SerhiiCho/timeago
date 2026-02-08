@@ -26,19 +26,19 @@ const (
 	OptNoSuffix opt = "noSuffix"
 )
 
-func enableOption(o opt) {
-	options = append(options, o)
+func enableOption(opt opt) {
+	options = append(options, opt)
 }
 
 func enableOptions(opts []opt) {
-	for _, opt := range opts {
-		enableOption(opt)
+	for i := range opts {
+		enableOption(opts[i])
 	}
 }
 
-func optionIsEnabled(o opt) bool {
-	for _, option := range options {
-		if option == o {
+func optionIsEnabled(opt opt) bool {
+	for i := range options {
+		if options[i] == opt {
 			return true
 		}
 	}

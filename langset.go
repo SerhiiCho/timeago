@@ -27,7 +27,6 @@ type LangSet struct {
 
 func newLangSet() (*LangSet, error) {
 	filePath := fmt.Sprintf("langs/%s.json", conf.Language)
-
 	if cache, ok := cachedJsonRes[filePath]; ok {
 		return cache, nil
 	}

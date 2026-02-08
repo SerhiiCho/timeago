@@ -25,14 +25,14 @@ func parseLangSet(filePath string) (*LangSet, error) {
 	return langSet, nil
 }
 
-func isUnsignedInteger(s string) bool {
-	if len(s) == 0 {
+func isUnsignedInteger(date string) bool {
+	if len(date) == 0 {
 		return false
 	}
 
-	for i := 0; i < len(s); i++ {
-		c := s[i]
-		if c < '0' || c > '9' {
+	for i := 0; i < len(date); i++ {
+		char := date[i]
+		if char < '0' || char > '9' {
 			return false
 		}
 	}

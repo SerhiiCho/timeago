@@ -134,7 +134,6 @@ func TestParse(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(tc.res, func(t *testing.T) {
 			res, err := Parse(tc.date)
-
 			if err != nil {
 				t.Errorf("Error must be nil, but got %q instead", err)
 			}
