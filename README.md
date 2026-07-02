@@ -9,15 +9,18 @@
 Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷. For more information you can read the [documentation](https://time-ago.github.io/).
 
 ### Follow the [Official documentation](https://time-ago.github.io/) for all the details
+
 - [🗒 Documentation](https://time-ago.github.io/)
 - [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
 
 ## Quick Start
+
 ```bash
 go get github.com/SerhiiCho/timeago/v3
 ```
 
 ## Codebase naming
+
 Here are some of the naming conventions used in the codebase and their meanings for better understanding:
 
 - **time unit** - a single time unit like `second`, `seconds`, `minute`, `minutes`, etc.
@@ -26,35 +29,45 @@ Here are some of the naming conventions used in the codebase and their meanings 
 - **time since** - the final output result like `2 minutes`, `3 minutes ago`, `Just now`, `Online`, `3 years ago` etc.
 
 ## Star History
+
 [![Star History Chart](https://api.star-history.com/svg?repos=SerhiiCho/timeago&type=Date)](https://www.star-history.com/#SerhiiCho/timeago&Date)
 
 ## License
+
 This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md).
 
 ## Contribute
+
 ### With Container Engine
+
 #### Build an Image
+
 To build an image, navigate to the root of the project and run this command.
 
 With Podman:
+
 ```bash
 podman-compose build
 ```
 
 With Docker:
+
 ```bash
 docker compose build
 ```
 
 #### Run the Container
+
 To run a container, navigate to the root of the project and run this command to enter the Linux container with Go installed.
 
 With Podman:
+
 ```bash
 podman-compose run --rm app
 ```
 
 With Docker:
+
 ```bash
 docker compose run --rm app
 ```
