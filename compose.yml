@@ -1,8 +1,10 @@
 name: serhii-timeago
 
 services:
-    app:
-        image: serhii-timeago
-        build: .
-        volumes:
-            - .:/app:z
+  app:
+    image: serhii-timeago
+    build: .
+    volumes:
+      - .:/var/www/html:z
+    tty: true
+    stdin_open: true

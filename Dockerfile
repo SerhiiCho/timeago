@@ -1,9 +1,7 @@
 FROM golang:1.24-alpine
 
-WORKDIR /app
+WORKDIR /var/www/html
 
-RUN apk add --no-cache make
-
-COPY . .
+RUN apk update && apk add --no-cache make
 
 ENTRYPOINT ["sh"]

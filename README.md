@@ -38,9 +38,7 @@ This project is open-sourced software licensed under the [MIT license](https://g
 
 ## Contribute
 
-### With Container Engine
-
-#### Build an Image
+### Build an Image
 
 To build an image, navigate to the root of the project and run this command.
 
@@ -56,20 +54,34 @@ With Docker:
 docker compose build
 ```
 
-#### Run the Container
+### Run the Container
 
 To run a container, navigate to the root of the project and run this command to enter the Linux container with Go installed.
 
 With Podman:
 
 ```bash
-podman-compose run --rm app
+podman-compose up -d
 ```
 
 With Docker:
 
 ```bash
-docker compose run --rm app
+docker compose up -d
+```
+
+### Enter the Container
+
+With Podman:
+
+```bash
+podman-compose exec app sh
+```
+
+With Docker:
+
+```bash
+docker compose exec app sh
 ```
 
 Inside of this container you'll be able to run `make` commands like `make test` to run tests.
