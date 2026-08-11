@@ -9,19 +9,20 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: burn
     strategy:
       matrix:
-        go_version: [1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24, 1.25]
+        #go_version: [1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23, 1.24, 1.25]
+        go_version: [1.16]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup the correct timezone
         run: sudo cp -f /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: https://github.com/actions/setup-go@v4
 
       - name: Install golangci-lint
         run: curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.8.0
