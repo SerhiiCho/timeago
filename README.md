@@ -10,7 +10,13 @@ Timeago is a fast and lightweight date time package that converts given date int
 
 Moved to [https://codeberg.org/timeago/timeago](https://codeberg.org/timeago/timeago)
 
-To upgrade to the new location and receive updates, change all of your references in Go files from GitHub to Codeberg. For example:
+To upgrade to the new location and receive updates, change all of your references in Go files from GitHub to Codeberg:
+
+```bash
+go get codeberg.org/timeago/timeago/v3@latest
+```
+
+Change imports in source:
 
 ```diff
 - github.com/SerhiiCho/timeago/v3
