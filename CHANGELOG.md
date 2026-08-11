@@ -1,6 +1,6 @@
 # Release Notes v3
 
-## v3.4.2 (2026-08-11)
+## v3.4.0 (2026-08-11)
 
 - 🧑 Moved from GitHub to Codeberg
 - ⚠️ **POTENTIAL BREAK**. Dropped Go versions support for 1.16, 1.17, 1.18 and 1.19
