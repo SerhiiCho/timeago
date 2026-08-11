@@ -6,7 +6,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/?branch=master)
 [![GitHub](https://img.shields.io/github/license/SerhiiCho/timeago)](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md)
 
-Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷. For more information you can read the [documentation](https://time-ago.github.io/).
+Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷.
 
 Moved to [https://github.com/SerhiiCho/timeago](https://github.com/SerhiiCho/timeago)
 
