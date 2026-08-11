@@ -12,8 +12,8 @@ jobs:
     runs-on: burn
     strategy:
       matrix:
-        #go_version: [1.20, 1.21, 1.22, 1.23, 1.24, 1.25]
-        go_version: [1.20]
+        #go_version: ['1.20', '1.21', '1.22', '1.23', '1.24', '1.25', '1.26']
+        go_version: ['1.20']
 
     steps:
       - uses: actions/checkout@v4
