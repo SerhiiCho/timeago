@@ -13,7 +13,7 @@ Moved to [https://codeberg.org/timeago/timeago](https://codeberg.org/timeago/tim
 To upgrade to the new location and receive updates, change all of your references in Go files from GitHub to Codeberg:
 
 ```bash
-go get codeberg.org/timeago/timeago/v3@latest
+go get codeberg.org/timeago/timeago/v3
 ```
 
 Change imports in source:
