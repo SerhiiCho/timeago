@@ -22,7 +22,10 @@ jobs:
         run: cp -f /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 
       - name: Set up Go
-        uses: https://github.com/actions/setup-go@v4
+        uses: https://github.com/actions/setup-go@v7
+        with:
+          # Version or version range of Go to use
+          go-version: ${{ matrix.go_version }}
 
       - name: Install golangci-lint
         run: curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.8.0
