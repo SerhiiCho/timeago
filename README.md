@@ -1,22 +1,17 @@
-![golang](https://serhiicho.com/img/other/timeago.png)
+![golang](.forgejo/header.png)
 
-[![Go](https://github.com/SerhiiCho/timeago/actions/workflows/go.yml/badge.svg)](https://github.com/SerhiiCho/timeago/actions/workflows/go.yml)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FSerhiiCho%2Ftimeago%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/SerhiiCho/timeago/goto?ref=master)
 [![Build Status](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/?branch=master)
-[![GitHub](https://img.shields.io/github/license/SerhiiCho/timeago)](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md)
 
-Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷. For more information you can read the [documentation](https://time-ago.github.io/).
+Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷.
 
-### Follow the [Official documentation](https://time-ago.github.io/) for all the details
-
-- [🗒 Documentation](https://time-ago.github.io/)
-- [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
+- [🗒 Documentation](https://timeago.codeberg.page/)
+- [🗒 Release notes](https://codeberg.org/timeago/timeago/src/branch/master/CHANGELOG.md)
 
 ## Quick Start
 
 ```bash
-go get github.com/SerhiiCho/timeago/v3
+go get codeberg.org/timeago/timeago/v3
 ```
 
 ## Codebase naming
@@ -34,7 +29,7 @@ Here are some of the naming conventions used in the codebase and their meanings 
 
 ## License
 
-This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md).
+This project is open-sourced software licensed under the [MIT license](https://codeberg.org/timeago/timeago/src/branch/master/LICENSE.md).
 
 ## Contribute
 

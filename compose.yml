@@ -1,8 +1,8 @@
-name: serhii-timeago
+name: timeago
 
 services:
   app:
-    image: serhii-timeago
+    image: timeago
     build: .
     volumes:
       - .:/var/www/html:z
