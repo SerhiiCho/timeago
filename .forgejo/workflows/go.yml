@@ -1,4 +1,5 @@
-name: Go
+name: Run quality checks
+enable-email-notifications: true
 
 on:
   push:
@@ -8,15 +9,15 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Run checks for Go ${{ matrix.go-version }}
     runs-on: burn
     strategy:
       matrix:
-        #go_version: ['1.20', '1.21', '1.22', '1.23', '1.24', '1.25', '1.26']
-        go_version: ['1.20']
+        go-version: ['1.20', '1.21', '1.22', '1.23', '1.24', '1.25', '1.26']
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup the correct timezone
         run: cp -f /usr/share/zoneinfo/Europe/Kiev /etc/localtime
@@ -24,8 +25,7 @@ jobs:
       - name: Set up Go
         uses: https://github.com/actions/setup-go@v7
         with:
-          # Version or version range of Go to use
-          go-version: ${{ matrix.go_version }}
+          go-version: ${{ matrix.go-version }}
 
       - name: Install golangci-lint
         run: curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.8.0
