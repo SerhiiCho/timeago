@@ -40,8 +40,8 @@
 
 - 📝 Updated the `LICENSE.md` file
 - 🧑 Refactored codebase to make it more readable and maintainable
-- ✨ Added [OnlineThreshold](https://timeago.codeberg.page/v3/configurations.html#thresholds) parameter to the configurations to set the threshold for the "Online" status
-- ✨ Added [JustNowThreshold](https://timeago.codeberg.page/v3/configurations.html#thresholds) parameter to the configurations to set the threshold for the "Just now" status
+- ✨ Added [OnlineThreshold](https://timeago.serhiicho.com/v3/configurations.html#thresholds) parameter to the configurations to set the threshold for the "Online" status
+- ✨ Added [JustNowThreshold](https://timeago.serhiicho.com/v3/configurations.html#thresholds) parameter to the configurations to set the threshold for the "Just now" status
 - ✨ Added support for Chinese Simplified language 🇨🇳
 - ⚠️ **POTENTIAL BREAK**. Might break your code if you were using the `Option` type or option constants directly. Which wasn't documented for public use.
   - Rename `Option` type to `opt` making it unexported
@@ -51,7 +51,7 @@
 
 > BREAKING CHANGES!
 
-[Upgrade Guide from v2 to v3](https://timeago.codeberg.page/v3/upgrade.html)
+[Upgrade Guide from v2 to v3](https://timeago.serhiicho.com/v3/upgrade.html)
 
 - **Improved error handling**. The `Parse` function now returns an error as the second returned value
 - **Update package namespace**. Changed package namespace to `codeberg.org/timeago/timeago/v3`
@@ -60,7 +60,7 @@
 - **New language addition is improved**. Add ability to change the output of the `Parse` function when adding a support for a new language by adding a `format` field to a `JSON` file
 - **New function `Reconfigure`**. Added a new function to reconfigure the package configurations. Unlike the `Configure` function, it will overwrite the previous configurations with the new ones.
 
-> Follow the [Upgrade Guide](https://timeago.codeberg.page/upgrade.html) from v2 to v3
+> Follow the [Upgrade Guide](https://timeago.serhiicho.com/upgrade.html) from v2 to v3
 
 ## [Release Notes v2](.forgejo/CHANGELOGV2.md)
 

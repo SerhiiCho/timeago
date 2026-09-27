@@ -27,7 +27,7 @@ type Config struct {
 
 	// Translations is a slice of language sets that can be used to
 	// overwrite the default translations. Read more about it in the docs
-	// https://timeago.codeberg.page/configurations.html#overwrite-translations
+	// https://timeago.serhiicho.com/configurations.html#overwrite-translations
 	// Default: []LangSet{}
 	Translations []LangSet
 

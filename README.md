@@ -5,7 +5,7 @@
 
 Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷.
 
-- [🗒 Documentation](https://timeago.codeberg.page/)
+- [🗒 Documentation](https://timeago.serhiicho.com/)
 - [🗒 Release notes](https://codeberg.org/timeago/timeago/src/branch/master/CHANGELOG.md)
 
 ## Quick Start
