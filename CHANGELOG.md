@@ -1,5 +1,10 @@
 # Release Notes v3
 
+## v3.4.1 (2026-09-27)
+
+- 🧑 Changed docs link to https://timeago.serhiicho.com
+- 🧑 Add Go version 1.27 to CI testing pipeline
+
 ## v3.4.0 (2026-08-11)
 
 - 🧑 Moved from GitHub to Codeberg
