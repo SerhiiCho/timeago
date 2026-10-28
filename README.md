@@ -8,7 +8,7 @@
 
 Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷. For more information you can read the [documentation](https://time-ago.github.io/).
 
-### Follow the [Official documentation](https://time-ago.github.io/) for all the details
+### Follow the [Official documentation](https://timeago.serhiicho.com/) for all the details
 
 - [🗒 Documentation](https://timeago.serhiicho.com/)
 - [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
