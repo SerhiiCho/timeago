@@ -1,83 +1,42 @@
-![golang](.github/header.png)
-
-[![Go](https://github.com/SerhiiCho/timeago/actions/workflows/go.yml/badge.svg)](https://github.com/SerhiiCho/timeago/actions/workflows/go.yml)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FSerhiiCho%2Ftimeago%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/SerhiiCho/timeago/goto?ref=master)
-[![Build Status](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/?branch=master)
-[![GitHub](https://img.shields.io/github/license/SerhiiCho/timeago)](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md)
+![golang](https://codeberg.org/timeago/timeago/raw/branch/master/.forgejo/header.png)
 
 Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷. For more information you can read the [documentation](https://time-ago.github.io/).
+
+> [!IMPORTANT]
+> The project moved from `github.com/SerhiiCho/timeago` to `codeberg.org/timeago/timeago`. See [Migrating from GitHub](#migrating-from-github) below.
 
 ### Follow the [Official documentation](https://timeago.serhiicho.com/) for all the details
 
 - [🗒 Documentation](https://timeago.serhiicho.com/)
-- [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
+- [🗒 Release notes](https://codeberg.org/timeago/timeago/src/branch/master/CHANGELOG.md)
 
 ## Quick Start
 
 ```bash
-go get github.com/SerhiiCho/timeago/v3
+go get codeberg.org/timeago/timeago/v3
 ```
 
-## Codebase naming
+## Migrating to Codeberg
 
-Here are some of the naming conventions used in the codebase and their meanings for better understanding:
+1. Replace the import path in your code:
 
-- **time unit** - a single time unit like `second`, `seconds`, `minute`, `minutes`, etc.
-- **time number** - a number of time units like `1`, `2`, `3`, etc. in a string like `1 minute ago`, `2 minutes ago`, `3 minutes ago`, etc.
-- **suffix** - the suffix `ago` in the final output like `1 minute ago`, `2 minutes ago`, `3 minutes ago`, etc.
-- **time since** - the final output result like `2 minutes`, `3 minutes ago`, `Just now`, `Online`, `3 years ago` etc.
+   ```bash
+   grep -rl 'github.com/SerhiiCho/timeago' --include='*.go' . | xargs sed -i 's#github.com/SerhiiCho/timeago#codeberg.org/timeago/timeago#g'
+   ```
+
+2. Fetch the new module and drop the old one:
+
+   ```bash
+   go get codeberg.org/timeago/timeago/v3
+   go mod tidy
+   ```
+
+3. Check that everything still builds and passes:
+
+   ```bash
+   go build ./... && go test ./...
+   ```
 
 ## License
 
-This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/LICENSE.md).
-
-## Contribute
-
-### Build an Image
-
-To build an image, navigate to the root of the project and run this command.
-
-With Podman:
-
-```bash
-podman-compose build
-```
-
-With Docker:
-
-```bash
-docker compose build
-```
-
-### Run the Container
-
-To run a container, navigate to the root of the project and run this command to enter the Linux container with Go installed.
-
-With Podman:
-
-```bash
-podman-compose up -d
-```
-
-With Docker:
-
-```bash
-docker compose up -d
-```
-
-### Enter the Container
-
-With Podman:
-
-```bash
-podman-compose exec app sh
-```
-
-With Docker:
-
-```bash
-docker compose exec app sh
-```
-
-Inside of this container you'll be able to run `make` commands like `make test` to run tests.
+This project is open-sourced software licensed under the [MIT license](https://codeberg.org/timeago/timeago/src/branch/master/LICENSE.md).
