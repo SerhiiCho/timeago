@@ -16,7 +16,7 @@ Timeago is a fast and lightweight date time package that converts given date int
 go get codeberg.org/timeago/timeago/v3
 ```
 
-## Migrating to Codeberg
+## Migrating from GitHub
 
 1. Replace the import path in your code:
 
