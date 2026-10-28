@@ -10,7 +10,7 @@ Timeago is a fast and lightweight date time package that converts given date int
 
 ### Follow the [Official documentation](https://time-ago.github.io/) for all the details
 
-- [🗒 Documentation](https://time-ago.github.io/)
+- [🗒 Documentation](https://timeago.serhiicho.com/)
 - [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
 
 ## Quick Start
