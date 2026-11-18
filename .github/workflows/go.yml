@@ -27,7 +27,7 @@ jobs:
           go-version: ${{ matrix.go-version }}
 
       - name: Install golangci-lint
-        run: curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.13.2
+        run: curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.15.0
 
       - name: Run checks
         run: make check
