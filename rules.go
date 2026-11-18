@@ -3,7 +3,7 @@ package timeago
 import (
 	"strings"
 
-	"codeberg.org/timeago/timeago/v3/internal/utils"
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 type Rule struct {

@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	ago "codeberg.org/timeago/timeago/v3"
-	"codeberg.org/timeago/timeago/v3/internal/utils"
+	ago "github.com/SerhiiCho/timeago/v3"
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 func TestParseNl(t *testing.T) {

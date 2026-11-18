@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"codeberg.org/timeago/timeago/v3/internal/utils"
+	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 var (

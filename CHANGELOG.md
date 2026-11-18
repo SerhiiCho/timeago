@@ -1,5 +1,9 @@
 # Release Notes v3
 
+## v3.4.2 (2026-11-18)
+
+- 🧑 Moved from Codeberg to GitHub
+
 ## v3.4.1 (2026-09-27)
 
 - 🧑 Changed docs link to https://timeago.serhiicho.com
@@ -59,7 +63,7 @@
 [Upgrade Guide from v2 to v3](https://timeago.serhiicho.com/v3/upgrade.html)
 
 - **Improved error handling**. The `Parse` function now returns an error as the second returned value
-- **Update package namespace**. Changed package namespace to `codeberg.org/timeago/timeago/v3`
+- **Update package namespace**. Changed package namespace to `github.com/SerhiiCho/timeago/v3`
 - **Rename a function**. Renamed `SetConfig` function to `Configure` to make it better fit into Go naming conventions
 - **New language files structure**. Change the file structure for `JSON` language files. They have now format to match [CLDR Specifications](https://cldr.unicode.org/index/cldr-spec/plural-rules)
 - **New language addition is improved**. Add ability to change the output of the `Parse` function when adding a support for a new language by adding a `format` field to a `JSON` file
@@ -67,6 +71,5 @@
 
 > Follow the [Upgrade Guide](https://timeago.serhiicho.com/upgrade.html) from v2 to v3
 
-## [Release Notes v2](.forgejo/CHANGELOGV2.md)
-
-## [Release Notes v1](.forgejo/CHANGELOGV1.md)
+## [Release Notes v2](.github/CHANGELOGV2.md)
+## [Release Notes v1](.github/CHANGELOGV1.md)

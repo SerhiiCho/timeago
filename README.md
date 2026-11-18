@@ -1,4 +1,4 @@
-![golang](.forgejo/header.png)
+![golang](.github/header.png)
 
 [![Build Status](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SerhiiCho/timeago/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SerhiiCho/timeago/?branch=master)
@@ -6,12 +6,12 @@
 Timeago is a fast and lightweight date time package that converts given date into human readable "n time ago" format in different languages, such as 🇬🇧 🇷🇺 🇺🇦 🇳🇱 🇩🇪 🇨🇳 🇧🇾 🇪🇸 🇯🇵 🇫🇷.
 
 - [🗒 Documentation](https://timeago.serhiicho.com/)
-- [🗒 Release notes](https://codeberg.org/timeago/timeago/src/branch/master/CHANGELOG.md)
+- [🗒 Release notes](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md)
 
 ## Quick Start
 
 ```bash
-go get codeberg.org/timeago/timeago/v3
+go get github.com/SerhiiCho/timeago/v3
 ```
 
 ## Codebase naming
@@ -25,7 +25,7 @@ Here are some of the naming conventions used in the codebase and their meanings 
 
 ## License
 
-This project is open-sourced software licensed under the [MIT license](https://codeberg.org/timeago/timeago/src/branch/master/LICENSE.md).
+This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md).
 
 ## Contribute
 

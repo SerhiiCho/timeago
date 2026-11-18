@@ -1,3 +1,3 @@
-module codeberg.org/timeago/timeago/v3
+module github.com/SerhiiCho/timeago/v3
 
 go 1.20
