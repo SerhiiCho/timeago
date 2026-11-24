@@ -45,7 +45,6 @@ func TestParseEn(t *testing.T) {
 		{subMonths(9), "9 months ago"},
 		{subMonths(10), "10 months ago"},
 		{subMonths(11), "11 months ago"},
-		{subMonths(11), "11 months ago"},
 		{subYears(1), "1 year ago"},
 		{subYears(2), "2 years ago"},
 		{subYears(21), "21 years ago"},
@@ -56,7 +55,6 @@ func TestParseEn(t *testing.T) {
 	for _, tc := range cases {
 		t.Run("result for "+tc.date.String(), func(test *testing.T) {
 			ago.Reconfigure(ago.Config{Language: ago.LangEn})
-
 			res, err := ago.Parse(tc.date)
 
 			if err != nil {
@@ -86,6 +84,7 @@ func TestParseEnWithSeconds(t *testing.T) {
 		{subSecs(22), []string{"22 seconds ago", "23 seconds ago"}},
 		{subSecs(30), []string{"30 seconds ago", "31 seconds ago"}},
 		{subSecs(59), []string{"59 seconds ago", "1 minute ago"}},
+		{subSecs(119), []string{"1 minute ago"}},
 	}
 
 	for _, tc := range cases {
