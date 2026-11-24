@@ -69,11 +69,11 @@ func TestParseWithOnlineFlag(t *testing.T) {
 			res, err := ago.Parse(tc.date, ago.OptOnline)
 
 			if err != nil {
-				test.Errorf("Error must be nil, but got %v instead", err)
+				test.Errorf("want nil error, got %v instead", err)
 			}
 
 			if res != tc.res {
-				test.Errorf("Result must be %q, but got %q instead", tc.res, res)
+				test.Errorf("want %q, got %q instead", tc.res, res)
 			}
 		})
 	}
@@ -110,11 +110,11 @@ func TestOnlineThresholdConfiguration(t *testing.T) {
 			out, err := ago.Parse(tc.date, ago.OptOnline)
 
 			if err != nil {
-				test.Errorf("Error must be nil, but got %v instead", err)
+				test.Errorf("want nil error, got %v instead", err)
 			}
 
 			if out != tc.res {
-				test.Errorf("Result must be %q, but got %q instead", tc.res, out)
+				test.Errorf("want %q, got %q instead", tc.res, out)
 			}
 		})
 	}
@@ -151,11 +151,11 @@ func TestJustNowThresholdConfiguration(t *testing.T) {
 			out, err := ago.Parse(tc.date, ago.OptJustNow)
 
 			if err != nil {
-				test.Errorf("Error must be nil, but got %v instead", err)
+				test.Errorf("want nil error, got %v instead", err)
 			}
 
 			if out != tc.res {
-				test.Errorf("Result must be %q, but got %q instead", tc.res, out)
+				test.Errorf("want %q, got %q instead", tc.res, out)
 			}
 		})
 	}

@@ -8,11 +8,11 @@ func TestParseJsonIntoLang(t *testing.T) {
 	t.Run("Function returns Lang model with needed values", func(test *testing.T) {
 		res, err := parseLangSet("langs/ru.json")
 		if err != nil {
-			t.Errorf("Function parseLangSet must return Lang model, but returned error %v", err)
+			t.Errorf("want no error, got %v instead", err)
 		}
 
 		if res.Ago != "назад" {
-			t.Errorf("Function needs to return model with value назад, but returned %v", res.Ago)
+			t.Errorf("want %q, got %q instead", "назад", res.Ago)
 		}
 	})
 }

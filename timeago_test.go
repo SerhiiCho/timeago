@@ -136,11 +136,11 @@ func TestParse(t *testing.T) {
 		t.Run(tc.res, func(t *testing.T) {
 			res, err := Parse(tc.date)
 			if err != nil {
-				t.Errorf("Error must be nil, but got %q instead", err)
+				t.Errorf("want nil error, got %v instead", err)
 			}
 
 			if res != tc.res {
-				t.Errorf("Result must be %q, but got %q instead", tc.res, res)
+				t.Errorf("want %q, got %q instead", tc.res, res)
 			}
 		})
 	}
@@ -155,11 +155,11 @@ func TestParse_InvalidDateType(t *testing.T) {
 		t.Run(strconv.Quote(fmt.Sprintf("%v", date)), func(t *testing.T) {
 			res, err := Parse(date)
 			if err == nil {
-				t.Fatalf("Parse(%T) must return an error, but returned %q instead", date, res)
+				t.Fatalf("want an error for Parse(%T), got %q instead", date, res)
 			}
 
 			if res != "" {
-				t.Errorf("Result must be empty, but got %q instead", res)
+				t.Errorf("want empty result, got %q instead", res)
 			}
 		})
 	}

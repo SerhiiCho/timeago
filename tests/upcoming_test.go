@@ -71,11 +71,11 @@ func TestParseWithUpcomingFlag(t *testing.T) {
 			res, err := ago.Parse(tc.date, ago.OptUpcoming)
 
 			if err != nil {
-				test.Errorf("Error must be nil, but got %v instead", err)
+				test.Errorf("want nil error, got %v instead", err)
 			}
 
 			if res != tc.res {
-				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
+				test.Errorf("want %q, got %q instead", tc.res, res)
 			}
 		})
 	}

@@ -9,29 +9,29 @@ import (
 
 func TestIsLocationProvided(t *testing.T) {
 	cases := []struct {
-		name   string
-		loc    string
-		expect bool
+		name string
+		loc  string
+		want bool
 	}{
 		{
-			name:   "Location is set to Europe/Paris",
-			loc:    "Europe/Paris",
-			expect: true,
+			name: "Location is set to Europe/Paris",
+			loc:  "Europe/Paris",
+			want: true,
 		},
 		{
-			name:   "Location is set to Asia/Shanghai",
-			loc:    "Asia/Shanghai",
-			expect: true,
+			name: "Location is set to Asia/Shanghai",
+			loc:  "Asia/Shanghai",
+			want: true,
 		},
 		{
-			name:   "Location is not set",
-			loc:    "UTC",
-			expect: false,
+			name: "Location is not set",
+			loc:  "UTC",
+			want: false,
 		},
 		{
-			name:   "Location is empty",
-			loc:    "",
-			expect: false,
+			name: "Location is empty",
+			loc:  "",
+			want: false,
 		},
 	}
 
@@ -40,8 +40,8 @@ func TestIsLocationProvided(t *testing.T) {
 			conf := NewConfig("en", tc.loc, []LangSet{}, 60, 60)
 			actual := conf.isLocationProvided()
 
-			if actual != tc.expect {
-				t.Fatalf("Expected %v, but got %v", tc.expect, actual)
+			if actual != tc.want {
+				t.Fatalf("want %v, got %v instead", tc.want, actual)
 			}
 		})
 	}
@@ -49,13 +49,13 @@ func TestIsLocationProvided(t *testing.T) {
 
 func TestCustomTranslations(t *testing.T) {
 	cases := []struct {
-		expect  string
+		want    string
 		time    time.Duration
 		langSet LangSet
 	}{
 		{
-			expect: "10 h a",
-			time:   time.Hour * 10,
+			want: "10 h a",
+			time: time.Hour * 10,
 			langSet: LangSet{
 				Lang: "en",
 				Ago:  "a",
@@ -63,8 +63,8 @@ func TestCustomTranslations(t *testing.T) {
 			},
 		},
 		{
-			expect: "1м н",
-			time:   time.Minute,
+			want: "1м н",
+			time: time.Minute,
 			langSet: LangSet{
 				Format: "{num}{timeUnit} {ago}",
 				Lang:   "ru",
@@ -73,8 +73,8 @@ func TestCustomTranslations(t *testing.T) {
 			},
 		},
 		{
-			expect: "2 d ago",
-			time:   time.Hour * 24 * 2,
+			want: "2 d ago",
+			time: time.Hour * 24 * 2,
 			langSet: LangSet{
 				Lang: "en",
 				Day:  LangForms{"other": "d"},
@@ -83,7 +83,7 @@ func TestCustomTranslations(t *testing.T) {
 	}
 
 	for _, tc := range cases {
-		name := tc.langSet.Lang + " " + tc.expect
+		name := tc.langSet.Lang + " " + tc.want
 
 		t.Run(name, func(t *testing.T) {
 			Reconfigure(Config{
@@ -92,8 +92,8 @@ func TestCustomTranslations(t *testing.T) {
 			})
 
 			date := utils.UnixFromPastDate(tc.time)
-			if res, _ := Parse(date); res != tc.expect {
-				t.Errorf("Result must be %q, but got %q instead", tc.expect, res)
+			if res, _ := Parse(date); res != tc.want {
+				t.Errorf("want %q, got %q instead", tc.want, res)
 			}
 		})
 	}

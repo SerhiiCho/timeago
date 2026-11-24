@@ -8,11 +8,11 @@ func assertResult(t *testing.T, want string, got string, err error) {
 	t.Helper()
 
 	if err != nil {
-		t.Errorf("Parse returned an error: %v", err)
+		t.Errorf("want nil error, got %v instead", err)
 		return
 	}
 
 	if got != want {
-		t.Errorf("Result must be %q, but got %q instead", want, got)
+		t.Errorf("want %q, got %q instead", want, got)
 	}
 }

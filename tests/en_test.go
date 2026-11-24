@@ -59,11 +59,11 @@ func TestParseEn(t *testing.T) {
 			res, err := ago.Parse(tc.date)
 
 			if err != nil {
-				test.Errorf("Error must be nil, but got %v instead", err)
+				test.Errorf("want nil error, got %v instead", err)
 			}
 
 			if res != tc.res {
-				test.Errorf("Result must be %s, but got %s instead", tc.res, res)
+				test.Errorf("want %q, got %q instead", tc.res, res)
 			}
 		})
 	}
@@ -94,12 +94,12 @@ func TestParseEnWithSeconds(t *testing.T) {
 			res, err := ago.Parse(tc.date)
 
 			if err != nil {
-				test.Errorf("Error must be nil, but got %v instead", err)
+				test.Errorf("want nil error, got %v instead", err)
 			}
 
 			if res != tc.res[0] && res != tc.res[1] {
 				test.Errorf(
-					"Result must be %s or %s, but got %s instead",
+					"want %q or %q, got %q instead",
 					tc.res[0],
 					tc.res[1],
 					res,
