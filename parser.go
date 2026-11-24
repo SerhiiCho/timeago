@@ -91,7 +91,7 @@ func (p *parser) computeTimeSince(t time.Time) (string, error) {
 		return "", err
 	}
 
-	timeInSec := p.computeTimeDifference(t, now)
+	timeInSec := p.computeTimeDiff(t, now)
 
 	langSet, err := p.newLangSet()
 	if err != nil {
@@ -132,8 +132,8 @@ func (p *parser) adjustTimesForLocation(t, now time.Time) (time.Time, time.Time,
 	return t.In(loc), now.In(loc), nil
 }
 
-// computeTimeDifference returns the absolute time difference in seconds.
-func (p *parser) computeTimeDifference(t, now time.Time) int {
+// computeTimeDiff returns the absolute time difference in seconds.
+func (p *parser) computeTimeDiff(t, now time.Time) int {
 	timeInSec := int(now.Sub(t).Seconds())
 	if timeInSec < 0 {
 		p.enableOption(OptUpcoming)
@@ -184,22 +184,15 @@ func (p *parser) computeSuffix() string {
 	return p.langSet.Ago
 }
 
-func calculateTimeNumbers(seconds float64) timeNumbers {
-	minutes := math.Round(seconds / 60)
-	hours := math.Round(seconds / 3600)
-	days := math.Round(seconds / 86400)
-	weeks := math.Round(seconds / 604800)
-	months := math.Round(seconds / 2629440)
-	years := math.Round(seconds / 31553280)
-
+func calculateTimeNumbers(secs float64) timeNumbers {
 	return timeNumbers{
-		Seconds: int(seconds),
-		Minutes: int(minutes),
-		Hours:   int(hours),
-		Days:    int(days),
-		Weeks:   int(weeks),
-		Months:  int(months),
-		Years:   int(years),
+		Seconds: int(secs),
+		Minutes: int(math.Round(secs / 60)),
+		Hours:   int(math.Round(secs / 3600)),
+		Days:    int(math.Round(secs / 86400)),
+		Weeks:   int(math.Round(secs / 604800)),
+		Months:  int(math.Round(secs / 2629440)),
+		Years:   int(math.Round(secs / 31553280)),
 	}
 }
 
