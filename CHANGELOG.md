@@ -1,6 +1,8 @@
 # Release Notes v3
 
-## v3.4.5 (2026-11-24)
+## v4.0.0 (2026-11-25)
+
+- 🐛 Fixed rounding up issues and inconsistencies, so everything is floored instead of rounded. Closes [#54](https://github.com/SerhiiCho/timeago/issues/54).
 
 ## v3.4.4 (2026-11-24)
 

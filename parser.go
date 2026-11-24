@@ -2,7 +2,6 @@ package timeago
 
 import (
 	"fmt"
-	"math"
 	"strconv"
 	"strings"
 	"time"
@@ -174,6 +173,10 @@ func (p *parser) findLangForms(timeInSec int) (LangForms, int) {
 		return p.langSet.Month, nums.Months
 	}
 
+	if nums.Years == 0 {
+		nums.Years = 1
+	}
+
 	return p.langSet.Year, nums.Years
 }
 
@@ -187,12 +190,12 @@ func (p *parser) computeSuffix() string {
 func calculateTimeNumbers(secs float64) timeNumbers {
 	return timeNumbers{
 		Seconds: int(secs),
-		Minutes: int(math.Round(secs / 60)),
-		Hours:   int(math.Round(secs / 3600)),
-		Days:    int(math.Round(secs / 86400)),
-		Weeks:   int(math.Round(secs / 604800)),
-		Months:  int(math.Round(secs / 2629440)),
-		Years:   int(math.Round(secs / 31553280)),
+		Minutes: int(secs / 60),
+		Hours:   int(secs / 3600),
+		Days:    int(secs / 86400),
+		Weeks:   int(secs / 604800),
+		Months:  int(secs / 2592000),
+		Years:   int(secs / 31536000),
 	}
 }
 

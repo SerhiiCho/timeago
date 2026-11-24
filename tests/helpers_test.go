@@ -20,7 +20,7 @@ func unixFromPastDate(subDuration time.Duration) int {
 }
 
 func unixFromFutureDate(duration time.Duration) int {
-	return int(addTime(duration).UnixNano() / 1000000000)
+	return int(addTime(duration).Add(time.Second - time.Nanosecond).Unix())
 }
 
 func subYears(duration time.Duration) time.Time {
@@ -28,7 +28,7 @@ func subYears(duration time.Duration) time.Time {
 }
 
 func subTime(duration time.Duration) time.Time {
-	return time.Now().Add(-duration)
+	return time.Now().Add(-duration).Truncate(time.Second)
 }
 
 func addTime(duration time.Duration) time.Time {
@@ -44,7 +44,7 @@ func subMins(duration time.Duration) time.Time {
 }
 
 func addMins(duration time.Duration) time.Time {
-	return addTime(minute * duration)
+	return addTime(minute*duration + second)
 }
 
 func subHours(duration time.Duration) time.Time {
@@ -52,7 +52,11 @@ func subHours(duration time.Duration) time.Time {
 }
 
 func addHours(duration time.Duration) time.Time {
-	return addTime(hour * duration)
+	return addTime(hour*duration + second)
+}
+
+func subHoursAndMinutes(hours, mins time.Duration) time.Time {
+	return subTime(hour*hours + minute*mins)
 }
 
 func subDays(duration time.Duration) time.Time {
@@ -65,6 +69,10 @@ func subWeeks(duration time.Duration) time.Time {
 
 func subMonths(duration time.Duration) time.Time {
 	return subTime(month * duration)
+}
+
+func subMonthsAndDays(months, days time.Duration) time.Time {
+	return subTime(month*months + day*days)
 }
 
 // assertResult checks the outcome of a parse call.

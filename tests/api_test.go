@@ -127,6 +127,13 @@ func TestParse(t *testing.T) {
 		{strconv.Itoa(unixFromPastDate(time.Hour * 24 * 5)), "5 days ago"},
 		{strconv.Itoa(unixFromPastDate(time.Hour * 24 * 6)), "6 days ago"},
 		{strconv.Itoa(unixFromPastDate(time.Hour * 24 * 7)), "1 week ago"},
+		// Edge cases that prove flooring is working
+		{subMonthsAndDays(11, 27), "11 months ago"},
+		{subMonthsAndDays(11, 28), "11 months ago"},
+		{subMonthsAndDays(11, 29), "11 months ago"},
+		{subHoursAndMinutes(23, 20), "23 hours ago"},
+		{subHoursAndMinutes(23, 59), "23 hours ago"},
+		{subHoursAndMinutes(23, 60), "1 day ago"},
 	}
 
 	ago.Reconfigure(ago.Config{Language: ago.LangEn})
