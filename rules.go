@@ -16,6 +16,13 @@ type Rule struct {
 var grammarRules = func(num int) map[string]*Rule {
 	end := num % 10
 
+	// In ru, uk and be, numbers ending in 11-14 take the many form
+	// regardless of their last digit (111 лет, 112 лет). Treat them
+	// as a zero ending so the one/few last-digit rules do not match.
+	if lastTwo := num % 100; lastTwo >= 11 && lastTwo <= 14 {
+		end = 0
+	}
+
 	return map[string]*Rule{
 		"en,nl,de,es,fr": {
 			Zero: num == 0,
