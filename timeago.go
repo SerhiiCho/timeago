@@ -64,6 +64,7 @@ func Configure(c Config) {
 
 	if len(c.Translations) > 0 {
 		conf.Translations = c.Translations
+		clearCache()
 	}
 }
 
@@ -74,11 +75,14 @@ func Reconfigure(c Config) {
 	conf = defaultConfig()
 	confMu.Unlock()
 
+	clearCache()
+	Configure(c)
+}
+
+func clearCache() {
 	cacheMu.Lock()
 	cachedJsonRes = map[string]*LangSet{}
 	cacheMu.Unlock()
-
-	Configure(c)
 }
 
 func getConfig() Config {

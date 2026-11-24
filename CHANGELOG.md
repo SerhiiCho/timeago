@@ -3,6 +3,7 @@
 ## v3.4.4 (2026-11-24)
 
 - 🐛 Fixed wrong plural forms in ru/uk/be languages for 11-14 above 100. Closed [#53](https://github.com/SerhiiCho/timeago/issues/53) by [prascli](https://github.com/prascli).
+- 🐛 Fixed an issue where `Configure` ignored new translations for cached languages. Closes [#51](https://github.com/SerhiiCho/timeago/issues/51).
 
 ## v3.4.3 (2026-11-24)
 
