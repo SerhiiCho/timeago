@@ -39,3 +39,7 @@ func isUnsignedInteger(date string) bool {
 
 	return true
 }
+
+func errorf(msg string, a ...any) error {
+	return fmt.Errorf("[Timeago]: "+msg, a...)
+}

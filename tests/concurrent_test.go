@@ -6,7 +6,6 @@ import (
 	"time"
 
 	ago "github.com/SerhiiCho/timeago/v3"
-	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 const goroutines = 100
@@ -29,7 +28,7 @@ func runConcurrently(fn func(i int)) {
 func TestParse_Concurrent(t *testing.T) {
 	ago.Reconfigure(ago.Config{Language: ago.LangEn})
 
-	date := utils.UnixFromPastDate(time.Minute * 5)
+	date := unixFromPastDate(time.Minute * 5)
 
 	runConcurrently(func(i int) {
 		if i%2 == 0 {
@@ -46,7 +45,7 @@ func TestParse_Concurrent(t *testing.T) {
 func TestParse_WhileConfiguring(t *testing.T) {
 	ago.Reconfigure(ago.Config{Language: ago.LangEn})
 
-	date := utils.UnixFromPastDate(time.Minute * 5)
+	date := unixFromPastDate(time.Minute * 5)
 
 	runConcurrently(func(i int) {
 		if i%2 == 0 {

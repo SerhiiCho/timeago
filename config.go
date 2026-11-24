@@ -2,8 +2,6 @@ package timeago
 
 import (
 	"time"
-
-	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 const (
@@ -76,7 +74,7 @@ func (c Config) location() (*time.Location, error) {
 
 	loc, err := time.LoadLocation(c.Location)
 	if err != nil {
-		return nil, utils.Errorf("%v", err)
+		return nil, errorf("%v", err)
 	}
 
 	return loc, nil

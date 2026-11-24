@@ -6,8 +6,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 // parser holds the state of a single Parse call. Keeping it local
@@ -50,7 +48,7 @@ func (p *parser) dateToTime(date any) (time.Time, error) {
 	default:
 		parsed, ok := date.(time.Time)
 		if !ok {
-			return time.Time{}, utils.Errorf("unsupported date type %T", date)
+			return time.Time{}, errorf("unsupported date type %T", date)
 		}
 		return parsed, nil
 	}
@@ -78,7 +76,7 @@ func (p *parser) strToTime(userDate string) (time.Time, error) {
 
 	parsedTime, err := time.ParseInLocation(time.DateTime, userDate, loc)
 	if err != nil {
-		return time.Time{}, utils.Errorf("%v", err)
+		return time.Time{}, errorf("%v", err)
 	}
 
 	return parsedTime, nil
