@@ -50,6 +50,17 @@ func TestParseRu(t *testing.T) {
 		{subYears(21), "21 год назад"},
 		{subYears(31), "31 год назад"},
 		{subYears(100), "100 лет назад"},
+		{subYears(111), "111 лет назад"},
+		{subYears(112), "112 лет назад"},
+		{subYears(113), "113 лет назад"},
+		{subYears(114), "114 лет назад"},
+		{subYears(115), "115 лет назад"},
+		{subYears(117), "117 лет назад"},
+		{subYears(118), "118 лет назад"},
+		{subYears(119), "119 лет назад"},
+		{subYears(120), "120 лет назад"},
+		{subYears(121), "121 год назад"},
+		{subYears(122), "122 года назад"},
 	}
 
 	for _, tc := range cases {

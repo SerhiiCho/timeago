@@ -50,6 +50,17 @@ func TestParseBe(t *testing.T) {
 		{subYears(21), "21 год таму"},
 		{subYears(31), "31 год таму"},
 		{subYears(100), "100 гадоў таму"},
+		{subYears(111), "111 гадоў таму"},
+		{subYears(112), "112 гадоў таму"},
+		{subYears(113), "113 гадоў таму"},
+		{subYears(114), "114 гадоў таму"},
+		{subYears(115), "115 гадоў таму"},
+		{subYears(117), "117 гадоў таму"},
+		{subYears(118), "118 гадоў таму"},
+		{subYears(119), "119 гадоў таму"},
+		{subYears(120), "120 гадоў таму"},
+		{subYears(121), "121 год таму"},
+		{subYears(122), "122 гады таму"},
 	}
 
 	for _, tc := range cases {
