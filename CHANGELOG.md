@@ -1,5 +1,7 @@
 # Release Notes v3
 
+## v3.4.4 (2026-11-24)
+
 ## v3.4.3 (2026-11-24)
 
 - 🧑 Makefile now runs all the commands inside a container to ensure that the environment is consistent across different machines.
