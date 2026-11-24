@@ -14,17 +14,72 @@ func TestSlavicTeensAboveHundredUseManyForm(t *testing.T) {
 		years int
 		want  string
 	}{
-		{"ru 111 years", ago.LangRu, 111, "111 лет назад"},
-		{"ru 112 years", ago.LangRu, 112, "112 лет назад"},
-		{"ru 114 years", ago.LangRu, 114, "114 лет назад"},
-		{"uk 111 years", ago.LangUk, 111, "111 років тому"},
-		{"uk 112 years", ago.LangUk, 112, "112 років тому"},
-		{"uk 114 years", ago.LangUk, 114, "114 років тому"},
-		{"be 111 years", ago.LangBe, 111, "111 гадоў таму"},
-		{"be 112 years", ago.LangBe, 112, "112 гадоў таму"},
-		{"be 114 years", ago.LangBe, 114, "114 гадоў таму"},
-		{"ru 121 years keeps one", ago.LangRu, 121, "121 год назад"},
-		{"ru 122 years keeps few", ago.LangRu, 122, "122 года назад"},
+		{
+			name:  "ru 111 years",
+			lang:  ago.LangRu,
+			years: 111,
+			want:  "111 лет назад",
+		},
+		{
+			name:  "ru 112 years",
+			lang:  ago.LangRu,
+			years: 112,
+			want:  "112 лет назад",
+		},
+		{
+			name:  "ru 114 years",
+			lang:  ago.LangRu,
+			years: 114,
+			want:  "114 лет назад",
+		},
+		{
+			name:  "uk 111 years",
+			lang:  ago.LangUk,
+			years: 111,
+			want:  "111 років тому",
+		},
+		{
+			name:  "uk 112 years",
+			lang:  ago.LangUk,
+			years: 112,
+			want:  "112 років тому",
+		},
+		{
+			name:  "uk 114 years",
+			lang:  ago.LangUk,
+			years: 114,
+			want:  "114 років тому",
+		},
+		{
+			name:  "be 111 years",
+			lang:  ago.LangBe,
+			years: 111,
+			want:  "111 гадоў таму",
+		},
+		{
+			name:  "be 112 years",
+			lang:  ago.LangBe,
+			years: 112,
+			want:  "112 гадоў таму",
+		},
+		{
+			name:  "be 114 years",
+			lang:  ago.LangBe,
+			years: 114,
+			want:  "114 гадоў таму",
+		},
+		{
+			name:  "ru 121 years keeps one",
+			lang:  ago.LangRu,
+			years: 121,
+			want:  "121 год назад",
+		},
+		{
+			name:  "ru 122 years keeps few",
+			lang:  ago.LangRu,
+			years: 122,
+			want:  "122 года назад",
+		},
 	}
 
 	for _, tc := range cases {

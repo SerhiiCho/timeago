@@ -13,6 +13,35 @@ type Rule struct {
 	Other bool
 }
 
+var grammarRules = func(num int) map[string]*Rule {
+	return map[string]*Rule{
+		"en,nl,de,es,fr": {
+			Zero: num == 0,
+			One:  num == 1,
+			Two:  num == 2,
+			Few:  num > 1,
+			Many: num > 1,
+		},
+		"ru,uk,be": func() *Rule {
+			end := slavicEnding(num)
+			return &Rule{
+				Zero: num == 0,
+				One:  num == 1 || (num > 20 && end == 1),
+				Two:  num == 2,
+				Few:  (end == 2 || end == 3 || end == 4) && (num < 10 || num > 20),
+				Many: (num >= 5 && num <= 20) || end == 0 || end >= 5,
+			}
+		}(),
+		"zh,ja": {
+			Zero: true,
+			One:  true,
+			Two:  true,
+			Few:  true,
+			Many: true,
+		},
+	}
+}
+
 // slavicEnding returns the ending that drives the ru, uk and be grammar
 // rules. Numbers ending in 11-14 take the many form regardless of their
 // last digit (111 лет, 112 лет), so they are treated as a zero ending
@@ -23,34 +52,6 @@ func slavicEnding(num int) int {
 	}
 
 	return num % 10
-}
-
-var grammarRules = func(num int) map[string]*Rule {
-	slavicEnd := slavicEnding(num)
-
-	return map[string]*Rule{
-		"en,nl,de,es,fr": {
-			Zero: num == 0,
-			One:  num == 1,
-			Two:  num == 2,
-			Few:  num > 1,
-			Many: num > 1,
-		},
-		"ru,uk,be": {
-			Zero: num == 0,
-			One:  num == 1 || (num > 20 && slavicEnd == 1),
-			Two:  num == 2,
-			Few:  (slavicEnd == 2 || slavicEnd == 3 || slavicEnd == 4) && (num < 10 || num > 20),
-			Many: (num >= 5 && num <= 20) || slavicEnd == 0 || slavicEnd >= 5,
-		},
-		"zh,ja": {
-			Zero: true,
-			One:  true,
-			Two:  true,
-			Few:  true,
-			Many: true,
-		},
-	}
 }
 
 func identifyGrammarRules(num int, lang string) (*Rule, error) {
