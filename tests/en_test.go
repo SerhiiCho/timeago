@@ -43,6 +43,8 @@ func TestParseEn(t *testing.T) {
 		{subMonths(1), "1 month ago"},
 		{subMonths(2), "2 months ago"},
 		{subMonths(9), "9 months ago"},
+		{subMonths(10), "10 months ago"},
+		{subMonths(11), "11 months ago"},
 		{subMonths(11), "11 months ago"},
 		{subYears(1), "1 year ago"},
 		{subYears(2), "2 years ago"},
