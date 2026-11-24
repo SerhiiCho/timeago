@@ -25,23 +25,3 @@ const (
 	// for example "5 minutes" instead of "5 minutes ago".
 	OptNoSuffix opt = "noSuffix"
 )
-
-func enableOption(opt opt) {
-	options = append(options, opt)
-}
-
-func enableOptions(opts []opt) {
-	for i := range opts {
-		enableOption(opts[i])
-	}
-}
-
-func optionIsEnabled(opt opt) bool {
-	for i := range options {
-		if options[i] == opt {
-			return true
-		}
-	}
-
-	return false
-}

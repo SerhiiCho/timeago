@@ -4,6 +4,7 @@
 
 - 🧑 Makefile now runs all the commands inside a container to ensure that the environment is consistent across different machines.
 - 🐛 `Parse` no longer panics on unsupported date types like `float64` or `nil`, it returns an error instead. Closes [#49](https://github.com/SerhiiCho/timeago/issues/49).
+- 🐛 `Parse` is now safe to call from multiple goroutines. Per-call state is local and shared config and translation cache are protected with mutexes. Closes [#48](https://github.com/SerhiiCho/timeago/issues/48).
 
 ## v3.4.2 (2026-11-18)
 
