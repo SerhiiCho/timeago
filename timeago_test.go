@@ -1,6 +1,7 @@
 package timeago
 
 import (
+	"fmt"
 	"strconv"
 	"testing"
 	"time"
@@ -10,7 +11,7 @@ import (
 
 func TestParse(t *testing.T) {
 	cases := []struct {
-		date interface{}
+		date any
 		res  string
 	}{
 		// Integer timestamp input parsing
@@ -140,6 +141,25 @@ func TestParse(t *testing.T) {
 
 			if res != tc.res {
 				t.Errorf("Result must be %q, but got %q instead", tc.res, res)
+			}
+		})
+	}
+}
+
+func TestParse_InvalidDateType(t *testing.T) {
+	Reconfigure(Config{Language: LangEn})
+
+	tc := []any{nil, 1.5, true, []int{1}}
+
+	for _, date := range tc {
+		t.Run(strconv.Quote(fmt.Sprintf("%v", date)), func(t *testing.T) {
+			res, err := Parse(date)
+			if err == nil {
+				t.Fatalf("Parse(%T) must return an error, but returned %q instead", date, res)
+			}
+
+			if res != "" {
+				t.Errorf("Result must be empty, but got %q instead", res)
 			}
 		})
 	}

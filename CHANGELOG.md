@@ -2,6 +2,8 @@
 
 ## v3.4.3 (2026-11-24)
 
+- 🐛 `Parse` no longer panics on unsupported date types like `float64` or `nil`, it returns an error instead. Closes [#49](https://github.com/SerhiiCho/timeago/issues/49).
+
 ## v3.4.2 (2026-11-18)
 
 - 🧑 Moved from Codeberg to GitHub

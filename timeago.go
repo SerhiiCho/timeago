@@ -41,7 +41,7 @@ type timeNumbers struct {
 // 1. Unix timestamp: int, int32, int64, unit, uint32, uint64, string
 // 2. Type from Go time package: time.Time
 // 3. Datetime string in format 'YYYY-MM-DD HH:MM:SS': string
-func Parse(date interface{}, opts ...opt) (string, error) {
+func Parse(date any, opts ...opt) (string, error) {
 	options = []opt{}
 	langSet = nil
 
@@ -68,7 +68,11 @@ func Parse(date interface{}, opts ...opt) (string, error) {
 			t, err = strToTime(userDate)
 		}
 	default:
-		t = date.(time.Time)
+		parsed, ok := date.(time.Time)
+		if !ok {
+			return "", utils.Errorf("unsupported date type %T", date)
+		}
+		t = parsed
 	}
 
 	if err != nil {
