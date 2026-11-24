@@ -1,7 +1,17 @@
-FROM golang:1.24-alpine
+FROM golang:1.24
 
-WORKDIR /var/www/html
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        make \
+        curl \
+        ca-certificates \
+        git \
+        grep \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apk update && apk add --no-cache make
+RUN go install github.com/golangci/golines@v0.15.0
 
-ENTRYPOINT ["sh"]
+RUN curl -sSfL https://golangci-lint.run/install.sh \
+    | sh -s -- -b /usr/local/bin v2.15.0
+
+WORKDIR /app

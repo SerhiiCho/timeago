@@ -23,56 +23,27 @@ Here are some of the naming conventions used in the codebase and their meanings 
 - **suffix** - the suffix `ago` in the final output like `1 minute ago`, `2 minutes ago`, `3 minutes ago`, etc.
 - **time since** - the final output result like `2 minutes`, `3 minutes ago`, `Just now`, `Online`, `3 years ago` etc.
 
+### Available Commands
+
+All commands run inside a container. The image is built automatically the first time you run any command:
+
+```bash
+make test
+```
+
+- `make build` - Build the checks container image
+- `make test` - Run all tests
+- `make fmt` - Format Go code
+- `make lint` - Run linter
+- `make check` - Combines commands like: test, fmt, lint
+- `make` - Defaults to `make check`
+
+Commands use `podman-compose` by default. To use Docker Compose instead, override `OCI`:
+
+```bash
+make check OCI='docker compose'
+```
+
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://github.com/SerhiiCho/timeago/blob/master/CHANGELOG.md).
-
-## Contribute
-
-### Build an Image
-
-To build an image, navigate to the root of the project and run this command.
-
-With Podman:
-
-```bash
-podman-compose build
-```
-
-With Docker:
-
-```bash
-docker compose build
-```
-
-### Run the Container
-
-To run a container, navigate to the root of the project and run this command to enter the Linux container with Go installed.
-
-With Podman:
-
-```bash
-podman-compose up -d
-```
-
-With Docker:
-
-```bash
-docker compose up -d
-```
-
-### Enter the Container
-
-With Podman:
-
-```bash
-podman-compose exec app sh
-```
-
-With Docker:
-
-```bash
-docker compose exec app sh
-```
-
-Inside of this container you'll be able to run `make` commands like `make test` to run tests.
