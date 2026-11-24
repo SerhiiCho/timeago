@@ -98,7 +98,12 @@ func TestParseJaWithSeconds(t *testing.T) {
 			}
 
 			if res != tc.res[0] && res != tc.res[1] {
-				test.Errorf("Result must be %s or %s, but got %s instead", tc.res[0], tc.res[1], res)
+				test.Errorf(
+					"Result must be %s or %s, but got %s instead",
+					tc.res[0],
+					tc.res[1],
+					res,
+				)
 			}
 		})
 	}

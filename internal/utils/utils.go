@@ -23,7 +23,7 @@ func UnixFromFutureDate(duration time.Duration) int {
 	return int(AddTime(duration).UnixNano() / 1000000000)
 }
 
-func Errorf(msg string, a ...interface{}) error {
+func Errorf(msg string, a ...any) error {
 	return fmt.Errorf("[Timeago]: "+msg, a...)
 }
 
