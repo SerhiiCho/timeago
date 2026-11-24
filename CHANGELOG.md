@@ -4,6 +4,7 @@
 
 - 🐛 Fixed rounding up issues and inconsistencies, so everything is floored instead of rounded. Closes [#54](https://github.com/SerhiiCho/timeago/issues/54).
 - ⚠️ **BREAKING CHANGE**. Remove support for Go version `1.20`.
+- 🐛 Fixed month and year calculations to use calendar boundaries instead of fixed-duration approximations, including month-end and leap-year cases.
 
 ## v3.4.4 (2026-11-24)
 

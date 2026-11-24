@@ -7,6 +7,13 @@ import (
 	"time"
 )
 
+const (
+	secondsPerMinute = 60
+	secondsPerHour   = 60 * secondsPerMinute
+	secondsPerDay    = 24 * secondsPerHour
+	secondsPerWeek   = 7 * secondsPerDay
+)
+
 // parser holds the state of a single Parse call. Keeping it local
 // makes Parse safe to call from multiple goroutines.
 type parser struct {
@@ -107,7 +114,7 @@ func (p *parser) computeTimeSince(t time.Time) (string, error) {
 		return langSet.JustNow, nil
 	}
 
-	langForms, timeNum := p.findLangForms(timeInSec)
+	langForms, timeNum := p.findLangForms(timeInSec, t, now)
 
 	timeUnit, err := p.computeTimeUnit(langForms, timeNum)
 	if err != nil {
@@ -152,8 +159,10 @@ func (p *parser) mergeFinalOutput(timeNum int, timeUnit, suffix string) string {
 	return strings.TrimSpace(replacer.Replace(p.langSet.Format))
 }
 
-func (p *parser) findLangForms(timeInSec int) (LangForms, int) {
+func (p *parser) findLangForms(timeInSec int, t, now time.Time) (LangForms, int) {
 	nums := calculateTimeNumbers(float64(timeInSec))
+	nums.Months = calendarMonthsBetween(t, now)
+	nums.Years = nums.Months / 12
 
 	switch {
 	case timeInSec < 60:
@@ -190,13 +199,37 @@ func (p *parser) computeSuffix() string {
 func calculateTimeNumbers(secs float64) timeNumbers {
 	return timeNumbers{
 		Seconds: int(secs),
-		Minutes: int(secs / 60),
-		Hours:   int(secs / 3600),
-		Days:    int(secs / 86400),
-		Weeks:   int(secs / 604800),
-		Months:  int(secs / 2592000),
-		Years:   int(secs / 31536000),
+		Minutes: int(secs / secondsPerMinute),
+		Hours:   int(secs / secondsPerHour),
+		Days:    int(secs / secondsPerDay),
+		Weeks:   int(secs / secondsPerWeek),
 	}
+}
+
+func calendarMonthsBetween(t, now time.Time) int {
+	if t.After(now) {
+		t, now = now, t
+	}
+
+	t = t.In(now.Location())
+	months := (now.Year()-t.Year())*12 + int(now.Month()-t.Month())
+	if addMonthsClamped(t, months).After(now) {
+		months--
+	}
+
+	return months
+}
+
+func addMonthsClamped(t time.Time, months int) time.Time {
+	// Anchor on the 1st so time.Date normalizes month/year overflow
+	// in both directions without spilling into the next month.
+	first := time.Date(t.Year(), t.Month()+time.Month(months), 1, 0, 0, 0, 0, t.Location())
+	lastDay := first.AddDate(0, 1, -1).Day()
+
+	return time.Date(
+		first.Year(), first.Month(), min(t.Day(), lastDay),
+		t.Hour(), t.Minute(), t.Second(), t.Nanosecond(), t.Location(),
+	)
 }
 
 func (p *parser) computeTimeUnit(langForm LangForms, num int) (string, error) {
