@@ -1,9 +1,6 @@
 package timeago
 
-import (
-	"embed"
-	"fmt"
-)
+import "embed"
 
 //go:embed langs/*.json
 var langsFS embed.FS
@@ -25,30 +22,12 @@ type LangSet struct {
 	Year    LangForms `json:"year"`
 }
 
-func newLangSet() (*LangSet, error) {
-	filePath := fmt.Sprintf("langs/%s.json", conf.Language)
-	if cache, ok := cachedJsonRes[filePath]; ok {
-		return cache, nil
-	}
-
-	langSet, err := parseLangSet(filePath)
-	if err != nil {
-		return nil, err
-	}
-
-	langSet = applyCustomTranslations(langSet)
-
-	cachedJsonRes[filePath] = langSet
-
-	return langSet, nil
-}
-
-func applyCustomTranslations(langSet *LangSet) *LangSet {
-	if len(conf.Translations) == 0 {
+func applyCustomTranslations(langSet *LangSet, translations []LangSet) *LangSet {
+	if len(translations) == 0 {
 		return langSet
 	}
 
-	for _, trans := range conf.Translations {
+	for _, trans := range translations {
 		if trans.Lang != langSet.Lang {
 			continue
 		}

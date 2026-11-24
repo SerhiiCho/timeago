@@ -2,8 +2,6 @@ package timeago
 
 import (
 	"strings"
-
-	"github.com/SerhiiCho/timeago/v3/internal/utils"
 )
 
 type Rule struct {
@@ -55,5 +53,5 @@ func identifyGrammarRules(num int, lang string) (*Rule, error) {
 		}
 	}
 
-	return nil, utils.Errorf("Language '%s' not found", lang)
+	return nil, errorf("Language '%s' not found", lang)
 }

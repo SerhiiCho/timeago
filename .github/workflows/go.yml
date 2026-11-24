@@ -1,10 +1,16 @@
-name: Run quality checks
+name: Build and test
 
 on:
   push:
     branches: [master]
+    paths-ignore: &docs
+      - '**.md'
+      - '.vscode/**'
+      - '.gitignore'
+      - '.gitattributes'
   pull_request:
     branches: [master]
+    paths-ignore: *docs
 
 jobs:
   build:
@@ -18,16 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup the correct timezone
-        run: cp -f /usr/share/zoneinfo/Europe/Kyiv /etc/localtime
+      - uses: webgtx/setup-podman-compose@v1
 
-      - name: Set up Go
-        uses: actions/setup-go@v7
-        with:
-          go-version: ${{ matrix.go-version }}
-
-      - name: Install golangci-lint
-        run: curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.15.0
+      - name: Build image
+        run: make build
 
       - name: Run checks
-        run: make check
+        run: make

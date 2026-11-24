@@ -1,5 +1,9 @@
 package timeago
 
+import (
+	"time"
+)
+
 const (
 	LangEn string = "en" // English
 	LangRu string = "ru" // Russian
@@ -60,4 +64,18 @@ func NewConfig(lang, loc string, langSets []LangSet, online, justNow int) *Confi
 
 func (c Config) isLocationProvided() bool {
 	return c.Location != "UTC" && c.Location != ""
+}
+
+// location loads location from the time package
+func (c Config) location() (*time.Location, error) {
+	if !c.isLocationProvided() {
+		return time.Now().Location(), nil
+	}
+
+	loc, err := time.LoadLocation(c.Location)
+	if err != nil {
+		return nil, errorf("%v", err)
+	}
+
+	return loc, nil
 }
