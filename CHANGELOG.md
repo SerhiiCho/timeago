@@ -3,6 +3,7 @@
 ## v4.0.0 (2026-11-25)
 
 - 🐛 Fixed rounding up issues and inconsistencies, so everything is floored instead of rounded. Closes [#54](https://github.com/SerhiiCho/timeago/issues/54).
+- ⚠️ **BREAKING CHANGE**. Remove support for Go version `1.20`.
 
 ## v3.4.4 (2026-11-24)
 
