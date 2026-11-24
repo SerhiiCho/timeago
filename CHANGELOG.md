@@ -1,5 +1,7 @@
 # Release Notes v3
 
+## v3.4.3 (2026-11-24)
+
 ## v3.4.2 (2026-11-18)
 
 - 🧑 Moved from Codeberg to GitHub
