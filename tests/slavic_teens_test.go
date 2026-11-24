@@ -30,9 +30,7 @@ func TestSlavicTeensAboveHundredUseManyForm(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			ago.Reconfigure(ago.Config{Language: tc.lang})
-
 			got, err := ago.Parse(subYears(time.Duration(tc.years)))
-
 			assertResult(t, tc.want, got, err)
 		})
 	}
