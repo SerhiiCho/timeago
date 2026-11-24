@@ -65,6 +65,17 @@ func TestParseUk(t *testing.T) {
 		{subYears(21), "21 рік тому"},
 		{subYears(31), "31 рік тому"},
 		{subYears(100), "100 років тому"},
+		{subYears(111), "111 років тому"},
+		{subYears(112), "112 років тому"},
+		{subYears(113), "113 років тому"},
+		{subYears(114), "114 років тому"},
+		{subYears(115), "115 років тому"},
+		{subYears(117), "117 років тому"},
+		{subYears(118), "118 років тому"},
+		{subYears(119), "119 років тому"},
+		{subYears(120), "120 років тому"},
+		{subYears(121), "121 рік тому"},
+		{subYears(122), "122 роки тому"},
 	}
 
 	for _, tc := range cases {

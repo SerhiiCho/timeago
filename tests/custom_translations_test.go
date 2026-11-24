@@ -58,3 +58,28 @@ func TestCustomTranslations(t *testing.T) {
 		})
 	}
 }
+
+func TestConfigureCustomTranslationsClearsCache(t *testing.T) {
+	t.Cleanup(func() {
+		ago.Reconfigure(ago.Config{Language: "en"})
+	})
+
+	ago.Reconfigure(ago.Config{Language: "en"})
+
+	date := unixFromPastDate(10 * time.Hour)
+	if res, err := ago.Parse(date); err != nil || res != "10 hours ago" {
+		t.Fatalf("want %q, got %q (error: %v)", "10 hours ago", res, err)
+	}
+
+	ago.Configure(ago.Config{
+		Translations: []ago.LangSet{{
+			Lang: "en",
+			Ago:  "a",
+			Hour: ago.LangForms{"other": "h"},
+		}},
+	})
+
+	if res, err := ago.Parse(date); err != nil || res != "10 h a" {
+		t.Errorf("want %q, got %q (error: %v)", "10 h a", res, err)
+	}
+}
