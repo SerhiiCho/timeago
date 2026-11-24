@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	ago "github.com/SerhiiCho/timeago/v3"
+	ago "github.com/SerhiiCho/timeago/v4"
 )
 
 func TestParse(t *testing.T) {
