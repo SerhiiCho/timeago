@@ -52,6 +52,24 @@ func TestCalendarMonthsBetween(t *testing.T) {
 			to:   getDate(2023, time.April, 1),
 			want: 3,
 		},
+		{
+			name: "same day with earlier time still counts as a full month",
+			from: time.Date(2025, time.January, 1, 12, 0, 0, 0, time.UTC),
+			to:   time.Date(2025, time.February, 1, 0, 0, 0, 0, time.UTC),
+			want: 1,
+		},
+		{
+			name: "future anniversary is not affected by sub-day drift",
+			from: time.Date(2025, time.February, 1, 0, 0, 0, 0, time.UTC),
+			to:   time.Date(2025, time.January, 1, 0, 0, 0, 1, time.UTC),
+			want: 1,
+		},
+		{
+			name: "future month end clamps",
+			from: time.Date(2025, time.March, 1, 0, 0, 0, 0, time.UTC),
+			to:   time.Date(2025, time.January, 31, 0, 0, 0, 0, time.UTC),
+			want: 1,
+		},
 	}
 
 	for _, tc := range cases {

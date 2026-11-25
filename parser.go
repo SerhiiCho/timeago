@@ -216,6 +216,13 @@ func calendarMonthsBetween(t, now time.Time) int {
 	}
 
 	t = t.In(now.Location())
+
+	// Compare calendar days only. A sub-day drift between the two
+	// instants (for example the nanoseconds of time.Now()) should not
+	// shave off a whole month, especially for dates in the future.
+	t = time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location())
+	now = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
+
 	months := (now.Year()-t.Year())*12 + int(now.Month()-t.Month())
 	if addMonthsClamped(t, months).After(now) {
 		months--
