@@ -84,17 +84,17 @@ func TestParse_InvalidDateString(t *testing.T) {
 func TestParse_InvalidDateType(t *testing.T) {
 	Reconfigure(Config{Language: LangEn})
 
-	tc := []any{nil, 1.5, true, []int{1}}
+	cases := []any{nil, 1.5, true, []int{1}}
 
-	for _, date := range tc {
-		t.Run(strconv.Quote(fmt.Sprintf("%v", date)), func(t *testing.T) {
-			res, err := Parse(date)
+	for _, tc := range cases {
+		t.Run(strconv.Quote(fmt.Sprintf("%v", tc)), func(t *testing.T) {
+			date, err := Parse(tc)
 			if err == nil {
-				t.Fatalf("want an error for Parse(%T), got %q instead", date, res)
+				t.Fatalf("want an error for Parse(%T), got %q instead", tc, date)
 			}
 
-			if res != "" {
-				t.Errorf("want empty result, got %q instead", res)
+			if date != "" {
+				t.Errorf("want empty result, got %q instead", date)
 			}
 		})
 	}
