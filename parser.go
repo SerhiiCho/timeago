@@ -41,11 +41,11 @@ func (p *parser) dateToTime(date any) (time.Time, error) {
 	case int64:
 		return unixToTime(int(userDate)), nil
 	case uint:
-		return unixToTime(int(userDate)), nil
+		return uintToTime(uint64(userDate))
 	case uint32:
 		return unixToTime(int(userDate)), nil
 	case uint64:
-		return unixToTime(int(userDate)), nil
+		return uintToTime(userDate)
 	case string:
 		if isUnsignedInteger(userDate) {
 			return strTimestampToTime(userDate)
