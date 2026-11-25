@@ -38,6 +38,49 @@ func TestParse_UintOverflow(t *testing.T) {
 	}
 }
 
+func TestParse_InvalidDateString(t *testing.T) {
+	Reconfigure(Config{Language: LangEn})
+
+	cases := []struct {
+		name string
+		date string
+	}{
+		{
+			name: "empty string",
+			date: "",
+		},
+		{
+			name: "random text",
+			date: "not a date",
+		},
+		{
+			name: "month out of range",
+			date: "2026-13-01 00:00:00",
+		},
+		{
+			name: "day out of range",
+			date: "2026-02-30 00:00:00",
+		},
+		{
+			name: "wrong format",
+			date: "25.11.2026",
+		},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			date, err := Parse(tc.date)
+			if err == nil {
+				t.Fatalf("want an error for Parse(%q), got %q instead", tc.date, date)
+			}
+
+			if date != "" {
+				t.Errorf("want empty result, got %q instead", date)
+			}
+		})
+	}
+}
+
 func TestParse_InvalidDateType(t *testing.T) {
 	Reconfigure(Config{Language: LangEn})
 

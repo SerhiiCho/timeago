@@ -71,7 +71,11 @@ func strTimestampToTime(userDate string) (time.Time, error) {
 
 func (p *parser) strToTime(userDate string) (time.Time, error) {
 	if !p.conf.isLocationProvided() {
-		parsedTime, _ := time.Parse(time.DateTime, userDate)
+		parsedTime, err := time.Parse(time.DateTime, userDate)
+		if err != nil {
+			return time.Time{}, errorf("%v", err)
+		}
+
 		return parsedTime, nil
 	}
 
