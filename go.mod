@@ -1,3 +1,3 @@
-module github.com/SerhiiCho/timeago/v3
+module github.com/SerhiiCho/timeago/v4
 
-go 1.20
+go 1.21

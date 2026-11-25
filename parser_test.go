@@ -1,6 +1,85 @@
 package timeago
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
+
+func TestCalendarMonthsBetween(t *testing.T) {
+	getDate := func(year int, month time.Month, date int) time.Time {
+		return time.Date(year, month, date, 12, 0, 0, 0, time.UTC)
+	}
+
+	cases := []struct {
+		name string
+		from time.Time
+		to   time.Time
+		want int
+	}{
+		{
+			name: "leap day to clamped anniversary",
+			from: getDate(2024, time.February, 29),
+			to:   getDate(2025, time.February, 28),
+			want: 12,
+		},
+		{
+			name: "before leap day anniversary",
+			from: getDate(2024, time.February, 29),
+			to:   getDate(2025, time.February, 27),
+			want: 11,
+		},
+		{
+			name: "month end clamps",
+			from: getDate(2025, time.January, 31),
+			to:   getDate(2025, time.February, 28),
+			want: 1,
+		},
+		{
+			name: "before clamped month end",
+			from: getDate(2025, time.January, 31),
+			to:   getDate(2025, time.February, 27),
+			want: 0,
+		},
+		{
+			name: "3 full months on leap year",
+			from: getDate(2025, time.January, 1),
+			to:   getDate(2025, time.April, 1),
+			want: 3,
+		},
+		{
+			name: "3 full months on non-leap year",
+			from: getDate(2023, time.January, 1),
+			to:   getDate(2023, time.April, 1),
+			want: 3,
+		},
+		{
+			name: "same day with earlier time still counts as a full month",
+			from: time.Date(2025, time.January, 1, 12, 0, 0, 0, time.UTC),
+			to:   time.Date(2025, time.February, 1, 0, 0, 0, 0, time.UTC),
+			want: 1,
+		},
+		{
+			name: "future anniversary is not affected by sub-day drift",
+			from: time.Date(2025, time.February, 1, 0, 0, 0, 0, time.UTC),
+			to:   time.Date(2025, time.January, 1, 0, 0, 0, 1, time.UTC),
+			want: 1,
+		},
+		{
+			name: "future month end clamps",
+			from: time.Date(2025, time.March, 1, 0, 0, 0, 0, time.UTC),
+			to:   time.Date(2025, time.January, 31, 0, 0, 0, 0, time.UTC),
+			want: 1,
+		},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			if got := calendarMonthsBetween(tc.from, tc.to); got != tc.want {
+				t.Errorf("want %d months, got %d", tc.want, got)
+			}
+		})
+	}
+}
 
 func TestParserOptionIsEnabled(t *testing.T) {
 	cases := []struct {

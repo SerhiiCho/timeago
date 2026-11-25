@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	ago "github.com/SerhiiCho/timeago/v3"
+	ago "github.com/SerhiiCho/timeago/v4"
 )
 
 func TestParse(t *testing.T) {
@@ -127,6 +127,14 @@ func TestParse(t *testing.T) {
 		{strconv.Itoa(unixFromPastDate(time.Hour * 24 * 5)), "5 days ago"},
 		{strconv.Itoa(unixFromPastDate(time.Hour * 24 * 6)), "6 days ago"},
 		{strconv.Itoa(unixFromPastDate(time.Hour * 24 * 7)), "1 week ago"},
+		// Edge cases that prove flooring is working
+		{subMonthsAndDays(1, 27), "1 month ago"},
+		{subMonthsAndDays(6, 27), "6 months ago"},
+		{subMonthsAndDays(10, 27), "10 months ago"},
+		{subMonthsAndDays(11, 1), "11 months ago"},
+		{subMonthsAndDays(11, 27), "11 months ago"},
+		{subHoursAndMinutes(23, 59), "23 hours ago"},
+		{subHoursAndMinutes(23, 60), "1 day ago"},
 	}
 
 	ago.Reconfigure(ago.Config{Language: ago.LangEn})

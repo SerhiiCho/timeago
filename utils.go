@@ -3,11 +3,20 @@ package timeago
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"time"
 )
 
 func unixToTime(userDate int) time.Time {
 	return time.Unix(int64(userDate), 0)
+}
+
+func uintToTime(userDate uint64) (time.Time, error) {
+	if userDate > math.MaxInt64 {
+		return time.Time{}, errorf("timestamp %d overflows int64", userDate)
+	}
+
+	return unixToTime(int(userDate)), nil
 }
 
 func parseLangSet(filePath string) (*LangSet, error) {

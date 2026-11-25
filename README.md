@@ -11,7 +11,7 @@ Timeago is a fast and lightweight date time package that converts given date int
 ## Quick Start
 
 ```bash
-go get github.com/SerhiiCho/timeago/v3
+go get github.com/SerhiiCho/timeago/v4
 ```
 
 ## Codebase naming

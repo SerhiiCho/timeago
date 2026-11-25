@@ -2,10 +2,16 @@ package timeago
 
 import (
 	"fmt"
-	"math"
 	"strconv"
 	"strings"
 	"time"
+)
+
+const (
+	secondsPerMinute = 60
+	secondsPerHour   = 60 * secondsPerMinute
+	secondsPerDay    = 24 * secondsPerHour
+	secondsPerWeek   = 7 * secondsPerDay
 )
 
 // parser holds the state of a single Parse call. Keeping it local
@@ -35,11 +41,11 @@ func (p *parser) dateToTime(date any) (time.Time, error) {
 	case int64:
 		return unixToTime(int(userDate)), nil
 	case uint:
-		return unixToTime(int(userDate)), nil
+		return uintToTime(uint64(userDate))
 	case uint32:
 		return unixToTime(int(userDate)), nil
 	case uint64:
-		return unixToTime(int(userDate)), nil
+		return uintToTime(userDate)
 	case string:
 		if isUnsignedInteger(userDate) {
 			return strTimestampToTime(userDate)
@@ -65,7 +71,11 @@ func strTimestampToTime(userDate string) (time.Time, error) {
 
 func (p *parser) strToTime(userDate string) (time.Time, error) {
 	if !p.conf.isLocationProvided() {
-		parsedTime, _ := time.Parse(time.DateTime, userDate)
+		parsedTime, err := time.Parse(time.DateTime, userDate)
+		if err != nil {
+			return time.Time{}, errorf("%v", err)
+		}
+
 		return parsedTime, nil
 	}
 
@@ -91,7 +101,7 @@ func (p *parser) computeTimeSince(t time.Time) (string, error) {
 		return "", err
 	}
 
-	timeInSec := p.computeTimeDifference(t, now)
+	timeInSec := p.computeTimeDiff(t, now)
 
 	langSet, err := p.newLangSet()
 	if err != nil {
@@ -108,7 +118,7 @@ func (p *parser) computeTimeSince(t time.Time) (string, error) {
 		return langSet.JustNow, nil
 	}
 
-	langForms, timeNum := p.findLangForms(timeInSec)
+	langForms, timeNum := p.findLangForms(timeInSec, t, now)
 
 	timeUnit, err := p.computeTimeUnit(langForms, timeNum)
 	if err != nil {
@@ -132,8 +142,8 @@ func (p *parser) adjustTimesForLocation(t, now time.Time) (time.Time, time.Time,
 	return t.In(loc), now.In(loc), nil
 }
 
-// computeTimeDifference returns the absolute time difference in seconds.
-func (p *parser) computeTimeDifference(t, now time.Time) int {
+// computeTimeDiff returns the absolute time difference in seconds.
+func (p *parser) computeTimeDiff(t, now time.Time) int {
 	timeInSec := int(now.Sub(t).Seconds())
 	if timeInSec < 0 {
 		p.enableOption(OptUpcoming)
@@ -153,8 +163,10 @@ func (p *parser) mergeFinalOutput(timeNum int, timeUnit, suffix string) string {
 	return strings.TrimSpace(replacer.Replace(p.langSet.Format))
 }
 
-func (p *parser) findLangForms(timeInSec int) (LangForms, int) {
+func (p *parser) findLangForms(timeInSec int, t, now time.Time) (LangForms, int) {
 	nums := calculateTimeNumbers(float64(timeInSec))
+	nums.Months = calendarMonthsBetween(t, now)
+	nums.Years = nums.Months / 12
 
 	switch {
 	case timeInSec < 60:
@@ -174,6 +186,10 @@ func (p *parser) findLangForms(timeInSec int) (LangForms, int) {
 		return p.langSet.Month, nums.Months
 	}
 
+	if nums.Years == 0 {
+		nums.Years = 1
+	}
+
 	return p.langSet.Year, nums.Years
 }
 
@@ -184,23 +200,47 @@ func (p *parser) computeSuffix() string {
 	return p.langSet.Ago
 }
 
-func calculateTimeNumbers(seconds float64) timeNumbers {
-	minutes := math.Round(seconds / 60)
-	hours := math.Round(seconds / 3600)
-	days := math.Round(seconds / 86400)
-	weeks := math.Round(seconds / 604800)
-	months := math.Round(seconds / 2629440)
-	years := math.Round(seconds / 31553280)
-
+func calculateTimeNumbers(secs float64) timeNumbers {
 	return timeNumbers{
-		Seconds: int(seconds),
-		Minutes: int(minutes),
-		Hours:   int(hours),
-		Days:    int(days),
-		Weeks:   int(weeks),
-		Months:  int(months),
-		Years:   int(years),
+		Seconds: int(secs),
+		Minutes: int(secs / secondsPerMinute),
+		Hours:   int(secs / secondsPerHour),
+		Days:    int(secs / secondsPerDay),
+		Weeks:   int(secs / secondsPerWeek),
 	}
+}
+
+func calendarMonthsBetween(t, now time.Time) int {
+	if t.After(now) {
+		t, now = now, t
+	}
+
+	t = t.In(now.Location())
+
+	// Compare calendar days only. A sub-day drift between the two
+	// instants (for example the nanoseconds of time.Now()) should not
+	// shave off a whole month, especially for dates in the future.
+	t = time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location())
+	now = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
+
+	months := (now.Year()-t.Year())*12 + int(now.Month()-t.Month())
+	if addMonthsClamped(t, months).After(now) {
+		months--
+	}
+
+	return months
+}
+
+func addMonthsClamped(t time.Time, months int) time.Time {
+	// Anchor on the 1st so time.Date normalizes month/year overflow
+	// in both directions without spilling into the next month.
+	first := time.Date(t.Year(), t.Month()+time.Month(months), 1, 0, 0, 0, 0, t.Location())
+	lastDay := first.AddDate(0, 1, -1).Day()
+
+	return time.Date(
+		first.Year(), first.Month(), min(t.Day(), lastDay),
+		t.Hour(), t.Minute(), t.Second(), t.Nanosecond(), t.Location(),
+	)
 }
 
 func (p *parser) computeTimeUnit(langForm LangForms, num int) (string, error) {
